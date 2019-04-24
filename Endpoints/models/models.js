@@ -13,8 +13,10 @@ module.exports = (wagner) => {
     
     //Declarar modelos
     const Persona = require('./persona.model');
+    const Curso = require('./curso.model');
     const models = {
-        Persona
+        Persona,
+        Curso
     }
     //recorrer los modelos y ponerlos disponibles
     _.each(models,(v,k)=>{
