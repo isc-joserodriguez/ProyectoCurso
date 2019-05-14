@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const personaSchema = new mongoose.Schema({
+    _id:{
+        type:String,
+        required:true
+    },
     credencial:{
         correo:{
             type:String,
@@ -42,8 +46,13 @@ const personaSchema = new mongoose.Schema({
             }
         }],
     cursoMaestro:[{}],
-    cursoAlumno:[{}],
-    });
+    cursoAlumno:[{_id:{type:String,required:true},estadoCurso:{type:String}}],
+    carrito:[{_id:{type:String,required:true},codigos:[{_id:{type:String}}]}],
+    historialCompra:[{_id:{type: String, required:true}}],
+    metodosPago:[{_id:{type: String, required:true},numero:{type:String,required:true},mes:{type:Number,required:true},año:{type:Number, required:true},cvc:{type:Number, required:true}}],
+    certificados:[{_id:{type: String, required:true},nombre:{type: String, required: true},autoridad:{type: String, required: true},url:{type: String, required:true}, fecha:{type:String, required:true}}],
+    notificaciones:[{_id:{type: String, required:true},personaId:{type: String, required:true}, fecha:{type:Date,required:true},descripción:{type: String, required:true},estado:{type:Boolean, required:true}}]
+});
     
 //modelo Persona
 const personaModel = mongoose.model('Persona', personaSchema,'personas');

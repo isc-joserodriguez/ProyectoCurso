@@ -36,18 +36,15 @@ const create = (req,res)=>{
                     {
                         "nombreLeccion":"Instalación",
                         "recursos":"Video y texto",
-                        "tarea":"Doc",
-                        "estadoLeccion":1
+                        "tarea":"Doc"
                     },
                     {
                         "nombreLeccion":"U2",
                         "recursos":"Video y texto",
-                        "tarea":"Doc",
-                        "estadoLeccion":1
+                        "tarea":"Doc"
                     },
                 ],
-            "evaluacion":"PDF",
-            "estadoUnidad":1
+            "evaluacion":"PDF"
             },
             {
                 "nombreUnidad":"Aspectos avanzados",
@@ -55,21 +52,26 @@ const create = (req,res)=>{
                     {
                         "nombreLeccion":"Modulos",
                         "recursos":"Video y texto",
-                        "tarea":"Doc",
-                        "estadoLeccion":1
+                        "tarea":"Doc"
                     },
                     {
                         "nombreLeccion":"Modulos avanzados",
                         "recursos":"Video y texto",
-                        "tarea":"Doc",
-                        "estadoLeccion":1
+                        "tarea":"Doc"
                     },
                 ],
-            "evaluacion":"PDF",
-            "estadoUnidad":1
+            "evaluacion":"PDF"
             }
         ]
-    }
+    },
+    "insignias":[
+        {
+            "nombreInsignia":"Iniciando","descripcionInsignia":"Termina tu primera leccion"
+        },
+        {
+            "nombreInsignia":"Terminado","descripcionInsignia":"Termina el curso"
+        }
+    ]
     }    
     */
     const curso = req.body;
