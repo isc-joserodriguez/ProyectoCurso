@@ -39,10 +39,11 @@ const cursoSchema = new mongoose.Schema({
             subtemas:[{
                 nombreTema:{type:String,required:true},
                 clases:[{
+                    ponderacion:{type:Number, required:true},
                     nombreClase:{type:String, required:true},
                     tipoPlantilla:{type:Number, required:true},
                     recursos:{type:String},//Recursos del contenido de la leccion
-                    tarea:{type:String},//Recursos de la tarea
+                    tarea:[{recurso:{type:String, required:true},envios:[{_id:{type:String,required:true},idAlumno:{type:String,required:true},estatus:{type:String,required:true},calificacion:{type:String,required:true},fecha:{type:Date,required:true},retroalimentacion:{type:String,required:true}}]}],//Recursos de la tarea
                     comentarios:[{_id:{type:String},idPersona:{type:String, required:true},comentario:{type:String, required: true},respuestas:[{_id:{type:String},idPersona:{type:String, required:true},comentario:{type:String, required: true}}]}]
                 }]
             }],
@@ -51,8 +52,8 @@ const cursoSchema = new mongoose.Schema({
     },
     insignias:[{nombreInsignia:{type:String,required:true},descripcionInsignia:{type:String,required:true},imagen:{type:String, required:true}}],
     precio:{type:String,required:true},
-    cursosRelacionados:[{_id:{type:String,required:true}}]
-    
+    cursosRelacionados:[{_id:{type:String,required:true}}],
+    estado:{type:Number, required:true}
 });
     
 //modelo Curso
