@@ -1,0 +1,67 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"*ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" (click)="maestroDetalle()"><mat-icon>info</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="maestroForm" (ngSubmit)="onFormSubmit(maestroForm.value)">
+      <!--nombre-->
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nombre Maestro" formControlName="nombre" [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!maestroForm.get('nombre').valid && maestroForm.get('nombre').touched">Agregar Nombre</span>
+          </mat-error>
+      </mat-form-field>
+      <br>
+      <!--apPaterno-->
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Ap. Paterno Maestro" formControlName="apPaterno" [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!maestroForm.get('apPaterno').valid && maestroForm.get('apPaterno').touched">Agregar Ap. Paterno</span>
+          </mat-error>
+      </mat-form-field>
+      <br>
+      <!--apMaterno-->
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Ap. Materno Maestro" formControlName="apMaterno" [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!maestroForm.get('apMaterno').valid && maestroForm.get('apMaterno').touched">Agregar Ap. Materno</span>
+          </mat-error>
+      </mat-form-field>
+      <br>
+      <!--fechaNac-->
+      <mat-form-field class="example-full-width">
+          <input type="date" matInput placeholder="Nacimiento" formControlName="fechaNac" [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!maestroForm.get('fechaNac').valid && maestroForm.get('fechaNac').touched">Agregar Fecha Nac.</span>
+          </mat-error>
+      </mat-form-field>
+      <br>
+      <!--foto-->
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="URL Foto" formControlName="foto" [errorStateMatcher]="matcher" [(ngModel)]="foto">
+          <mat-error>
+            <span *ngIf="!maestroForm.get('foto').valid && maestroForm.get('foto').touched">Agregar URL</span>
+          </mat-error>
+      </mat-form-field>
+      <br>
+      <span *ngIf="maestroForm.get('foto').valid">
+          <img [src]="foto" width="200">
+      </span>
+      <br>
+      <!--paginaWeb-->
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="URL Web Maestro" formControlName="paginaWeb" [errorStateMatcher]="matcher">
+          <mat-error>
+            <span *ngIf="!maestroForm.get('paginaWeb').valid && maestroForm.get('paginaWeb').touched">Agregar URL</span>
+          </mat-error>
+      </mat-form-field>
+      <br>
+    <div class="button-row">
+      <button type="submit" [disabled]="!maestroForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+    </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,40 @@
+<div class="example-container mat-elevation-z8">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+      <a mat-flat-button color="primary" [routerLink]="['/maestros']"><mat-icon>list</mat-icon></a>
+    </div>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2>Maestro {{maestro.nombre}}</h2></mat-card-title>
+        <mat-card-subtitle>Persona tipo: {{maestro.tipo}}</mat-card-subtitle>
+        <a (click)="modalImg(img)" ><img [src]="maestro.foto" width="100" height="100"></a>
+      </mat-card-header>
+      <mat-card-content>
+        <dl>
+          <dt>Nombre:</dt><dd>{{maestro.nombre}} {{maestro.apPaterno}} {{maestro.apMaterno}}</dd>
+          <dt>Correo:</dt><dd>{{maestro.credencial.correo}}</dd>
+          <dt>Fecha de nacimiento:</dt><dd>{{maestro.fechaNac.substring(0,10)}}</dd>
+          <dt>Página web:</dt><dd>{{maestro.paginaWeb}}</dd>
+        </dl>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-flat-button color="primary" [routerLink]="['/maestro-editar', maestro._id]"><mat-icon>edit</mat-icon></a>
+        <a mat-flat-button color="warn" (click)="deleteMaestro(maestro._id)"><mat-icon>delete</mat-icon></a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #img>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <img [src]="maestro.foto" >
+      </div>
+    </ng-template>

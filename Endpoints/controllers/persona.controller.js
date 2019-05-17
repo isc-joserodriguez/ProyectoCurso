@@ -99,17 +99,12 @@ const update = (req,res)=>{
     const {id}= req.params;
     const persona=req.body;
     _persona.update({_id:id},{$set:{
-        credencial:persona.credencial,
-        tipo:persona.tipo,
         nombre:persona.nombre,
         apPaterno:persona.apPaterno,
-        apMaterno:persona,apMaterno,
+        apMaterno:persona.apMaterno,
         fechaNac:persona.fechaNac,
         foto:persona.foto,
         paginaWeb:persona.paginaWeb,
-        redSocial:persona.redSocial,
-        cursoMaestro:persona.cursoMaestro,
-        cursoAlumno:persona.cursoAlumno
     }})
     .then(data=>{
         res.status(200);
