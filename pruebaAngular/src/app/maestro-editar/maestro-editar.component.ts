@@ -42,7 +42,7 @@ export class MaestroEditarComponent implements OnInit {
         nombre : data.detail[0].nombre,
         apPaterno : data.detail[0].apPaterno,
         apMaterno : data.detail[0].apMaterno,
-        fechaNac : data.detail[0].fechaNac.substring(0,10),
+        fechaNac : data.detail[0].fechaNac,
         foto : data.detail[0].foto,
         paginaWeb : data.detail[0].paginaWeb
       });
@@ -55,7 +55,7 @@ export class MaestroEditarComponent implements OnInit {
     this.maestroEdit.apMaterno = form.apMaterno;
     this.maestroEdit.apPaterno = form.apPaterno;
     this.maestroEdit.tipo = [3];
-    this.maestroEdit.fechaNac = form.fechaNac+"".substring(0,10);;
+    this.maestroEdit.fechaNac = form.fechaNac;
     this.maestroEdit.foto = form.foto;
     this.maestroEdit.nombre = form.nombre;
     this.maestroEdit.paginaWeb = form.paginaWeb;

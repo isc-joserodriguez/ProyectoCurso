@@ -51,7 +51,7 @@ export class MaestroNuevoComponent implements OnInit {
         contraseña: form.contraseña,
         correo: form.correo
       };
-    this.maestroNuevo.fechaNac = form.fechaNac+"".substring(0,10);
+    this.maestroNuevo.fechaNac = form.fechaNac;
     this.maestroNuevo.foto = form.foto;
     this.maestroNuevo.nombre = form.nombre;
     this.maestroNuevo.paginaWeb = form.paginaWeb;

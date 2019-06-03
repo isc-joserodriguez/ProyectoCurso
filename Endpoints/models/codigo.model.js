@@ -10,7 +10,7 @@ const codigoSchema = new mongoose.Schema({
 });
 
 //modelo Curso
-const codigoModel = mongoose.model('Codigo', codigoSchema,'codigos');
+const codigoModel = mongoose.model('Codigo', codigoSchema,'codigo');
 
 //exportar
 module.exports= codigoModel;

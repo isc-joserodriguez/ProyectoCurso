@@ -65,7 +65,7 @@
             <td>{{maestro.tipo}}</td>
             <td>{{maestro.apPaterno}}</td>
             <td>{{maestro.apMaterno}}</td>
-            <td>{{maestro.fechaNac.substring(0,10)}}</td>
+            <td>{{maestro.fechaNac | date}}</td>
             <td>{{maestro.paginaWeb}}</td>
             <td ><a [routerLink]="['/maestro-detalle/', maestro._id]">Detalles</a></td>
           </tr>

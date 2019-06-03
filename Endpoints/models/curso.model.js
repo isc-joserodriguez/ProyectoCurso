@@ -3,32 +3,14 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const cursoSchema = new mongoose.Schema({
-    _id:{
-        type:String,
-        required:true
-    },
+    _id:{ type:String, required:true },
     maestro:{
-        _id:{
-            type:String,
-            required:true
-        }
+        _id:{ type:String, required:true }
     },
-    nombreCompleto:{
-        type:String,
-        required: true
-    },
-    nombreCorto:{
-        type:String,
-        required: true
-    },
-    descripcionCurso:{
-        type:String,
-        required: true
-    },
-    aprendizaje:{
-        type:String,
-        required: true
-    },
+    nombreCompleto:{ type:String, required: true },
+    nombreCorto:{ type:String, required: true },
+    descripcionCurso:{ type:String, required: true },
+    aprendizaje:{ type:String, required: true },
     imagen:{type:String, required:true},
     categoria:{type:String, required:true},
     subcategoria:{type:String, required:true},
@@ -53,7 +35,8 @@ const cursoSchema = new mongoose.Schema({
     insignias:[{nombreInsignia:{type:String,required:true},descripcionInsignia:{type:String,required:true},imagen:{type:String, required:true}}],
     precio:{type:String,required:true},
     cursosRelacionados:[{_id:{type:String,required:true}}],
-    estado:{type:Number, required:true}
+    estado:{type:Number, required:true},
+    royal: { type: Boolean, required: true}
 });
     
 //modelo Curso

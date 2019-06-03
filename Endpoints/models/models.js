@@ -16,11 +16,19 @@ module.exports = (wagner) => {
     const Curso = require('./curso.model');
     const Valoracion = require('./valoracion.model');
     const Comunidad = require('./comunidad.model');
+    const Cobro= require('./cobro.model');
+    const Codigo= require('./codigo.model');
+    const Compra= require('./compra.model');
+
+    
     const models = {
         Persona,
         Curso,
         Valoracion,
-        Comunidad
+        Comunidad,
+        Cobro,
+        Codigo,
+        Compra
     }
     //recorrer los modelos y ponerlos disponibles
     _.each(models,(v,k)=>{

@@ -9,6 +9,7 @@
   "author": "Carla Reyes, Jose Rodriguez",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.5.3",

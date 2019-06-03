@@ -16,7 +16,7 @@
         <dl>
           <dt>Nombre:</dt><dd>{{maestro.nombre}} {{maestro.apPaterno}} {{maestro.apMaterno}}</dd>
           <dt>Correo:</dt><dd>{{maestro.credencial.correo}}</dd>
-          <dt>Fecha de nacimiento:</dt><dd>{{maestro.fechaNac.substring(0,10)}}</dd>
+          <dt>Fecha de nacimiento:</dt><dd>{{maestro.fechaNac | date}}</dd>
           <dt>Página web:</dt><dd>{{maestro.paginaWeb}}</dd>
         </dl>
       </mat-card-content>

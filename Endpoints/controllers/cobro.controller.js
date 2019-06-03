@@ -1,13 +1,13 @@
-let _comunidad;
+let _cobro;
 
 const getAll = (req,res)=>{
-    _comunidad.find({})
-    .then(comunidades=>{
+    _cobro.find({})
+    .then(cobros=>{
         res.status(200);
         res.json({
             code:200,
             msg:"Consulta exitosa.",
-            detail:comunidades
+            detail:cobros
         });        
     }).catch(error=>{
             res.status(400);
@@ -20,18 +20,8 @@ const getAll = (req,res)=>{
 };
 
 const create = (req,res)=>{
-/*    {
-        _id:"n",
-        idPersona:"n",
-        nombreTema:"Ayuda",
-        cuerpoTema:"Contenido",
-        fechaTema:"03-06-16",
-        categoriaTema:"Tecnología",
-        repuestas:[{_id:"n",idPersona:"n",comentario:"Muy bonito!",fecha:"Hoy"}]
-    }
-*/
-    const comunidad = req.body;
-    _comunidad.create(comunidad)
+    const cobro = req.body;
+    _cobro.create(cobro)
     .then(data=>{
         res.status(200);
         res.json({
@@ -48,9 +38,9 @@ const create = (req,res)=>{
     });
 }
 
-const deleteComunidad = (req,res) =>{
+const deleteCobro = (req,res) =>{
     const {id}= req.params;
-    _comunidad.remove({_id:id})
+    _cobro.remove({_id:id})
     .then(data=>{
         res.status(200);
         res.json({
@@ -70,13 +60,13 @@ const deleteComunidad = (req,res) =>{
 
 const getById = (req,res)=>{
     const id= req.params.id;
-    _comunidad.find({_id:id})
-    .then(comunidad=>{
+    _cobro.find({_id:id})
+    .then(cobro=>{
         res.status(200);
         res.json({
             code:200,
             msg:"Consulta exitosa.",
-            detail:comunidad
+            detail:cobro
         });
     }).catch(error=>{
         res.status(400);
@@ -90,14 +80,14 @@ const getById = (req,res)=>{
 
 const update = (req,res)=>{
     const {id}= req.params;
-    const comunidad=req.body;
-    _comunidad.update({_id:id},{$set:{
-        idPersona:comunidad.idPersona,
-        nombreTema:comunidad.nombreTema,
-        cuerpoTema:comunidad.cuerpoTema,
-        fechaTema:comunidad.fechaTema,
-        categoriaTema:comunidad.categoriaTema,
-        repuestas:comunidad.repuestas,
+    const cobro=req.body;
+    _cobro.update({_id:id},{$set:{
+        idPersona:cobro.idPersona,
+        nombreTema:cobro.nombreTema,
+        cuerpoTema:cobro.cuerpoTema,
+        fechaTema:cobro.fechaTema,
+        categoriaTema:cobro.categoriaTema,
+        repuestas:cobro.repuestas
     }}).then(data=>{
         res.status(200);
         res.json({
@@ -115,9 +105,9 @@ const update = (req,res)=>{
     });
 }
 
-module.exports = (Comunidad)=>{
-    _comunidad = Comunidad;
+module.exports = (Cobro)=>{
+    _cobro = Cobro;
     return ({
-        getAll, create, deleteComunidad, getById,update
+        getAll, create, deleteCobro, getById,update
     });
 }

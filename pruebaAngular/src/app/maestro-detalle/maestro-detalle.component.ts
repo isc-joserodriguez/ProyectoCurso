@@ -22,7 +22,7 @@ export class MaestroDetalleComponent implements OnInit {
   getMaestroDetalles(id) {
     this.api.getMaestro(id).subscribe(data => {
       this.maestro = data.detail[0];
-      this.maestro.fechaNac=this.maestro.fechaNac + ''.substring(0, 10);
+      this.maestro.fechaNac=this.maestro.fechaNac;
       console.log(this.maestro);
       this.isLoadingResults = false;
     });

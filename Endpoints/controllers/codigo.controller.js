@@ -1,13 +1,13 @@
-let _comunidad;
+let _codigo;
 
 const getAll = (req,res)=>{
-    _comunidad.find({})
-    .then(comunidades=>{
+    _codigo.find({})
+    .then(codigos=>{
         res.status(200);
         res.json({
             code:200,
             msg:"Consulta exitosa.",
-            detail:comunidades
+            detail:codigos
         });        
     }).catch(error=>{
             res.status(400);
@@ -20,18 +20,8 @@ const getAll = (req,res)=>{
 };
 
 const create = (req,res)=>{
-/*    {
-        _id:"n",
-        idPersona:"n",
-        nombreTema:"Ayuda",
-        cuerpoTema:"Contenido",
-        fechaTema:"03-06-16",
-        categoriaTema:"Tecnología",
-        repuestas:[{_id:"n",idPersona:"n",comentario:"Muy bonito!",fecha:"Hoy"}]
-    }
-*/
-    const comunidad = req.body;
-    _comunidad.create(comunidad)
+    const codigo = req.body;
+    _codigo.create(codigo)
     .then(data=>{
         res.status(200);
         res.json({
@@ -48,9 +38,9 @@ const create = (req,res)=>{
     });
 }
 
-const deleteComunidad = (req,res) =>{
+const deletecodigo = (req,res) =>{
     const {id}= req.params;
-    _comunidad.remove({_id:id})
+    _codigo.remove({_id:id})
     .then(data=>{
         res.status(200);
         res.json({
@@ -70,13 +60,13 @@ const deleteComunidad = (req,res) =>{
 
 const getById = (req,res)=>{
     const id= req.params.id;
-    _comunidad.find({_id:id})
-    .then(comunidad=>{
+    _codigo.find({_id:id})
+    .then(codigo=>{
         res.status(200);
         res.json({
             code:200,
             msg:"Consulta exitosa.",
-            detail:comunidad
+            detail:codigo
         });
     }).catch(error=>{
         res.status(400);
@@ -90,14 +80,14 @@ const getById = (req,res)=>{
 
 const update = (req,res)=>{
     const {id}= req.params;
-    const comunidad=req.body;
-    _comunidad.update({_id:id},{$set:{
-        idPersona:comunidad.idPersona,
-        nombreTema:comunidad.nombreTema,
-        cuerpoTema:comunidad.cuerpoTema,
-        fechaTema:comunidad.fechaTema,
-        categoriaTema:comunidad.categoriaTema,
-        repuestas:comunidad.repuestas,
+    const codigo=req.body;
+    _codigo.update({_id:id},{$set:{
+        idPersona:codigo.idPersona,
+        nombreTema:codigo.nombreTema,
+        cuerpoTema:codigo.cuerpoTema,
+        fechaTema:codigo.fechaTema,
+        categoriaTema:codigo.categoriaTema,
+        repuestas:codigo.repuestas,
     }}).then(data=>{
         res.status(200);
         res.json({
@@ -115,9 +105,9 @@ const update = (req,res)=>{
     });
 }
 
-module.exports = (Comunidad)=>{
-    _comunidad = Comunidad;
+module.exports = (Codigo)=>{
+    _codigo = Codigo;
     return ({
-        getAll, create, deleteComunidad, getById,update
+        getAll, create, deletecodigo, getById,update
     });
 }
