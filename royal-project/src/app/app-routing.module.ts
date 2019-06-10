@@ -18,7 +18,13 @@ const routes: Routes = [
   },
   {
     path: 'maestro',
-    component: NavMaestroComponent
+    component: NavMaestroComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './modulos/maestro/maestro-home/maestro-home.module#MaestroHomeModule'
+      }
+    ]
   },
   {
     path: '',
