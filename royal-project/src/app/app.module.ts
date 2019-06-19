@@ -7,8 +7,8 @@ import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
 import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './componentes/login/login.component';
+import { RegisterComponent } from './componentes/register/register.component';
 
 @NgModule({
   declarations: [

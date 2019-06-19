@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/servicios/auth.service';
-import { UserInterface } from 'src/app/models/user-interface';
+import { AuthService } from '../../servicios/auth.service';
+import { UsuarioInterface } from '../../modelos/usuario-interface';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private location: Location) { }
-  private user: UserInterface = {
+  private user: UsuarioInterface = {
     name: '',
     email: '',
     password: ''
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   public isError = false;
   public msgError = '';
   ngOnInit() { }
-
+/*
   onRegister(form: NgForm): void {
     if (form.valid) {
       this.authService
@@ -47,4 +47,5 @@ export class RegisterComponent implements OnInit {
       this.isError = false;
     }, 4000);
   }
+  */
 }

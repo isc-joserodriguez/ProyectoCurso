@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { UserInterface } from 'src/app/models/user-interface';
+import { AuthService } from '../../servicios/auth.service';
+import { UsuarioInterface } from '../../modelos/usuario-interface';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { isError } from 'util';
@@ -9,18 +9,18 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private location: Location) { }
-  private user: UserInterface = {
+  private user: UsuarioInterface = {
     email: '',
     password: ''
   };
   public isError = false;
 
   ngOnInit() { }
-
+/*
   onLogin(form: NgForm) {
     if (form.valid) {
       return this.authService
@@ -48,5 +48,5 @@ export class LoginComponent implements OnInit {
     }, 4000);
   }
 
-
+*/
 }
