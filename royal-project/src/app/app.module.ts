@@ -10,6 +10,9 @@ import { NavAdministradorComponent } from './navs/nav-administrador/nav-administ
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 
+//componentes del MDB
+import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,10 @@ import { RegisterComponent } from './componentes/register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NavbarModule,
+    WavesModule, 
+    ButtonsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
