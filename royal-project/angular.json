@@ -27,19 +27,17 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "./src/assets/MDBoostraps/css/mdb.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "src/assets/MDBoostraps/css/mdb.min.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/popper.js/dist/umd/popper.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.js",
-              "./src/assets/MDBoostraps/js/mdb.min.js",
-              "./node_modules/@fortawesome/fontawesome-free/js/all.js"
-
-
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/assets/MDBoostraps/js/mdb.min.js",
+              "node_modules/@fortawesome/fontawesome-free/js/all.js"
             ],
             "es5BrowserSupport": true
           },
