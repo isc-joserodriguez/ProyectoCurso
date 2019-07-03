@@ -1,9 +1,8 @@
-const app =require('../server');
-
+const app = require('../server');
+const config = require('../config');
 //Congigurando el servidor http
 const server = require('http').Server(app);
-const port = 3002;
 
 //Ejecutando el servidor 
-server.listen(port);
-console.log('Running on port '+ port);
+server.listen(config.port);
+console.log('Running on port ' + config.port);
