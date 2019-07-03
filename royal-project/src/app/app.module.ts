@@ -13,6 +13,9 @@ import { RegisterComponent } from './componentes/register/register.component';
 //componentes del MDB
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 
+//Angular Material
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,8 @@ import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
     AppRoutingModule,
     NavbarModule,
     WavesModule, 
-    ButtonsModule
+    ButtonsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
