@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-alumno.component.scss']
 })
 export class NavAlumnoComponent implements OnInit {
-  time = {hour: 13, minute: 30};
+  usuario='Carlucha';
+  logueado=false;
 
   constructor() { }
 
