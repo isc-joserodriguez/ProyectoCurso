@@ -10,11 +10,12 @@ import { NavAdministradorComponent } from './navs/nav-administrador/nav-administ
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 
-//componentes del MDB
-import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+// Componentes del MDB
+import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 
-//Angular Material
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// Angular Material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
-    WavesModule, 
+    WavesModule,
     ButtonsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
