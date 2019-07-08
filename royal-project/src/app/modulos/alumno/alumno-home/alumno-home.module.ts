@@ -5,9 +5,13 @@ import { AlumnoHomeRoutingModule } from './alumno-home-routing.module';
 import { AlumnoHomeComponent } from './alumno-home.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { PerfilComponent } from './perfil/perfil.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 
 @NgModule({
-  declarations: [AlumnoHomeComponent],
+  declarations: [AlumnoHomeComponent, PerfilComponent, CarritoComponent, BusquedaComponent, MisCursosComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,

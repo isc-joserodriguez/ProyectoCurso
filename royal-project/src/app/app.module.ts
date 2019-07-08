@@ -16,6 +16,7 @@ import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { PerfilComponent } from './src/app/modulos/alumno/alumno-home/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
     NavCoordinadorComponent,
     NavAdministradorComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
