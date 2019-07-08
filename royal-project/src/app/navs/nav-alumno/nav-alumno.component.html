@@ -1,56 +1,123 @@
-<nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-lg fixed-top scrolling-navbar">
-
-  <a class="nav-item active d-flex justify-content-start mr-5 py-0 nav-link py-0" href="/">
-    <img class="icon-nav-home" src="./../../../assets/icons/home.svg">
-  </a>
-
-  <div class="collapse navbar-collapse col-md-12" id="navbarSupportedContent">
-    <div class="row col-md-12">
+<header>
+  <nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-sm fixed-top scrolling-navbar ">
+    <a class="nav-item active" href="/">
+      <img class="icon-nav-home" src="./../../../assets/icons/home.svg">
+    </a>
+    <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
+      <!--Categorias-->
       <div class="col-md-1 vertical-center">
         <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
-          <a class="nav-link" href="#">
+          <a class="waves-light" href="#">
             <img class="icon-nav" src="./../../../assets/icons/menu.svg"> <br>Categorías
           </a>
         </div>
       </div>
+      <!--Categorias-->
+
+      <!--Buscador-->
       <div class="col-md-6 vertical-center">
         <div class="input-group input-group-sm vertical-center">
-          <div class="input-group-prepend ">
-            <button class="btn btn-outline-secondary btn-sm mr-2" type="button"><i class="fas fa-search"></i></button>
+          <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso">
+          <div class="input-group-prepend ml-3">
+            <button mat-mini-fab color="primary"><i class="fas fa-search"></i></button>
           </div>
-          <input type="text" class="form-control my-auto" placeholder="Buscar Curso">
         </div>
       </div>
+      <!--Buscador-->
+
+      <!--Comunidad-->
       <div class="col-md-1 vertical-center">
         <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
-          <a class="nav-link" href="#">
+          <a class=" waves-light" href="#">
             <img class="icon-nav" src="./../../../assets/icons/comunidad.svg"><br>Comunidad
           </a>
         </div>
       </div>
+      <!--Comunidad-->
+
+      <!--Carrito-->
       <div class="col-md-1 vertical-center">
-        <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
-          <a class="nav-link" href="#">
-            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>Carrito
+        <div class="nav-item active text-center">
+          <a class=" waves-light" href="#">
+            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>Mi carrito
           </a>
         </div>
       </div>
-      <div class="col-md-3 vertical-center">
-        <div class="btn-group btn-group-sm justify-content-rightwi77u 877777hh vertical-center ml-auto " role="group"
+      <!--Carrito-->
+
+      <!--Inicio Sesión/Registro-->
+      <div class="col-md-3 vertical-center" *ngIf="!logueado">
+        <div class="btn-group btn-group-sm justify-content-right vertical-center ml-auto " role="group"
           aria-label="Basic example">
           <button type="button" class="btn btn-success">Inicia sesión</button>
-          <button type="button" class="btn tn btn btn-danger">Regístrate</button>
+          <button type="button" class="btn tn btn b  tn-danger">Regístrate</button>
         </div>
-
       </div>
+
+      <!--Inicio Sesión/Registro-->
+
+      <!--Mis Cursos-->
+      <div class="col-md-1 vertical-center" *ngIf="logueado">
+        <div class="nav-item active d-flex text-center dropdown">
+          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>Mis Cursos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!--Mis Cursos-->
+
+      <!-- Alertas-->
+      <div class="col-md-1 vertical-center" *ngIf="logueado">
+        <div class="nav-item active d-flex text-center dropdown">
+          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br> Alertas
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!-- Alertas-->
+
+      <!--Mi perfil-->
+      <div class="col-md-1 vertical-center" *ngIf="logueado">
+        <div class="nav-item active d-flex text-center dropdown">
+          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>{{usuario}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!--Perfil-->
     </div>
-  </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    <!--icono del toggler bar (las tres lienas que salen al compactar la página)-->
-  </button>
-</nav>
+
+    <!--Toggler button-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      <!--icono del toggler bar (las tres lienas que salen al compactar la página)-->
+    </button>
+    <!--Toggler button-->
+
+  </nav>
+</header>
 
 <br><br><br><br><br><br><br>
 <router-outlet></router-outlet>

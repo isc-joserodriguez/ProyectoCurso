@@ -15,6 +15,7 @@ import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 
 //Angular Material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NavbarModule,
     WavesModule, 
     ButtonsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
