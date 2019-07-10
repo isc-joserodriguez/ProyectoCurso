@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
       <!--Categorias-->
       <div class="col-md-1 vertical-center">
-        <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
+        <div class="nav-item active d-flex justify-content-start mr-0 ml-2 text-center">
           <a class="waves-light" href="#">
             <img class="icon-nav" src="./../../../assets/icons/menu.svg"> <br>Categorías
           </a>
@@ -49,8 +49,8 @@
       <div class="col-md-3 vertical-center" *ngIf="!logueado">
         <div class="btn-group btn-group-sm justify-content-right vertical-center ml-auto " role="group"
           aria-label="Basic example">
-          <button type="button" class="btn btn-success">Inicia sesión</button>
-          <button type="button" class="btn tn btn b  tn-danger">Regístrate</button>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">Inicia sesión</button>
+          <button type="button" class="btn tn btn b  btn-danger" data-toggle="modal" data-target="#regModal">Regístrate</button>
         </div>
       </div>
 
@@ -115,9 +115,53 @@
       <!--icono del toggler bar (las tres lienas que salen al compactar la página)-->
     </button>
     <!--Toggler button-->
-
   </nav>
 </header>
 
-<br><br><br><br><br><br><br>
+<!--Modal Login-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModal">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+          ¿Aún no tienes cuenta? <span><button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#regModal">Regístrate</button></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal Login-->
+
+<!--Modal Register-->
+<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModal"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regModal">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Registrarse
+      </div>
+      <div class="modal-footer">
+        ¿Ya tienes cuenta? <span><button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Inicia sesión</button></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal Register-->
+<br><br><br><br><br>
 <router-outlet></router-outlet>
