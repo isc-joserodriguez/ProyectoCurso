@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavAlumnoComponent implements OnInit {
   usuario='Carlucha';
-  logueado=false;
+  logueado=true;
+  sexo=false;
 
   constructor() { }
 

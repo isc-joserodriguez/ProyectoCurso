@@ -1,0 +1,21 @@
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: proxima-nova,"Helvetica Neue",Helvetica,sans-serif;
+    text-shadow: 2px 2px 4px #000000;
+   
+  }
+
+  .abajo{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: small;
+    left: 50%; 
+    bottom: 0%;
+    text-shadow: 2px 2px 4px #000000;
+  }
+
+ 
