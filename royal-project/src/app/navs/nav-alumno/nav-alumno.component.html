@@ -5,8 +5,8 @@
     </a>
     <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
       <!--Categorias-->
-      <div class="col-md-1 vertical-center">
-        <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
+      <div class="col-md-1 vertical-center ">
+        <div class="nav-item active d-flex justify-content-start mr-0 ml-2 text-center ">
           <a class="waves-light" href="#">
             <img class="icon-nav" src="./../../../assets/icons/menu.svg"> <br>Categorías
           </a>
@@ -61,7 +61,7 @@
         <div class="nav-item active d-flex text-center dropdown">
           <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>Mis Cursos
+            <img class="icon-nav" src="./../../../assets/icons/cursos.svg"><br>Mis Cursos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action</a>
@@ -78,7 +78,7 @@
         <div class="nav-item active d-flex text-center dropdown">
           <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br> Alertas
+            <img class="icon-nav" src="./../../../assets/icons/alertas.svg"><br> Alertas
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action</a>
@@ -95,7 +95,7 @@
         <div class="nav-item active d-flex text-center dropdown">
           <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>{{usuario}}
+            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo"><img class="icon-nav" src="./../../../assets/icons/perfil-h.svg" *ngIf="!sexo"><br>{{usuario}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action</a>
