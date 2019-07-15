@@ -1,21 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
-.icon-nav{
-    width: 30px
+.icon-nav {
+  width: 30px
 }
 
-.icon-nav-home{
-    width: 40px
+.icon-nav-home {
+  width: 40px
 }
 
-.vertical-center{
-    margin-top: auto;
-    margin-bottom: auto;
+.vertical-center {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .active-cyan-2 input[type=text]:focus:not([readonly]) {
-    border-bottom: 1px solid #4dd0e1;
-    box-shadow: 0 1px 0 0 #4dd0e1;
-    }
-        
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  border-bottom: 1px solid #4dd0e1;
+  box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.field-login {
+    width: 100%;
+}

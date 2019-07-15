@@ -7,8 +7,10 @@ import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
 import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { RegisterComponent } from './componentes/register/register.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 // Componentes del MDB
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
@@ -16,6 +18,10 @@ import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -23,9 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     NavAlumnoComponent,
     NavMaestroComponent,
     NavCoordinadorComponent,
-    NavAdministradorComponent,
-    LoginComponent,
-    RegisterComponent
+    NavAdministradorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,14 @@ import { MatButtonModule } from '@angular/material/button';
     WavesModule,
     ButtonsModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

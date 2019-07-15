@@ -97,10 +97,7 @@ const login = (req, res) => {
                         });
                     } else {
                         const tokenTTL = `${1000 * 60 * 60 * 24 * 30}ms`; // ms * s * m * h * d
-                        const payload = {
-                            id: usuario._id,
-                            tipo: usuario.tipo
-                        };
+                        const payload = {usuario};
                         const token = tkn.generateJWT(payload, tokenTTL);
                         res.status(200).json({
                             code: 200,

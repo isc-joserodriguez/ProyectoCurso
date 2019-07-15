@@ -1,0 +1,18 @@
+{
+  "name": "api-todo",
+  "version": "1.0.0",
+  "description": "API para app to-do",
+  "main": ".bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carla",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.3",
+    "underscore": "^1.9.1",
+    "wagner-core": "^0.2.0"
+  }
+}
