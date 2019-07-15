@@ -122,7 +122,8 @@
 </header>
 
 <!--Modal Login-->
-<div class="modal fade ventana-modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+<div class="modal fade ventana-modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal"
+  aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -162,11 +163,12 @@
 <!--Modal Login-->
 
 <!--Modal Register-->
-<div class="modal fade ventana-modal" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModal" aria-hidden="true">
+<div class="modal fade ventana-modal" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModal"
+  aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="regModal">¡Registrate gratis!</h5>
+        <h5 class="modal-title" id="regModal">¡Regístrate gratis!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -181,7 +183,7 @@
                 nombre</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="field-login2">
+          <mat-form-field class="field-login">
             <input matInput placeholder="Apellido Paterno" formControlName="regApPaterno">
             <mat-error>
               <span *ngIf="regForm.controls.regApPaterno.errors!=null && regForm.controls.regApPaterno.touched">Agrega
@@ -190,7 +192,7 @@
                 paterno</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="field-login2">
+          <mat-form-field class="field-login">
             <input matInput placeholder="Apellido Materno" formControlName="regApMaterno">
             <mat-error>
               <span *ngIf="regForm.controls.regApMaterno.errors!=null && regForm.controls.regApMaterno.touched">Agrega
@@ -231,9 +233,6 @@
           </mat-form-field>
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" [disabled]="!regForm.valid"
             (click)="registrar()">Regístrate</button>
-
-          <button type="button" class="btn btn-danger btn-sm" (click)="imprime()">Regístrate</button>
-
         </form>
       </div>
       <div class="modal-footer">
