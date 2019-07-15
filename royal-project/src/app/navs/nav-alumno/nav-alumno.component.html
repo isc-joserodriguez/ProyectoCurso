@@ -144,7 +144,7 @@
             <input matInput placeholder="Contrasenia" type="password" formControlName="logContrasenia">
             <mat-error>
               <span *ngIf="!logForm.get('logContrasenia').valid && logForm.get('logContrasenia').touched">Agrega una
-                contrasenia</span>
+                contraseña</span>
             </mat-error>
           </mat-form-field>
           <a href="#">¡Olvidé mi conraseña!</a>
@@ -181,7 +181,7 @@
                 nombre</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="field-login">
+          <mat-form-field class="field-login2">
             <input matInput placeholder="Apellido Paterno" formControlName="regApPaterno">
             <mat-error>
               <span *ngIf="regForm.controls.regApPaterno.errors!=null && regForm.controls.regApPaterno.touched">Agrega
@@ -190,7 +190,7 @@
                 paterno</span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="field-login">
+          <mat-form-field class="field-login2">
             <input matInput placeholder="Apellido Materno" formControlName="regApMaterno">
             <mat-error>
               <span *ngIf="regForm.controls.regApMaterno.errors!=null && regForm.controls.regApMaterno.touched">Agrega
@@ -198,6 +198,13 @@
                 apellido
                 materno</span>
             </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <mat-label>Sexo</mat-label>
+            <select matNativeControl required formControlName="regSexo">
+              <option value=false>Hombre</option>
+              <option value=true>Mujer</option>
+            </select>
           </mat-form-field>
           <mat-form-field class="field-login">
             <input matInput placeholder="Correo" formControlName="regCorreo">
@@ -217,12 +224,15 @@
           <mat-form-field class="field-login">
             <input matInput placeholder="Confirmación" type="password" formControlName="regRepContrasenia">
             <mat-error>
-              <span *ngIf="regForm.controls.regRepContrasenia.errors!=null && regForm.controls.regRepContrasenia.touched">Las
+              <span
+                *ngIf="regForm.controls.regRepContrasenia.errors!=null && regForm.controls.regRepContrasenia.touched">Las
                 contraseñas no coinciden</span>
             </mat-error>
           </mat-form-field>
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" [disabled]="!regForm.valid"
             (click)="registrar()">Regístrate</button>
+
+          <button type="button" class="btn btn-danger btn-sm" (click)="imprime()">Regístrate</button>
 
         </form>
       </div>

@@ -28,7 +28,8 @@ export class NavAlumnoComponent implements OnInit {
     },
     nombre: '',
     apPaterno: '',
-    apMaterno: ''
+    apMaterno: '',
+    sexo: false
   };
 
   usuario = '';
@@ -46,6 +47,7 @@ export class NavAlumnoComponent implements OnInit {
     });
 
     this.regForm = this.formBuilder.group({
+      regSexo: ['', Validators.required],
       regNombre: ['', Validators.required],
       regApMaterno: ['', Validators.required],
       regApPaterno: ['', Validators.required],
@@ -64,7 +66,7 @@ export class NavAlumnoComponent implements OnInit {
     this.auth.login(this.persona).subscribe(res => {
       this.respuesta = res;
       localStorage.setItem('token', this.respuesta.detail);
-      this.verificarToken();
+      this.ngOnInit();
     }, err => {
       console.log(err);
     });
@@ -76,6 +78,7 @@ export class NavAlumnoComponent implements OnInit {
     this.persona.nombre = this.regForm.value.regNombre;
     this.persona.apPaterno = this.regForm.value.regApPaterno;
     this.persona.apMaterno = this.regForm.value.regApMaterno;
+    this.persona.sexo = this.regForm.value.regSexo;
 
     this.auth.signup(this.persona).subscribe(resp => {
       this.auth.login(this.persona).subscribe(res => {
@@ -108,6 +111,6 @@ export class NavAlumnoComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    this.verificarToken();
+    this.ngOnInit();
   }
 }
