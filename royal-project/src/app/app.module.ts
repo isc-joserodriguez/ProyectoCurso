@@ -40,9 +40,7 @@ import {MatSelectModule} from '@angular/material/select';
     ButtonsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-<<<<<<< HEAD
-    CarouselModule
-=======
+    CarouselModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -51,7 +49,6 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     HttpClientModule,
     MatSelectModule
->>>>>>> c21287b6aca8a34c04eca5d4014e7115b502eaa3
   ],
   providers: [],
   bootstrap: [AppComponent]
