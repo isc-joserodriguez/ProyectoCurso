@@ -49,8 +49,10 @@
       <div class="col-md-3 vertical-center" *ngIf="!logueado">
         <div class="btn-group btn-group-sm justify-content-right vertical-center ml-auto " role="group"
           aria-label="Basic example">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">Inicia sesión</button>
-          <button type="button" class="btn tn btn b  btn-danger" data-toggle="modal" data-target="#regModal">Regístrate</button>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">Inicia
+            sesión</button>
+          <button type="button" class="btn tn btn b  btn-danger" data-toggle="modal"
+            data-target="#regModal">Regístrate</button>
         </div>
       </div>
 
@@ -95,10 +97,11 @@
         <div class="nav-item active d-flex text-center dropdown">
           <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo"><img class="icon-nav" src="./../../../assets/icons/perfil-h.svg" *ngIf="!sexo"><br>{{usuario}}
+            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo"><img class="icon-nav"
+              src="./../../../assets/icons/perfil-h.svg" *ngIf="!sexo"><br>{{usuario}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
@@ -119,23 +122,40 @@
 </header>
 
 <!--Modal Login-->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal"
+<div class="modal fade ventana-modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal"
   aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="loginModal">Modal title</h5>
+        <h5 class="modal-title" id="loginModal">¡Inicia sesión en tu cuenta!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="">
-          
+        <form class="text-center" [formGroup]="logForm">
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Correo" formControlName="logCorreo">
+            <mat-error>
+              <span *ngIf="!logForm.get('logCorreo').valid && logForm.get('logCorreo').touched">Agrega un
+                correo</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Contrasenia" type="password" formControlName="logContrasenia">
+            <mat-error>
+              <span *ngIf="!logForm.get('logContrasenia').valid && logForm.get('logContrasenia').touched">Agrega una
+                contraseña</span>
+            </mat-error>
+          </mat-form-field>
+          <a href="#">¡Olvidé mi conraseña!</a>
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" [disabled]="!logForm.valid"
+            (click)="login()">Inicia sesión</button>
         </form>
       </div>
       <div class="modal-footer">
-          ¿Aún no tienes cuenta? <span><button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#regModal">Regístrate</button></span>
+        ¿Aún no tienes cuenta? <span><button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+            data-toggle="modal" data-target="#regModal">Regístrate</button></span>
       </div>
     </div>
   </div>
@@ -143,21 +163,81 @@
 <!--Modal Login-->
 
 <!--Modal Register-->
-<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModal"
+<div class="modal fade ventana-modal" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModal"
   aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="regModal">Modal title</h5>
+        <h5 class="modal-title" id="regModal">¡Regístrate gratis!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Registrarse
+        <h6>Para acceder a los cursos, necesitarás crear una cuenta.</h6>
+        <form class="text-center" [formGroup]="regForm">
+          <mat-form-field class="field-login">
+            <input matInput class="form-control" placeholder="Nombre(s)" formControlName="regNombre">
+            <mat-error>
+              <span *ngIf="regForm.controls.regNombre.errors!=null && regForm.controls.regNombre.touched">Agrega tu
+                nombre</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Apellido Paterno" formControlName="regApPaterno">
+            <mat-error>
+              <span *ngIf="regForm.controls.regApPaterno.errors!=null && regForm.controls.regApPaterno.touched">Agrega
+                tu
+                apellido
+                paterno</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Apellido Materno" formControlName="regApMaterno">
+            <mat-error>
+              <span *ngIf="regForm.controls.regApMaterno.errors!=null && regForm.controls.regApMaterno.touched">Agrega
+                tu
+                apellido
+                materno</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <mat-label>Sexo</mat-label>
+            <select matNativeControl required formControlName="regSexo">
+              <option value=false>Hombre</option>
+              <option value=true>Mujer</option>
+            </select>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Correo" formControlName="regCorreo">
+            <mat-error>
+              <span *ngIf="regForm.controls.regCorreo.errors!=null && regForm.controls.regCorreo.touched">Agrega tu
+                correo</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Contraseña" type="password" formControlName="regContrasenia">
+            <mat-error>
+              <span
+                *ngIf="regForm.controls.regContrasenia.errors!=null && regForm.controls.regContrasenia.touched">Agrega
+                tu contraseña</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-login">
+            <input matInput placeholder="Confirmación" type="password" formControlName="regRepContrasenia">
+            <mat-error>
+              <span
+                *ngIf="regForm.controls.regRepContrasenia.errors!=null && regForm.controls.regRepContrasenia.touched">Las
+                contraseñas no coinciden</span>
+            </mat-error>
+          </mat-form-field>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" [disabled]="!regForm.valid"
+            (click)="registrar()">Regístrate</button>
+        </form>
       </div>
       <div class="modal-footer">
-        ¿Ya tienes cuenta? <span><button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#loginModal">Inicia sesión</button></span>
+        ¿Ya tienes cuenta? <span><button type="button" class="btn btn-success btn-sm" data-dismiss="modal"
+            data-toggle="modal" data-target="#loginModal">Inicia sesión</button></span>
       </div>
     </div>
   </div>

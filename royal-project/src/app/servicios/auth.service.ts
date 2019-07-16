@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const apiUrl = 'http://localhost:3002/personas';
 
@@ -9,8 +9,25 @@ const apiUrl = 'http://localhost:3002/personas';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
+
   login(credencial) {
-    this.http.post(apiUrl + '/authenticate', credencial);
+    return this.http.post(apiUrl + '/login', credencial);
+  }
+
+  signup(credencial) {
+    return this.http.post(apiUrl + '/signup', credencial);
+  }
+
+  infoUser(token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: token
+      })
+    };
+
+    return this.http.get(apiUrl + '/userInfo', httpOptions);
+
   }
 
 }

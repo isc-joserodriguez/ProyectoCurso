@@ -7,8 +7,10 @@ import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
 import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { RegisterComponent } from './componentes/register/register.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 // Componentes del MDB
 import { NavbarModule, WavesModule, ButtonsModule, CarouselModule } from 'angular-bootstrap-md';
@@ -16,6 +18,11 @@ import { NavbarModule, WavesModule, ButtonsModule, CarouselModule } from 'angula
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -23,9 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
     NavAlumnoComponent,
     NavMaestroComponent,
     NavCoordinadorComponent,
-    NavAdministradorComponent,
-    LoginComponent,
-    RegisterComponent
+    NavAdministradorComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,18 @@ import { MatButtonModule } from '@angular/material/button';
     ButtonsModule,
     BrowserAnimationsModule,
     MatButtonModule,
+<<<<<<< HEAD
     CarouselModule
+=======
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatSelectModule
+>>>>>>> c21287b6aca8a34c04eca5d4014e7115b502eaa3
   ],
   providers: [],
   bootstrap: [AppComponent]

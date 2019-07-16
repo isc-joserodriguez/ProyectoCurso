@@ -1,0 +1,148 @@
+<div class="example-container mat-elevation-z8">
+  <mat-card>
+    <div class="example-loading-shade"*ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+  </mat-card>
+  <!--Delete-->
+  <mat-accordion *ngIf="delete" class="example-headers-align">
+    <mat-expansion-panel [expanded]="delete" (opened)="delete=true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Eliminar tarea
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="text-align:center">
+        ¿Desea eliminar esta tarea?
+        <br>
+        <br>
+        <button mat-fab color="primary" (click)="eliminar()"><mat-icon>delete</mat-icon></button>
+        <button mat-fab color="primary" (click)="cancelar()"><mat-icon>cancel</mat-icon></button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  <!--Edit-->
+  <mat-accordion *ngIf="edit" class="example-headers-align">
+    <mat-expansion-panel [expanded]="edit" (opened)="edit=true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Editar tarea
+        </mat-panel-title>
+        <mat-panel-description>
+          Agrega un nombre y una descripción
+          <mat-icon>edit</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="todoForm">
+        <mat-form-field>
+          <input matInput placeholder="Nombre" formControlName="nombreTarea" [errorStateMatcher]="matcher" [(ngModel)]="nombre">
+          <mat-error>
+            <span *ngIf="!todoForm.get('nombreTarea').valid && todoForm.get('nombreTarea').touched">Agregar nombre</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Descripción" formControlName="descripcionTarea" [errorStateMatcher]="matcher" [(ngModel)]="descripcion">
+          <mat-error>
+            <span *ngIf="!todoForm.get('descripcionTarea').valid && todoForm.get('descripcionTarea').touched">Agregar nombre</span>
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <mat-action-row>
+        <button [disabled]="!todoForm.valid" mat-fab color="primary" (click)="actualizar()"><mat-icon>save</mat-icon></button>
+        <button mat-fab color="primary" (click)="cancelar()"><mat-icon>cancel</mat-icon></button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  <!--Create-->
+  <mat-accordion *ngIf="!edit && !delete" class="example-headers-align">
+    <mat-expansion-panel [expanded]="add" (opened)="add=true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Nueva tarea
+        </mat-panel-title>
+        <mat-panel-description>
+          Agrega un nombre y una descripción
+          <mat-icon>add</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="todoForm">
+        <mat-form-field>
+          <input matInput placeholder="Nombre" formControlName="nombreTarea" [errorStateMatcher]="matcher" [(ngModel)]="nombre">
+          <mat-error>
+            <span *ngIf="!todoForm.get('nombreTarea').valid && todoForm.get('nombreTarea').touched">Agregar nombre</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Descripción" formControlName="descripcionTarea" [errorStateMatcher]="matcher" [(ngModel)]="descripcion">
+          <mat-error>
+            <span *ngIf="!todoForm.get('descripcionTarea').valid && todoForm.get('descripcionTarea').touched">Agregar nombre</span>
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <mat-action-row>
+        <button [disabled]="!todoForm.valid" mat-fab color="primary" (click)="agregar()"><mat-icon>add</mat-icon></button>
+        <button mat-fab color="primary" (click)="cancelar()"><mat-icon>cancel</mat-icon></button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-card>
+    <mat-tab-group>
+      
+      <!--Pendientes-->
+      <mat-tab label="Pendientes">
+        <div *ngFor="let tarea of data">
+          <mat-card *ngIf="!tarea.estadoTarea">
+            <mat-grid-list cols="3" rowHeight="50px">
+              <mat-grid-tile class="nombre" [colspan]="2" [rowspan]="1">
+                {{tarea.nombreTarea}}
+              </mat-grid-tile>
+              <mat-grid-tile class="nombre" [colspan]="1" [rowspan]="3">
+                <div class="example-ripple-container mat-elevation-z4" matRipple (click)="cambiarEstado(tarea._id,tarea.estadoTarea)">
+                  Completar
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile class="descripcion" [colspan]="2" [rowspan]="1">
+                {{tarea.descripcionTarea}} <br> Fecha: {{tarea.fechaCreacionTarea|date}}
+              </mat-grid-tile>
+              <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <div class="example-button-row">
+                  <button mat-icon-button color="primary" (click)="mostrarEdit(tarea.nombreTarea,tarea.descripcionTarea,tarea._id)">
+                    <mat-icon >edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" (click)="mostrarDelete(tarea._id)">
+                    <mat-icon >delete</mat-icon>
+                  </button>
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-divider></mat-divider>
+          </mat-card>
+        </div>
+      </mat-tab>
+      
+      <!--Completas-->
+      <mat-tab label="Completas">
+        <div *ngFor="let tarea of data">
+          <mat-card *ngIf="tarea.estadoTarea">
+            <mat-grid-list cols="3" rowHeight="50px">
+              <mat-grid-tile class="nombre" [colspan]="2" [rowspan]="1">
+                {{tarea.nombreTarea}}
+              </mat-grid-tile>
+              <mat-grid-tile class="nombre" [colspan]="1" [rowspan]="2">
+                <div class="example-ripple-container mat-elevation-z4" matRipple (click)="cambiarEstado(tarea._id,tarea.estadoTarea)">
+                  Deshacer
+                </div>
+              </mat-grid-tile>
+              <mat-grid-tile class="descripcion" [colspan]="2" [rowspan]="1">
+                {{tarea.descripcionTarea}} <br> Fecha completada: {{tarea.fechaCompletadaTarea|date}}
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-divider></mat-divider>
+          </mat-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
