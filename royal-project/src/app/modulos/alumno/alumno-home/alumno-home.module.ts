@@ -5,17 +5,23 @@ import { AlumnoHomeRoutingModule } from './alumno-home-routing.module';
 import { AlumnoHomeComponent } from './alumno-home.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
+
+//mdbootstrap
+import { CarouselModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, PerfilComponent, CarritoComponent, BusquedaComponent, MisCursosComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule,
+    CarouselModule
   ]
 })
 export class AlumnoHomeModule { }

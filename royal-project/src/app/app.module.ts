@@ -11,7 +11,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 
 // Componentes del MDB
-import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
+import { NavbarModule, WavesModule, ButtonsModule, CarouselModule } from 'angular-bootstrap-md';
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +34,8 @@ import { MatButtonModule } from '@angular/material/button';
     WavesModule,
     ButtonsModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

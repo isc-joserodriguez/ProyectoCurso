@@ -1,391 +1,415 @@
-<div class="container">
-  <!--carrousel-->
-  <div class="col-md-10 container">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="http://www.lorempixel.com/200/200" height="300" class="d-block w-100" alt="Responsive image">
+<!--carrousel-->
+
+<div class="carrusel  px-0 pt-1" style="background-color:rgb(37, 35, 35)">
+
+  <div class="col-md-9 container">
+
+    <!--Carousel Wrapper-->
+    <mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [animation]="'fade'">
+      <!--First slide-->
+      <mdb-slide>
+        <video class="video-fluid" autoplay loop>
+          <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+        </video>
+      </mdb-slide>
+      <!--/First slide-->
+      <!--Second slide-->
+      <mdb-slide>
+        <video class="video-fluid" autoplay loop>
+          <source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
+        </video>
+      </mdb-slide>
+      <!--/Second slide-->
+      <!--Third slide-->
+      <mdb-slide>
+        <video class="video-fluid" autoplay loop>
+          <source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
+        </video>
+      </mdb-slide>
+      <!--/Third slide-->
+    </mdb-carousel>
+    <!--Carousel Wrapper-->
+
+
+
+  </div>
+</div>
+<!--Cierre carrousel-->
+<br><br>
+<!--categorias-->
+<div class="categorias container mx-auto">
+  <p class="h3 font-weight-bold text-center bg-warning text-dark">CATEGORÍAS</p> <br>
+
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Tecnologías">
+      <div class="Tecnologias">
+        <br>
+        <div class="row col-md-12 ">
+          <div class="col-md-3">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap ">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
         </div>
-        <div class="carousel-item">
-          <img src="http://www.lorempixel.com/200/200" height="300" class="d-block w-100" alt="Responsive image">
-        </div>
-        <div class="carousel-item">
-          <img src="http://www.lorempixel.com/200/200" height="300" class="d-block w-100" alt="Responsive image">
+        <br>
+        <div class="row col-md-12 ">
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    </mat-tab>
+    <mat-tab label="Idiomas">
+      <div class="Idiomas">
+        <br>
+        <div class="row col-md-12 o">
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title </h5>
+                  <p class="card-text"> Royal Lenguage <i class="fas fa-search"></i></p>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <br>
+        <div class="row col-md-12 ">
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="col-md-3 text-center">
+            <label>
+              <div class="card">
+                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!--Botones Categorias-->
+  <div class="row col-md-12">
+    <div class="col-md-12 text-right pr-5">
+      <button type="button" class="btn btn-outline-info btn-sm">Ver más categorías...</button>
     </div>
   </div>
-  <!--carrousel-->
-  <br><br>
-  <!--categorias-->
-  <div class="categorias">
-    <p class="h3 font-weight-bold text-center">CATEGORÍAS</p> <br>
-
-    <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="Tecnologías">
-        <div class="Tecnologias">
-          <br>
-          <div class="row col-md-12">
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <br>
-          <div class="row col-md-12">
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Idiomas">
-        <div class="Idiomas">
-          <br>
-          <div class="row col-md-12">
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title </h5>
-                    <p class="card-text"> Royal Lenguage <i class="fas fa-search"></i></p>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <br>
-          <div class="row col-md-12">
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-
-            <div class="col-md-3 text-center">
-              <label>
-                <div class="card">
-                  <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
-  <!--Cierre Categorías-->
-
-  <!--Paquetes-->
-  <div class="paquetes">
-    <br>
-    <p class="h3 font-weight-bold text-center">Conviértete en lo que quieras ser </p> <br>
-    <p class="h4 font-weight-bold text-center">PAQUETES ROYALE</p> <br>
-
-    <div class="paquetes-img">
-      <br>
-      <div class="row col-md-12">
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-      </div>
-      <br>
-      <div class="row col-md-12">
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div class="col-md-3 text-center ">
-          <label>
-            <div class="view overlay zoom z-depth-2 rounded">
-              <img src="http://www.lorempixel.com/200/200" class="img-fluid" alt="zoom">
-              <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-              <div class="mask waves-effect waves-light ">
-                <p class="white-text abajo font-weight-bold">3 Cursos</p>
-              </div>
-            </div>
-          </label>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <!--Cierre Paquetes-->
+  <!--Cierre Botones Categorias-->
 
 </div>
+<!--Cierre Categorías-->
+
+<!--Texto Paquetes-->
+<div class="col-md-12 texto-paquetes">
+  <br>
+  <p class="h3 font-weight-bold text-center text-dark">Conviértete en lo que quieras ser </p> <br>
+  <p class="h4 font-weight-bold text-center text-warning">PAQUETES ROYALE</p> <br>
+
+</div>
+<!--Cierre Texto Paquetes-->
+<!--Imagenes Paquetes-->
+<div class="col-md-12 px-0 paquetes" style="background-color:#eceff1">
+
+  <div class="paquetes-img pb-3 container">
+    <br>
+    <div class="row col-md-12">
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid wow bounceInUp" alt="zoom" max-width="100%" height="160" style=" visibility: visible; animation-name: bounceInUp;">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <br>
+    <div class="row col-md-12">
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div class="col-md-3 text-center ">
+        <label>
+          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
+            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
+            <div class="mask flex-center waves-effect waves-light">
+              <p class="white-text abajo font-weight-bold">3 Cursos</p>
+            </div>
+          </div>
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!--Cierre Paquetes-->
+<br>
+
+<!--Botones Paquetes-->
+<div class="col-md-12 text-center">
+  <button type="button" class="btn btn-warning btn-lg text-dark">¡Conoce nuestros paquetes!</button></div>
+<!--Cierre Botones Paquetes-->
+<br><br>
