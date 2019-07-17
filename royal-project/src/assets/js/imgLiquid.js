@@ -33,7 +33,7 @@ ex:
 var imgLiquid = imgLiquid || {VER: '0.9.944'};
 imgLiquid.bgs_Available = false;
 imgLiquid.bgs_CheckRunned = false;
-imgLiquid.injectCss = '.imgLiquid img {visibility:hidden}';
+imgLiquid.injectCss = '.imgLiquid img {visibility:visible}';
 
 
 (function ($) {
