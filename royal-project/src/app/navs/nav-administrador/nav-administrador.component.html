@@ -1,3 +1,110 @@
-<p>
-  nav-administrador works!
-</p>
+<header>
+  <nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-sm fixed-top scrolling-navbar ">
+    <a class="nav-item active" href="/">
+      <img class="icon-nav-home" src="./../../../assets/icons/home.svg">
+    </a>
+    <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
+      <!--Categorias-->
+      <div class="col-md-1 vertical-center ">
+        <div class="nav-item active d-flex justify-content-start mr-0 ml-2 text-center ">
+          <a class="waves-light" href="#">
+            <img class="icon-nav" src="./../../../assets/icons/menu.svg"> <br>Categorías
+          </a>
+        </div>
+      </div>
+      <!--Categorias-->
+
+      <!--Buscador-->
+      <div class="col-md-6 vertical-center">
+        <div class="input-group input-group-sm vertical-center">
+          <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso">
+          <div class="input-group-prepend ml-3">
+            <button mat-mini-fab color="primary"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <!--Buscador-->
+
+      <!--Comunidad-->
+      <div class="col-md-1 vertical-center">
+        <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
+          <a class=" waves-light" href="#">
+            <img class="icon-nav" src="./../../../assets/icons/comunidad.svg"><br>Comunidad
+          </a>
+        </div>
+      </div>
+      <!--Comunidad-->
+
+      <!--Carrito-->
+      <div class="col-md-1 vertical-center">
+        <div class="nav-item active text-center">
+          <a class=" waves-light" href="#">
+            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>Mi carrito
+          </a>
+        </div>
+      </div>
+      <!--Carrito-->
+
+      <!--Mis Cursos-->
+      <div class="col-md-1 vertical-center" >
+        <div class="nav-item active d-flex text-center dropdown">
+          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="icon-nav" src="./../../../assets/icons/cursos.svg"><br>Mis Cursos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!--Mis Cursos-->
+
+      <!-- Alertas-->
+      <div class="col-md-1 vertical-center" >
+        <div class="nav-item active d-flex text-center dropdown">
+          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="icon-nav" src="./../../../assets/icons/alertas.svg"><br> Alertas
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!-- Alertas-->
+
+      <!--Mi perfil-->
+      <div class="col-md-1 vertical-center" >
+        <div class="nav-item active d-flex text-center dropdown">
+          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo"><img class="icon-nav"
+              src="./../../../assets/icons/perfil-h.svg" *ngIf="!sexo"><br>{{usuario}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+      <!--Perfil-->
+    </div>
+
+    <!--Toggler button-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      <!--icono del toggler bar (las tres lienas que salen al compactar la página)-->
+    </button>
+    <!--Toggler button-->
+  </nav>
+</header>
+<router-outlet></router-outlet>
