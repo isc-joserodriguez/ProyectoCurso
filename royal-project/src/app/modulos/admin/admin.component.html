@@ -8,6 +8,7 @@
 
   <div class="col md-4 mt-1 ">
 
+<<<<<<< HEAD
     <div class="card text-white bg-dark  font-weight-bold text-center list-group">
 
       <a class="list-group-item list-group-item-action" [routerLink]="['./']" style="font-size:25px;"> <img class="icon-nav"
@@ -21,13 +22,32 @@
           class="icon-nav" src="./../../../assets/icons/pagos.svg"> Pagos</a>
       <a class="list-group-item list-group-item-action  text-left" [routerLink]="['./estadisticas']" style="font-size:20px;"> <img
           class="icon-nav" src="./../../../assets/icons/estadisticas.svg"> Estadísticas</a>
+=======
+    <div class="card font-weight-bold text-center list-group">
+
+      <li class="list-group-item list-group-item-action badge-primary" [routerLink]="['./']" style="font-size:25px;"> <img
+          class="icon-nav" src="./../../../assets/icons/menu_admin.svg">MENÚ</li>
+
+      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
+        [routerLink]="['./cursos']" style="font-size:20px;"> <img class="icon-nav"
+          src="./../../../assets/icons/cursos.svg">Cursos</a>
+      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
+        [routerLink]="['./usuarios']" style="font-size:20px;"> <img class="icon-nav"
+          src="./../../../assets/icons/usuarios.svg">Usuarios</a>
+      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
+        [routerLink]="['./pagos']" style="font-size:20px;"> <img class="icon-nav"
+          src="./../../../assets/icons/pagos.svg">Pagos</a>
+      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
+        [routerLink]="['./estadisticas']" style="font-size:20px;"> <img class="icon-nav"
+          src="./../../../assets/icons/estadisticas.svg">Estadísticas</a>
+>>>>>>> 99d5af4ef76c3aef2f22cabafdfaff2f32a87ed0
 
     </div>
 
   </div>
 
   <div class="col-md-8 ">
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </div>
 <br>
