@@ -13,7 +13,7 @@ import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 
 //mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
-import { CardsFreeModule } from 'angular-bootstrap-md';
+
 
 @NgModule({
   declarations: [AlumnoHomeComponent, PerfilComponent, CarritoComponent, BusquedaComponent, MisCursosComponent],
@@ -22,8 +22,7 @@ import { CardsFreeModule } from 'angular-bootstrap-md';
     AlumnoHomeRoutingModule,
     MatTabsModule,
     MatButtonModule,
-    CarouselModule,
-    CardsFreeModule
+    CarouselModule
   ]
 })
 export class AlumnoHomeModule { }
