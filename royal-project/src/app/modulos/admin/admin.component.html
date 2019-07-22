@@ -5,29 +5,27 @@
 
 <div class="row col-md-12">
 
-
   <div class="col md-4 mt-1 ">
 
     <div class="card font-weight-bold text-center list-group">
 
-      <li class="list-group-item list-group-item-action badge-primary" [routerLink]="['./']" style="font-size:25px;"> <img
-          class="icon-nav" src="./../../../assets/icons/menu_admin.svg">MENÚ</li>
+      <a class="list-group-item list-group-item-action btn-warning btn btn-block " style="font-size:25px;"
+        [routerLink]="['./']" style="font-size:25px;"> <img class="icon-nav mr-2"
+          src="./../../../assets/icons/menu_admin.svg">MENÚ</a>
 
-      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
-        [routerLink]="['./cursos']" style="font-size:20px;"> <img class="icon-nav"
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" 
+        style="font-size:20px;" [routerLink]="['./cursos']" style="font-size:20px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/cursos.svg">Cursos</a>
-      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
-        [routerLink]="['./usuarios']" style="font-size:20px;"> <img class="icon-nav"
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" 
+        style="font-size:20px;" [routerLink]="['./usuarios']" style="font-size:20px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/usuarios.svg">Usuarios</a>
-      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
-        [routerLink]="['./pagos']" style="font-size:20px;"> <img class="icon-nav"
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" 
+        style="font-size:20px;" [routerLink]="['./pagos']" style="font-size:20px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/pagos.svg">Pagos</a>
-      <a class="list-group-item btn btn-block font-weight-bold btn-outline-dark  list-group-item-action  text-left"
-        [routerLink]="['./estadisticas']" style="font-size:20px;"> <img class="icon-nav"
-          src="./../../../assets/icons/estadisticas.svg">Estadísticas</a>
-
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;" [routerLink]="['./estadisticas']"
+        style="font-size:20px;">
+        <img class="icon-nav mr-2" src="./../../../assets/icons/estadisticas.svg">Estadísticas</a>
     </div>
-
   </div>
 
   <div class="col-md-8 ">

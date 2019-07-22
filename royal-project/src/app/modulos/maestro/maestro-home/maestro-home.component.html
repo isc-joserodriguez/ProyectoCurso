@@ -8,20 +8,23 @@
 
   <div class="col md-4 mt-1 example-1 ">
 
-    <div class="card text-white bg-dark  font-weight-bold text-center list-group">
+    <div class="card font-weight-bold text-center list-group">
 
-      <a class="list-group-item list-group-item-action" href="#" style="font-size:25px;"> <img class="icon-nav"
+      <a class="list-group-item list-group-item-action btn-warning btn btn-block " style="font-size:25px;"
+        [routerLink]="['./']" style="font-size:25px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/cursos.svg">MIS CURSOS</a>
 
-      <a class="list-group-item list-group-item-action  text-left" href="#" style="font-size:20px;"> <img
-          class="icon-nav" src="./../../../assets/icons/cursos.svg">Diseño Web</a>
-      <a class="list-group-item list-group-item-action  text-left" href="#" style="font-size:20px;"> <img
-          class="icon-nav" src="./../../../assets/icons/cursos.svg">Programación</a>
-      <a class="list-group-item list-group-item-action  text-left" href="#" style="font-size:20px;"> <img
-          class="icon-nav" src="./../../../assets/icons/cursos.svg">Inglés II</a>
-
-
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;"
+        [routerLink]="['./cursos']" style="font-size:20px;"> <img class="icon-nav mr-2"
+          src="./../../../assets/icons/cursos.svg">Diseño Web</a>
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;"
+        [routerLink]="['./usuarios']" style="font-size:20px;"> <img class="icon-nav mr-2"
+          src="./../../../assets/icons/cursos.svg">Programación</a>
+      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;"
+        [routerLink]="['./pagos']" style="font-size:20px;"> <img class="icon-nav mr-2"
+          src="./../../../assets/icons/cursos.svg">Inglés II</a>
     </div>
+
 
   </div>
   <!--carrousel-->
