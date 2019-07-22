@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'estadisticas',
     component: AdminEstadisticasComponent
-  },
+  }
 ];
 
 @NgModule({

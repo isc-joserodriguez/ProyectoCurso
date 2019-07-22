@@ -1,3 +1,44 @@
-<p>
-  maestro works!
-</p>
+<br>
+<br>
+<br>
+<br>
+
+<div class="row col-md-12">
+    <div class="col md-4 mt-1 example-1 ">
+
+        <div class="card font-weight-bold text-center list-group">
+    
+          <a class="list-group-item list-group-item-action btn-warning btn btn-block " style="font-size:25px;"
+            [routerLink]="['./']" style="font-size:25px;"> <img class="icon-nav mr-2"
+              src="./../../../assets/icons/cursos.svg">MIS CURSOS</a>
+    
+          <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;"
+            [routerLink]="['./cursos']" style="font-size:20px;"> <img class="icon-nav mr-2"
+              src="./../../../assets/icons/cursos.svg">Diseño Web</a>
+          <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;"
+            [routerLink]="['./usuarios']" style="font-size:20px;"> <img class="icon-nav mr-2"
+              src="./../../../assets/icons/cursos.svg">Programación</a>
+          <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left" style="font-size:20px;"
+            [routerLink]="['./pagos']" style="font-size:20px;"> <img class="icon-nav mr-2"
+              src="./../../../assets/icons/cursos.svg">Inglés II</a>
+        </div>
+    
+    
+      </div>
+
+  <div class="col-md-8 ">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<br>
+<!--Nuevo Curso-->
+<div class="row col-md-12">
+  <div class="categorias container mx-auto">
+    <p class="h3 font-weight-bold text-center bg-warning text-dark">¿NUEVO CURSO?</p> <br>
+    <!--Botones Paquetes-->
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-success btn-lg text-dark">Crear nuevo curso</button></div>
+    <!--Cierre Botones Paquetes-->
+  </div>
+</div>
+<br><br>
