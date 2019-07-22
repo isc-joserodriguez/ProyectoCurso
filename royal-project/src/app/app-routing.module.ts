@@ -33,10 +33,32 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        loadChildren: './modulos/admin/admin.module#AdminModule'
+      }
+    ]
+  },
+  /*
+  {
+    path: 'maestro',
+    component: NavMaestroComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './modulos/maestro/maestro-home/maestro-home.module#MaestroHomeModule'
+      }
+    ]
+  },
+  {
+    path: 'admin',
+    component: NavAdministradorComponent,
+    children: [
+      {
+        path: '',
         loadChildren: './modulos/admin/admin-home/admin-home.module#AdminHomeModule'
       }
     ]
   },
+  */
   {
     path: '',
     redirectTo: '/inicio',

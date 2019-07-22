@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Componentes del MDB
 import { NavbarModule, WavesModule, ButtonsModule, CarouselModule } from 'angular-bootstrap-md';
 
+
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
