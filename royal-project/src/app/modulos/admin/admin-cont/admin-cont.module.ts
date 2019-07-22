@@ -11,9 +11,10 @@ import { AdminCursosComponent } from './admin-cursos/admin-cursos.component';
 import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
 import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
 import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisticas.component';
+import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 
 @NgModule({
-  declarations: [AdminHomeComponent, AdminCursosComponent, AdminUsuariosComponent, AdminPagosComponent, AdminEstadisticasComponent],
+  declarations: [AdminHomeComponent, AdminCursosComponent, AdminUsuariosComponent, AdminPagosComponent, AdminEstadisticasComponent, AdminUsuarioNuevoComponent],
   imports: [
     CommonModule,
     AdminContRoutingModule,
