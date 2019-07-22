@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './modulos/maestro/maestro-home/maestro-home.module#MaestroHomeModule'
+        loadChildren: './modulos/maestro/maestro.module#MaestroModule'
       }
     ]
   },
