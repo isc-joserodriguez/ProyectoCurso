@@ -6,14 +6,18 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 //material
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatSelectModule} from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
-import { CardsFreeModule  } from 'angular-bootstrap-md';
+import { CardsFreeModule } from 'angular-bootstrap-md';
 import { AdminCursosComponent } from './admin-cursos/admin-cursos.component';
 import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
 import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
@@ -21,7 +25,14 @@ import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisti
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 
 @NgModule({
-  declarations: [AdminHomeComponent, AdminCursosComponent, AdminUsuariosComponent, AdminPagosComponent, AdminEstadisticasComponent, AdminUsuarioNuevoComponent],
+  declarations: [
+    AdminHomeComponent,
+    AdminCursosComponent,
+    AdminUsuariosComponent,
+    AdminPagosComponent,
+    AdminEstadisticasComponent,
+    AdminUsuarioNuevoComponent
+  ],
   imports: [
     CommonModule,
     AdminContRoutingModule,
@@ -32,7 +43,9 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     MatCardModule,
     MatDatepickerModule,
     TextFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class AdminContModule { }
