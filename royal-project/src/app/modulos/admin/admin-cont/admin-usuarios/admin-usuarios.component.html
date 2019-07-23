@@ -3,9 +3,59 @@
 </div>
 <div class="row">
     <div class="col-md-12 text-right">
-        <button type="button" class="btn btn-success btn-md "  [routerLink]="['./admin-usuario-nuevo']">
-                <img class="icon-nav" src="./../../../assets/icons/agregar-user2.svg">
+        <button type="button" class="btn btn-success btn-md " [routerLink]="['../nuevo-usuario']">
+            <img class="icon-nav" src="./../../../assets/icons/agregar-user2.svg">
             NUEVO USUARIO</button>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+        </mat-form-field>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
 
+                <!-- Columna imagen -->
+                <ng-container matColumnDef="img">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen Usuario </th>
+                    <td mat-cell *matCellDef="let row"><img width="50" [src]="row.img" alt="">  </td>
+                </ng-container>
+
+                <!-- Columna nombre -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre(s) </th>
+                    <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                </ng-container>
+
+                <!-- Columna apellidos -->
+                <ng-container matColumnDef="apellidos">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+                    <td mat-cell *matCellDef="let row"> {{row.apellidos}} </td>
+                </ng-container>
+
+                <!-- Columna Estatus -->
+                <ng-container matColumnDef="estatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                    <td mat-cell *matCellDef="let row"> {{row.estatus}} </td>
+                </ng-container>
+
+                <!-- Columna Acciones -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button>b1</button>
+                        <button>b2</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+
+    </div>
 </div>
