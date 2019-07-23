@@ -4,7 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AdminContRoutingModule } from './admin-cont-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
-// Material
+//material
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {TextFieldModule} from '@angular/cdk/text-field';
+import {MatSelectModule} from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -33,8 +38,13 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     AdminContRoutingModule,
     CarouselModule,
     CardsFreeModule,
-    MatTableModule,
+    MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    MatDatepickerModule,
+    TextFieldModule,
+    MatSelectModule,
+    MatTableModule,
     MatPaginatorModule
   ]
 })
