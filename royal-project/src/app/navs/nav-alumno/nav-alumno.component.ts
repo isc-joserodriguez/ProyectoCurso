@@ -33,7 +33,7 @@ export class NavAlumnoComponent implements OnInit {
   };
 
   usuario = '';
-  logueado = false;
+  logueado = localStorage.getItem('token') != null;
   sexo = false; // F=true M=false
 
   constructor(private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }

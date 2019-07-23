@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class AdminUsuariosComponent implements OnInit {
   displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'estatus', 'acciones'];
   dataSource: MatTableDataSource<any>;
-  
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
   constructor() {
