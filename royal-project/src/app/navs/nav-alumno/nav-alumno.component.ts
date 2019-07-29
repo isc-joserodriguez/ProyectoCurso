@@ -18,7 +18,6 @@ export class NavAlumnoComponent implements OnInit {
     code: 0,
     msg: '',
     detail: ''
-
   };
 
   persona = {

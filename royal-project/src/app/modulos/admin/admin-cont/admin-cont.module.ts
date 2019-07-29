@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import { AdminContRoutingModule } from './admin-cont-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
-//material
+//Forms
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Material
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -53,6 +56,8 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     WavesModule, 
     IconsModule, 
     ButtonsModule 
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminContModule { }
