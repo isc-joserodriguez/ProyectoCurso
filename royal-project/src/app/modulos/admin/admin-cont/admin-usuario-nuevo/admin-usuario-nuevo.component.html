@@ -3,26 +3,38 @@
     <label class="h1">Nuevo Usuario</label>
   </div>
 
-  <form>
+  <form [formGroup]="altaForm">
     <mat-card>
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Nombre:</mat-label>
-              <input matInput placeholder="Ingresa tu nombre" required>
+              <input matInput placeholder="Ingresa tu nombre" required formControlName="altaNombre">
+              <mat-error>
+                <span *ngIf="!altaForm.get('altaNombre').valid && altaForm.get('altaNombre').touched">Agrega un
+                  nombre</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Apellido Paterno:</mat-label>
-              <input matInput placeholder="Ingresa tu Apellido Paterno:" required>
+              <input matInput placeholder="Ingresa tu Apellido Paterno:" required formControlName="altaApPaterno">
+              <mat-error>
+                <span *ngIf="!altaForm.get('altaApPaterno').valid && altaForm.get('altaApPaterno').touched">Agrega
+                  apellido paterno</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Apellido Materno:</mat-label>
-              <input matInput placeholder="Ingresa tu Apellido Materno:" required>
+              <input matInput placeholder="Ingresa tu Apellido Materno:" required formControlName="altaApMaterno">
+              <mat-error>
+                <span *ngIf="!altaForm.get('altaApMaterno').valid && altaForm.get('altaApMaterno').touched">Agrega
+                  apellido materno</span>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -30,16 +42,24 @@
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Email:</mat-label>
-              <input matInput placeholder="Ingresa tu email" required>
+              <input matInput placeholder="Ingresa tu email" required formControlName="altaCorreo">
+              <mat-error>
+                <span *ngIf="!altaForm.get('altaCorreo').valid && altaForm.get('altaCorreo').touched">Agrega un
+                  correo</span>
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6 text-center">
 
             <mat-form-field appearance="outline">
               <mat-label>Fecha de Nacimiento:</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" required>
+              <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" required formControlName="altaNac">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+              <mat-error>
+                <span *ngIf="!altaForm.get('altaNac').valid && altaForm.get('altaNac').touched">Agrega fecha de
+                  nacimiento</span>
+              </mat-error>
             </mat-form-field>
           </div>
 
@@ -48,7 +68,7 @@
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Rol de Usuario:</mat-label>
-              <select matNativeControl required>
+              <select matNativeControl required formControlName="altaRol">
                 <option value="1">Administrador</option>
                 <option value="2">Coordinador</option>
                 <option value="3">Maestro</option>
@@ -56,21 +76,25 @@
               </select>
             </mat-form-field>
           </div>
-          <div class="col-md-8 vertical-center field-login2 ">
+          <div class="col-md-8 vertical-center field-login2">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Subir Foto</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="altaFoto">
                 <label class="custom-file-label" for="inputGroupFile01">Elige un Archivo</label>
+                <mat-error>
+                  <span *ngIf="!altaForm.get('altaFoto').valid && altaForm.get('altaFoto').touched">Agrega una
+                    foto</span>
+                </mat-error>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 text-center">
-            <button type="button" class="btn btn-success btn-md " [routerLink]="['../usuario/id']">
+            <button type="button" class="btn btn-success btn-md " [disabled]="!altaForm.valid" (click)="alta()">
               <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
               Guardar y Mostrar</button>
           </div>
