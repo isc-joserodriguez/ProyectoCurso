@@ -18,11 +18,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule } from 'angular-bootstrap-md';
+import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
+
+// Components
 import { AdminCursosComponent } from './admin-cursos/admin-cursos.component';
 import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
 import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
 import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisticas.component';
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +49,10 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     TextFieldModule,
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    WavesModule, 
+    IconsModule, 
+    ButtonsModule 
   ]
 })
 export class AdminContModule { }
