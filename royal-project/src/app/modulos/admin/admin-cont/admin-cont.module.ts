@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
 
 
 // MDBootstrap
@@ -55,9 +56,10 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     MatPaginatorModule,
     WavesModule, 
     IconsModule, 
-    ButtonsModule 
+    ButtonsModule, 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ]
 })
 export class AdminContModule { }

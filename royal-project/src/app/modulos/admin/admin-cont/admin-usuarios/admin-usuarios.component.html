@@ -3,8 +3,8 @@
 </div>
 <div class="row">
     <div class="col-md-12 text-right">
-        <button type="button" class="btn btn-success btn-md "  [routerLink]="['../nuevo-usuario']">
-                <img class="icon-nav" src="./../../../assets/icons/agregar-user2.svg">
+        <button type="button" class="btn btn-success btn-md " [routerLink]="['../nuevo-usuario']">
+            <img class="icon-nav" src="./../../../assets/icons/agregar-user2.svg">
             NUEVO USUARIO</button>
     </div>
 </div>
@@ -19,7 +19,7 @@
                 <!-- Columna imagen -->
                 <ng-container matColumnDef="img">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen Usuario </th>
-                    <td mat-cell *matCellDef="let row"><img width="50" [src]="row.img" alt="">  </td>
+                    <td mat-cell *matCellDef="let row"><img width="50" [src]="row.img" alt=""> </td>
                 </ng-container>
 
                 <!-- Columna nombre -->
@@ -37,24 +37,27 @@
                 <!-- Columna Estatus -->
                 <ng-container matColumnDef="estatus">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                    <td mat-cell *matCellDef="let row"> {{row.estatus}} 
-                        <div class="custom-control custom-switch">
+                    <td mat-cell *matCellDef="let row">
+                        <div class="custom-control custom-switch pl-0">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-                              </div>    
+                                <label class="custom-control-label" for="customSwitch1">Activo</label>
+                            </div>
                         </div>
                     </td>
                 </ng-container>
 
                 <!-- Columna Acciones -->
+                <div class="text-center">
+
                 <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones </th>
                     <td mat-cell *matCellDef="let row">
-                        <button>b1</button>
-                        <button>b2</button>
+                        <button mat-mini-fab color="primary"><img class="icon-opcion" src="./../../../assets/icons/edit.svg"></button> | 
+                        <button mat-mini-fab color="warn"><img class="icon-opcion" src="./../../../assets/icons/error.svg"></button>
                     </td>
                 </ng-container>
+                </div>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;">
