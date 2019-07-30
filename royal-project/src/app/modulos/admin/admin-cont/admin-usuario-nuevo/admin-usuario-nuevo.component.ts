@@ -71,7 +71,6 @@ export class AdminUsuarioNuevoComponent implements OnInit {
 
     this.auth.signup(this.persona).subscribe(resp => {
       this.respuesta = resp;
-      console.log(this.respuesta.detail);
     }, err => {
       console.log(err);
     });

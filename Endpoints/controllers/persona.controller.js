@@ -3,7 +3,7 @@ const hash = require('../middlewares/password');
 const tkn = require('../middlewares/token');
 
 const getAll = (req, res) => {
-    _persona.find({})
+    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1 })
         .then(personas => {
             res.status(200);
             res.json({
@@ -97,7 +97,7 @@ const login = (req, res) => {
                         });
                     } else {
                         const tokenTTL = `${1000 * 60 * 60 * 24 * 30}ms`; // ms * s * m * h * d
-                        const payload = {usuario};
+                        const payload = { usuario };
                         const token = tkn.generateJWT(payload, tokenTTL);
                         res.status(200).json({
                             code: 200,
@@ -110,12 +110,12 @@ const login = (req, res) => {
                 })
             }
         }).catch(error => {
-        res.status(400).json({
-            code: 400,
-            msg: "No se pudo insertar!!!",
-            detail: error
+            res.status(400).json({
+                code: 400,
+                msg: "No se pudo insertar!!!",
+                detail: error
+            });
         });
-    });
 }
 
 const info = (req, res) => {

@@ -101,7 +101,6 @@ export class NavAlumnoComponent implements OnInit {
         this.usuario = this.respuesta.data.usuario.nombre;
         this.logueado = true;
         this.sexo = this.respuesta.data.usuario.sexo;
-        console.log(this.respuesta);
       }, err => {
         console.log(err);
       });
