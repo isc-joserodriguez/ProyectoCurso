@@ -16,6 +16,7 @@ const personaSchema = new mongoose.Schema({
     fechaNac: { type: Date },
     foto: { type: String },
     paginaWeb: { type: String },
+    estatus: {type: Boolean, default: true},
     redSocial: [
         {
             red: { type: String },

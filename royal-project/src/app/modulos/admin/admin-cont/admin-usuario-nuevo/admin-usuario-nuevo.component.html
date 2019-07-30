@@ -83,7 +83,7 @@
               </div>
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="altaFoto">
-                <label class="custom-file-label" for="inputGroupFile01">Elige un Archivo</label>
+                <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
                 <mat-error>
                   <span *ngIf="!altaForm.get('altaFoto').valid && altaForm.get('altaFoto').touched">Agrega una
                     foto</span>

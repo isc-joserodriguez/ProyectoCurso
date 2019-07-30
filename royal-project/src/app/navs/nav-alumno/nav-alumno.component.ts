@@ -28,12 +28,12 @@ export class NavAlumnoComponent implements OnInit {
     nombre: '',
     apPaterno: '',
     apMaterno: '',
-    sexo: false
+    sexo: 3
   };
 
   usuario = '';
   logueado = localStorage.getItem('token') != null;
-  sexo = false; // F=true M=false
+  sexo = 3; // 1= H 2= M 3= Indef
 
   constructor(private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 

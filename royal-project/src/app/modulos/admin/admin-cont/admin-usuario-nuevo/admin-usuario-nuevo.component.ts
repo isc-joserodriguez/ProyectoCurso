@@ -34,6 +34,8 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     foto: 'http://www.lorempixel.com/200/200'
   };
 
+  archivopath = 'Elige un Archivo';
+
   constructor(private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -45,6 +47,10 @@ export class AdminUsuarioNuevoComponent implements OnInit {
       altaNac: ['', Validators.required],
       altaFoto: ['', Validators.required],
       altaRol: ['', Validators.required]
+    });
+
+    this.altaForm.valueChanges.subscribe((data) => {
+    this.archivopath = data.altaFoto;
     });
   }
 
@@ -70,5 +76,4 @@ export class AdminUsuarioNuevoComponent implements OnInit {
       console.log(err);
     });
   }
-
 }

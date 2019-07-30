@@ -97,8 +97,9 @@
         <div class="nav-item active d-flex text-center dropdown">
           <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo"><img class="icon-nav"
-              src="./../../../assets/icons/perfil-h.svg" *ngIf="!sexo"><br>{{usuario}}
+            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo==2"><img class="icon-nav"
+              src="./../../../assets/icons/perfil-h.svg" *ngIf="sexo==1"><img class="icon-nav"
+              src="./../../../assets/icons/perfil-i.svg" *ngIf="sexo==3"><br>{{usuario}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" (click)="logout()">Logout</a>
