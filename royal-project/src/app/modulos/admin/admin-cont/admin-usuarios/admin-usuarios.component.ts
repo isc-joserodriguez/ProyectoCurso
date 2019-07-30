@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { UsuariosService } from '../../../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -9,31 +10,64 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./admin-usuarios.component.scss']
 })
 export class AdminUsuariosComponent implements OnInit {
-  displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'estatus', 'acciones'];
+  displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'tipo', 'estatus', 'acciones'];
+  listaUsuarios = [];
   dataSource: MatTableDataSource<any>;
+  respuesta: any = {
+    code: 0,
+    msg: '',
+    detail: ''
+  };
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-  constructor() {
-    this.dataSource = new MatTableDataSource([
-      { img: 'http://www.lorempixel.com/200/200', nombre: 'Alfonso', apellidos: 'Lopez Meza', estatus: 'Activo', acciones: 'hola' },
-      { img: 'http://www.lorempixel.com/200/200', nombre: 'Mario', apellidos: 'Luna Gonzalez', estatus: 'Activo', acciones: 'hola' },
-      { img: 'http://www.lorempixel.com/200/200', nombre: 'Laura', apellidos: 'Martinez Anaya', estatus: 'Activo', acciones: 'hola' },
-      { img: 'http://www.lorempixel.com/200/200', nombre: 'Samuel', apellidos: 'Ruiz Luna', estatus: 'Activo', acciones: 'hola' },
-      { img: 'http://www.lorempixel.com/200/200', nombre: 'Carlos', apellidos: 'Reyes Lopez', estatus: 'Activo', acciones: 'hola' },
-      { img: 'http://www.lorempixel.com/200/200', nombre: 'Pablo', apellidos: 'Hola Adios', estatus: 'Activo', acciones: 'hola' }
-    ]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(private usuarios: UsuariosService) {
+    this.dataSource = new MatTableDataSource(this.listaUsuarios);
   }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.getUsuarios();
   }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  getUsuarios() {
+    this.usuarios.getAll().subscribe(resp => {
+      this.respuesta = resp;
+      this.respuesta.detail.forEach(usuario => {
+        this.listaUsuarios.push({
+          id: usuario._id,
+          img: usuario.foto,
+          nombre: usuario.nombre,
+          apellidos: usuario.apPaterno + ' ' + usuario.apMaterno,
+          tipo: this.getTipo(usuario.tipo), estatus: usuario.estatus
+        });
+      });
+      this.dataSource = new MatTableDataSource(this.listaUsuarios);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, err => {
+      console.log(err);
+    });
+  }
+  getTipo(tipo) {
+    // 1= Admin 2=Coord 3=Maestro 4= Alumno
+    if (tipo == 1) {
+      return 'Administrador';
+    } else if (tipo == 2) {
+      return 'Coordinador';
+    } else if (tipo == 3) {
+      return 'Maestro';
+    } else {
+      return 'Alumno';
     }
   }
 }
