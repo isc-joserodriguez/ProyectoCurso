@@ -44,31 +44,23 @@
                 <ng-container matColumnDef="estatus">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
                     <td mat-cell *matCellDef="let row">
-                        <div *ngIf={{row.estatus}} class="custom-control custom-switch pl-0">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1" >
-                                <label class="custom-control-label" for="customSwitch1">Activo</label>
-                            </div>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" [checked]="row.estatus" class="custom-control-input"
+                                [id]="'customSwitch'+row.id" (click)="cambiarEstado(row.id,row.estatus)">
+                            <label class="custom-control-label" [for]="'customSwitch'+row.id">Activo</label>
                         </div>
-                        <div class="custom-control custom-switch pl-0">
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" >
-                                    <label class="custom-control-label" for="customSwitch1">Activo</label>
-                                </div>
-                            </div>
                     </td>
                 </ng-container>
 
-                <!-- Columna Acciones -->
+                <!-- Columna Editar -->
                 <div class="text-center">
-
-                <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones </th>
-                    <td mat-cell *matCellDef="let row">
-                        <button mat-mini-fab color="primary"><img class="icon-opcion" src="./../../../assets/icons/edit.svg"></button> | 
-                        <button mat-mini-fab color="warn"><img class="icon-opcion" src="./../../../assets/icons/error.svg"></button>
-                    </td>
-                </ng-container>
+                    <ng-container matColumnDef="editar">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-mini-fab color="primary" (click)="configUsuario(row.id)"><img
+                                    class="icon-opcion" src="./../../../assets/icons/edit.svg"></button>
+                        </td>
+                    </ng-container>
                 </div>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

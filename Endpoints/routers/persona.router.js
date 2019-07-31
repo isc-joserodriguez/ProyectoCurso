@@ -21,6 +21,10 @@ module.exports = (wagner) => {
     personaRouter.put("/edit/:id", (req, res) => {
         personaCtrl.update(req, res);
     });
+
+    personaRouter.put("/editSatus/:id", (req, res) => {
+        personaCtrl.updateStatus(req, res);
+    });
     /*
     personaRouter.post("/", (req, res) => {
         personaCtrl.create(req, res);

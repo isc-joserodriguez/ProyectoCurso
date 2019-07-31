@@ -10,7 +10,7 @@ import { UsuariosService } from '../../../../servicios/usuarios.service';
   styleUrls: ['./admin-usuarios.component.scss']
 })
 export class AdminUsuariosComponent implements OnInit {
-  displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'tipo', 'estatus', 'acciones'];
+  displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'tipo', 'estatus', 'editar'];
   listaUsuarios = [];
   dataSource: MatTableDataSource<any>;
   respuesta: any = {
@@ -40,6 +40,7 @@ export class AdminUsuariosComponent implements OnInit {
   }
 
   getUsuarios() {
+    this.listaUsuarios = [];
     this.usuarios.getAll().subscribe(resp => {
       this.respuesta = resp;
       this.respuesta.detail.forEach(usuario => {
@@ -69,5 +70,21 @@ export class AdminUsuariosComponent implements OnInit {
     } else {
       return 'Alumno';
     }
+  }
+  cambiarEstado(id, status) {
+    this.usuarios.updateStatus(id, { estatus: status }).subscribe(resp => {
+
+    }, err => {
+      console.log(err);
+    });
+
+  }
+
+  configUsuario(id) {
+    console.log('Ir a usuario ' + id);
+  }
+
+  eliminarUsuario(id) {
+    console.log('Eliminar usuario ' + id);
   }
 }

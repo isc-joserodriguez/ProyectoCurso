@@ -167,6 +167,32 @@ const getById = (req, res) => {
         });
 }
 
+const updateStatus = (req, res) => {
+    const { id } = req.params;
+    const estatus = req.body.estatus;
+    _persona.update({ _id: id }, {
+        $set: {
+            estatus: !estatus
+        }
+    })
+        .then(data => {
+            res.status(200);
+            res.json({
+                code: 200,
+                mgs: "Se editó con éxito",
+                detail: data
+            });
+
+        }).catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                msg: "Error.",
+                detail: error
+            });
+        });
+}
+
 const update = (req, res) => {
     const { id } = req.params;
     const persona = req.body;
@@ -201,6 +227,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login
+        getAll, create, deletePersona, getById, update, info, login, updateStatus
     });
 }

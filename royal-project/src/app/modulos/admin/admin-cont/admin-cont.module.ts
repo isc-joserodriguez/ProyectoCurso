@@ -4,20 +4,19 @@ import { CommonModule } from '@angular/common';
 import { AdminContRoutingModule } from './admin-cont-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 
-//Forms
+// Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Material
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatButtonModule} from '@angular/material/button';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
 
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -30,6 +29,7 @@ import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.componen
 import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
 import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisticas.component';
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
+import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-info.component';
 
 
 @NgModule({
@@ -39,7 +39,8 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     AdminUsuariosComponent,
     AdminPagosComponent,
     AdminEstadisticasComponent,
-    AdminUsuarioNuevoComponent
+    AdminUsuarioNuevoComponent,
+    AdminUsuarioInfoComponent
   ],
   imports: [
     CommonModule,
@@ -54,9 +55,9 @@ import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
-    WavesModule, 
-    IconsModule, 
-    ButtonsModule, 
+    WavesModule,
+    IconsModule,
+    ButtonsModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule
