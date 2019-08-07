@@ -5,13 +5,33 @@
     </a>
     <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
       <!--Categorias-->
-      <div class="col-md-1 vertical-center ">
-        <div class="nav-item active d-flex justify-content-start mr-0 ml-2 text-center ">
-          <a class="waves-light" href="#">
-            <img class="icon-nav" src="./../../../assets/icons/menu.svg"> <br>Categorías
-          </a>
-        </div>
-      </div>
+      <button mat-button [matMenuTriggerFor]="categorias">
+        <img class="icon-nav" src="./../../../assets/icons/menu.svg"><p class="salto_pag mb-0">Categorías</p>
+      </button>
+      <mat-menu #categorias="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="Tecnologias">
+          <i class="fas fa-laptop-code"></i>Tecnología
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item [matMenuTriggerFor]="Idiomas">
+          <i class="fas fa-language"></i> Idiomas
+        </button>
+      </mat-menu>
+      <mat-menu #Tecnologias="matMenu">
+        <button mat-menu-item >Fishes</button>
+        <button mat-menu-item >Amphibians</button>
+        <button mat-menu-item >Reptiles</button>
+        <button mat-menu-item>Birds</button>
+        <button mat-menu-item>Mammals</button>
+      </mat-menu>
+      <mat-menu #Idiomas="matMenu">
+        <button mat-menu-item >Fishes</button>
+        <button mat-menu-item >Amphibians</button>
+        <button mat-menu-item >Reptiles</button>
+        <button mat-menu-item>Birds</button>
+        <button mat-menu-item>Mammals</button>
+      </mat-menu>
+
       <!--Categorias-->
 
       <!--Buscador-->
@@ -27,10 +47,16 @@
 
       <!--Comunidad-->
       <div class="col-md-1 vertical-center">
-        <div class="nav-item active d-flex justify-content-start mr-5 text-center ">
-          <a class=" waves-light" href="#">
+        <div class="nav-item active d-flex justify-content-start mr-5 text-center dropdown ">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            data-display="static" aria-haspopup="true" aria-expanded="false">
             <img class="icon-nav" src="./../../../assets/icons/comunidad.svg"><br>Comunidad
           </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#"><i class="fas fa-laptop-code"></i>Tecnología</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="fas fa-language"></i> Idiomas</a>
+          </div>
         </div>
       </div>
       <!--Comunidad-->
