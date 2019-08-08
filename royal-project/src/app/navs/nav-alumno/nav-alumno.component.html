@@ -1,36 +1,40 @@
 <header>
-  <nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-sm fixed-top scrolling-navbar ">
+  <nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-sm fixed-top scrolling-navbar img-posicion">
     <a class="nav-item active" href="/">
       <img class="icon-nav-home" src="./../../../assets/icons/home.svg">
     </a>
     <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
       <!--Categorias-->
-      <button mat-button [matMenuTriggerFor]="categorias">
-        <img class="icon-nav" src="./../../../assets/icons/menu.svg"><p class="salto_pag mb-0">Categorías</p>
-      </button>
-      <mat-menu #categorias="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="Tecnologias">
-          <i class="fas fa-laptop-code"></i>Tecnología
+      <div class="col-md-1 vertical-center nav-item active pl-4">
+        <button mat-button [matMenuTriggerFor]="categorias" class="p-0">
+          <img class="icon-nav" src="./../../../assets/icons/menu.svg">
+          <p class="salto_pag mb-0">Categorías</p>
         </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item [matMenuTriggerFor]="Idiomas">
-          <i class="fas fa-language"></i> Idiomas
-        </button>
-      </mat-menu>
-      <mat-menu #Tecnologias="matMenu">
-        <button mat-menu-item >Fishes</button>
-        <button mat-menu-item >Amphibians</button>
-        <button mat-menu-item >Reptiles</button>
-        <button mat-menu-item>Birds</button>
-        <button mat-menu-item>Mammals</button>
-      </mat-menu>
-      <mat-menu #Idiomas="matMenu">
-        <button mat-menu-item >Fishes</button>
-        <button mat-menu-item >Amphibians</button>
-        <button mat-menu-item >Reptiles</button>
-        <button mat-menu-item>Birds</button>
-        <button mat-menu-item>Mammals</button>
-      </mat-menu>
+        <mat-menu #categorias="matMenu" class="fondo-navbar">
+          <button mat-menu-item [matMenuTriggerFor]="Tecnologias">
+            <i class="fas fa-laptop-code"></i>Tecnología
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item [matMenuTriggerFor]="Idiomas">
+            <i class="fas fa-language"></i> Idiomas
+          </button>
+        </mat-menu>
+        <mat-menu #Tecnologias="matMenu">
+          <button mat-menu-item>Fishes</button>
+          <button mat-menu-item>Amphibians</button>
+          <button mat-menu-item>Reptiles</button>
+          <button mat-menu-item>Birds</button>
+          <button mat-menu-item>Mammals</button>
+        </mat-menu>
+        <mat-menu #Idiomas="matMenu">
+          <button mat-menu-item>Fishes</button>
+          <button mat-menu-item>Amphibians</button>
+          <button mat-menu-item>Reptiles</button>
+          <button mat-menu-item>Birds</button>
+          <button mat-menu-item>Mammals</button>
+        </mat-menu>
+
+      </div>
 
       <!--Categorias-->
 
@@ -46,28 +50,29 @@
       <!--Buscador-->
 
       <!--Comunidad-->
-      <div class="col-md-1 vertical-center">
-        <div class="nav-item active d-flex justify-content-start mr-5 text-center dropdown ">
-          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            data-display="static" aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/comunidad.svg"><br>Comunidad
-          </a>
-          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#"><i class="fas fa-laptop-code"></i>Tecnología</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><i class="fas fa-language"></i> Idiomas</a>
-          </div>
-        </div>
+      <div class="col-md-1 vertical-center nav-item active">
+        <button mat-button [matMenuTriggerFor]="comunidad" class="p-0">
+          <img class="icon-nav" src="./../../../assets/icons/comunidad.svg">
+          <p class="salto_pag mb-0">Comunidad</p>
+        </button>
+        <mat-menu #comunidad="matMenu" class="fondo-navbar">
+          <button mat-menu-item>
+            <i class="fas fa-laptop-code"></i>Tecnologías
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <i class="fas fa-language"></i> Idiomas
+          </button>
+        </mat-menu>
       </div>
       <!--Comunidad-->
 
       <!--Carrito-->
-      <div class="col-md-1 vertical-center">
-        <div class="nav-item active text-center">
-          <a class=" waves-light" href="#">
-            <img class="icon-nav" src="./../../../assets/icons/carrito.svg"><br>Mi carrito
-          </a>
-        </div>
+      <div class="col-md-1 vertical-center nav-item active ">
+        <button mat-button href="#" class="p-0">
+          <img class="icon-nav" src="./../../../assets/icons/carrito.svg">
+          <p class="salto_pag mb-0">Mi carrito</p>
+        </button>
       </div>
       <!--Carrito-->
 
@@ -85,58 +90,72 @@
       <!--Inicio Sesión/Registro-->
 
       <!--Mis Cursos-->
-      <div class="col-md-1 vertical-center" *ngIf="logueado">
-        <div class="nav-item active d-flex text-center dropdown">
-          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/cursos.svg"><br>Mis Cursos
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
+      <div class="col-md-1 vertical-center d-flex text-center" *ngIf="logueado">
+
+        <button class="p-0" mat-button [matMenuTriggerFor]="miscursos">
+          <img class="icon-nav" src="./../../../assets/icons/cursos.svg">
+          <p class="salto_pag mb-0">Mis Cursos</p>
+        </button>
+        <mat-menu #miscursos="matMenu" class="fondo-navbar">
+          <button mat-menu-item>
+            <i class="fas fa-laptop-code"></i>Tecnologías
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <i class="fas fa-language"></i> Idiomas
+          </button>
+        </mat-menu>
+
       </div>
       <!--Mis Cursos-->
 
       <!-- Alertas-->
       <div class="col-md-1 vertical-center" *ngIf="logueado">
-        <div class="nav-item active d-flex text-center dropdown">
-          <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/alertas.svg"><br> Alertas
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
+        <button mat-button [matMenuTriggerFor]="alertas" class="p-0">
+          <img class="icon-nav" src="./../../../assets/icons/alertas.svg">
+          <p class="salto_pag mb-0">Alertas</p>
+        </button>
+        <mat-menu #alertas="matMenu" class="fondo-navbar">
+          <button mat-menu-item>
+            <i class="fas fa-laptop-code"></i>Tecnologías
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <i class="fas fa-language"></i> Idiomas
+          </button>
+        </mat-menu>
       </div>
       <!-- Alertas-->
 
       <!--Mi perfil-->
       <div class="col-md-1 vertical-center" *ngIf="logueado">
-        <div class="nav-item active text-center dropdown">
-          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            data-display="static" aria-haspopup="true" aria-expanded="false">
-            <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo==2"><img class="icon-nav"
-              src="./../../../assets/icons/perfil-h.svg" *ngIf="sexo==1"><img class="icon-nav"
-              src="./../../../assets/icons/perfil-i.svg" *ngIf="sexo==3"><br>{{usuario}}
-          </a>
-          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#"><i class="fas fa-user pr-1"></i>Mi Perfil</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-at pr-1"></i>Cuenta</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-credit-card pr-1"></i>Métodos de Pago</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-file-alt"></i> Historial de Compra</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-award"></i> Certificados</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-          </div>
-        </div>
+        <button mat-button [matMenuTriggerFor]="miperfil" class="p-0">
+          <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo==2"><img class="icon-nav"
+            src="./../../../assets/icons/perfil-h.svg" *ngIf="sexo==1"><img class="icon-nav"
+            src="./../../../assets/icons/perfil-i.svg" *ngIf="sexo==3">
+          <p class="salto_pag mb-0">{{usuario}}</p>
+        </button>
+        <mat-menu #miperfil="matMenu" class="fondo-navbar">
+          <button mat-menu-item>
+            <i class="fas fa-user pr-1"></i>Mi Perfil
+          </button>
+          <button mat-menu-item>
+            <i class="fas fa-at pr-1"></i>Cuenta
+          </button>
+          <button mat-menu-item>
+            <i class="fas fa-credit-card pr-1"></i>Métodos de Pago
+          </button>
+          <button mat-menu-item>
+            <i class="fas fa-file-alt"></i> Historial de Compra
+          </button>
+          <button mat-menu-item>
+            <i class="fas fa-award"></i> Certificados
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+        </mat-menu>
       </div>
       <!--Perfil-->
     </div>
