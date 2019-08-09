@@ -60,10 +60,27 @@ export class AdminUsuariosComponent implements OnInit {
       console.log(err);
     });
   }
-  cambiarEstado(id, status, pos) {
-    console.log(id);
-    console.log(status);
-    console.log(pos);
+  cambiarEstado(id, tipo, cambio) {
+    switch (cambio) {
+      case 1:
+        console.log('cambiamos a coord con tipo ' + tipo);
+        tipo[1] = (tipo[1] == 1) ? 0 : 1;
+        console.log('a coord con tipo ' + tipo);
+        break;
+      case 2:
+        console.log('cambiamos a maestro con tipo ' + tipo);
+        tipo[2] = (tipo[2] == 1) ? 0 : 1;
+        console.log('a maestro con tipo ' + tipo);
+        break;
+      case 3:
+        console.log('cambiamos a alumno con tipo ' + tipo);
+        tipo[3] = (tipo[3] == 1) ? 0 : 1;
+        console.log('a alumno con tipo ' + tipo);
+        break;
+
+
+
+    }
     /* 
     this.usuarios.updateStatus(id, { estatus: status }).subscribe(resp => {
 
