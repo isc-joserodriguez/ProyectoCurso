@@ -30,7 +30,7 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     apPaterno: '',
     apMaterno: '',
     sexo: 3,
-    tipo: 4,
+    tipo: [0, 0, 0, 1],
     foto: 'http://www.lorempixel.com/200/200'
   };
 
@@ -45,12 +45,12 @@ export class AdminUsuarioNuevoComponent implements OnInit {
       altaApMaterno: ['', Validators.required],
       altaCorreo: ['', Validators.required],
       altaNac: ['', Validators.required],
-      altaFoto: ['', Validators.required],
+      altaFoto: [''],
       altaRol: ['', Validators.required]
     });
 
     this.altaForm.valueChanges.subscribe((data) => {
-    this.archivopath = data.altaFoto;
+      this.archivopath = data.altaFoto;
     });
   }
 
@@ -64,15 +64,26 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     this.persona.apPaterno = this.altaForm.value.altaApPaterno;
     this.persona.apMaterno = this.altaForm.value.altaApMaterno;
     this.persona.sexo = 3;
-    this.persona.tipo = this.altaForm.value.altaRol;
-    this.persona.foto = this.altaForm.value.altaFoto;
-
-    console.log(this.persona);
+    this.persona.tipo = this.getVal(this.altaForm.value.altaRol);
+    this.persona.foto = (this.altaForm.value.altaFoto == '') ? 'http://www.lorempixel.com/200/200' : this.altaForm.value.altaFoto;
 
     this.auth.signup(this.persona).subscribe(resp => {
       this.respuesta = resp;
+      this.router.navigate(['/admin/usuario', this.respuesta.detail._id]);
     }, err => {
       console.log(err);
     });
+  }
+  getVal(tipo) {
+    if (tipo == 0) {
+      return [1, 0, 0, 0];
+    } else if (tipo == 1) {
+      return [0, 1, 0, 0];
+    } else if (tipo == 2) {
+      return [0, 0, 1, 0];
+    } else {
+      return [0, 0, 0, 1];
+    }
+
   }
 }

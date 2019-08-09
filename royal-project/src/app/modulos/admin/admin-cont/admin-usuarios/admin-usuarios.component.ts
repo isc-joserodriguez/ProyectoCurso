@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,7 +11,7 @@ import { UsuariosService } from '../../../../servicios/usuarios.service';
   styleUrls: ['./admin-usuarios.component.scss']
 })
 export class AdminUsuariosComponent implements OnInit {
-  displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'tipo', 'estatus', 'editar'];
+  displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'tipo', 'editar'];
   listaUsuarios = [];
   dataSource: MatTableDataSource<any>;
   respuesta: any = {
@@ -21,7 +22,7 @@ export class AdminUsuariosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private usuarios: UsuariosService) {
+  constructor(private usuarios: UsuariosService, private router: Router) {
     this.dataSource = new MatTableDataSource(this.listaUsuarios);
   }
 
@@ -49,7 +50,7 @@ export class AdminUsuariosComponent implements OnInit {
           img: usuario.foto,
           nombre: usuario.nombre,
           apellidos: usuario.apPaterno + ' ' + usuario.apMaterno,
-          tipo: this.getTipo(usuario.tipo), estatus: usuario.estatus
+          tipo: usuario.tipo
         });
       });
       this.dataSource = new MatTableDataSource(this.listaUsuarios);
@@ -59,32 +60,20 @@ export class AdminUsuariosComponent implements OnInit {
       console.log(err);
     });
   }
-  getTipo(tipo) {
-    // 1= Admin 2=Coord 3=Maestro 4= Alumno
-    if (tipo == 1) {
-      return 'Administrador';
-    } else if (tipo == 2) {
-      return 'Coordinador';
-    } else if (tipo == 3) {
-      return 'Maestro';
-    } else {
-      return 'Alumno';
-    }
-  }
-  cambiarEstado(id, status) {
+  cambiarEstado(id, status, pos) {
+    console.log(id);
+    console.log(status);
+    console.log(pos);
+    /* 
     this.usuarios.updateStatus(id, { estatus: status }).subscribe(resp => {
 
     }, err => {
       console.log(err);
-    });
+    }); */
 
   }
 
   configUsuario(id) {
-    console.log('Ir a usuario ' + id);
-  }
-
-  eliminarUsuario(id) {
-    console.log('Eliminar usuario ' + id);
+    this.router.navigate(['/admin/usuario', id]);
   }
 }

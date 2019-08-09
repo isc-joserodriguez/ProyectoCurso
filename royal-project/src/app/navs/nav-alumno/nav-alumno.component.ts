@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 import { Match } from '../../helper/match.validator';
 
@@ -98,9 +98,16 @@ export class NavAlumnoComponent implements OnInit {
     } else {
       this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
         this.respuesta = res;
-        this.usuario = this.respuesta.data.usuario.nombre;
+        if (this.respuesta.data.tipo[0] == 1) {
+          this.router.navigate(['/admin/']);
+        } else if (this.respuesta.data.tipo[1] == 1) {
+          this.router.navigate(['/coord/']);
+        } else if (this.respuesta.data.tipo[2] == 1) {
+          this.router.navigate(['/maestro/']);
+        }
+        this.usuario = this.respuesta.data.nombre;
         this.logueado = true;
-        this.sexo = this.respuesta.data.usuario.sexo;
+        this.sexo = this.respuesta.data.sexo;
       }, err => {
         console.log(err);
       });

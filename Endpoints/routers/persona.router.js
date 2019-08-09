@@ -23,7 +23,7 @@ module.exports = (wagner) => {
     });
 
     personaRouter.put("/editSatus/:id", (req, res) => {
-        personaCtrl.updateStatus(req, res);
+        personaCtrl.updateTipo(req, res);
     });
     /*
     personaRouter.post("/", (req, res) => {

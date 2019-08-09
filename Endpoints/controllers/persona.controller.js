@@ -97,7 +97,14 @@ const login = (req, res) => {
                         });
                     } else {
                         const tokenTTL = `${1000 * 60 * 60 * 24 * 30}ms`; // ms * s * m * h * d
-                        const payload = { usuario };
+                        console.log(usuario);
+                        const payload = {
+                            id: usuario._id,
+                            tipo: usuario.tipo,
+                            nombre: usuario.nombre,
+                            foto: usuario.foto,
+                            sexo: usuario.sexo
+                        };
                         const token = tkn.generateJWT(payload, tokenTTL);
                         res.status(200).json({
                             code: 200,
@@ -167,12 +174,12 @@ const getById = (req, res) => {
         });
 }
 
-const updateStatus = (req, res) => {
+const updateTipo = (req, res) => {
     const { id } = req.params;
-    const estatus = req.body.estatus;
+    const tipo = req.body.tipo;
     _persona.update({ _id: id }, {
         $set: {
-            estatus: !estatus
+            tipo: tipo
         }
     })
         .then(data => {
@@ -227,6 +234,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateStatus
+        getAll, create, deletePersona, getById, update, info, login, updateTipo
     });
 }

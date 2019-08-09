@@ -15,6 +15,8 @@ export class UsuariosService {
   }
   updateStatus(id, status) {
     return this.http.put(apiUrl + '/editSatus/' + id, status);
-
+  }
+  getUser(id) {
+    return this.http.get(apiUrl + '/get/' + id);
   }
 }

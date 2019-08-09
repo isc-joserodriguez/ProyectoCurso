@@ -41,8 +41,8 @@
         <div class="row">
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Email:</mat-label>
-              <input matInput placeholder="Ingresa tu email" required formControlName="altaCorreo">
+              <mat-label>Correo:</mat-label>
+              <input matInput placeholder="Ingresa tu correo" required formControlName="altaCorreo">
               <mat-error>
                 <span *ngIf="!altaForm.get('altaCorreo').valid && altaForm.get('altaCorreo').touched">Agrega un
                   correo</span>
@@ -69,10 +69,10 @@
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Rol de Usuario:</mat-label>
               <select matNativeControl required formControlName="altaRol">
-                <option value="1">Administrador</option>
-                <option value="2">Coordinador</option>
-                <option value="3">Maestro</option>
-                <option value="4">Alumno</option>
+                <option value="0">Administrador</option>
+                <option value="1">Coordinador</option>
+                <option value="2">Maestro</option>
+                <option value="3">Alumno</option>
               </select>
             </mat-form-field>
           </div>

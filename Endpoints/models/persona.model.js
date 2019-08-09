@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const personaSchema = new mongoose.Schema({
-    _id: { type: String, required: true },
+    _id: { type: Number, required: true },
     credencial: {
         correo: { type: String, required: true },
         contraseña: { type: String, required: true }
     },
-    tipo: { type: Array, default: [4] }, //1= Admin 2=Coord 3=Maestro 4= Alumno
+    tipo: { type: Array, default: [0,0,0,1] }, //1= Admin 2=Coord 3=Maestro 4= Alumno
     sexo: { type: Number, default: 3 }, //1= H 2= M 3= Indef
     nombre: { type: String },
     apPaterno: { type: String },
@@ -16,7 +16,6 @@ const personaSchema = new mongoose.Schema({
     fechaNac: { type: Date },
     foto: { type: String },
     paginaWeb: { type: String },
-    estatus: {type: Boolean, default: true},
     redSocial: [
         {
             red: { type: String },

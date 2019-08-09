@@ -37,18 +37,32 @@
                 <!-- Columna tipo -->
                 <ng-container matColumnDef="tipo">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
-                    <td mat-cell *matCellDef="let row"> {{row.tipo}} </td>
-                </ng-container>
-
-                <!-- Columna Estatus -->
-                <ng-container matColumnDef="estatus">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
                     <td mat-cell *matCellDef="let row">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" [checked]="row.estatus" class="custom-control-input"
-                                [id]="'customSwitch'+row.id" (click)="cambiarEstado(row.id,row.estatus)">
-                            <label class="custom-control-label" [for]="'customSwitch'+row.id">Activo</label>
-                        </div>
+                        
+                            <div *ngIf="row.tipo[0]==1">
+                                Administrador
+                            </div>
+                            <div *ngIf="row.tipo[0]!=1 && row.tipo[2]!=1 && row.tipo[3]!=1">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" [checked]="row.tipo[1]" class="custom-control-input"
+                                        [id]="'switchCoord'+row.id" (click)="cambiarEstado(row.id,row.tipo,1)">
+                                    <label class="custom-control-label" [for]="'switchCoord'+row.id">Coordinador</label>
+                                </div>
+                            </div>
+                            <div *ngIf="row.tipo[0]!=1 && row.tipo[1]!=1">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" [checked]="row.tipo[2]" class="custom-control-input"
+                                        [id]="'switchMaestro'+row.id" (click)="cambiarEstado(row.id,row.tipo,2)">
+                                    <label class="custom-control-label" [for]="'switchMaestro'+row.id">Maestro</label>
+                                </div>
+                            </div>
+                            <div *ngIf="row.tipo[0]!=1 && row.tipo[1]!=1">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" [checked]="row.tipo[3]" class="custom-control-input"
+                                        [id]="'switchAlumno'+row.id" (click)="cambiarEstado(row.id,row.tipo,3)">
+                                    <label class="custom-control-label" [for]="'switchAlumno'+row.id">Alumno</label>
+                                </div>
+                            </div>
                     </td>
                 </ng-container>
 
