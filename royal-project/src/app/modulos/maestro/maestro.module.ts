@@ -7,14 +7,29 @@ import { MaestroComponent } from './maestro.component';
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule  } from 'angular-bootstrap-md';
+import { MaestroNuevoCursoComponent } from './maestro-nuevo-curso/maestro-nuevo-curso.component';
+
+//Material
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
-  declarations: [MaestroComponent],
+  declarations: [MaestroComponent, MaestroNuevoCursoComponent],
   imports: [
     CommonModule,
     MaestroRoutingModule,
     CarouselModule,
-    CardsFreeModule
+    CardsFreeModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class MaestroModule { }
