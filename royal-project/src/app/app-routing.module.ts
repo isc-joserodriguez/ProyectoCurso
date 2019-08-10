@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
+import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.component';
 
 
 const routes: Routes = [
@@ -37,28 +38,16 @@ const routes: Routes = [
       }
     ]
   },
-  /*
   {
-    path: 'maestro',
-    component: NavMaestroComponent,
+    path: 'coord',
+    component: NavCoordinadorComponent,
     children: [
       {
         path: '',
-        loadChildren: './modulos/maestro/maestro-home/maestro-home.module#MaestroHomeModule'
+        loadChildren: './modulos/coord/coord.module#CoordModule'
       }
     ]
   },
-  {
-    path: 'admin',
-    component: NavAdministradorComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './modulos/admin/admin-home/admin-home.module#AdminHomeModule'
-      }
-    ]
-  },
-  */
   {
     path: '',
     redirectTo: '/inicio',
