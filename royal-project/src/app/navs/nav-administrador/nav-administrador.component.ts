@@ -38,6 +38,13 @@ export class NavAdministradorComponent implements OnInit {
   verificarToken() {
     this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
       this.respuesta = res;
+      if (this.respuesta.data.tipo[1].coord != undefined) {
+        this.router.navigate(['/coord/']);
+      } else if (this.respuesta.data.tipo[2].maestro != undefined) {
+        this.router.navigate(['/maestro/']);
+      } else if (this.respuesta.data.tipo[3].alumno != undefined) {
+        this.router.navigate(['/']);
+      }
       this.usuario = this.respuesta.data.nombre;
       this.sexo = this.respuesta.data.sexo;
     }, err => {

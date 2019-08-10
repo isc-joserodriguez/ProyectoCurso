@@ -22,23 +22,6 @@ const getAll = (req, res) => {
 };
 
 const create = (req, res) => {
-    /*
-    {
-        "credencial":{
-            "correo":"nemo@hotmail.com",
-            "contraseña":"123456"
-        },
-        "tipo":[4],
-        "nombre":"Jaime",
-        "apPaterno":"Lopez",
-        "apMaterno":"Martinez",
-        "fechaNac":"03-03-1995",
-        "foto":"foto.png",
-        "paginaWeb":"google.com",
-        "redSocial":[{"red":"Facebook","url":"fb.com"}],
-        "cursoMaestro":[{"_id":"id1"}],
-        "cursoAlumno":[{"_id":"id2"}]
-    }*/
     const persona = req.body;
     _persona.find({}).sort({ _id: -1 }).then(regs => {
         persona._id = parseInt((regs.length == 0) ? 0 : (regs[0].id)) + 1;
@@ -177,9 +160,11 @@ const getById = (req, res) => {
 const updateTipo = (req, res) => {
     const { id } = req.params;
     const tipo = req.body.tipo;
+    const credencial=req.body.credencial;
     _persona.update({ _id: id }, {
         $set: {
-            tipo: tipo
+            tipo: tipo,
+            credencial: credencial
         }
     })
         .then(data => {

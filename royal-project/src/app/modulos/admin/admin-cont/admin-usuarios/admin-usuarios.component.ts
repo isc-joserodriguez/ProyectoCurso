@@ -63,30 +63,21 @@ export class AdminUsuariosComponent implements OnInit {
   cambiarEstado(id, tipo, cambio) {
     switch (cambio) {
       case 1:
-        console.log('cambiamos a coord con tipo ' + tipo);
-        tipo[1] = (tipo[1] == 1) ? 0 : 1;
-        console.log('a coord con tipo ' + tipo);
+        tipo[1].coord = !tipo[1].coord;
         break;
       case 2:
-        console.log('cambiamos a maestro con tipo ' + tipo);
-        tipo[2] = (tipo[2] == 1) ? 0 : 1;
-        console.log('a maestro con tipo ' + tipo);
+        tipo[2].maestro = !tipo[2].maestro;
         break;
       case 3:
-        console.log('cambiamos a alumno con tipo ' + tipo);
-        tipo[3] = (tipo[3] == 1) ? 0 : 1;
-        console.log('a alumno con tipo ' + tipo);
+        tipo[3].alumno = !tipo[3].alumno;
         break;
-
-
-
     }
-    /* 
-    this.usuarios.updateStatus(id, { estatus: status }).subscribe(resp => {
+
+    this.usuarios.updateTipo(id, { tipoNuevo: tipo }).subscribe(resp => {
 
     }, err => {
       console.log(err);
-    }); */
+    });
 
   }
 

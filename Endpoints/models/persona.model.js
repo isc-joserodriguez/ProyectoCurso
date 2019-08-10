@@ -8,7 +8,7 @@ const personaSchema = new mongoose.Schema({
         correo: { type: String, required: true },
         contraseña: { type: String, required: true }
     },
-    tipo: { type: Array, default: [0,0,0,1] }, //1= Admin 2=Coord 3=Maestro 4= Alumno
+    tipo: { type: Array, default: [{}, {}, {}, { alumno: true }] }, //1= Admin 2=Coord 3=Maestro 4= Alumno
     sexo: { type: Number, default: 3 }, //1= H 2= M 3= Indef
     nombre: { type: String },
     apPaterno: { type: String },
