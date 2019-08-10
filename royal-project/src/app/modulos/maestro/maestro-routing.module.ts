@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MaestroComponent } from './maestro.component';
+import { MaestroNuevoCursoComponent } from './maestro-nuevo-curso/maestro-nuevo-curso.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
         loadChildren: './maestro-cont/maestro-cont.module#MaestroContModule'
       }
     ]
+  },
+  {
+    path:'curso-nuevo',
+    component: MaestroNuevoCursoComponent
   }
 ];
 

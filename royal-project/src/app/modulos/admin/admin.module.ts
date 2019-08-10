@@ -8,13 +8,17 @@ import { AdminComponent } from './admin.component';
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule  } from 'angular-bootstrap-md';
 
+//Material
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   declarations: [AdminComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     CarouselModule,
-    CardsFreeModule
+    CardsFreeModule,
+    MatExpansionModule
   ]
 })
 export class AdminModule { }
