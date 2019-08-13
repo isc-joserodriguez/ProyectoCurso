@@ -30,7 +30,7 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     apPaterno: '',
     apMaterno: '',
     sexo: 3,
-    tipo: [0, 0, 0, 1],
+    tipo: [],
     foto: 'http://www.lorempixel.com/200/200'
   };
 
@@ -76,13 +76,13 @@ export class AdminUsuarioNuevoComponent implements OnInit {
   }
   getVal(tipo) {
     if (tipo == 0) {
-      return [1, 0, 0, 0];
+      return [{ admin: true }, {}, {}, {}];
     } else if (tipo == 1) {
-      return [0, 1, 0, 0];
+      return [{}, { coord: true }, {}, {}];
     } else if (tipo == 2) {
-      return [0, 0, 1, 0];
+      return [{}, {}, { maestro: true }, {}];
     } else {
-      return [0, 0, 0, 1];
+      return [{}, {}, {}, { alumno: true }];
     }
 
   }

@@ -22,23 +22,6 @@ const getAll = (req, res) => {
 };
 
 const create = (req, res) => {
-    /*
-    {
-        "credencial":{
-            "correo":"nemo@hotmail.com",
-            "contraseña":"123456"
-        },
-        "tipo":[4],
-        "nombre":"Jaime",
-        "apPaterno":"Lopez",
-        "apMaterno":"Martinez",
-        "fechaNac":"03-03-1995",
-        "foto":"foto.png",
-        "paginaWeb":"google.com",
-        "redSocial":[{"red":"Facebook","url":"fb.com"}],
-        "cursoMaestro":[{"_id":"id1"}],
-        "cursoAlumno":[{"_id":"id2"}]
-    }*/
     const persona = req.body;
     _persona.find({}).sort({ _id: -1 }).then(regs => {
         persona._id = parseInt((regs.length == 0) ? 0 : (regs[0].id)) + 1;
@@ -85,7 +68,7 @@ const login = (req, res) => {
                 res.status(400).json({
                     code: 400,
                     msg: "Error: El correo es incorrecto",
-                    data: []
+                    detail: []
                 });
             } else {
                 hash.comparePassword(contraseña, usuario.credencial.contraseña).then(contraseñaCorrecta => {
@@ -93,7 +76,7 @@ const login = (req, res) => {
                         res.status(400).json({
                             code: 400,
                             msg: "Error: La contraseña es incorrecta",
-                            data: []
+                            detail: []
                         });
                     } else {
                         const tokenTTL = `${1000 * 60 * 60 * 24 * 30}ms`; // ms * s * m * h * d
@@ -129,7 +112,7 @@ const info = (req, res) => {
     res.status(200).json({
         code: 200,
         msg: "Entraste correctamente!",
-        data: req.decoded
+        detail: req.decoded
     })
 
 }
@@ -177,9 +160,11 @@ const getById = (req, res) => {
 const updateTipo = (req, res) => {
     const { id } = req.params;
     const tipo = req.body.tipo;
+    const credencial=req.body.credencial;
     _persona.update({ _id: id }, {
         $set: {
-            tipo: tipo
+            tipo: tipo,
+            credencial: credencial
         }
     })
         .then(data => {

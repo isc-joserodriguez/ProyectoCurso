@@ -13,8 +13,11 @@ export class UsuariosService {
   getAll() {
     return this.http.get(apiUrl + '/getAll');
   }
-  updateStatus(id, status) {
-    return this.http.put(apiUrl + '/editSatus/' + id, status);
+  getId(id) {
+    return this.http.get(apiUrl + '/get/' + id);
+  }
+  updateTipo(id, tipo) {
+    return this.http.put(apiUrl + '/editTipo/' + id, tipo);
   }
   getUser(id) {
     return this.http.get(apiUrl + '/get/' + id);

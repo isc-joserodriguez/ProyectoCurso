@@ -98,16 +98,18 @@ export class NavAlumnoComponent implements OnInit {
     } else {
       this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
         this.respuesta = res;
-        if (this.respuesta.data.tipo[0] == 1) {
+        if (this.respuesta.detail.token != undefined) {
+          this.logout();
+        } else if (this.respuesta.detail.tipo[0].admin != undefined) {
           this.router.navigate(['/admin/']);
-        } else if (this.respuesta.data.tipo[1] == 1) {
+        } else if (this.respuesta.detail.tipo[1].coord != undefined) {
           this.router.navigate(['/coord/']);
-        } else if (this.respuesta.data.tipo[2] == 1) {
+        } else if (this.respuesta.detail.tipo[2].maestro != undefined) {
           this.router.navigate(['/maestro/']);
         }
-        this.usuario = this.respuesta.data.nombre;
+        this.usuario = this.respuesta.detail.nombre;
         this.logueado = true;
-        this.sexo = this.respuesta.data.sexo;
+        this.sexo = this.respuesta.detail.sexo;
       }, err => {
         console.log(err);
       });

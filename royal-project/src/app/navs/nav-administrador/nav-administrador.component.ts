@@ -38,8 +38,17 @@ export class NavAdministradorComponent implements OnInit {
   verificarToken() {
     this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
       this.respuesta = res;
-      this.usuario = this.respuesta.data.nombre;
-      this.sexo = this.respuesta.data.sexo;
+      if (this.respuesta.detail.token != undefined) {
+        this.logout();
+      } else if (this.respuesta.detail.tipo[1].coord != undefined) {
+        this.router.navigate(['/coord/']);
+      } else if (this.respuesta.detail.tipo[2].maestro != undefined) {
+        this.router.navigate(['/maestro/']);
+      } else if (this.respuesta.detail.tipo[3].alumno != undefined) {
+        this.router.navigate(['/']);
+      }
+      this.usuario = this.respuesta.detail.nombre;
+      this.sexo = this.respuesta.detail.sexo;
     }, err => {
       console.log(err);
     });

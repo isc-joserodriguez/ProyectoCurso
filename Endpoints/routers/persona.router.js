@@ -22,14 +22,9 @@ module.exports = (wagner) => {
         personaCtrl.update(req, res);
     });
 
-    personaRouter.put("/editSatus/:id", (req, res) => {
+    personaRouter.put("/editTipo/:id", (req, res) => {
         personaCtrl.updateTipo(req, res);
     });
-    /*
-    personaRouter.post("/", (req, res) => {
-        personaCtrl.create(req, res);
-    });
-    */
 
     //AUTH
     personaRouter.get('/userInfo', token.checkJWT, (req, res) => {

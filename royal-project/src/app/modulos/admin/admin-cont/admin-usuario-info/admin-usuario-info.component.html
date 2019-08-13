@@ -14,56 +14,66 @@
             <div class="col-md-8">
                 <mat-form-field appearance="outline" class="field-login">
                     <mat-label>Correo:</mat-label>
-                    <input matInput placeholder="Ingresa tu correo" required [(ngModel)]="usuario.correo">
+                    <input matInput placeholder="Ingresa tu correo" required [(ngModel)]="usuario.credencial.correo">
                     <mat-error>
                         <span *ngIf="usuario.correo==''">Agrega un correo</span>
                     </mat-error>
                 </mat-form-field>
                 <br>
-                <label><span class="h6">Fecha de nacimiento: </span>{{usuario.fechaNac}}</label>
+                <label><span class="h6">Fecha de nacimiento: </span>{{usuario.fechaNac|date}}</label>
                 <br>
                 <label class="h6">Tipo de usuario:</label>
                 <br>
-                <div *ngIf="!(usuario.tipo[0]==1 || usuario.tipo[1]==1)">
+                <div *ngIf="!(usuario.tipo[0].admin!=undefined || usuario.tipo[1].coord!=undefined)">
                     <ul>
-                        <li>
+                        <li *ngIf="usuario.tipo[3].alumno!=undefined">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" [checked]="usuario.tipo[3]==1" class="custom-control-input"
-                                    id="switchAlumno" (click)="cambiarEstado(usuario.id,usuario.estatus)">
+                                <input type="checkbox" [checked]="usuario.tipo[3].alumno" class="custom-control-input"
+                                    id="switchAlumno" (click)="cambiarEstado(usuario.id,usuario.tipo,3)">
                                 <label class="custom-control-label" for="switchAlumno">Alumno</label>
                             </div>
                         </li>
-                        <li>
+                        <li *ngIf="usuario.tipo[2].maestro!=undefined">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" [checked]="usuario.tipo[2]==1" class="custom-control-input"
-                                    id="switchMaestro" (click)="cambiarEstado(usuario.id,usuario.estatus)">
+                                <input type="checkbox" [checked]="usuario.tipo[2].maestro" class="custom-control-input"
+                                    id="switchMaestro" (click)="cambiarEstado(usuario.id,usuario.tipo,2)">
                                 <label class="custom-control-label" for="switchMaestro">Maestro</label>
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <div *ngIf="usuario.tipo[0]==1 || usuario.tipo[1]==1">
+                <div *ngIf="(usuario.tipo[0].admin!=undefined || usuario.tipo[1].coord!=undefined)">
                     <mat-form-field appearance="outline" class="field-login">
                         <mat-label>Rol de Usuario:</mat-label>
-                        <select matNativeControl [(ngModel)]="permisoUsuario" (change)="cambiarEstado(permisoUsuario)">
+                        <select matNativeControl [(ngModel)]="permisoUsuario"
+                            (change)="cambiarEstado(usuario.id,usuario.tipo,0)">
                             <option value="0">Administrador</option>
                             <option value="1">Coordinador</option>
                         </select>
                     </mat-form-field>
-                    <div class="row" *ngIf="usuario.tipo[0]!=1">
+                    <div class="row" *ngIf="permisoUsuario!=0">
                         <label class="h6 pr-2">Estatus:</label>
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" [checked]="usuario.estatus" class="custom-control-input" id="switch1"
-                                (click)="cambiarEstado(usuario.id,usuario.estatus)">
+                            <input type="checkbox" [checked]="tempCoord" class="custom-control-input"
+                                id="switch1" (click)="cambiarEstado(usuario.id,usuario.tipo,1)">
                             <label class="custom-control-label" for="switch1"></label>
                         </div>
                     </div>
                 </div>
                 <br>
-                <button type="button" class="btn btn-danger btn-md" [routerLink]="['../../usuarios']">
-                    <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">
-                    Volver</button>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                      <button type="button" class="btn btn-success btn-md " (click)="guardar()" [routerLink]="['../../usuarios']">
+                        <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
+                        Guardar</button>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <button type="button" class="btn btn-danger btn-md" [routerLink]="['../../usuarios']">
+                            <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">
+                            Volver</button>
+                    </div>
+                  </div>
             </div>
         </div>
     </mat-card>
