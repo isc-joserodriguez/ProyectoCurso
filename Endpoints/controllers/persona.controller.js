@@ -68,7 +68,7 @@ const login = (req, res) => {
                 res.status(400).json({
                     code: 400,
                     msg: "Error: El correo es incorrecto",
-                    data: []
+                    detail: []
                 });
             } else {
                 hash.comparePassword(contraseña, usuario.credencial.contraseña).then(contraseñaCorrecta => {
@@ -76,7 +76,7 @@ const login = (req, res) => {
                         res.status(400).json({
                             code: 400,
                             msg: "Error: La contraseña es incorrecta",
-                            data: []
+                            detail: []
                         });
                     } else {
                         const tokenTTL = `${1000 * 60 * 60 * 24 * 30}ms`; // ms * s * m * h * d
@@ -112,7 +112,7 @@ const info = (req, res) => {
     res.status(200).json({
         code: 200,
         msg: "Entraste correctamente!",
-        data: req.decoded
+        detail: req.decoded
     })
 
 }

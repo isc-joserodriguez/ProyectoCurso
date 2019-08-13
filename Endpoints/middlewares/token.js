@@ -13,7 +13,9 @@ const checkJWT = (req, res, next) => {
         req.decoded = decoded;
         next();
     } catch (error) {
-        return res.status(401).send({ message: 'Unauthorized' });
+        req.decoded = { token: 'expirado' }
+        next();
+        /* return res.status(401).send({ message: 'Unauthorized' }); */
     }
 };
 
