@@ -16,7 +16,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [MaestroComponent, MaestroNuevoCursoComponent],
   imports: [
@@ -29,7 +30,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatDatepickerModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ]
 })
 export class MaestroModule { }

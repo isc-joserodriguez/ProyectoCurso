@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-maestro-nuevo-curso',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./maestro-nuevo-curso.component.scss']
 })
 export class MaestroNuevoCursoComponent implements OnInit {
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+
   step = 0;
 
   setStep(index: number) {
