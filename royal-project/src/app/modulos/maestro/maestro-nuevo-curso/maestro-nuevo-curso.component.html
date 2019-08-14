@@ -11,9 +11,9 @@
   <mat-accordion class="example-headers-align">
     <div class="col-md-12">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header class="acordeon-enc">
           <mat-panel-title>
-            General
+            <b>General</b>
           </mat-panel-title>
           <mat-panel-description>
             <span> </span>
@@ -21,6 +21,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <!--1 fila-->
+        <br>
         <div class="row pl-4  col-md-7">
           <mat-form-field appearance="outline" class="field-login">
             <mat-label>Nombre completo del curso:</mat-label>
@@ -80,11 +81,11 @@
 
       <!--segundo acordeon-->
 
-
+      <!--Segundo acordeón-->
       <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header class="acordeon-enc">
           <mat-panel-title>
-            Descripción
+            <b>Descripción</b>
           </mat-panel-title>
           <mat-panel-description>
             <span> </span>
@@ -92,14 +93,64 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="col-md-7 pl-4">
-          <mat-form-field appearance="outline" class="field-login">
-            <mat-label>Descripción del curso</mat-label>
-            <textarea matInput placeholder="Agrega la descripción del curso"  cdkTextareaAutosize
-              cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5">
+        <br>
+        <div class="row">
+          <div class="col-md-7 pl-4">
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Descripción del curso</mat-label>
+              <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
+                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5">
           </textarea>
-          </mat-form-field>
+            </mat-form-field>
+          </div>
         </div>
+
+        <!--Imagen del curso-->
+        <div class="row">
+          <div class="col-md-3">
+            <p>Imagen del curso:</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-7 vertical-center field-login2">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Subir Foto</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01">
+                <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Imagen del curso-->
+
+        <!--video del curso-->
+
+        <div class="row">
+          <div class="col-md-3">
+            <p>Vídeo del curso:</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-7 vertical-center field-login2">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Subir Vídeo</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01">
+                <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--video del curso-->
+
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">Anterior</button>
           <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
@@ -109,12 +160,12 @@
 
       <!--tercer acordeon-->
       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header class="acordeon-enc">
           <mat-panel-title>
-            Day of the trip
+            <b>Temario</b>
           </mat-panel-title>
           <mat-panel-description>
-            Inform the date you wish to travel
+            <span> </span>
             <mat-icon>date_range</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>

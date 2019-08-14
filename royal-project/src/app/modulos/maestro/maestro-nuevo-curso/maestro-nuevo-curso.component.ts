@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -8,6 +8,9 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./maestro-nuevo-curso.component.scss']
 })
 export class MaestroNuevoCursoComponent implements OnInit {
+  archivopath = 'Elige un Archivo';
+
+
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
 
