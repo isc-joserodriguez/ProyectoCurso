@@ -126,8 +126,7 @@
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Descripción del curso</mat-label>
                 <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
-                  cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" formControlName="descripcion">
-          </textarea>
+                  cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" formControlName="descripcion"></textarea>
               </mat-form-field>
             </div>
           </div>
@@ -182,7 +181,7 @@
         <!-- Form Descripción -->
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">Anterior</button>
-          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          <button mat-button [disabled]="!descripcionForm.valid" color="primary" (click)="nextStep()">Siguiente</button>
         </mat-action-row>
       </mat-expansion-panel>
       <!--segundo acordeon-->
@@ -198,15 +197,23 @@
             <mat-icon>date_range</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
-
-        <mat-form-field>
-          <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
-        </mat-form-field>
-        <mat-datepicker #picker></mat-datepicker>
+        <br>
+        <form>
+          <div class="row">
+            <div class="col-md-7 pl-4">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Descripción del curso</mat-label>
+                <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
+                  cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
 
         <mat-action-row>
-          <button mat-button color="warn" (click)="prevStep()">Previous</button>
-          <button mat-button color="primary" (click)="nextStep()">End</button>
+          <button mat-button color="warn" [routerLink]="['../']">Cancelar</button>
+          <button mat-button [disabled]="!generalForm.valid && !descripcionForm.valid" color="primary"
+            (click)="nextStep()">Subir</button>
         </mat-action-row>
       </mat-expansion-panel>
       <!--tercer acordeon-->
@@ -219,4 +226,4 @@
 
 </div>
 
-<br><br><br>
+<br><br><br><br><br><br><br><br>
