@@ -3,10 +3,8 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const cursoSchema = new mongoose.Schema({
-    _id: { type: String, required: true },
-    maestro: {
-        _id: { type: String, required: true }
-    },
+    _id: { type: Number, required: true },
+    idMaestro: { type: Number, required: true },
     nombreCompleto: { type: String, required: true },
     nombreCorto: { type: String, required: true },
     descripcionCurso: { type: String, required: true },

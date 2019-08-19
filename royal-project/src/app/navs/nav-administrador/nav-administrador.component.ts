@@ -58,5 +58,4 @@ export class NavAdministradorComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
   }
-
 }
