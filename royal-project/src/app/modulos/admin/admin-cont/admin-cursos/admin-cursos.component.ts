@@ -9,6 +9,12 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./admin-cursos.component.scss']
 })
 export class AdminCursosComponent implements OnInit {
+  //Variables reportes cursos
+  variable2= false;
+  listareportes = []
+  colrepo: string[] = ['curso','maestro','reporta','fecha','revision'];
+  datosReportes: MatTableDataSource<any>;
+
   //Variables Solicitudes Cursos
   variable = false;
   listaSolicitudes = []
