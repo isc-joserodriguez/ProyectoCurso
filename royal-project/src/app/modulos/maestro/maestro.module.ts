@@ -4,12 +4,15 @@ import { CommonModule } from '@angular/common';
 import { MaestroRoutingModule } from './maestro-routing.module';
 import { MaestroComponent } from './maestro.component';
 
+// Forms
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule  } from 'angular-bootstrap-md';
 import { MaestroNuevoCursoComponent } from './maestro-nuevo-curso/maestro-nuevo-curso.component';
 
-//Material
+// Material
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -17,7 +20,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [MaestroComponent, MaestroNuevoCursoComponent],
   imports: [
@@ -32,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     MatAutocompleteModule,
+    FormsModule,
     ReactiveFormsModule
   ]
 })

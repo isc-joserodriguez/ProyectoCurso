@@ -6,10 +6,10 @@
   <div class="text-center vertical-center">
     <label class="h3 pt-2">Configuración de Curso</label>
   </div>
-  <!--Acordion-->
-  <!--primer acordeon-->
+  <!--Acordeon-->
   <mat-accordion class="example-headers-align">
     <div class="col-md-12">
+      <!--primer acordeon-->
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
         <mat-expansion-panel-header class="acordeon-enc">
           <mat-panel-title>
@@ -20,66 +20,91 @@
             <mat-icon>assignment</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <!--1 fila-->
         <br>
-        <div class="row pl-4  col-md-7">
-          <mat-form-field appearance="outline" class="field-login">
-            <mat-label>Nombre completo del curso:</mat-label>
-            <input matInput placeholder="Ingresa el nombre completo del curso" required>
-          </mat-form-field>
-        </div>
-        <!--1 fila-->
-        <!--2 fila-->
-        <div class="row ">
-          <div class="col-md-3 pl-4">
+        <!-- form -->
+        <form [formGroup]="generalForm">
+          <!--1 fila-->
+          <div class="row pl-4  col-md-7">
             <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Nombre corto del curso:</mat-label>
-              <input matInput placeholder="Ingresa el nombre corto del curso" required>
+              <mat-label>Nombre completo del curso:</mat-label>
+              <input matInput placeholder="Ingresa el nombre completo del curso" required
+                formControlName="nombreCompleto">
+              <mat-error>
+                <span
+                  *ngIf="!generalForm.get('nombreCompleto').valid && generalForm.get('nombreCompleto').touched">Agrega
+                  un nombre para el curso.</span>
+              </mat-error>
             </mat-form-field>
           </div>
-          <div class="col-md-3">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Categoría del Curso:</mat-label>
-              <select matNativeControl required>
-                <option value="0">Tecnologías</option>
-                <option value="1">Idiomas</option>
-              </select>
-            </mat-form-field>
+          <!--1 fila-->
+          <!--2 fila-->
+          <div class="row ">
+            <div class="col-md-3 pl-4">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Nombre corto del curso:</mat-label>
+                <input matInput placeholder="Ingresa el nombre corto del curso" required formControlName="nombreCorto">
+                <mat-error>
+                  <span *ngIf="!generalForm.get('nombreCorto').valid && generalForm.get('nombreCorto').touched">Agrega
+                    un nombre corto.</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Categoría del Curso:</mat-label>
+                <select matNativeControl required *ngFor="let categoria of categorias" formControlName="categoria">
+                  <option value="categoria">{{categoria}}</option>
+                </select>
+                <mat-error>
+                  <span *ngIf="!generalForm.get('categoria').valid && generalForm.get('categoria').touched">Selecciona
+                    una categoria.</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
-        </div>
-        <!--2 fila-->
-        <!--3 fila-->
-        <div class="row ">
-          <div class="col-md-3 pl-4">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Subcategoría del Curso:</mat-label>
-              <input type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of options" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
+          <!--2 fila-->
+          <!--3 fila-->
+          <div class="row ">
+            <div class="col-md-3 pl-4">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Subcategoría del Curso:</mat-label>
+                <input type="text" placeholder="Selecciona o agrega uno" aria-label="Number" matInput
+                  [matAutocomplete]="auto" formControlName="subcategoria">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let subcategoria of subcategorias" [value]="subcategoria">
+                    {{subcategoria}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error>
+                  <span
+                    *ngIf="!generalForm.get('subcategoria').valid && generalForm.get('subcategoria').touched">Selecciona
+                    o agrega una subcategoria.</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Tipo de Curso:</mat-label>
+                <select matNativeControl required formControlName="tipo">
+                  <option value="presencial">Presencial</option>
+                  <option value="abierto">Abierto</option>
+                </select>
+                <mat-error>
+                  <span *ngIf="!generalForm.get('tipo').valid && generalForm.get('tipo').touched">Selecciona
+                    el tipo de Curso.</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
-          <div class="col-md-3">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Tipo de Curso:</mat-label>
-              <select matNativeControl required>
-                <option value="0">Presencial</option>
-                <option value="1">Abierto</option>
-              </select>
-            </mat-form-field>
-          </div>
-        </div>
-        <!--3 fila-->
+          <!--3 fila-->
+        </form>
+        <!-- form -->
         <mat-action-row>
-          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          <button [disabled]="!generalForm.valid" mat-button color="primary" (click)="nextStep()">Siguiente</button>
         </mat-action-row>
 
       </mat-expansion-panel>
       <!--primer acordeon-->
-
-      <!--segundo acordeon-->
 
       <!--Segundo acordeón-->
       <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
@@ -92,65 +117,69 @@
             <mat-icon>create</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
-
         <br>
-        <div class="row">
-          <div class="col-md-7 pl-4">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Descripción del curso</mat-label>
-              <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
-                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5">
+        <!-- Form Descripción -->
+        <form [formGroup]="descripcionForm">
+          <!-- Fila 1 -->
+          <div class="row">
+            <div class="col-md-7 pl-4">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Descripción del curso</mat-label>
+                <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
+                  cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" formControlName="descripcion">
           </textarea>
-            </mat-form-field>
+              </mat-form-field>
+            </div>
           </div>
-        </div>
+          <!-- Fila 1 -->
 
-        <!--Imagen del curso-->
-        <div class="row">
-          <div class="col-md-3">
-            <p>Imagen del curso:</p>
+          <!--Imagen del curso-->
+          <div class="row">
+            <div class="col-md-3">
+              <p>Imagen del curso:</p>
+            </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-7 vertical-center field-login2">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Subir Foto</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01">
-                <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
+          <div class="row">
+            <div class="col-md-7 vertical-center field-login2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Subir Foto</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="fotoCurso">
+                  <label class="custom-file-label" for="inputGroupFile01">{{fotoPath}}</label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!--Imagen del curso-->
+          <!--Imagen del curso-->
 
-        <!--video del curso-->
+          <!--video del curso-->
 
-        <div class="row">
-          <div class="col-md-3">
-            <p>Vídeo del curso:</p>
+          <div class="row">
+            <div class="col-md-3">
+              <p>Vídeo del curso:</p>
+            </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-7 vertical-center field-login2">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Subir Vídeo</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01">
-                <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
+          <div class="row">
+            <div class="col-md-7 vertical-center field-login2">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Subir Vídeo</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="videoCurso">
+                  <label class="custom-file-label" for="inputGroupFile01">{{videoPath}}</label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!--video del curso-->
-
+          <!--video del curso-->
+        </form>
+        <!-- Form Descripción -->
         <mat-action-row>
           <button mat-button color="warn" (click)="prevStep()">Anterior</button>
           <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
