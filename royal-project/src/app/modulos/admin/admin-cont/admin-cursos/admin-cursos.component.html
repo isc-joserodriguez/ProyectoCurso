@@ -1,6 +1,6 @@
-<!--primer acordeon-->
 <mat-accordion class="example-headers-align">
   <div class="col-md-12">
+    <!--primer acordeon-->
     <mat-expansion-panel [expanded]="variable" hideToggle="true">
       <mat-expansion-panel-header class="acordeon-enc">
         <mat-panel-title>
@@ -54,14 +54,10 @@
       </div>
       <!--fin tabla-->
     </mat-expansion-panel>
-  </div>
-</mat-accordion>
-<!--cierre primer acordeon-->
+    <!--cierre primer acordeon-->
 
-<!--2do acordeon-->
-<mat-accordion class="example-headers-align">
-  <div class="col-md-12">
-    <mat-expansion-panel hideToggle="true">
+    <!--2do acordeon-->
+    <mat-expansion-panel hideToggle="true" [expanded]="variable2">
       <mat-expansion-panel-header class="acordeon-enc">
         <mat-panel-title>
           <b>Reportes de Cursos</b>
@@ -71,24 +67,65 @@
           <mat-icon>assignment</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-
       <br>
-      <div class="row pl-4  col-md-7">
-        <mat-form-field appearance="outline" class="field-login">
-          <mat-label>Nombre completo del curso:</mat-label>
-          <input matInput placeholder="Ingresa el nombre completo del curso" required>
-        </mat-form-field>
-      </div>
+        <!--tabla-->
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="datosReportes" matSort>
+    
+              <!-- Columna Nombre Maestro -->
+              <ng-container matColumnDef="maestro">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del maestro </th>
+                <td mat-cell *matCellDef="let row">{{row.maestro}}</td>
+              </ng-container>
+    
+              <!-- Columna Nombre Curso -->
+              <ng-container matColumnDef="curso">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del curso</th>
+                <td mat-cell *matCellDef="let row"> {{row.curso}} </td>
+              </ng-container>
+
+              <!-- Columna Nombre del reportador -->
+              <ng-container matColumnDef="reporta">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Reporta </th>
+                  <td mat-cell *matCellDef="let row">{{row.reporta}}</td>
+                </ng-container>
+    
+              <!-- Columna Fecha Solicitud -->
+              <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha solicitud </th>
+                <td mat-cell *matCellDef="let row"> {{row.fecha}} </td>
+              </ng-container>
+    
+              <!-- Columna Revisar -->
+              <div class="text-center">
+                <ng-container matColumnDef="revision">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Revision</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button mat-mini-fab color="primary" (click)="revisarCurso(row.id)"><img class="icon-opcion"
+                        src="./../../../assets/icons/edit.svg"></button>
+                  </td>
+                </ng-container>
+              </div>
+    
+              <tr mat-header-row *matHeaderRowDef="colrepo"></tr>
+              <tr mat-row *matRowDef="let row; columns: colrepo;">
+              </tr>
+            </table>
+    
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+          <!--fin tabla-->
+
 
 
     </mat-expansion-panel>
+    <!--cierre 2do acordeon-->
   </div>
 </mat-accordion>
-<!--cierre 2do acordeon-->
 <br>
-<div class="text-center vertical-center" style="background: #f2f6f9">
+<div class="text-center vertical-center p-2" style="background: #007791">
   <label class="h1">Cursos</label>
-</div>
+
 <!--tabla-->
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="datosCursos" matSort>
@@ -142,3 +179,5 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
 <!--fin tabla-->
+<br> <br>
+</div>
