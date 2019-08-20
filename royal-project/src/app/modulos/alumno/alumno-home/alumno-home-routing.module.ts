@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlumnoHomeComponent } from './alumno-home.component';
-import { PerfilComponent } from './perfil/perfil.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
+import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 
 const routes: Routes = [
   {
@@ -12,8 +12,14 @@ const routes: Routes = [
     component: AlumnoHomeComponent
   },
   {
-    path: 'mi-perfil',
-    component: PerfilComponent
+    path: 'perfil',
+    component: PerfilNavComponent,
+    children: [
+      {
+        path:'',
+        loadChildren: './perfil-nav/perfil-cont/perfil-cont.module#PerfilContModule'
+      }
+    ]
   },
   {
     path: 'mi-carrito',

@@ -3,20 +3,22 @@ import { CommonModule } from '@angular/common';
 
 import { AlumnoHomeRoutingModule } from './alumno-home-routing.module';
 import { AlumnoHomeComponent } from './alumno-home.component';
-
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonModule} from '@angular/material/button';
-import { PerfilComponent } from './perfil/perfil.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
+import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 
-//mdbootstrap
+// Material
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+
+
+// mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 
 
 @NgModule({
-  declarations: [AlumnoHomeComponent, PerfilComponent, CarritoComponent, BusquedaComponent, MisCursosComponent],
+  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,PerfilNavComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
