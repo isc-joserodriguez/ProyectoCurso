@@ -9,7 +9,7 @@ import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.
 
 const routes: Routes = [
   {
-    path: 'inicio',
+    path: '',
     component: NavAlumnoComponent,
     children: [
       {
