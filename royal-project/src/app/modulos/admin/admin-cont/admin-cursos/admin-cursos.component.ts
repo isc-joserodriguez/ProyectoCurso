@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./admin-cursos.component.scss']
 })
 export class AdminCursosComponent implements OnInit {
-  //Variables Solicitudes Cursos
+  // Variables Solicitudes Cursos
   variable = false;
   listaSolicitudes = []
   displayedColumns: string[] = ['maestro', 'curso', 'fecha', 'revision'];
@@ -17,14 +17,14 @@ export class AdminCursosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  //Variables Cursos
-  listaCursos = []
+  // Variables Cursos
+  listaCursos = [];
   colCursos: string[] = ['maestro', 'curso', 'fecha', 'estado', 'publicado', 'editar'];
   datosCursos: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginasCursos: MatPaginator;
   @ViewChild(MatSort) ordenCursos: MatSort;
 
-  //Variables reportes cursos
+  // Variables reportes cursos
   listareportes = []
   colrepo: string[] = ['curso','maestro','reporta','fecha','revision'];
   datosReportes: MatTableDataSource<any>;
@@ -32,26 +32,26 @@ export class AdminCursosComponent implements OnInit {
   @ViewChild(MatSort) ordenRepor: MatSort;
 
   constructor() {
-    //datasource solicitudes
+    // datasource solicitudes
     this.dataSource = new MatTableDataSource(this.listaSolicitudes);
-    //datasource cursos
+    // datasource cursos
     this.datosCursos = new MatTableDataSource(this.listaCursos);
-    //datasource reportes
+    // datasource reportes
     this.datosReportes = new MatTableDataSource(this.listareportes);
   }
 
   ngOnInit() {
-    //inic. solicitudes
+    // inic. solicitudes
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.getSolicitudesCursos();
 
-    //inic. cursos
+    // inic. cursos
     this.datosCursos.paginator = this.paginasCursos;
     this.datosCursos.sort = this.ordenCursos;
     this.getCursos();
 
-    //inic. reportes
+    // inic. reportes
     this.datosReportes.paginator = this.paginaRepor;
     this.datosReportes.sort = this.ordenRepor;
     this.getReportes();
