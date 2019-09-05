@@ -26,7 +26,7 @@ export class AdminCursosComponent implements OnInit {
 
   // Variables reportes cursos
   listareportes = []
-  colrepo: string[] = ['curso','maestro','reporta','fecha','revision'];
+  colrepo: string[] = ['curso', 'maestro', 'reporta', 'fecha', 'revision'];
   datosReportes: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginaRepor: MatPaginator;
   @ViewChild(MatSort) ordenRepor: MatSort;
@@ -59,12 +59,12 @@ export class AdminCursosComponent implements OnInit {
   getReportes() {
     this.listareportes = []
     this.listareportes = [
-      { "id": 1, "maestro": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018","reporta":"José Antonio" },
-      { "id": 2, "maestro": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018" ,"reporta":"Carla Reyes"},
-      { "id": 3, "maestro": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018","reporta":"José Antonio"},
-      { "id": 4, "maestro": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018","reporta":"Carla Reyes" },
-      { "id": 5, "maestro": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018","reporta":"José Antonio" },
-      { "id": 6, "maestro": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018","reporta":"Carla Reyes" }
+      { "id": 1, "maestro": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018", "reporta": "José Antonio" },
+      { "id": 2, "maestro": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018", "reporta": "Carla Reyes" },
+      { "id": 3, "maestro": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018", "reporta": "José Antonio" },
+      { "id": 4, "maestro": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018", "reporta": "Carla Reyes" },
+      { "id": 5, "maestro": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018", "reporta": "José Antonio" },
+      { "id": 6, "maestro": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018", "reporta": "Carla Reyes" }
     ];
     this.datosReportes = new MatTableDataSource(this.listareportes);
     this.datosReportes.paginator = this.paginaRepor;
@@ -88,7 +88,7 @@ export class AdminCursosComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   getCursos() {
-    this.listaCursos = []
+    this.listaCursos = [];
     this.listaCursos = [
       { "publicado": true, "estado": "Aceptado", "id": 1, "nombre": "Mario Alberto Gomez", "curso": "Programación", "fecha": "12/12/2018" },
       { "publicado": false, "estado": "Aceptado", "id": 2, "nombre": "Maria Lopez Gomez", "curso": "Programación", "fecha": "12/12/2018" },

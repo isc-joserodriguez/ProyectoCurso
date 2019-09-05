@@ -8,34 +8,35 @@ const cursoSchema = new mongoose.Schema({
     nombreCompleto: { type: String, required: true },
     nombreCorto: { type: String, required: true },
     descripcionCurso: { type: String, required: true },
-    aprendizaje: { type: String, required: true },
-    imagen: { type: String, required: true },
+    objetivos: { type: Array, required: true },
+    imagen: { type: String },
     categoria: { type: String, required: true },
     subcategoria: { type: String, required: true },
     contenidoCurso: {
-        introduccionVideo: { type: String, required: true },
+        introduccionVideo: { type: String },
         unidadCurso: [{
-            nombreUnidad: { type: String, required: true },
+            nombreUnidad: { type: String },
             subtemas: [{
-                nombreTema: { type: String, required: true },
+                nombreTema: { type: String },
                 clases: [{
-                    ponderacion: { type: Number, required: true },
-                    nombreClase: { type: String, required: true },
-                    tipoPlantilla: { type: Number, required: true },
+                    ponderacion: { type: Number },
+                    nombreClase: { type: String },
+                    tipoPlantilla: { type: Number },
                     recursos: { type: String },//Recursos del contenido de la leccion
-                    tarea: [{ recurso: { type: String, required: true }, envios: [{ _id: { type: String, required: true }, idAlumno: { type: String, required: true }, estatus: { type: String, required: true }, calificacion: { type: String, required: true }, fecha: { type: Date, required: true }, retroalimentacion: { type: String, required: true } }] }],//Recursos de la tarea
-                    comentarios: [{ _id: { type: String }, idPersona: { type: String, required: true }, comentario: { type: String, required: true }, respuestas: [{ _id: { type: String }, idPersona: { type: String, required: true }, comentario: { type: String, required: true } }] }]
+                    tarea: [{ recurso: { type: String }, envios: [{ _id: { type: String }, idAlumno: { type: String }, estatus: { type: String }, calificacion: { type: String }, fecha: { type: Date }, retroalimentacion: { type: String } }] }],//Recursos de la tarea
+                    comentarios: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String }, respuestas: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String } }] }]
                 }]
             }],
             evaluacion: { type: String } //Evaluación de la unidad (opcional).
         }]
     },
     insignias: [{ nombreInsignia: { type: String, required: true }, descripcionInsignia: { type: String, required: true }, imagen: { type: String, required: true } }],
-    precio: { type: String, required: true },
+    precio: { type: String },
     cursosRelacionados: [{ _id: { type: String, required: true } }],
-    estado: { type: String, default: 'En revisión' }, //En revisión, Aceptado, Rechazado
+    estado: { type: String, default: 'En revisión' }, //1:En revisión, 2:Aceptado, 3:Rechazado
     publicación: { type: Boolean, default: false },
-    royal: { type: Boolean, required: true }
+    fechaSolicitud: { type: Date, default: Date.now() },
+    royal: { type: Boolean, default: false }
 });
 
 //modelo Curso
