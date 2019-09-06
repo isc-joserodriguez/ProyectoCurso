@@ -1,4 +1,4 @@
-<div class="col-md-12 fondoadmin" >
+<div class="col-md-12 fondoadmin">
   <div class="text-center vertical-center">
     <label class="h1">Mi Perfil</label>
   </div>
@@ -11,57 +11,29 @@
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Nombre:</mat-label>
               <input matInput placeholder="Ingresa tu nombre" required>
-              
+
             </mat-form-field>
           </div>
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Apellido Paterno:</mat-label>
-              <input matInput placeholder="Ingresa tu Apellido Paterno:" required >
-            
+              <input matInput placeholder="Ingresa tu Apellido Paterno:" required>
+
             </mat-form-field>
           </div>
           <div class="col-md-4">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Apellido Materno:</mat-label>
-              <input matInput placeholder="Ingresa tu Apellido Materno:" required >
-             
+              <input matInput placeholder="Ingresa tu Apellido Materno:" required>
+
             </mat-form-field>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Correo:</mat-label>
-              <input matInput placeholder="Ingresa tu correo" required>
-              
-            </mat-form-field>
-          </div>
-          <div class="col-md-6 text-center">
-
-            <mat-form-field appearance="outline">
-              <mat-label>Fecha de Nacimiento:</mat-label>
-              <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" required >
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              
-            </mat-form-field>
-          </div>
-
+        <div class="row p-0">
+          <p class="p-0 m-0 ml-3">Foto de Perfil:</p>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Rol de Usuario:</mat-label>
-              <select matNativeControl required>
-                <option value="0">Administrador</option>
-                <option value="1">Coordinador</option>
-                <option value="2">Maestro</option>
-                <option value="3">Alumno</option>
-              </select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-8 vertical-center field-login2">
+          <div class="col-md-7 vertical-center">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">Subir Foto</span>
@@ -69,16 +41,82 @@
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="inputGroupFile01">
                 <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
-                
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 text-center">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de Nacimiento:</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row p-0">
+          <p class="p-0 m-0 ml-3">Enlaces:</p>
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Página Web:</mat-label>
+              <input matInput placeholder="(Http(s)://..)" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--FB-->
+        <div class="row ">
+          <div class="col-md-10 ">
+            <div class="input-group input-group-sm vertical-center">
+              <img class="icon-nav" src="./../../../assets/icons/fb.svg">
+              <div class="col-md-8 vertical-center">
+                <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                  <mat-label>Facebook:</mat-label>
+                  <input matInput placeholder="(http://www.facebook.com/)" required>
+                </mat-form-field>
               </div>
             </div>
           </div>
         </div>
+        <!--FB cierre-->
+        <!--Linked-->
+        <div class="row ">
+          <div class="col-md-10 ">
+            <div class="input-group input-group-sm vertical-center">
+              <img class="icon-nav" src="./../../../assets/icons/link.svg">
+              <div class="col-md-8 vertical-center">
+                <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                  <mat-label>Linkedin</mat-label>
+                  <input matInput placeholder="(http://www.linkedin.com/)" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Linked cierre-->
+        <!--Youtube-->
+        <div class="row">
+          <div class="col-md-10 ">
+            <div class="input-group input-group-sm vertical-center">
+              <img class="icon-nav" src="./../../../assets/icons/yt.svg">
+              <div class="col-md-8 vertical-center">
+                <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                  <mat-label>Youtube:</mat-label>
+                  <input matInput placeholder="(http://www.youtube.com/)" required>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Youtube cierre-->
+        <br>
         <div class="row">
           <div class="col-md-6 text-center">
             <button type="button" class="btn btn-success btn-md " (click)="alta()">
-              <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
-              Guardar y Mostrar</button>
+              <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">
+              Guardar</button>
           </div>
           <div class="col-md-6 text-center">
             <button type="button" class="btn btn-danger btn-md" [routerLink]="['../usuarios']">

@@ -94,6 +94,7 @@ body {
 
 mat-form-field {
   margin-right: 12px;
+  padding: 0;
 }
 
 table {
@@ -103,6 +104,7 @@ table {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
+  padding: 0;
 }
 
 .paqueteshome{
@@ -112,4 +114,88 @@ table {
 .fondoadmin{
   background-color: #007791;
   color: #eceff1;
+  border-radius: 19px 19px 19px 19px;
+}
+//curso
+.fondocurso{
+  background-color: #3B3837;
+}
+
+.video-fluid {
+  width: 100%;
+  height: 70%;
+}
+
+.letracursotitulo{
+color: #000000;
+font-family: "Open Sans",Arial,sans-serif;
+text-shadow: 2px 2px 9px rgba(145,145,145,0.89);
+}
+
+.imgsale{
+  width: 50px;
+  position: absolute;
+  right: 1em;
+  top: initial;
+}
+
+.redondear{
+  border-radius: 19px 19px 19px 19px;
+}
+
+.letrabtnlg{
+  font-size: 1.60rem;
+}
+
+.letralist{
+  font-family: "Open Sans",Arial,sans-serif;
+  font-size: 0.8rem;
+}
+
+//ranking star
+.letrastar{
+  color:  #d8af54;
+  font-weight: bold;
+}
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+//fin raking start
+
+.negrita{
+  font-weight: bold;
 }

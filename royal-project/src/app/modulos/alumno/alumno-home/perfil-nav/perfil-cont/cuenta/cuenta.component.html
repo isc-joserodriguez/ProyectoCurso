@@ -1,3 +1,77 @@
-<p>
-  cuenta works!
-</p>
+<div class="col-md-12 fondoadmin">
+  <div class="text-center vertical-center">
+    <label class="h1">Cuenta</label>
+  </div>
+
+  <form>
+    <mat-card>
+      <div class="row p-0">
+        <label class="p-0 m-0 ml-3 h6">
+          Correo Electrónico:
+        </label>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-7">
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Correo Electrónico:</mat-label>
+            <input matInput placeholder="Ingresa tu Correo Electrónico:" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Correo Electrónico:</mat-label>
+            <input matInput placeholder="Repite tu Correo Electrónico:" required>
+          </mat-form-field>
+        </div>
+        <div class="col-md-5 text-center">
+          <button type="button" class="btn btn-success btn-md " (click)="alta()">
+            <img class="icon-nav mr-1" src="./../../../assets/icons/editar.svg">
+            Cambiar Correo Electrónico</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <br>
+      <!--2do form-->
+      <div class="row p-0">
+        <label class="p-0 m-0 ml-3 h6">
+          Contraseña:
+        </label>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-7">
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Contraseña Actual:</mat-label>
+            <input matInput placeholder="Ingresa tu Contraseña Actual:" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Nueva Contraseña:</mat-label>
+            <input matInput placeholder="Ingresa tu Nueva Contraseña:" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Nueva Contraseña:</mat-label>
+            <input matInput placeholder="Repite tu Nueva Contraseña:" required>
+          </mat-form-field>
+        </div>
+        <div class="col-md-5 text-center">
+          <button type="button" class="btn btn-success btn-md " (click)="alta()">
+            <img class="icon-nav mr-1" src="./../../../assets/icons/editar.svg">
+            Cambiar Contraseña</button>
+        </div>
+      </div>
+      <br>
+    </mat-card>
+  </form>
+  <br>
+</div>

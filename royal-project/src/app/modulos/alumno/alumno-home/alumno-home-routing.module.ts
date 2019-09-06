@@ -5,11 +5,16 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
+import { CursoComponent } from './curso/curso.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AlumnoHomeComponent
+  },
+  {
+    path: 'curso/:id/vista',
+    component: CursoComponent
   },
   {
     path: 'perfil',

@@ -11,20 +11,24 @@ import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 // Material
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 
 // mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
+import { CursoComponent } from './curso/curso.component';
 
 
 @NgModule({
-  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,PerfilNavComponent],
+  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,PerfilNavComponent, CursoComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
     MatTabsModule,
     MatButtonModule,
-    CarouselModule
+    CarouselModule,
+    MatDividerModule
   ]
 })
 export class AlumnoHomeModule { }

@@ -19,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -64,7 +65,8 @@ import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-in
     ReactiveFormsModule,
     MatButtonModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule
   ]
 })
 export class AdminContModule { }
