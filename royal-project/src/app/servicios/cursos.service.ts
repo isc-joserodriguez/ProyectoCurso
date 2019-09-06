@@ -10,8 +10,6 @@ export class CursosService {
 
   constructor(private http: HttpClient) { }
 
-  //localhost:3002/cursos/getCursosMaestro/:id GET 
-
   getCursosMaestro(idMaestro) {
     return this.http.get(apiUrl + '/getCursosMaestro/' + idMaestro);
   }
@@ -22,5 +20,9 @@ export class CursosService {
 
   getSubcategorias() {
     return this.http.get(apiUrl + '/getSubcategorias/');
+  }
+
+  getCursosSolicitudes() {
+    return this.http.get(apiUrl + '/getCursosSolicitudes/');
   }
 }

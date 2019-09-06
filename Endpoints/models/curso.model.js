@@ -33,7 +33,7 @@ const cursoSchema = new mongoose.Schema({
     insignias: [{ nombreInsignia: { type: String, required: true }, descripcionInsignia: { type: String, required: true }, imagen: { type: String, required: true } }],
     precio: { type: String },
     cursosRelacionados: [{ _id: { type: String, required: true } }],
-    estado: { type: String, default: 'En revisión' }, //1:En revisión, 2:Aceptado, 3:Rechazado
+    estado: { type: String, default: 1 }, //1:En revisión, 2:Aceptado, 3:Rechazado
     publicación: { type: Boolean, default: false },
     fechaSolicitud: { type: Date, default: Date.now() },
     royal: { type: Boolean, default: false }

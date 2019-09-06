@@ -17,6 +17,10 @@ module.exports = (wagner) => {
         cursoCtrl.getCursosMaestro(req,res);
     });
 
+    cursoRouter.get("/getCursosSolicitudes",(req,res)=>{
+        cursoCtrl.getCursosSolicitudes(req,res);
+    });
+
     cursoRouter.get("/getSubcategorias",(req,res)=>{
         cursoCtrl.getSubcategorias(req,res);
     });
