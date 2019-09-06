@@ -48,6 +48,7 @@ export class NavMaestroComponent implements OnInit {
       }
       this.usuario = this.respuesta.detail.nombre;
       this.sexo = this.respuesta.detail.sexo;
+      localStorage.setItem('userid', this.respuesta.detail.id);
     }, err => {
       console.log(err);
     });
@@ -55,6 +56,7 @@ export class NavMaestroComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userid');
     this.router.navigate(['/']);
   }
 }

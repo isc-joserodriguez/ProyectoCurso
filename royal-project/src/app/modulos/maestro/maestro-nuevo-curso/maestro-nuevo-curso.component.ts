@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CursosService } from '../../../servicios/cursos.service';
 
@@ -18,14 +18,23 @@ export class MaestroNuevoCursoComponent implements OnInit {
     detail: ''
   };
 
+  cursoNuevo = {
+    idMaestro: localStorage.getItem('userid'),
+    nombreCompleto: '',
+    nombreCorto: '',
+    descripcionCurso: '',
+    objetivos: [],
+    contenidoCurso: [],
+    categoria: '',
+    subcategoria: ''
+    /* , estado: 2 */
+  };
+
   generalForm: FormGroup;
-  descripcionForm: FormGroup;
+  temarioForm: FormGroup;
 
   categorias = ['Tecnología', 'Idiomas'];
-  subcategorias = ['cat1', 'cat2', 'nueva', 'anterior', 'Resto'];
-
-  fotoPath = 'Selecciona foto';
-  videoPath = 'Selecciona video';
+  subcategorias = [];
 
   constructor(private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
@@ -36,12 +45,94 @@ export class MaestroNuevoCursoComponent implements OnInit {
       categoria: ['', Validators.required],
       subcategoria: ['', Validators.required],
       tipo: ['', Validators.required],
+      descripcion: ['', Validators.required]
     });
-    this.descripcionForm = this.formBuilder.group({
-      descripcion: ['', Validators.required],
-      fotoCurso: ['', Validators.required],
-      videoCurso: ['', Validators.required]
+
+    this.temarioForm = this.formBuilder.group({
+      objetivos: this.formBuilder.array([]),
+      unidades: this.formBuilder.array([])
     });
+  }
+
+  getSubcategorias() {
+    this.subcategorias = [];
+    const categoria = this.generalForm.value.categoria;
+    this.cursos.getSubcategorias().subscribe(res => {
+      this.respuesta = res;
+      this.respuesta.detail.forEach(e => {
+        if (e.categoria == categoria) {
+          this.subcategorias.push(e.subcategoria);
+        }
+      });
+      const a = [];
+      new Set(this.subcategorias).forEach(e => {
+        a.push(e);
+      });
+      this.subcategorias = a;
+    });
+  }
+
+  get objetivos() {
+    return this.temarioForm.get('objetivos') as FormArray;
+  }
+
+  get unidades() {
+    return this.temarioForm.get('unidades') as FormArray;
+  }
+
+  subtemas(i) {
+    return (this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray;
+  }
+
+  subir() {
+    this.cursoNuevo.nombreCompleto = this.generalForm.value.nombreCompleto;
+    this.cursoNuevo.nombreCorto = this.generalForm.value.nombreCorto;
+    this.cursoNuevo.descripcionCurso = this.generalForm.value.descripcion;
+    this.cursoNuevo.objetivos = this.temarioForm.value.objetivos;
+    this.cursoNuevo.contenidoCurso = this.temarioForm.value.unidades;
+    this.cursoNuevo.categoria = this.generalForm.value.categoria;
+    this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
+
+    this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
+      this.respuesta = res;
+      this.router.navigate(['/maestro/']);
+    });
+  }
+
+  primeraMay(cad) {
+    return cad.charAt(0).toUpperCase() + cad.slice(1);
+  }
+
+  agregarSubtema(i) {
+    const subtemaFormGroup = this.formBuilder.group({
+      subtema: ['Nombre subtema ' + (((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).length + 1),
+      Validators.required]
+    });
+    ((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).push(subtemaFormGroup);
+  }
+  removerSubtema(i, j) {
+    ((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).removeAt(j);
+  }
+
+  agregarUnidad() {
+    const unidadFormGroup = this.formBuilder.group({
+      unidad: ['Nombre de unidad ' + (this.unidades.length + 1), Validators.required],
+      subtemas: this.formBuilder.array([])
+    });
+    this.unidades.push(unidadFormGroup);
+  }
+  removerUnidad(i) {
+    this.unidades.removeAt(i);
+  }
+
+  agregarObjetivo() {
+    const objetivoFormGroup = this.formBuilder.group({
+      objetivo: ['Objetivo ' + (this.objetivos.length + 1), Validators.required]
+    });
+    this.objetivos.push(objetivoFormGroup);
+  }
+  removerObjetivo(i) {
+    this.objetivos.removeAt(i);
   }
 
   setStep(index: number) {
@@ -50,7 +141,6 @@ export class MaestroNuevoCursoComponent implements OnInit {
 
   nextStep() {
     this.step++;
-    console.log(this.descripcionForm);
   }
 
   prevStep() {

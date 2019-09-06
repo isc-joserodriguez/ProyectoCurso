@@ -24,21 +24,23 @@
         <!-- form -->
         <form [formGroup]="generalForm">
           <!--1 fila-->
-          <div class="row pl-4  col-md-7">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Nombre completo del curso:</mat-label>
-              <input matInput placeholder="Ingresa el nombre completo del curso" required
-                formControlName="nombreCompleto">
-              <mat-error>
-                <span
-                  *ngIf="!generalForm.get('nombreCompleto').valid && generalForm.get('nombreCompleto').touched">Agrega
-                  un nombre para el curso.</span>
-              </mat-error>
-            </mat-form-field>
+          <div class="row">
+            <div class="col-md-7 pl-4">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Nombre completo del curso:</mat-label>
+                <input matInput placeholder="Ingresa el nombre completo del curso" required
+                  formControlName="nombreCompleto">
+                <mat-error>
+                  <span
+                    *ngIf="!generalForm.get('nombreCompleto').valid && generalForm.get('nombreCompleto').touched">Agrega
+                    un nombre para el curso.</span>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
           <!--1 fila-->
           <!--2 fila-->
-          <div class="row ">
+          <div class="row">
             <div class="col-md-3 pl-4">
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Nombre corto del curso:</mat-label>
@@ -52,8 +54,8 @@
             <div class="col-md-3">
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Categoría del Curso:</mat-label>
-                <select matNativeControl required *ngFor="let categoria of categorias" formControlName="categoria">
-                  <option value="categoria">{{categoria}}</option>
+                <select matNativeControl required formControlName="categoria" (change)="getSubcategorias()">
+                  <option *ngFor="let categoria of categorias" value={{categoria}}>{{categoria}}</option>
                 </select>
                 <mat-error>
                   <span *ngIf="!generalForm.get('categoria').valid && generalForm.get('categoria').touched">Selecciona
@@ -63,8 +65,9 @@
             </div>
           </div>
           <!--2 fila-->
+
           <!--3 fila-->
-          <div class="row ">
+          <div class="row">
             <div class="col-md-3 pl-4">
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Subcategoría del Curso:</mat-label>
@@ -97,97 +100,33 @@
             </div>
           </div>
           <!--3 fila-->
-        </form>
-        <!-- form -->
-        <mat-action-row>
-          <button [disabled]="!generalForm.valid" mat-button color="primary" (click)="nextStep()">Siguiente</button>
-        </mat-action-row>
 
-      </mat-expansion-panel>
-      <!--primer acordeon-->
-
-      <!--Segundo acordeón-->
-      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
-        <mat-expansion-panel-header class="acordeon-enc">
-          <mat-panel-title>
-            <b>Descripción</b>
-          </mat-panel-title>
-          <mat-panel-description>
-            <span> </span>
-            <mat-icon>create</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <br>
-        <!-- Form Descripción -->
-        <form [formGroup]="descripcionForm">
-          <!-- Fila 1 -->
+          <!-- Fila 4 -->
           <div class="row">
             <div class="col-md-7 pl-4">
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Descripción del curso</mat-label>
                 <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
                   cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" formControlName="descripcion"></textarea>
+                <mat-error>
+                  <span *ngIf="!generalForm.get('descripcion').valid && generalForm.get('descripcion').touched">Agrega
+                    una descripción del curso.</span>
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
-          <!-- Fila 1 -->
+          <!-- Fila 4 -->
 
-          <!--Imagen del curso-->
-          <div class="row">
-            <div class="col-md-3">
-              <p>Imagen del curso:</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-7 vertical-center field-login2">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Subir Foto</span>
-                </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="fotoCurso">
-                  <label class="custom-file-label" for="inputGroupFile01">{{fotoPath}}</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--Imagen del curso-->
-
-          <!--video del curso-->
-
-          <div class="row">
-            <div class="col-md-3">
-              <p>Vídeo del curso:</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-7 vertical-center field-login2">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Subir Vídeo</span>
-                </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="videoCurso">
-                  <label class="custom-file-label" for="inputGroupFile01">{{videoPath}}</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--video del curso-->
         </form>
-        <!-- Form Descripción -->
+        <!-- form -->
         <mat-action-row>
-          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
-          <button mat-button [disabled]="!descripcionForm.valid" color="primary" (click)="nextStep()">Siguiente</button>
+          <button [disabled]="!generalForm.valid" mat-button color="primary" (click)="nextStep()">Siguiente</button>
         </mat-action-row>
       </mat-expansion-panel>
-      <!--segundo acordeon-->
+      <!--primer acordeon-->
 
       <!--tercer acordeon-->
-      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
         <mat-expansion-panel-header class="acordeon-enc">
           <mat-panel-title>
             <b>Temario</b>
@@ -198,32 +137,109 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
-        <form>
-          <div class="row">
-            <div class="col-md-7 pl-4">
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Descripción del curso</mat-label>
-                <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize
-                  cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
-              </mat-form-field>
+        <div class="row pl-2">
+          <div class="vertical-center">
+            <label class="h4">Objetivos:</label>
+            <button class="ml-3 btn btn-success" (click)="agregarObjetivo()"><img class="icon-opcion"
+                src="./../../../assets/icons/edit.svg"> Agregar objetivo</button>
+          </div>
+        </div>
+
+        <form [formGroup]="temarioForm">
+          <!-- objetivos -->
+          <div formArrayName="objetivos" *ngFor="let objetivoForm of objetivos.controls; let i = index">
+            <div [formGroupName]="i">
+              <div class="row">
+                <div class="col-md-7">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Objetivo:</mat-label>
+                    <input matInput placeholder="Ingresa un objetivo" required formControlName="objetivo">
+                    <mat-error>
+                      <span *ngIf="!objetivoForm.valid && objetivoForm.touched">Agrega un objetivo.</span>
+                    </mat-error>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-2 vertical-center">
+                  <button mat-button color="warn" (click)="removerObjetivo(i)">Remover</button>
+                </div>
+              </div>
             </div>
           </div>
+          <!-- objetivos -->
+          <br>
+          <br>
+
+          <label class="h4">Temario:</label>
+
+          <!-- Unidades -->
+          <div formArrayName="unidades" *ngFor="let unidad of unidades.controls; let i = index">
+            <br>
+            <label class="h6">Unidad {{i+1}}</label>
+            <br>
+            <div [formGroupName]="i">
+              <div class="row">
+                <div class="col-md-8">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Unidad {{i+1}}:</mat-label>
+                    <input matInput placeholder="Ingresa el nombre de la unidad" required formControlName="unidad">
+                    <mat-error>
+                      <span *ngIf="!unidad.valid && unidad.touched">Agrega el nombre de la unidad.</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2 vertical-center">
+                  <button mat-button color="warn" (click)="removerUnidad(i)">Remover</button>
+                </div>
+              </div>
+              <div class="aling-subtemas">
+                <label class="h5 text-right">Subtemas:</label>
+                <!-- Temas -->
+                <div formArrayName="subtemas" *ngFor="let subtema of subtemas(i).controls; let j = index">
+                  <div [formGroupName]="j">
+                    <div class="row">
+                      <div class="col-md-7">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Subtema {{j+1}}:</mat-label>
+                          <input matInput placeholder="Ingresa el nombre del subtema" required
+                            formControlName="subtema">
+                          <mat-error>
+                            <span *ngIf="!subtema.valid && subtema.touched">Agrega el nombre del subtema.</span>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2 vertical-center">
+                        <button mat-button color="warn" (click)="removerSubtema(i,j)">Remover</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Temas -->
+                <button class="btn btn-success" (click)="agregarSubtema(i)"><img class="icon-opcion"
+                    src="./../../../assets/icons/edit.svg"> Agregar subtema a unidad {{i+1}}</button>
+              </div>
+            </div>
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+          </div>
+          <!-- Unidades -->
         </form>
+        <button class="ml-3 btn btn-success" (click)="agregarUnidad()"><img class="icon-opcion"
+            src="./../../../assets/icons/edit.svg"> Agregar unidad</button>
 
         <mat-action-row>
           <button mat-button color="warn" [routerLink]="['../']">Cancelar</button>
-          <button mat-button [disabled]="!generalForm.valid && !descripcionForm.valid" color="primary"
-            (click)="nextStep()">Subir</button>
+          <button mat-button
+            [disabled]="!(generalForm.valid && temarioForm.valid && temarioForm.value.objetivos.length!=0 && temarioForm.value.unidades.length!=0)"
+            color="primary" (click)="subir()">Subir</button>
         </mat-action-row>
       </mat-expansion-panel>
       <!--tercer acordeon-->
     </div>
   </mat-accordion>
-
-
   <!--Acordion-->
-  <br><br>
-
+  <br>
+  <br>
 </div>
-
 <br><br><br><br><br><br><br><br>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MaestroComponent } from './maestro.component';
 import { MaestroNuevoCursoComponent } from './maestro-nuevo-curso/maestro-nuevo-curso.component';
+import { ConfigCursoComponent } from './config-curso/config-curso.component';
 
 const routes: Routes = [
   {
@@ -15,9 +16,13 @@ const routes: Routes = [
     ]
   },
   {
-    path:'curso-nuevo',
+    path: 'curso-nuevo',
     component: MaestroNuevoCursoComponent
-  }
+  },
+  {
+    path: 'curso-config/:id',
+    component: ConfigCursoComponent
+  },
 ];
 
 @NgModule({
