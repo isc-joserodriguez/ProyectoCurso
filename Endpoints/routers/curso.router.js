@@ -9,7 +9,7 @@ module.exports = (wagner) => {
         cursoCtrl.getAll(req,res);
     });
 
-    cursoRouter.get("/get/:id",(req,res)=>{
+    cursoRouter.get("/getCursoInfo/:id",(req,res)=>{
         cursoCtrl.getById(req,res);
     });
 
