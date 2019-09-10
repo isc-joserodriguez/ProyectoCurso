@@ -13,6 +13,10 @@ export class CursosService {
   getCursosMaestro(idMaestro) {
     return this.http.get(apiUrl + '/getCursosMaestro/' + idMaestro);
   }
+  
+  getCursoInfo(id) {
+    return this.http.get(apiUrl + '/getCursoInfo/' + id);
+  }
 
   addCursoNuevo(curso) {
     return this.http.post(apiUrl + '/nuevoCurso', curso);

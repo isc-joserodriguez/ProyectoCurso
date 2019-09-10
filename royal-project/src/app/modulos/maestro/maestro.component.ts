@@ -7,13 +7,6 @@ import { CursosService } from '../../servicios/cursos.service';
   styleUrls: ['./maestro.component.scss']
 })
 export class MaestroComponent implements OnInit {
-  variable = 'Nombre Curso';
-  
-  v2 = {
-    azucar: {
-      lomas: [1, 2, 3, 'Tamarindo']
-    }
-  }
   listaCursos = [];
 
   respuesta: any = {

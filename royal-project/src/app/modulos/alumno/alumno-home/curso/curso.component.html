@@ -1,60 +1,141 @@
 <div class="col-md-12 p-0">
   <br><br><br><br>
   <div class="row pl-5">
-    <label class="h1 letracursotitulo mb-0"><b> Coreano Nivel II </b></label>
+    <label class="h1 letracursotitulo mb-0"><b> {{infoCurso.nombreCompleto}} </b></label>
   </div>
   <mat-divider></mat-divider>
   <div class="row pl-3">
     <!--div video-->
     <div class="col-md-8 mt-3 pl-3 mx-4">
-      <div class="embed-responsive embed-responsive-16by9 z-depth-1" autoplay loop controls>
+      <!-- <div class="embed-responsive embed-responsive-16by9 z-depth-1" autoplay loop controls>
         <iframe class="embed-responsive-item" src="//player.vimeo.com/video/353296548" allowfullscreen></iframe>
-      </div>
+      </div> -->
+      <img [src]="infoCurso.videoPrincipal">
       <!--div descripcion-->
       <div class="row">
         <div class="col-md-12 p-3 mr-4 ">
           <h4><b>Descripción</b></h4>
           <p class="text-center mb-0">
-            👩🏼‍🎓Cada nivel tiene una duración de 10 semanas
-            🎓Son 8 niveles para adquirir un nivel profesional
-            🌎Y a partir de 4 puedes realizar la certificación internacional
-            👥Grupos reducidos mínimo 5 máximo 16 estudiantes
-            🇩🇪HORARIOS ALEMÁN | 1 GRUPO
-            ⏰MARTES Y JUEVES 6-8pm Inicio 27 Agosto
-            👩🏻‍🏫Maestros Lic en Lingüística Aplicada y Comercio Internacional
-            📍Inscripciones e información en Insurgentes #88 entre Puebla yVeracruz
+            {{infoCurso.descripcion}}
           </p>
         </div>
         <!--ranking star-->
         <div class="col-md-6 pt-0">
           <h4 class="letrastar mb-0">Valoraciones:</h4>
           <div class="rate">
-            <input type="radio" id="star5" name="rate" value="5" />
+            <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
             <label for="star5" title="text">5 stars</label>
-            <input type="radio" id="star4" name="rate" value="4" />
+            <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
             <label for="star4" title="text">4 stars</label>
-            <input type="radio" id="star3" name="rate" value="3" />
+            <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
             <label for="star3" title="text">3 stars</label>
-            <input type="radio" id="star2" name="rate" value="2" />
+            <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
             <label for="star2" title="text">2 stars</label>
-            <input type="radio" id="star1" name="rate" value="1" />
+            <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
             <label for="star1" title="text">1 star</label>
           </div>
         </div>
         <!--Alumnos totales-->
         <div class="col-md-6 text-right pt-3">
           <img class="icon-nav" src="./../../../assets/icons/alumnos.svg">
-          <label for="">32 Alumnos</label>
+          <label for="">{{infoCurso.inscritos}} Alumnos</label>
         </div>
         <!--Objetivos-->
         <div class="col-md-12 p-2">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-light text-center">
               ¿Qué aprenderé?
             </div>
             <div class="card-body">
-              <li class="card-title">Special title treatment</li>
+              <ul>
+                <li *ngFor="let objetivo of infoCurso.objetivos" class="card-title">{{objetivo}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--Temario-->
+        <div class="col-md-12 p-2">
+          <h4 class="text-center"><b>Temario</b></h4>
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header p-0" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    Collapsible Group Item #1
+                  </button>
+                </h2>
               </div>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                  moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                  Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                  shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                  proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                  aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header p-0" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    Collapsible Group Item #2
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                  moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                  Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                  shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                  proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                  aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header p-0" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Collapsible Group Item #3
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                  moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                  Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                  shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                  proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                  aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Profesor-->
+        <div class="col-md-12 p-2">
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="..." class="card-img" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -62,23 +143,29 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <!--div inf precios-->
-    <div class="col-md-3 yellow text-center ml-4 mt-3 pt-4 py-4 redondear">
-      <ul class="list-group">
-        <li class="list-group-item heading">
+    <div class="col-md-3  ml-4 mt-3 pt-4 py-4">
+      <div class="card text-center">
+        <div class=" card-header light-blue lighten-1 textoprecio p-4">
           <img class="imgsale align-rigth" src="./../../../assets/icons/sale.svg" />
-          <h1 class="letracursotitulo"> <b>$240</b></h1>
-        </li>
-        <li class="list-group-item plan-action"> <button class="btn-lg letrabtnlg p-2" mat-raised-button color="warn">
+          <label>${{infoCurso.precio}} MX</label>
+        </div>
+        <div class="card-body">
+          <label class="card-title">Este curso contiene:</label>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item card-text">Certificado de finalización</li>
+            <li class="list-group-item card-text">Actualizaciones continuas</li>
+            <li class="list-group-item card-text">Ejercicios y vídeos incluidos</li>
+          </ul>
+        </div>
+        <div class="card-footer text-muted light-blue lighten-1 white-text">
+          <button class="btn-lg p-2 mb-2" mat-raised-button color="warn">
             ¡Comprar Ahora!
-          </button></li>
-        <li class="list-group-item plan-action"> <button class="btn-lg" mat-raised-button color="primary"><i
-              class="fas fa-cart-plus"></i></button></li>
-        <li class="list-group-item list-group-item-secondary"><span><b>Este Curso Contiene:</b></span></li>
-        <li class="list-group-item letralist"><span>8 Gb Dadicated Ram</span></li>
-        <li class="list-group-item letralist"><span>Unlimited Addon Domain</span></li>
-        <li class="list-group-item letralist"><span>Unlimited Email Account</span></li>
-      </ul>
+          </button> <br>
+          <button class="btn-lg" mat-raised-button color="primary"><i class="fas fa-cart-plus"></i></button>
+        </div>
+      </div>
     </div>
+
   </div>
 
 
