@@ -138,7 +138,7 @@ text-shadow: 2px 2px 9px rgba(145,145,145,0.89);
 .imgsale{
   width: 50px;
   position: absolute;
-  right: 1em;
+  right: 0em;
   top: initial;
 }
 
@@ -201,4 +201,17 @@ text-shadow: 2px 2px 9px rgba(145,145,145,0.89);
 
 .negrita{
   font-weight: bold;
+}
+
+.textoprecio{
+  
+    color: #FFFFFF;
+    font-family: "Open Sans",Arial,sans-serif;
+    text-shadow: 2px 2px 2px #4F484E;
+    font-size: 2.70rem;
+    font-weight: bold;   
+}
+
+.headercard{
+  background-color: #6c757d;
 }

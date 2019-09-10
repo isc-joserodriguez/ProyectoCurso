@@ -35,8 +35,12 @@ export class NavMaestroComponent implements OnInit {
   }
 
   verificarToken() {
+    if(localStorage.getItem('token')==null){
+      this.router.navigate(['/']);
+    }
     this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
       this.respuesta = res;
+      console.log(res);
       if (this.respuesta.detail.token != undefined) {
         this.logout();
       } else if (this.respuesta.detail.tipo[0].admin != undefined) {
