@@ -93,6 +93,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
     this.cursoNuevo.categoria = this.generalForm.value.categoria;
     this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
 
+    
     this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
       this.respuesta = res;
       this.router.navigate(['/maestro/']);

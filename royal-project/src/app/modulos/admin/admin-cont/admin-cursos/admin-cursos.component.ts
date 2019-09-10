@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CursosService } from '../../../../servicios/cursos.service';
+import { UsuariosService } from '../../../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-admin-cursos',
@@ -11,6 +12,12 @@ import { CursosService } from '../../../../servicios/cursos.service';
 })
 export class AdminCursosComponent implements OnInit {
   respuesta: any = {
+    code: 0,
+    msg: '',
+    detail: ''
+  };
+
+  resUsuario: any = {
     code: 0,
     msg: '',
     detail: ''
@@ -39,7 +46,7 @@ export class AdminCursosComponent implements OnInit {
   @ViewChild('paginaRepor', { read: MatPaginator }) paginaRepor: MatPaginator;
   @ViewChild(MatSort) ordenRepor: MatSort;
 
-  constructor(private cursos: CursosService) {
+  constructor(private cursos: CursosService, private usuarios: UsuariosService) {
     // datasource solicitudes
     this.dataSource = new MatTableDataSource(this.listaSolicitudes);
     // datasource cursos
@@ -69,20 +76,23 @@ export class AdminCursosComponent implements OnInit {
     this.listaSolicitudes = [];
     this.cursos.getCursosSolicitudes().subscribe(res => {
       this.respuesta = res;
-      console.log(this.respuesta.detail);
+      this.respuesta.detail.forEach(curso => {
+        this.usuarios.getId(curso.idMaestro).subscribe(maestro => {
+          this.resUsuario = maestro;
+          this.listaSolicitudes.push({
+            id: curso._id,
+            nombre: this.resUsuario.detail[0].nombre + ' ' +
+              this.resUsuario.detail[0].apPaterno + ' ' + this.resUsuario.detail[0].apMaterno,
+            curso: curso.nombreCorto,
+            fecha: curso.fechaSolicitud
+          });
+          this.solicitudes = this.listaSolicitudes.length != 0;
+          this.dataSource = new MatTableDataSource(this.listaSolicitudes);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        });
+      });
     });
-    this.listaSolicitudes = [
-      { id: 1, nombre: 'Mario Alberto Gomez', curso: 'Programación', fecha: '12/12/2018' },
-      { id: 2, nombre: 'Maria Lopez Gomez', curso: 'Programación', fecha: '12/12/2018' },
-      { id: 3, nombre: 'Mario Alberto Gomez', curso: 'Programación', fecha: '12/12/2018' },
-      { id: 4, nombre: 'Maria Lopez Gomez', curso: 'Programación', fecha: '12/12/2018' },
-      { id: 5, nombre: 'Mario Alberto Gomez', curso: 'Programación', fecha: '12/12/2018' },
-      { id: 6, nombre: 'Maria Lopez Gomez', curso: 'Programación', fecha: '12/12/2018' },
-      { id: 7, nombre: 'Mario Alberto Gomez', curso: 'Programación', fecha: '12/12/2018' }
-    ];
-    this.dataSource = new MatTableDataSource(this.listaSolicitudes);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   getReportes() {

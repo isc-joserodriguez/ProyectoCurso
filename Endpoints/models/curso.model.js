@@ -12,24 +12,25 @@ const cursoSchema = new mongoose.Schema({
     imagen: { type: String },
     categoria: { type: String, required: true },
     subcategoria: { type: String, required: true },
-    contenidoCurso: {
-        introduccionVideo: { type: String },
-        unidadCurso: [{
-            nombreUnidad: { type: String },
-            subtemas: [{
-                nombreTema: { type: String },
-                clases: [{
-                    ponderacion: { type: Number },
-                    nombreClase: { type: String },
-                    tipoPlantilla: { type: Number },
-                    recursos: { type: String },//Recursos del contenido de la leccion
-                    tarea: [{ recurso: { type: String }, envios: [{ _id: { type: String }, idAlumno: { type: String }, estatus: { type: String }, calificacion: { type: String }, fecha: { type: Date }, retroalimentacion: { type: String } }] }],//Recursos de la tarea
-                    comentarios: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String }, respuestas: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String } }] }]
-                }]
-            }],
+    introduccionVideo: { type: String },
+    contenidoCurso: [
+        {
+            unidad: { type: String },
+            subtemas: [
+                {
+                    subtema: { type: String },
+                    datos: [{
+                        ponderacion: { type: Number },
+                        tipoPlantilla: { type: Number },
+                        recursos: { type: String },//Recursos del contenido de la leccion
+                        tarea: [{ recurso: { type: String }, envios: [{ _id: { type: String }, idAlumno: { type: String }, estatus: { type: String }, calificacion: { type: String }, fecha: { type: Date }, retroalimentacion: { type: String } }] }],//Recursos de la tarea
+                        comentarios: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String }, respuestas: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String } }] }]
+                    }]
+                }
+            ],
             evaluacion: { type: String } //Evaluación de la unidad (opcional).
-        }]
-    },
+        }
+    ],
     insignias: [{ nombreInsignia: { type: String, required: true }, descripcionInsignia: { type: String, required: true }, imagen: { type: String, required: true } }],
     precio: { type: String },
     cursosRelacionados: [{ _id: { type: String, required: true } }],

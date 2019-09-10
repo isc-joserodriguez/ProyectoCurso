@@ -8,7 +8,7 @@ import { CursosService } from '../../servicios/cursos.service';
 })
 export class MaestroComponent implements OnInit {
   variable = 'Nombre Curso';
-  
+
   v2 = {
     azucar: {
       lomas: [1, 2, 3, 'Tamarindo']
