@@ -58,7 +58,7 @@
           <h4 class="text-center"><b>Temario</b></h4>
           <div class="accordion" id="accordionExample">
             <div class="card">
-              <div class="card-header p-0" id="headingOne">
+              <div class="card-header p-0 bg-info" id="headingOne">
                 <h2 class="mb-0">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
@@ -79,7 +79,7 @@
               </div>
             </div>
             <div class="card">
-              <div class="card-header p-0" id="headingTwo">
+              <div class="card-header p-0 bg-info" id="headingTwo">
                 <h2 class="mb-0">
                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="false" aria-controls="collapseTwo">
@@ -99,7 +99,7 @@
               </div>
             </div>
             <div class="card">
-              <div class="card-header p-0" id="headingThree">
+              <div class="card-header p-0 headercard" id="headingThree">
                 <h2 class="mb-0">
                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                     data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -143,18 +143,18 @@
     </div>
     <mat-divider [vertical]="true"></mat-divider>
     <!--div inf precios-->
-    <div class="col-md-3  ml-4 mt-3 pt-4 py-4">
+    <div class="col-md-3  ml-4 pt-4 py-4">
       <div class="card text-center">
+        <img class="imgsale align-rigth" src="./../../../assets/icons/sale.svg" />
         <div class=" card-header light-blue lighten-1 textoprecio p-4">
-          <img class="imgsale align-rigth" src="./../../../assets/icons/sale.svg" />
           <label>${{infoCurso.precio}} MX</label>
         </div>
         <div class="card-body">
           <label class="card-title">Este curso contiene:</label>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item card-text">Certificado de finalización</li>
-            <li class="list-group-item card-text">Actualizaciones continuas</li>
-            <li class="list-group-item card-text">Ejercicios y vídeos incluidos</li>
+            <li class="list-group-item card-text"><i class="fas fa-certificate"></i> Certificado de finalización</li>
+            <li class="list-group-item card-text"><i class="fas fa-sync"></i> Actualizaciones continuas</li>
+            <li class="list-group-item card-text"><i class="fas fa-photo-video"></i> Ejercicios y vídeos incluidos</li>
           </ul>
         </div>
         <div class="card-footer text-muted light-blue lighten-1 white-text">
