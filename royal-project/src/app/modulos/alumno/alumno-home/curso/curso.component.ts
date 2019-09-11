@@ -24,6 +24,7 @@ export class CursoComponent implements OnInit {
     valoracion: 3,
     inscritos: 32,
     objetivos: ['Aprender Algo', 'Aplicar lo aprendido', 'Enseñar todo']
+    
   }
 
   constructor(private curso: CursosService) { }
@@ -32,6 +33,7 @@ export class CursoComponent implements OnInit {
     this.getInfoCurso(this.id);
   }
   getInfoCurso(id) {
+    console.log(id);
     this.curso.getCursoInfo(id).subscribe(curso => {
       console.log(curso);
       this.respuesta=curso;
