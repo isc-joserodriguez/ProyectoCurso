@@ -72,7 +72,6 @@ export class AdminUsuariosComponent implements OnInit {
         tipo[3].alumno = !tipo[3].alumno;
         break;
     }
-
     this.usuarios.updateTipo(id, { tipoNuevo: tipo }).subscribe(resp => {
 
     }, err => {

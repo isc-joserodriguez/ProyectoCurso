@@ -99,7 +99,7 @@ const create = (req, res) => {
                 });
             });
     });
-}
+};
 
 const deleteCurso = (req, res) => {
     const { id } = req.params;
@@ -119,7 +119,7 @@ const deleteCurso = (req, res) => {
                 detail: error
             });
         });
-}
+};
 
 const getById = (req, res) => {
     const id = req.params.id;
@@ -139,7 +139,7 @@ const getById = (req, res) => {
                 detail: error
             });
         });
-}
+};
 
 const update = (req, res) => {
     const { id } = req.params;
@@ -167,7 +167,7 @@ const update = (req, res) => {
             detail: error
         });
     });
-}
+};
 
 module.exports = (Curso) => {
     _curso = Curso;

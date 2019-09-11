@@ -54,11 +54,10 @@ export class MaestroNuevoCursoComponent implements OnInit {
     });
   }
 
-  filtrarSubcategoria(cadena){
+  filtrarSubcategoria(cadena) {
     console.log(cadena);
 
   }
-
   getSubcategorias() {
     this.subcategorias = [];
     const categoria = this.generalForm.value.categoria;
