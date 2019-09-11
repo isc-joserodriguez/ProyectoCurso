@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CursosService } from '../../../../servicios/cursos.service'
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-curso',
@@ -27,10 +28,10 @@ export class CursoComponent implements OnInit {
     
   }
 
-  constructor(private curso: CursosService) { }
+  constructor(private route: ActivatedRoute, private curso: CursosService) { }
 
   ngOnInit() {
-    this.getInfoCurso(this.id);
+    this.getInfoCurso(this.route.snapshot.params.id);
   }
   getInfoCurso(id) {
     console.log(id);
@@ -39,6 +40,7 @@ export class CursoComponent implements OnInit {
       this.respuesta=curso;
       this.infoCurso.nombreCompleto=this.respuesta.detail[0].nombreCompleto;
       this.infoCurso.precio=520;
+      console.log(this.infoCurso.precio)
       this.infoCurso.videoPrincipal='http://www.lorempixel.com/900/500';
       this.infoCurso.descripcion=this.respuesta.detail[0].descripcionCurso;
       this.infoCurso.valoracion=5;
