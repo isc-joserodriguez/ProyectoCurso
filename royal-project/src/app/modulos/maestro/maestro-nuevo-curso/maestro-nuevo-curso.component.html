@@ -72,7 +72,7 @@
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Subcategoría del Curso:</mat-label>
                 <input type="text" placeholder="Selecciona o agrega uno" aria-label="Number" matInput
-                  [matAutocomplete]="auto" formControlName="subcategoria">
+                  [matAutocomplete]="auto" formControlName="subcategoria" (keyup)="filtrarSubcategoria($event.target.value)">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let subcategoria of subcategorias" [value]="subcategoria">
                     {{subcategoria}}

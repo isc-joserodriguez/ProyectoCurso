@@ -54,6 +54,11 @@ export class MaestroNuevoCursoComponent implements OnInit {
     });
   }
 
+  filtrarSubcategoria(cadena){
+    console.log(cadena);
+
+  }
+
   getSubcategorias() {
     this.subcategorias = [];
     const categoria = this.generalForm.value.categoria;
@@ -93,7 +98,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
     this.cursoNuevo.categoria = this.generalForm.value.categoria;
     this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
 
-    
+
     this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
       this.respuesta = res;
       this.router.navigate(['/maestro/']);

@@ -11,16 +11,18 @@
       <a class="list-group-item list-group-item-action btn-warning btn btn-block mat-elevation-z8"
         style="font-size:25px;" [routerLink]="['./']" style="font-size:25px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/cursos.svg">MIS CURSOS</a>
-
       <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
         style="font-size:20px;" [routerLink]="['./cursos']" style="font-size:20px;" *ngFor="let curso of listaCursos">
         <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">{{curso.nombre}}
       </a>
+      <br>
+      <button *ngIf="nuevoCurso" type="button" class="btn btn-success btn-lg text-dark"
+        [routerLink]="['./curso-nuevo']">Crear nuevo
+        curso</button>
+      <br>
     </div>
-
-
   </div>
-
+  
   <div class="col-md-8 ">
     <router-outlet></router-outlet>
   </div>
@@ -29,7 +31,9 @@
 <!--Nuevo Curso-->
 <div class="row col-md-12 p-0 m-0">
   <div class="col-md-12 px-0">
-    <p class="h3 font-weight-bold text-center bg-warning text-dark text-center p-2">¿NUEVO CURSO?</p> <br>
+
+    <p class="h3 font-weight-bold text-center bg-warning text-dark text-center p-2">¿NUEVO CURSO?</p>
+    <br>
     <!--Botones Paquetes-->
     <div class="col-md-12 text-center">
       <button type="button" class="btn btn-success btn-lg text-dark" [routerLink]="['./curso-nuevo']">Crear nuevo
