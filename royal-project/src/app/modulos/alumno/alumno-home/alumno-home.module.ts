@@ -9,9 +9,11 @@ import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 
 // Material
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonModule} from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -21,14 +23,16 @@ import { CursoComponent } from './curso/curso.component';
 
 
 @NgModule({
-  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,PerfilNavComponent, CursoComponent],
+  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent, PerfilNavComponent, CursoComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
     MatTabsModule,
     MatButtonModule,
     CarouselModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule,
+    MatIconModule
   ]
 })
 export class AlumnoHomeModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CursosService } from '../../../../servicios/cursos.service'
+import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-curso',
@@ -12,7 +13,7 @@ export class CursoComponent implements OnInit {
   respuesta: any = {
     code: 0,
     msg: '',
-    detail: ''
+    detail:''
   };
 
   infoCurso = {
@@ -27,31 +28,46 @@ export class CursoComponent implements OnInit {
       'Veracruz',
     valoracion: 3,
     inscritos: 32,
-    objetivos: ['Aprender Algo', 'Aplicar lo aprendido', 'Enseñar todo']
-
+    objetivos: ['Aprender Algo', 'Aplicar lo aprendido', 'Enseñar todo'],
+    contenidoCurso:[{}]
   };
+  infoMaestro = {
+    foto: 'http://www.lorempixel.com/200/200',
+    nombreCompleto:'Carla Reyes Godinez',
+    resumen:'Ingeniera en sistemas, Dos años de experiencia en IBM, Certificado en Diseño Web'
 
-  constructor(private route: ActivatedRoute, private curso: CursosService) { }
+  }
+
+  constructor(private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
     this.getInfoCurso(this.route.snapshot.params.id);
   }
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe(curso => {
+      //Pendientes
       this.respuesta = curso;
       this.infoCurso.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
-      this.infoCurso.precio = 520;
-      console.log(this.infoCurso.precio);
+      this.infoCurso.precio = this.respuesta.detail[0].precio;
       this.infoCurso.videoPrincipal = 'http://www.lorempixel.com/900/500';
       this.infoCurso.descripcion = this.respuesta.detail[0].descripcionCurso;
       this.infoCurso.valoracion = 5;
       this.infoCurso.inscritos = 5;
-      /* this.infoCurso.objetivos=this.respuesta.detail[0].objetivos; */
+      this.infoCurso.objetivos=this.respuesta.detail[0].objetivos;
       this.infoCurso.objetivos = [];
       this.respuesta.detail[0].objetivos.forEach(elemento => {
         this.infoCurso.objetivos.push(elemento.objetivo);
       });
+      this.infoCurso.contenidoCurso=this.respuesta.detail[0].contenidoCurso;
     });
+  }
+  getInfoMaestro(id){
+    this.usuarios.getUser(id).subscribe(usuario=>{
+      this.respuesta = usuario;
+      this.infoMaestro.foto='http://www.lorempixel.com/200/200';
+      this.infoMaestro.nombreCompleto= this.respuesta.detail[0].nombreCompleto;
+      this.infoMaestro.resumen= this.respuesta.detail[0].resumen;
+    })
   }
 
 }
