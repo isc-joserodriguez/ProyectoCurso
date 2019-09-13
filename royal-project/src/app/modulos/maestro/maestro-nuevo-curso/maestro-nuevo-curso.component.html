@@ -117,6 +117,23 @@
           </div>
           <!-- Fila 4 -->
 
+          <!-- Fila 5 -->
+          <div class="row">
+              <div class="col-md-7 pl-4">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Precio del curso:</mat-label>
+                  <input matInput placeholder="Ingresa el precio del curso" required
+                    formControlName="precio">
+                  <mat-error>
+                    <span
+                      *ngIf="!generalForm.get('precio').valid && generalForm.get('precio').touched">Agrega
+                      el del curso.</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          <!-- Fila 5 -->
+
         </form>
         <!-- form -->
         <mat-action-row>

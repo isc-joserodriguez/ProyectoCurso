@@ -159,11 +159,14 @@ const getById = (req, res) => {
 
 const updateTipo = (req, res) => {
     const { id } = req.params;
-    const tipo = req.body.tipoNuevo;
+    const nuevo = (req.body.credencialNuevo != undefined) ? {
+        tipo: req.body.tipoNuevo,
+        credencial: req.body.credencialNuevo
+    } : { tipo: req.body.tipoNuevo }
+
+
     _persona.update({ _id: id }, {
-        $set: {
-            tipo: tipo
-        }
+        $set: nuevo
     })
         .then(data => {
             res.status(200);

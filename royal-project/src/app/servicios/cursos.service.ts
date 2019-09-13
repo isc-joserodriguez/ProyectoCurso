@@ -13,7 +13,7 @@ export class CursosService {
   getCursosMaestro(idMaestro) {
     return this.http.get(apiUrl + '/getCursosMaestro/' + idMaestro);
   }
-  
+
   getCursoInfo(id) {
     return this.http.get(apiUrl + '/getCursoInfo/' + id);
   }
@@ -28,5 +28,9 @@ export class CursosService {
 
   getCursosSolicitudes() {
     return this.http.get(apiUrl + '/getCursosSolicitudes/');
+  }
+
+  getCursosAprobados() {
+    return this.http.get(apiUrl + '/getCursosAprobados/');
   }
 }

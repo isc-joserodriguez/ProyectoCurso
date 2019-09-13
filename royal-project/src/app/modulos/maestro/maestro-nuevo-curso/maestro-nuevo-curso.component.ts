@@ -26,7 +26,8 @@ export class MaestroNuevoCursoComponent implements OnInit {
     objetivos: [],
     contenidoCurso: [],
     categoria: '',
-    subcategoria: ''
+    subcategoria: '',
+    precio: 0
     /* , estado: 2 */
   };
 
@@ -39,13 +40,15 @@ export class MaestroNuevoCursoComponent implements OnInit {
   constructor(private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.generalForm = this.formBuilder.group({
       nombreCompleto: ['', Validators.required],
       nombreCorto: ['', Validators.required],
       categoria: ['', Validators.required],
       subcategoria: ['', Validators.required],
       tipo: ['', Validators.required],
-      descripcion: ['', Validators.required]
+      descripcion: ['', Validators.required],
+      precio: ['', Validators.required]
     });
 
     this.temarioForm = this.formBuilder.group({
@@ -96,7 +99,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
     this.cursoNuevo.contenidoCurso = this.temarioForm.value.unidades;
     this.cursoNuevo.categoria = this.generalForm.value.categoria;
     this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
-
+    this.cursoNuevo.precio = this.generalForm.value.precio;
 
     this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
       this.respuesta = res;

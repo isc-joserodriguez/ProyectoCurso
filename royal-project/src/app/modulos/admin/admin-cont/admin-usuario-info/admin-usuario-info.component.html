@@ -29,14 +29,14 @@
                         <li *ngIf="usuario.tipo[3].alumno!=undefined">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" [checked]="usuario.tipo[3].alumno" class="custom-control-input"
-                                    id="switchAlumno" (click)="cambiarEstado(usuario.id,usuario.tipo,3)">
+                                    id="switchAlumno" (click)="cambiarEstado(usuario.tipo,3)">
                                 <label class="custom-control-label" for="switchAlumno">Alumno</label>
                             </div>
                         </li>
                         <li *ngIf="usuario.tipo[2].maestro!=undefined">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" [checked]="usuario.tipo[2].maestro" class="custom-control-input"
-                                    id="switchMaestro" (click)="cambiarEstado(usuario.id,usuario.tipo,2)">
+                                    id="switchMaestro" (click)="cambiarEstado(usuario.tipo,2)">
                                 <label class="custom-control-label" for="switchMaestro">Maestro</label>
                             </div>
                         </li>
@@ -47,7 +47,7 @@
                     <mat-form-field appearance="outline" class="field-login">
                         <mat-label>Rol de Usuario:</mat-label>
                         <select matNativeControl [(ngModel)]="permisoUsuario"
-                            (change)="cambiarEstado(usuario.id,usuario.tipo,0)">
+                            (change)="cambiarEstado(usuario.tipo,0)">
                             <option value="0">Administrador</option>
                             <option value="1">Coordinador</option>
                         </select>
@@ -56,7 +56,7 @@
                         <label class="h6 pr-2">Estatus:</label>
                         <div class="custom-control custom-switch">
                             <input type="checkbox" [checked]="tempCoord" class="custom-control-input"
-                                id="switch1" (click)="cambiarEstado(usuario.id,usuario.tipo,1)">
+                                id="switch1" (click)="cambiarEstado(usuario.tipo,1)">
                             <label class="custom-control-label" for="switch1"></label>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                 <br>
                 <div class="row">
                     <div class="col-md-6 text-center">
-                      <button type="button" class="btn btn-success btn-md " (click)="guardar()" [routerLink]="['../../usuarios']">
+                      <button type="button" class="btn btn-success btn-md " (click)="guardar()">
                         <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
                         Guardar</button>
                     </div>

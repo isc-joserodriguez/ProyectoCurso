@@ -5,12 +5,12 @@ module.exports = (wagner) => {
     require('../controllers/curso.controller')(Curso));
     //Definir endPoints
     //CRUD CURSO
-    cursoRouter.get("/getAll",(req,res)=>{
-        cursoCtrl.getAll(req,res);
-    });
-
     cursoRouter.get("/getCursoInfo/:id",(req,res)=>{
         cursoCtrl.getById(req,res);
+    });
+
+    cursoRouter.get("/getCursos",(req,res)=>{
+        cursoCtrl.getAll(req,res);
     });
 
     cursoRouter.get("/getCursosMaestro/:id",(req,res)=>{
@@ -19,6 +19,14 @@ module.exports = (wagner) => {
 
     cursoRouter.get("/getCursosSolicitudes",(req,res)=>{
         cursoCtrl.getCursosSolicitudes(req,res);
+    });
+
+    cursoRouter.get("/getCursosAprobados",(req,res)=>{
+        cursoCtrl.getCursosAprobados(req,res);
+    });
+
+    cursoRouter.get("/getCursosRechazados",(req,res)=>{
+        cursoCtrl.getCursosRechazados(req,res);
     });
 
     cursoRouter.get("/getSubcategorias",(req,res)=>{

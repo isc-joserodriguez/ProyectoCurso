@@ -35,8 +35,10 @@ export class AdminUsuarioInfoComponent implements OnInit {
     this.usuarios.getId(id).subscribe(resp => {
       this.respuesta = resp;
       this.usuario.tipo = this.respuesta.detail[0].tipo;
+
       this.permisoUsuario = this.usuario.tipo[0].admin == true ? 0 : 1;
       this.tempCoord = this.respuesta.detail[0].tipo[1].coord != undefined ? this.respuesta.detail[0].tipo[1].coord : false;
+
       this.usuario.id = this.respuesta.detail[0]._id;
       this.usuario.foto = this.respuesta.detail[0].foto;
       this.usuario.nombre = this.respuesta.detail[0].nombre;
@@ -44,13 +46,12 @@ export class AdminUsuarioInfoComponent implements OnInit {
       this.usuario.apPaterno = this.respuesta.detail[0].apPaterno;
       this.usuario.fechaNac = this.respuesta.detail[0].fechaNac;
       this.usuario.credencial = this.respuesta.detail[0].credencial;
-
     }, err => {
       console.log(err);
     });
   }
 
-  cambiarEstado(id, tipo, cambio) {
+  cambiarEstado(tipo, cambio) {
     switch (cambio) {
       case 0:
         if (this.permisoUsuario == 0) {
@@ -73,8 +74,8 @@ export class AdminUsuarioInfoComponent implements OnInit {
   }
 
   guardar() {
-    this.usuarios.updateTipo(this.usuario.id, this.usuario).subscribe(resp => {
-      this.ngOnInit();
+    this.usuarios.updateTipo(this.usuario.id, { tipoNuevo: this.usuario.tipo, credencialNuevo: this.usuario.credencial }).subscribe(resp => {
+      this.router.navigate(['/admin/usuarios']);
     }, err => {
       console.log(err);
     });

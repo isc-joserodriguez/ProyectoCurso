@@ -46,114 +46,13 @@
       <div class="Tecnologias">
         <br>
         <div class="row col-md-12 ">
-          <div class="col-md-3">
+          <div class="col-md-3 text-center" *ngFor="let curso of cursosTec">
             <label>
               <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap ">
+                <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-        </div>
-        <br>
-        <div class="row col-md-12 ">
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+                  <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                  <p class="card-text">{{curso.descripcionCurso}}</p>
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div>
@@ -166,120 +65,18 @@
       <div class="Idiomas">
         <br>
         <div class="row col-md-12 o">
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title </h5>
-                  <p class="card-text"> Royal Lenguage <i class="fas fa-search"></i></p>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
+                <label>
+                  <div class="card">
+                    <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                      <p class="card-text">{{curso.descripcionCurso}}</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </label>
               </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-        </div>
-        <br>
-        <div class="row col-md-12 ">
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <div class="col-md-3 text-center">
-            <label>
-              <div class="card">
-                <img class="card-img-top" src="http://www.lorempixel.com/200/200" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </label>
-          </div>
         </div>
       </div>
     </mat-tab>
