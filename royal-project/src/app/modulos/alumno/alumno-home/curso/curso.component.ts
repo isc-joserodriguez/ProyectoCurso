@@ -14,6 +14,7 @@ export class CursoComponent implements OnInit {
     code: 0,
     msg: '',
     detail:''
+    
   };
 
   infoCurso = {
