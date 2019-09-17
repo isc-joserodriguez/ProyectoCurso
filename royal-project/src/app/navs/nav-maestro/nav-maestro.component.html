@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-sm fixed-top scrolling-navbar img-posicion">
-    <a class="nav-item active" href="/">
+    <a class="nav-item active" [routerLink]="['/maestro']">
       <img class="icon-nav-home" src="./../../../assets/icons/home.svg">
     </a>
     <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
@@ -102,20 +102,17 @@
           <p class="salto_pag mb-0">{{usuario}}</p>
         </button>
         <mat-menu #miperfil="matMenu" class="fondo-navbar">
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['./perfil']">
             <i class="fas fa-user pr-1"></i>Mi Perfil
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/maestro/perfil/cuenta']">
             <i class="fas fa-at pr-1"></i>Cuenta
           </button>
-          <button mat-menu-item>
-            <i class="fas fa-credit-card pr-1"></i>Métodos de Pago
+          <button mat-menu-item [routerLink]="['/maestro/perfil/documentacion']">
+            <i class="fas fa-award"></i> Mi documentación
           </button>
-          <button mat-menu-item>
-            <i class="fas fa-file-alt"></i> Historial de Compra
-          </button>
-          <button mat-menu-item>
-            <i class="fas fa-award"></i> Certificados
+          <button mat-menu-item [routerLink]="['/maestro/perfil/pagos']">
+            <i class="fas fa-file-alt"></i> Historial de Pagos
           </button>
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="logout()">

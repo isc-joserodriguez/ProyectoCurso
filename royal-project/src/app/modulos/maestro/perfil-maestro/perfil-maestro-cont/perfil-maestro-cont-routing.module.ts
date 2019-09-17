@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
-import { PagosComponent } from './pagos/pagos.component';
-import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
-import { CertificadosComponent } from './certificados/certificados.component';
+import { DocumentacionComponent } from './documentacion/documentacion.component';
+import { HistorialPagosComponent } from './historial-pagos/historial-pagos.component';
 
 const routes: Routes = [
   {
@@ -16,16 +15,12 @@ const routes: Routes = [
     component: CuentaComponent
   },
   {
+    path: 'documentacion',
+    component: DocumentacionComponent
+  },
+  {
     path: 'pagos',
-    component: PagosComponent
-  },
-  {
-    path: 'historial',
-    component: HistorialComprasComponent
-  },
-  {
-    path: 'certificados',
-    component: CertificadosComponent
+    component: HistorialPagosComponent
   }
 ];
 
@@ -33,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PerfilContRoutingModule { }
+export class PerfilMaestroContRoutingModule { }
