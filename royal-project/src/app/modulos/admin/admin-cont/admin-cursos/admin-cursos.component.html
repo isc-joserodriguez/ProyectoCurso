@@ -1,14 +1,14 @@
 <mat-accordion class="example-headers-align">
   <div class="col-md-12">
     <!--primer acordeon-->
-    <mat-expansion-panel [expanded]="solicitudes" hideToggle="true">
+    <mat-expansion-panel [expanded]="solicitudes" hideToggle="true" class="acordeon-cuerpo">
       <mat-expansion-panel-header class="acordeon-enc">
         <mat-panel-title>
           <b>Solicitudes de Cursos</b>
         </mat-panel-title>
         <mat-panel-description>
           <span> </span>
-          <mat-icon>assignment</mat-icon>
+          <i class="fas fa-file-import"></i>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <br>
@@ -55,17 +55,17 @@
     <!--cierre primer acordeon-->
   </div>
 </mat-accordion>
+<!--segundo acordeon-->
 <mat-accordion class="example-headers-align">
   <div class="col-md-12">
-    <!--2do acordeon-->
-    <mat-expansion-panel hideToggle="true" [expanded]="reportes">
+    <mat-expansion-panel hideToggle="true" [expanded]="reportes" class="acordeon-cuerpo">
       <mat-expansion-panel-header class="acordeon-enc">
         <mat-panel-title>
           <b>Reportes de Cursos</b>
         </mat-panel-title>
         <mat-panel-description>
           <span> </span>
-          <mat-icon>assignment</mat-icon>
+          <i class="fas fa-file-excel"></i>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <br>
@@ -119,8 +119,12 @@
   </div>
 </mat-accordion>
 <br>
-<div class="vertical-center p-2" style="background: #007791">
+<div class="vertical-center p-2 fondoadmin px-4">
   <label *ngFor="let of list" class="h1">Cursos</label>
+  <!--todos los cursos-->
+  <div class="text-center vertical-center">
+    <label class="h3">Resumen de cursos</label>
+  </div>
   <!--tabla-->
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="datosCursos" matSort>
@@ -173,6 +177,5 @@
     <mat-paginator #paginasCursos [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
   <!--fin tabla-->
-  <br>
   <br>
 </div>
