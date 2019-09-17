@@ -7,6 +7,7 @@ import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisti
 import { AdminCursosComponent } from './admin-cursos/admin-cursos.component';
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-info.component';
+import { CursoRevisionComponent } from './curso-revision/curso-revision.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'usuario/:id',
     component: AdminUsuarioInfoComponent
+  },
+  {
+    path: 'cursos/revisar/:id',
+    component: CursoRevisionComponent
   }
 ];
 

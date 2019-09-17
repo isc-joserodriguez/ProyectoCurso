@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
-  selector: 'app-curso',
-  templateUrl: './curso.component.html',
-  styleUrls: ['./curso.component.scss']
+  selector: 'app-curso-revision',
+  templateUrl: './curso-revision.component.html',
+  styleUrls: ['./curso-revision.component.scss']
 })
-
-export class CursoComponent implements OnInit {
+export class CursoRevisionComponent implements OnInit {
   respuesta: any = {
     code: 0,
     msg: '',
@@ -28,7 +28,8 @@ export class CursoComponent implements OnInit {
     valoracion: 3,
     inscritos: 32,
     objetivos: ['Aprender Algo', 'Aplicar lo aprendido', 'Enseñar todo'],
-    contenidoCurso: [{}]
+    contenidoCurso: [{}],
+    notas: 'hola'
   };
   infoMaestro = {
     foto: 'http://www.lorempixel.com/200/200',
@@ -36,9 +37,16 @@ export class CursoComponent implements OnInit {
     resumen: 'Ingeniera en sistemas, Dos años de experiencia en IBM, Certificado en Diseño Web'
   };
 
-  constructor(private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
+  revisionForm: FormGroup;
+
+  constructor(private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
+    this.revisionForm = this.formBuilder.group({
+      precio: ['', Validators.required],
+      notas: ['', Validators.required]
+    });
     this.getInfoCurso(this.route.snapshot.params.id);
   }
   getInfoCurso(id) {
@@ -51,6 +59,7 @@ export class CursoComponent implements OnInit {
       this.infoCurso.descripcion = this.respuesta.detail[0].descripcionCurso;
       this.infoCurso.valoracion = 5;
       this.infoCurso.inscritos = 5;
+      this.infoCurso.notas = this.respuesta.detail[0].notas;
       this.infoCurso.objetivos = this.respuesta.detail[0].objetivos;
       this.infoCurso.objetivos = [];
       this.respuesta.detail[0].objetivos.forEach(elemento => {
@@ -65,7 +74,19 @@ export class CursoComponent implements OnInit {
       this.infoMaestro.foto = 'http://www.lorempixel.com/200/200';
       this.infoMaestro.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
       this.infoMaestro.resumen = this.respuesta.detail[0].resumen;
-    })
+    });
+  }
+  aceptarCurso() {
+    const estatus = { estado: 2, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio };
+    this.curso.updateEstado(this.route.snapshot.params.id, estatus).subscribe(res => {
+      this.router.navigate(['/admin/cursos']);
+    });
+  }
+  rechazarCurso() {
+    const estatus = { estado: 3, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio };
+    this.curso.updateEstado(this.route.snapshot.params.id, estatus).subscribe(res => {
+      this.router.navigate(['/admin/cursos']);
+    });
   }
 
 }

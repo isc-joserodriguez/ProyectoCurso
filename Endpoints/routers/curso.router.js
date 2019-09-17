@@ -40,6 +40,10 @@ module.exports = (wagner) => {
     cursoRouter.put("/:id",(req,res)=>{
        cursoCtrl.update(req,res);
     });
+
+    cursoRouter.put("/updateEstado/:id",(req,res)=>{
+        cursoCtrl.updateEstado(req,res);
+     });
     
     cursoRouter.post("/nuevoCurso",(req,res)=>{
         cursoCtrl.create(req,res);

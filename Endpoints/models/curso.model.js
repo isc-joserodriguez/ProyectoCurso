@@ -10,7 +10,7 @@ const cursoSchema = new mongoose.Schema({
     nombreCorto: { type: String, required: true },
     descripcionCurso: { type: String, required: true },
     objetivos: { type: Array, required: true },
-    imagen: { type: String, default:'http://www.lorempixel.com/200/200' },
+    imagen: { type: String, default: 'http://www.lorempixel.com/200/200' },
     categoria: { type: String, required: true },
     subcategoria: { type: String, required: true },
     introduccionVideo: { type: String },
@@ -35,10 +35,11 @@ const cursoSchema = new mongoose.Schema({
     insignias: [{ nombreInsignia: { type: String, required: true }, descripcionInsignia: { type: String, required: true }, imagen: { type: String, required: true } }],
     precio: { type: Number },
     cursosRelacionados: [{ _id: { type: String, required: true } }],
-    estado: { type: String, default: 1 }, //1:En revisión, 2:Aceptado, 3:Rechazado
-    publicación: { type: Boolean, default: false },
+    estado: { type: Number, default: 1 }, //1:En revisión, 2:Aceptado, 3:Rechazado
+    publicacion: { type: Boolean, default: false },
     fechaSolicitud: { type: Date, default: Date.now() },
-    royal: { type: Boolean, default: false }
+    royal: { type: Boolean, default: false },
+    notas: { type: String }
 });
 
 //modelo Curso

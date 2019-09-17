@@ -33,4 +33,13 @@ export class CursosService {
   getCursosAprobados() {
     return this.http.get(apiUrl + '/getCursosAprobados/');
   }
+
+  getCursos() {
+    return this.http.get(apiUrl + '/getCursos/');
+  }
+
+  updateEstado(id, estatus) {
+    return this.http.put(apiUrl + '/updateEstado/' + id, estatus);
+  }
+
 }

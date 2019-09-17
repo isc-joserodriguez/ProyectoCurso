@@ -33,6 +33,7 @@ import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
 import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisticas.component';
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-info.component';
+import { CursoRevisionComponent } from './curso-revision/curso-revision.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-in
     AdminPagosComponent,
     AdminEstadisticasComponent,
     AdminUsuarioNuevoComponent,
-    AdminUsuarioInfoComponent
+    AdminUsuarioInfoComponent,
+    CursoRevisionComponent
   ],
   imports: [
     CommonModule,
