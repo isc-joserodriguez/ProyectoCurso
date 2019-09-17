@@ -21,7 +21,7 @@ const routes: Routes = [
     component: PerfilNavComponent,
     children: [
       {
-        path:'',
+        path: '',
         loadChildren: './perfil-nav/perfil-cont/perfil-cont.module#PerfilContModule'
       }
     ]
