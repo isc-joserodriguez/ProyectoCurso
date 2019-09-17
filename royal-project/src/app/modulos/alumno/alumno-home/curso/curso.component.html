@@ -22,19 +22,17 @@
         <!--ranking star-->
         <div class="col-md-6 pt-0">
           <h4 class="letrastar mb-0">Valoraciones:</h4>
-          <div class="col-md-6">
-            <span id="rateMe">
-              <i class="fas fa-star py-2 px-1 rate-popover" data-index="0" data-html="true" data-toggle="popover"
-                data-placement="top" title="Very bad"></i>
-              <i class="fas fa-star py-2 px-1 rate-popover" data-index="1" data-html="true" data-toggle="popover"
-                data-placement="top" title="Poor"></i>
-              <i class="fas fa-star py-2 px-1 rate-popover" data-index="2" data-html="true" data-toggle="popover"
-                data-placement="top" title="OK"></i>
-              <i class="fas fa-star py-2 px-1 rate-popover" data-index="3" data-html="true" data-toggle="popover"
-                data-placement="top" title="Good"></i>
-              <i class="fas fa-star py-2 px-1 rate-popover" data-index="4" data-html="true" data-toggle="popover"
-                data-placement="top" title="Excellent"></i>
-            </span>
+          <div class="rate">
+            <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+            <label for="star5" title="text">5 stars</label>
+            <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+            <label for="star4" title="text">4 stars</label>
+            <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+            <label for="star3" title="text">3 stars</label>
+            <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+            <label for="star2" title="text">2 stars</label>
+            <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+            <label for="star1" title="text">1 star</label>
           </div>
         </div>
         <!--Alumnos totales-->

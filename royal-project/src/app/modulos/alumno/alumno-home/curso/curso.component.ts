@@ -13,7 +13,12 @@ export class CursoComponent implements OnInit {
   respuesta: any = {
     code: 0,
     msg: '',
+<<<<<<< HEAD
     detail: ''
+=======
+    detail:''
+    
+>>>>>>> e88fbd04ba5c90ef2512639a94a7a8d3c5d664c6
   };
   infoCurso = {
     nombreCompleto: '',

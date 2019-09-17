@@ -53,79 +53,98 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </div>
-
         </div>
+        <!--Enlaces-->
         <div class="row p-0">
-          <p class="p-0 m-0 ml-3">Enlaces:</p>
-        </div>
-        <div class="row">
-          <div class="col-md-7">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Página Web:</mat-label>
-              <input matInput placeholder="(Http(s)://..)" required>
-            </mat-form-field>
-          </div>
-        </div>
-        <!--FB-->
-        <div class="row ">
-          <div class="col-md-10 ">
-            <div class="input-group input-group-sm vertical-center">
-              <img class="icon-nav" src="./../../../assets/icons/fb.svg">
-              <div class="col-md-8 vertical-center">
-                <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
-                  <mat-label>Facebook:</mat-label>
-                  <input matInput placeholder="(http://www.facebook.com/)" required>
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--FB cierre-->
-        <!--Linked-->
-        <div class="row ">
-          <div class="col-md-10 ">
-            <div class="input-group input-group-sm vertical-center">
-              <img class="icon-nav" src="./../../../assets/icons/link.svg">
-              <div class="col-md-8 vertical-center">
-                <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
-                  <mat-label>Linkedin</mat-label>
-                  <input matInput placeholder="(http://www.linkedin.com/)" required>
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Linked cierre-->
-        <!--Youtube-->
-        <div class="row">
-          <div class="col-md-10 ">
-            <div class="input-group input-group-sm vertical-center">
-              <img class="icon-nav" src="./../../../assets/icons/yt.svg">
-              <div class="col-md-8 vertical-center">
-                <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
-                  <mat-label>Youtube:</mat-label>
-                  <input matInput placeholder="(http://www.youtube.com/)" required>
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Youtube cierre-->
-        <br>
-        <div class="row">
-          <div class="col-md-6 text-center">
-            <button type="button" class="btn btn-success btn-md " (click)="alta()">
-              <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">
-              Guardar</button>
+          <div class="col-md-6">
+            <p class="p-0 m-0 ml-3">Enlaces:</p>
           </div>
           <div class="col-md-6 text-center">
-            <button type="button" class="btn btn-danger btn-md" [routerLink]="['../usuarios']">
-              <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">
-              Cancelar</button>
+            <p class="p-0 m-0 ml-3">Resumen de CV:</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 mr-3">
+              <div class="row">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Página Web:</mat-label>
+                  <input matInput placeholder="(Http(s)://..)" required>
+                </mat-form-field>
+              </div>
+
+              <!--FB-->
+              <div class="row">
+                <div class="input-group input-group-sm vertical-center">
+                  <img class="icon-nav" src="./../../../assets/icons/fb.svg">
+                  <div class="col-md-11 vertical-center">
+                    <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                      <mat-label>Facebook:</mat-label>
+                      <input matInput placeholder="(http://www.facebook.com/)" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+
+              <!--FB cierre-->
+              <!--Linked-->
+              <div class="row ">
+
+                <div class="input-group input-group-sm vertical-center">
+                  <img class="icon-nav" src="./../../../assets/icons/link.svg">
+                  <div class="col-md-11 vertical-center">
+                    <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                      <mat-label>Linkedin</mat-label>
+                      <input matInput placeholder="(http://www.linkedin.com/)" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <!--Linked cierre-->
+              <!--Youtube-->
+              <div class="row">
+                <div class="input-group input-group-sm vertical-center">
+                  <img class="icon-nav" src="./../../../assets/icons/yt.svg">
+                  <div class="col-md-11 vertical-center">
+                    <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                      <mat-label>Youtube:</mat-label>
+                      <input matInput placeholder="(http://www.youtube.com/)" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div class="col-md-5 ml-4">
+              <mat-form-field appearance="outline" class="field-login2">
+                <mat-label>CV:</mat-label>
+                <textarea matInput placeholder="Agrega un resumen de tu cv" cdkTextareaAutosize
+                  cdkAutosizeMinRows="4" cdkAutosizeMaxRows="10"></textarea>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <!--Youtube cierre-->
+
+          <br>
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <button type="button" class="btn btn-success btn-md " (click)="alta()">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">
+                Guardar</button>
+            </div>
+            <div class="col-md-6 text-center">
+              <button type="button" class="btn btn-danger btn-md" [routerLink]="['../usuarios']">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">
+                Cancelar</button>
+            </div>
           </div>
         </div>
       </div>
     </mat-card>
   </form>
-  <br>
 </div>
+<br>
