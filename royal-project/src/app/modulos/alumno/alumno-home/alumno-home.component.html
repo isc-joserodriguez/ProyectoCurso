@@ -53,7 +53,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{curso.nombreCorto}}</h5>
                   <p class="card-text">{{curso.descripcionCurso}}</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                  <a href="#" class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']" >Ver curso</a>
                 </div>
               </div>
             </label>

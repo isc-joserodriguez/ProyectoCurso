@@ -66,13 +66,14 @@ export class CursoRevisionComponent implements OnInit {
         this.infoCurso.objetivos.push(elemento.objetivo);
       });
       this.infoCurso.contenidoCurso = this.respuesta.detail[0].contenidoCurso;
+      this.getInfoMaestro(this.respuesta.detail[0].idMaestro);
     });
   }
   getInfoMaestro(id) {
     this.usuarios.getUser(id).subscribe(usuario => {
       this.respuesta = usuario;
-      this.infoMaestro.foto = 'http://www.lorempixel.com/200/200';
-      this.infoMaestro.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
+      this.infoMaestro.foto = this.respuesta.detail[0].foto;
+      this.infoMaestro.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
       this.infoMaestro.resumen = this.respuesta.detail[0].resumen;
     });
   }
