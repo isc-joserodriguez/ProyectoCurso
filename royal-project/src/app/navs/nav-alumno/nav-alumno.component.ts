@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../servicios/auth.service';
 import { Match } from '../../helper/match.validator';
+import { CursosService } from '../../servicios/cursos.service';
 
 
 @Component({
@@ -13,6 +14,9 @@ import { Match } from '../../helper/match.validator';
 export class NavAlumnoComponent implements OnInit {
   logForm: FormGroup;
   regForm: FormGroup;
+
+  categoriasTec = [];
+  categoriasLen = [];
 
   respuesta: any = {
     code: 0,
@@ -35,9 +39,10 @@ export class NavAlumnoComponent implements OnInit {
   logueado = localStorage.getItem('token') != null;
   sexo = 3; // 1= H 2= M 3= Indef
 
-  constructor(private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.verificarToken();
 
     this.logForm = this.formBuilder.group({
@@ -54,8 +59,28 @@ export class NavAlumnoComponent implements OnInit {
       regContrasenia: ['', Validators.required],
       regRepContrasenia: ['', Validators.required]
     }, {
-        validator: Match('regContrasenia', 'regRepContrasenia')
+      validator: Match('regContrasenia', 'regRepContrasenia')
+    });
+
+    this.getCategorias();
+
+  }
+  getCategorias() {
+
+    this.categoriasTec = [];
+    this.categoriasLen = [];
+    this.cursos.getSubcategorias().subscribe(res => {
+      this.respuesta = res;
+      this.respuesta.detail.forEach(e => {
+        if (e.categoria == 'Tecnología') {
+          this.categoriasTec.push(e.subcategoria);
+        } else {
+          this.categoriasLen.push(e.subcategoria);
+        }
       });
+      console.log(this.categoriasTec);
+      console.log(this.categoriasLen);
+    });
 
   }
 
@@ -120,6 +145,7 @@ export class NavAlumnoComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userid');
+    this.router.navigate(['/']);
     this.ngOnInit();
   }
 }

@@ -32,6 +32,7 @@ export class NavAdministradorComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.verificarToken();
   }
 

@@ -8,7 +8,7 @@ import { CursosService } from '../../servicios/cursos.service';
 })
 export class MaestroComponent implements OnInit {
   listaCursos = [];
-  nuevoCurso = true;
+  nuevoCurso = false;
 
   respuesta: any = {
     code: 0,
@@ -27,7 +27,7 @@ export class MaestroComponent implements OnInit {
       this.respuesta = res;
       this.respuesta.detail.forEach(e => {
         if (e.estado == 2) {
-          this.listaCursos.push({ nombre: e.nombreCorto, id: e._id });
+          this.listaCursos.push({ nombre: e.nombreCorto, id: e._id, ruta: e.ruta });
           this.nuevoCurso = false;
         }
       });

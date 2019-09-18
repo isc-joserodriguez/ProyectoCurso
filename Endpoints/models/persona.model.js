@@ -15,12 +15,10 @@ const personaSchema = new mongoose.Schema({
     apMaterno: { type: String },
     fechaNac: { type: Date },
     foto: { type: String },
-    paginaWeb: { type: String },
-    redSocial: [
-        {
-            red: { type: String },
-            url: { type: String }
-        }],
+    web: { type: String, default: ' ' },
+    fb: { type: String, default: ' ' },
+    yt: { type: String, default: ' ' },
+    in: { type: String, default: ' ' },
     cursoMaestro: [{}],
     cursoAlumno: [{ _id: { type: String, required: true }, estadoCurso: { type: String } }],
     carrito: [{ _id: { type: String, required: true }, codigos: [{ _id: { type: String } }] }],

@@ -31,7 +31,7 @@ const routes: Routes = [
     component: MaestroNuevoCursoComponent
   },
   {
-    path: 'curso-config/:id',
+    path: 'config/:id',
     component: ConfigCursoComponent
   },
 ];

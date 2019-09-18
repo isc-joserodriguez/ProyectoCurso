@@ -13,34 +13,13 @@ export class AlumnoHomeComponent implements OnInit {
     detail: '',
     msg: ''
   };
-  cursosIdiomas = [
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'Árabe I', descripcionCurso: 'Aprende' }
-  ];
-  cursosTec = [
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' },
-    { imagen: 'http://www.lorempixel.com/200/200', nombreCorto: 'POO', descripcionCurso: 'Aprende' }
-  ];
+  cursosIdiomas = [];
+  cursosTec = [];
 
   constructor(private cursos: CursosService) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.getCursos();
   }
 

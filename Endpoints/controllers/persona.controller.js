@@ -109,11 +109,38 @@ const login = (req, res) => {
 }
 
 const info = (req, res) => {
-    res.status(200).json({
-        code: 200,
-        msg: "Entraste correctamente!",
-        detail: req.decoded
-    })
+    var datos = {
+        id: 0,
+        tipo: [],
+        nombre: '',
+        foto: '',
+        sexo: '',
+        iat: req.decoded.iat,
+        exp: req.decoded.exp
+    }
+    console.log(res);
+    _persona.find({ _id: req.decoded.id })
+        .then(persona => {
+            console.log(persona)
+            datos.id = persona[0]._id;
+            datos.tipo = persona[0].tipo;
+            datos.nombre = persona[0].nombre;
+            datos.foto = persona[0].foto;
+            datos.sexo = persona[0].sexo;
+            res.status(200);
+            res.json({
+                code: 200,
+                msg: "Consulta exitosa.",
+                detail: datos
+            });
+        }).catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                msg: "Error.",
+                detail: error
+            });
+        });
 
 }
 
@@ -194,9 +221,14 @@ const update = (req, res) => {
             nombre: persona.nombre,
             apPaterno: persona.apPaterno,
             apMaterno: persona.apMaterno,
+            sexo: persona.sexo,
             fechaNac: persona.fechaNac,
             foto: persona.foto,
-            paginaWeb: persona.paginaWeb,
+            web: persona.web,
+            fb: persona.fb,
+            yt: persona.yt,
+            in: persona.in,
+            resumen: persona.resumen
         }
     })
         .then(data => {

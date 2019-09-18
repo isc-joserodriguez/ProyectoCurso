@@ -9,12 +9,44 @@
     <div class="card font-weight-bold text-center list-group">
 
       <a class="list-group-item list-group-item-action btn-warning btn btn-block mat-elevation-z8"
-        style="font-size:25px;" [routerLink]="['./']" style="font-size:25px;"> <img class="icon-nav mr-2"
+        style="font-size:25px;" [routerLink]="['/maestro']" style="font-size:25px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/cursos.svg">MIS CURSOS</a>
-      <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
-        style="font-size:20px;" [routerLink]="['./cursos']" style="font-size:20px;" *ngFor="let curso of listaCursos">
-        <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">{{curso.nombre}}
-      </a>
+
+      <mat-accordion class="example-headers-align">
+        <div class="col-md-12">
+          <!--primer acordeon-->
+          <mat-expansion-panel hideToggle="true" *ngFor="let curso of listaCursos">
+            <mat-expansion-panel-header class="acordeon-enc">
+              <mat-panel-title>
+                <b>{{curso.nombre}}</b>
+              </mat-panel-title>
+              <mat-panel-description>
+                <span> </span>
+                <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
+              style="font-size:20px;" [routerLink]="['./cursos']" style="font-size:20px;">
+              <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">Alumnos
+            </a>
+            <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
+              style="font-size:20px;" [routerLink]="['./cursos']" style="font-size:20px;">
+              <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">Revisión
+            </a>
+            <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
+              style="font-size:20px;" [routerLink]="['./cursos']" style="font-size:20px;">
+              <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">Insignias
+            </a>
+            <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
+              style="font-size:20px;" [routerLink]="['/maestro/config',curso.ruta]" style="font-size:20px;">
+              <img class="icon-nav mr-2" src="./../../../assets/icons/cursos.svg">Ajustes
+            </a>
+          </mat-expansion-panel>
+          <!--primer acordeon-->
+        </div>
+      </mat-accordion>
+
+
       <br>
       <button *ngIf="nuevoCurso" type="button" class="btn btn-success btn-lg text-dark"
         [routerLink]="['./curso-nuevo']">Crear nuevo
@@ -22,7 +54,7 @@
       <br>
     </div>
   </div>
-  
+
   <div class="col-md-8 ">
     <router-outlet></router-outlet>
   </div>

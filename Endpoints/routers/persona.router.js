@@ -18,7 +18,7 @@ module.exports = (wagner) => {
         personaCtrl.deletePersona(req, res);
     });
 
-    personaRouter.put("/edit/:id", (req, res) => {
+    personaRouter.put("/editDatos/:id", (req, res) => {
         personaCtrl.update(req, res);
     });
 

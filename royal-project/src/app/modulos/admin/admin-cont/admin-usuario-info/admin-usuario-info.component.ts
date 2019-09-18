@@ -29,6 +29,7 @@ export class AdminUsuarioInfoComponent implements OnInit {
   };
   constructor(private route: ActivatedRoute, private usuarios: UsuariosService, private router: Router) { }
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.getUsuario(this.route.snapshot.params.id);
   }
   getUsuario(id) {

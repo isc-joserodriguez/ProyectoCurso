@@ -20,18 +20,10 @@
           </button>
         </mat-menu>
         <mat-menu #Tecnologias="matMenu">
-          <button mat-menu-item>Fishes</button>
-          <button mat-menu-item>Amphibians</button>
-          <button mat-menu-item>Reptiles</button>
-          <button mat-menu-item>Birds</button>
-          <button mat-menu-item>Mammals</button>
+          <button mat-menu-item *ngFor="let cat of categoriasTec">{{cat}}</button>
         </mat-menu>
         <mat-menu #Idiomas="matMenu">
-          <button mat-menu-item>Fishes</button>
-          <button mat-menu-item>Amphibians</button>
-          <button mat-menu-item>Reptiles</button>
-          <button mat-menu-item>Birds</button>
-          <button mat-menu-item>Mammals</button>
+            <button mat-menu-item *ngFor="let cat of categoriasLen">{{cat}}</button>
         </mat-menu>
 
       </div>
@@ -136,22 +128,22 @@
           <p class="salto_pag mb-0">{{usuario}}</p>
         </button>
         <mat-menu #miperfil="matMenu" class="fondo-navbar">
-          <button mat-menu-item [routerLink]="['./perfil']">
+          <button mat-menu-item [routerLink]="['/perfil']">
             <i class="fas fa-user pr-1"></i>Mi Perfil
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/perfil/cuenta']">
             <i class="fas fa-at pr-1"></i>Cuenta
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/perfil/pagos']">
             <i class="fas fa-credit-card pr-1"></i>Métodos de Pago
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/perfil/historial']">
             <i class="fas fa-file-alt"></i> Historial de Compra
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/perfil/certificados']">
             <i class="fas fa-award"></i> Certificados
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/maestro']">
             <i class="fas fa-chalkboard-teacher"></i> Modo Maestro
           </button>
           <mat-divider></mat-divider>

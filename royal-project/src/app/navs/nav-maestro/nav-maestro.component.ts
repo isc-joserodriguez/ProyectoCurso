@@ -31,11 +31,12 @@ export class NavMaestroComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.verificarToken();
   }
 
   verificarToken() {
-    if(localStorage.getItem('token')==null){
+    if (localStorage.getItem('token') == null) {
       this.router.navigate(['/']);
     }
     this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {

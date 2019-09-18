@@ -22,4 +22,7 @@ export class UsuariosService {
   getUser(id) {
     return this.http.get(apiUrl + '/get/' + id);
   }
+  updateDatos(id, datos) {
+    return this.http.put(apiUrl + '/editDatos/' + id, datos);
+  }
 }
