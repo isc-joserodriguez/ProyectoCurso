@@ -14,7 +14,7 @@ const routes: Routes = [
     component: MaestroCursoComponent
   },
   {
-    path: 'curso/config',
+    path: 'curso/config/:id',
     component: CursoConfigComponent
   }
 ];
