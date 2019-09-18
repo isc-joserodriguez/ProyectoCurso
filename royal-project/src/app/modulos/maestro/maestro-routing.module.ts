@@ -29,11 +29,7 @@ const routes: Routes = [
   {
     path: 'curso-nuevo',
     component: MaestroNuevoCursoComponent
-  },
-  {
-    path: 'config/:id',
-    component: ConfigCursoComponent
-  },
+  }
 ];
 
 @NgModule({

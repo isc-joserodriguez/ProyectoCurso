@@ -8,9 +8,10 @@ import { MaestroCursoComponent } from './maestro-curso/maestro-curso.component';
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule  } from 'angular-bootstrap-md';
+import { CursoConfigComponent } from './curso-config/curso-config.component';
 
 @NgModule({
-  declarations: [MaestroHomeComponent, MaestroCursoComponent],
+  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent],
   imports: [
     CommonModule,
     MaestroContRoutingModule,
