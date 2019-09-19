@@ -38,6 +38,7 @@ export class NavAlumnoComponent implements OnInit {
   usuario = '';
   logueado = localStorage.getItem('token') != null;
   sexo = 3; // 1= H 2= M 3= Indef
+  busqueda = '';
 
   constructor(private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
@@ -146,4 +147,11 @@ export class NavAlumnoComponent implements OnInit {
     this.router.navigate(['/']);
     this.ngOnInit();
   }
+
+  buscar() {
+    const parametro = this.busqueda.replace(/ /g, '-');
+    this.router.navigate(['/buscar', parametro]);
+  }
+
+
 }

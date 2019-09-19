@@ -20,10 +20,11 @@ import { MatIconModule } from '@angular/material/icon';
 // mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CursoComponent } from './curso/curso.component';
+import { CategoriasComponent } from './categorias/categorias.component';
 
 
 @NgModule({
-  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent, PerfilNavComponent, CursoComponent],
+  declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent, PerfilNavComponent, CursoComponent, CategoriasComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,

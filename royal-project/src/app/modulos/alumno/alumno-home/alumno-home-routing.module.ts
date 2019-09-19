@@ -6,6 +6,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 import { CursoComponent } from './curso/curso.component';
+import { CategoriasComponent } from './categorias/categorias.component';
 
 const routes: Routes = [
   {
@@ -31,8 +32,12 @@ const routes: Routes = [
     component: CarritoComponent
   },
   {
-    path: 'buscar',
+    path: 'buscar/:palabra',
     component: BusquedaComponent
+  },
+  {
+    path: 'categoria/:categoria',
+    component: CategoriasComponent
   },
   {
     path: 'mis-cursos',

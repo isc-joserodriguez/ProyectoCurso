@@ -33,9 +33,9 @@
       <!--Buscador-->
       <div class="col-md-6 vertical-center">
         <div class="input-group input-group-sm vertical-center">
-          <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso">
+          <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso" [(ngModel)]="busqueda">
           <div class="input-group-prepend ml-3">
-            <button mat-mini-fab color="primary"><i class="fas fa-search"></i></button>
+            <button mat-mini-fab color="primary" (click)="buscar()"><i class="fas fa-search"></i></button>
           </div>
         </div>
       </div>
