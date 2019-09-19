@@ -1,3 +1,51 @@
-<p>
-  curso-config works!
-</p>
+<div class="col-md-12 p-0">
+  <div class="row pl-5">
+    <label class="h1 letracursotitulo mb-0"><b> {{infoCurso.nombreCompleto}} </b></label>
+  </div>
+  <mat-divider></mat-divider>
+  <!--Competencias-->
+  <div class="col-md-12 p-2">
+    <div class="card">
+      <div class="card-header bg-light text-center">
+        Competencias
+      </div>
+
+      <div class="example-container mat-elevation-z8">
+        <!-- Tabla -->
+        <!-- Tabla -->
+      </div>
+
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                <b>Unidad</b>
+              </button>
+            </h2>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 text-right">
+                    <button type="button" class="btn btn-success btn-md " (click)="guardar()">
+                      <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
+                      Guardar</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-success btn-md " (click)="guardar()">
+                      <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
+                      Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

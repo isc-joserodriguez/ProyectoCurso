@@ -21,11 +21,10 @@ import { MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
-import { ConfigCursoComponent } from './config-curso/config-curso.component';
 import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
 
 @NgModule({
-  declarations: [MaestroComponent, MaestroNuevoCursoComponent, ConfigCursoComponent, PerfilMaestroComponent],
+  declarations: [MaestroComponent, MaestroNuevoCursoComponent, PerfilMaestroComponent],
   imports: [
     CommonModule,
     MaestroRoutingModule,

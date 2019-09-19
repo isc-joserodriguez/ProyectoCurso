@@ -32,7 +32,6 @@ export class AlumnoHomeComponent implements OnInit {
         } else {
           this.cursosIdiomas.push(curso);
         }
-        console.log(curso);
       });
     });
   }

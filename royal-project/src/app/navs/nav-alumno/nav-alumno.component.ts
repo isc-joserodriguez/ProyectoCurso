@@ -78,8 +78,6 @@ export class NavAlumnoComponent implements OnInit {
           this.categoriasLen.push(e.subcategoria);
         }
       });
-      console.log(this.categoriasTec);
-      console.log(this.categoriasLen);
     });
 
   }

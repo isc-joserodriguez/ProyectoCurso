@@ -40,7 +40,6 @@ export class PerfilComponent implements OnInit {
   getUser(id) {
     this.usuario.getUser(id).subscribe(user => {
       this.respuesta = user;
-      console.log(user);
       this.perfilForm.setValue({
         nombre: this.respuesta.detail[0].nombre,
         apPaterno: this.respuesta.detail[0].apPaterno,
