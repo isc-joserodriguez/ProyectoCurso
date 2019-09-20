@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CursosService } from 'src/app/servicios/cursos.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -8,11 +9,33 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  respuesta: any = {
+    code: 0,
+    msg: '',
+    detail: ''
+  };
+
+  listaCursos = [0];
+
+  constructor(private route: ActivatedRoute, private cursos: CursosService) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    console.log(this.route.snapshot.params.palabra);
+    this.getCursos(this.route.snapshot.params.busqueda);
+  }
+  getCursos(busqueda) {
+    this.listaCursos = [];
+    const buscar = busqueda.replace(/-/g, ' ');
+    this.cursos.getBusqueda(buscar).subscribe(res => {
+      this.respuesta = res;
+      this.respuesta.detail.forEach(e => {
+        this.listaCursos.push(e);
+      });
+    });
+  }
+
+  primeraMay(cad) {
+    return cad.charAt(0).toUpperCase() + cad.slice(1);
   }
 
 }

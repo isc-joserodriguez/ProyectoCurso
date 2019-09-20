@@ -67,7 +67,6 @@ export class NavAlumnoComponent implements OnInit {
 
   }
   getCategorias() {
-
     this.categoriasTec = [];
     this.categoriasLen = [];
     this.cursos.getSubcategorias().subscribe(res => {
@@ -80,7 +79,6 @@ export class NavAlumnoComponent implements OnInit {
         }
       });
     });
-
   }
 
   login() {
