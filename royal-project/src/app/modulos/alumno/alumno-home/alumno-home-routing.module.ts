@@ -7,6 +7,7 @@ import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 import { CursoComponent } from './curso/curso.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+/* import { RedirectComponent } from './redirect/redirect.component'; */
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
     component: CarritoComponent
   },
   {
-    path: 'buscar/:palabra',
+    path: 'buscar/:busqueda',
     component: BusquedaComponent
   },
   {
@@ -42,7 +43,11 @@ const routes: Routes = [
   {
     path: 'mis-cursos',
     component: MisCursosComponent
-  }
+  },
+  /* {
+    path: 'redirect/:redireccionar',
+    component: RedirectComponent
+  } */
 ];
 
 @NgModule({

@@ -2,6 +2,25 @@
 <br>
 <br>
 <br>
-<p>
-  busqueda works!
-</p>
+<div class="col-md-12 p-2" *ngFor="let curso of listaCursos">
+    <h4 class="pl-2"><b>{{curso.nombreCompleto}}</b></h4>
+    <div class="card mb-12">
+      <div class="row no-gutters">
+        <div class="col-md-2">
+          <img [src]="curso.imagen" class="card-img">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{curso.descripcionCurso}}</h5>
+            <p class="card-text">{{curso.subcategoria}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 p-2" *ngIf="listaCursos.length==0">
+      <div class="card mb-12">
+        <h3>No se encontró ningún resultado. Asegurate de haber usado acentos.</h3>
+      </div>
+    </div>
+<br>

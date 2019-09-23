@@ -97,7 +97,27 @@ const getCursosRechazados = (req, res) => {
 };
 
 const getSubcategorias = (req, res) => {
-    _curso.find({}, { subcategoria: 1, categoria: 1 }).sort({ subcategoria: 1 })
+    /* _curso.find({}, { subcategoria: 1, categoria: 1 }).sort({ subcategoria: 1 }) */
+    _curso.find({}).sort({ subcategoria: 1 })
+        .then(cursos => {
+            res.status(200);
+            res.json({
+                code: 200,
+                msg: "Consulta exitosa.",
+                detail: cursos
+            });
+        }).catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                msg: "Error.",
+                detail: error
+            });
+        });
+};
+
+const getBusqueda = (req, res) => {
+    _curso.find({nombreCompleto: new RegExp(req.params.busqueda,'i')})
         .then(cursos => {
             res.status(200);
             res.json({
@@ -240,6 +260,6 @@ const update = (req, res) => {
 module.exports = (Curso) => {
     _curso = Curso;
     return ({
-        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado
+        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda
     });
 }

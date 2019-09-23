@@ -33,6 +33,10 @@ module.exports = (wagner) => {
         cursoCtrl.getSubcategorias(req,res);
     });
 
+    cursoRouter.get("/getBusqueda/:busqueda",(req,res)=>{
+        cursoCtrl.getBusqueda(req,res);
+    });
+
     cursoRouter.delete("/:id", (req,res)=>{
         cursoCtrl.deleteCurso(req,res);
     });
