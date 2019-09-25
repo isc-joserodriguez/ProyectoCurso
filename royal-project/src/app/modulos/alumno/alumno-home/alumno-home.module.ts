@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 // mdbootstrap
@@ -35,7 +35,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
     CarouselModule,
     MatDividerModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ]
 })
 export class AlumnoHomeModule { }
