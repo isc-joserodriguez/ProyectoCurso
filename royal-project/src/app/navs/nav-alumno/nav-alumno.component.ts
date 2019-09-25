@@ -147,8 +147,9 @@ export class NavAlumnoComponent implements OnInit {
   }
 
   buscar() {
-    const parametro = this.busqueda.replace(/ /g, '-');
-    this.router.navigate(['/buscar', parametro]);
+    const parametro = '2' + this.busqueda.replace(/ /g, '-');
+
+    this.router.navigate(['/busqueda', parametro]);
   }
 
 

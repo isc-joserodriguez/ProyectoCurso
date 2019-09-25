@@ -13,7 +13,7 @@ const personaSchema = new mongoose.Schema({
     nombre: { type: String },
     apPaterno: { type: String },
     apMaterno: { type: String },
-    fechaNac: { type: Date },
+    fechaNac: { type: Date, default: Date.now() },
     foto: { type: String },
     web: { type: String, default: ' ' },
     fb: { type: String, default: ' ' },
@@ -29,7 +29,7 @@ const personaSchema = new mongoose.Schema({
     identificacion: { type: String },
     curriculum: { type: String },
     notificaciones: [{ _id: { type: String, required: true }, personaId: { type: String, required: true }, fecha: { type: Date, required: true }, descripción: { type: String, required: true }, estado: { type: Boolean, required: true } }],
-    resumen: { type: String }
+    resumen: { type: String, default: ' '}
 });
 
 //modelo Persona

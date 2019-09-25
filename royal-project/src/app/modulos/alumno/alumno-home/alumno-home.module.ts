@@ -21,12 +21,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CursoComponent } from './curso/curso.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,

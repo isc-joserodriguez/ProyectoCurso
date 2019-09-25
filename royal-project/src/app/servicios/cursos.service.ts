@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
-const apiUrl = 'http://localhost:3002/cursos';
+const apiUrl = environment.urlMongo + 'cursos';
 
 @Injectable({
   providedIn: 'root'
