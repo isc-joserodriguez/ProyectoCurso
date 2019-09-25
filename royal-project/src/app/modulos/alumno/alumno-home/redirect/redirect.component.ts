@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-redirect',
@@ -8,19 +9,22 @@ import { ActivatedRoute, Route } from '@angular/router';
 })
 export class RedirectComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Route) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.redirect(this.route.snapshot.params.redireccionar);
+    this.redirec(this.route.snapshot.params.ruta);
   }
-  redirect(ruta) {
-    /* const opciones = ruta.split('-');
-    if(opciones[0]=='cat'){
 
-    }else{
-      //this.router.navi
-    } */
-
+  redirec(ruta) {
+    // 1-busqueda cat
+    // 2-busqueda nombre
+    const sw = ruta.substring(0, 1);
+    const tempRuta = ruta.substring(1);
+    if (sw == 1) {
+      this.router.navigate(['/categoria/', tempRuta]);
+    } else if (sw == 2) {
+      this.router.navigate(['/buscar/', tempRuta]);
+    }
   }
 
 }
