@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-const apiUrl = environment.urlMongo + '/compras';
+const apiUrl = environment.urlMongo + 'compras';
 
 @Injectable({
   providedIn: 'root'

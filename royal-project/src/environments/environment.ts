@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlMongo: 'http://localhost:3002',
+  urlMongo: 'http://localhost:3002/',
   firebaseConfig: {
     apiKey: 'AIzaSyDGqMTJv408g2V1zUWUuAAFuXGtHyb49CY',
     authDomain: 'royal-proyect.firebaseapp.com',
