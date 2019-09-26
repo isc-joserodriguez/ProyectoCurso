@@ -14,7 +14,7 @@ const personaSchema = new mongoose.Schema({
     apPaterno: { type: String },
     apMaterno: { type: String },
     fechaNac: { type: Date, default: Date.now() },
-    foto: { type: String },
+    foto: { type: String, default:'http://www.lorempixel.com/200/200' },
     web: { type: String, default: ' ' },
     fb: { type: String, default: ' ' },
     yt: { type: String, default: ' ' },
