@@ -101,18 +101,26 @@ export class PerfilComponent implements OnInit {
 
   // Sube el archivo a Cloud Storage
   public subirArchivo(datos) {
+    this.porcentaje = 0;
     const archivo = this.datosFormulario.get('archivo');
-    const referencia = this.firebase.referenciaCloudStorage('usuario/' + localStorage.getItem('userid') + '/foto' + this.nombreArchivo);
-    const tarea = this.firebase.tareaCloudStorage('usuario/' + localStorage.getItem('userid') + '/foto' + this.nombreArchivo, archivo);
-
+    const referencia = this.firebase.referenciaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-perfil/' + this.nombreArchivo);
+    const tarea = this.firebase.tareaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-perfil/' + this.nombreArchivo, archivo);
+    const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-perfil/20190330_163832.jpg');//+ this.URLPublica.split('foto-perfil%2F')[1].split('?')[0]);
     // Cambia el porcentaje
     tarea.percentageChanges().subscribe((porcentaje) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
-        referencia.getDownloadURL().subscribe((URL) => {
-          this.URLPublica = URL;
-          datos.foto = URL;
-          this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => { });
+        referenciaBorrar.delete().subscribe(err => {
+          referencia.getDownloadURL().subscribe((URL) => {
+            this.URLPublica = URL;
+            datos.foto = URL;
+            this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
+              this.router.navigate(['/perfil/1']);
+            });
+          });
         });
       }
     });

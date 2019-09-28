@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-redirect',
   templateUrl: './redirect.component.html',
@@ -21,7 +20,7 @@ export class RedirectComponent implements OnInit {
     const sw = ruta.substring(0, 1);
     const tempRuta = ruta.substring(1);
     if (sw == 1) {
-      this.router.navigate(['/categoria/', tempRuta]);
+      this.router.navigate(['/perfil/']);
     } else if (sw == 2) {
       this.router.navigate(['/buscar/', tempRuta]);
     }

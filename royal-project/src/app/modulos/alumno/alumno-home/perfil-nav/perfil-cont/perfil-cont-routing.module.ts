@@ -5,6 +5,7 @@ import { CuentaComponent } from './cuenta/cuenta.component';
 import { PagosComponent } from './pagos/pagos.component';
 import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
 import { CertificadosComponent } from './certificados/certificados.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'certificados',
     component: CertificadosComponent
+  },
+  {
+    path: ':ruta',
+    component: RedirectComponent
   }
 ];
 

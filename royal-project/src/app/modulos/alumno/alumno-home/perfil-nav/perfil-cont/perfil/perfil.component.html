@@ -147,12 +147,13 @@
                     <span class="input-group-text">Subir Foto</span>
                   </div>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" formControlName="foto" (change)="seleccionarFoto($event)">
+                    <input type="file" class="custom-file-input" formControlName="foto"
+                      (change)="seleccionarFoto($event)">
                     <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
                   </div>
-                  <progress *ngIf="porcentaje > 0 && 100 > porcentaje" class="progress is-large is-success"
-                    value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
                 </div>
+                <progress *ngIf="porcentaje > 0 && 100 > porcentaje" class="progress is-large is-success"
+                  value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
               </div>
 
             </div>
@@ -165,9 +166,9 @@
           <div class="row">
             <div class="col-md-6 text-center">
               <!-- <a href="/"> -->
-                <button type="button" class="btn btn-success btn-md " (click)="guardar()">
-                  <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">
-                  Guardar</button>
+              <button type="button" class="btn btn-success btn-md " (click)="guardar()">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">
+                Guardar</button>
               <!-- </a> -->
             </div>
             <div class="col-md-6 text-center">
