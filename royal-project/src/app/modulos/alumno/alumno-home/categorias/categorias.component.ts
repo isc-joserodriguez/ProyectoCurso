@@ -8,6 +8,7 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   styleUrls: ['./categorias.component.scss']
 })
 export class CategoriasComponent implements OnInit {
+  categoria = '';
 
   respuesta: any = {
     code: 0,
@@ -21,6 +22,7 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.categoria = this.primeraMay(this.route.snapshot.params.categoria);
     this.getCursos(this.route.snapshot.params.categoria);
   }
   getCursos(cat) {

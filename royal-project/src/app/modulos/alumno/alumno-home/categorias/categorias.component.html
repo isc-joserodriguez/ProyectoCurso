@@ -2,20 +2,108 @@
 <br>
 <br>
 <br>
-<div class="col-md-12 p-2" *ngFor="let curso of listaCursos">
-    <h4 class="pl-2"><b>{{curso.nombreCompleto}}</b></h4>
-    <div class="card mb-12">
-      <div class="row no-gutters">
-        <div class="col-md-2">
-          <img [src]="curso.imagen" class="card-img">
-        </div>
-        <div class="col-md-10">
-          <div class="card-body">
-            <h5 class="card-title">{{curso.descripcionCurso}}</h5>
-            <p class="card-text">{{curso.subcategoria}}</p>
+
+<div class="col-md-12 px-0 paqueteshome">
+  <h2 class="p-3 letracursotitulo"><b>{{categoria}}</b></h2>
+</div>
+<br>
+<!--cursosdestacados-->
+<div class="row">
+  <h4 class="txtTodos container">Cursos destacados</h4>
+</div>
+<!--Carrusel-->
+<div class="col-md-10 container divisor p-0">
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let curso of listaCursos; let i=index" [ngClass]="{active: i==0}">
+        <div class="card col-md-12 p-0">
+          <div class="row no-gutters">
+            <div class="col-md-3">
+              <img [src]="curso.imagen" class="card-img">
+            </div>
+            <div class="col-md-9 descri">
+              <div class="card-body">
+                <h5 class="card-title mb-4 negrita">{{curso.nombreCompleto}}</h5>
+                <div class=" p-3">{{curso.descripcionCurso}}</div>
+                <br>
+                <div class="row justify-content-between">
+                  <div class="col-md-4 ml-4 p-2 text-center">
+                    <p class="preciocar">${{curso.precio}}</p>
+                  </div>
+                  <div class="col-4">
+                      <button type="button" class="btn colorbtn btn-lg">Ir al curso</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <button mat-mini-fab color="primary" class="btncarrusell" href="#carouselExampleControls" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </button>
+    <button mat-mini-fab color="primary" class="btncarruselr" href="#carouselExampleControls" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </button>
   </div>
+</div>
+
+<!--Fin Carrusel-->
+<br>
+<br>
+
+<!--Todos los cursos-->
+<div class="row text-center">
+  <h4 class="txtTodos container">Todos los cursos de {{categoria}}</h4>
+</div>
+<br>
+<div class="col-md-12 p-0">
+  <div class="row">
+    <br>
+    <div class="col-md-2 divisor container ml-5">
+      <h5 class="pt-2"><b>Royal Language</b></h5>
+      <div class="input-group input-group-sm vertical-center p-0">
+        <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
+          <span class="text-check"><b> Royal</b></span></mat-checkbox>
+      </div>
+      <mat-divider></mat-divider>
+      <h5 class="pt-2"><b>Subcategorías</b></h5>
+      <div class="row container pt-2" *ngFor="let curso of listaCursos">
+        <mat-checkbox>{{curso.subcategoria}}</mat-checkbox>
+      </div>
+    </div>
+    <div class="col-md-9 container pl-0 ml-0 descri">
+      <mat-divider></mat-divider>
+      <div class="col-md-12 p-2" *ngFor="let curso of listaCursos">
+        <h4 class="pl-2"><b>{{curso.nombreCompleto}}</b></h4>
+        <div class="card mb-12">
+          <div class="row no-gutters">
+            <div class="col-md-2">
+              <img [src]="curso.imagen" class="card-img">
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                <h5 class="card-title">{{curso.descripcionCurso}}</h5>
+                <p class="card-text">{{curso.subcategoria}}</p>
+                <div class="row justify-content-between">
+                  <div class="col-4">
+                    <p class="card-title">${{curso.precio}}</p>
+                  </div>
+                  <div class="col-4">
+                    <a href="#" class="btn colorbtn">Ir al curso</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </div>
+</div>
 <br>
