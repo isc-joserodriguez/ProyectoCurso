@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../../servicios/auth.service';
 
 // Convertidor fecha
@@ -46,7 +46,7 @@ export class AdminUsuarioNuevoComponent implements OnInit {
       altaApMaterno: ['', Validators.required],
       altaCorreo: ['', Validators.required],
       altaNac: ['', Validators.required],
-      altaFoto: [''],
+      sexo: ['', Validators.required],
       altaRol: ['', Validators.required]
     });
 
@@ -59,14 +59,14 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     this.persona.fechaNac = DateConvert(this.altaForm.value.altaNac);
     this.persona.credencial.correo = this.altaForm.value.altaCorreo;
     this.persona.credencial.contraseña = this.altaForm.value.altaNombre.substring(0, 2) +
-      this.altaForm.value.altaApPaterno.substring(0, 2) + this.altaForm.value.altaApMaterno.substring(0, 2) +
-      this.persona.fechaNac.replace(/-/g, '');
+      this.altaForm.value.altaApPaterno.substring(0, 2)+ this.persona.fechaNac.replace(/-/g, '');
+      console.log(this.persona.credencial.contraseña)
     this.persona.nombre = this.altaForm.value.altaNombre;
     this.persona.apPaterno = this.altaForm.value.altaApPaterno;
     this.persona.apMaterno = this.altaForm.value.altaApMaterno;
     this.persona.sexo = 3;
     this.persona.tipo = this.getVal(this.altaForm.value.altaRol);
-    this.persona.foto = (this.altaForm.value.altaFoto == '') ? 'http://www.lorempixel.com/200/200' : this.altaForm.value.altaFoto;
+    this.persona.sexo = this.altaForm.value.sexo;
 
     this.auth.signup(this.persona).subscribe(resp => {
       this.respuesta = resp;

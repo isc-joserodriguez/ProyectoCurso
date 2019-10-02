@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UsuariosService } from '../../../../../../servicios/usuarios.service';
 import { FirebaseService } from '../../../../../../servicios/firebase.service';
 
@@ -16,6 +15,7 @@ export class PerfilComponent implements OnInit {
     detail: ''
   };
   viejaFoto = '';
+  cambiaFoto = false;
 
   public mensajeArchivo = 'No hay un archivo seleccionado';
   public datosFormulario = new FormData();
@@ -27,7 +27,7 @@ export class PerfilComponent implements OnInit {
   perfilForm: FormGroup;
 
   constructor(private firebase: FirebaseService, private usuario: UsuariosService,
-    private formBuilder: FormBuilder, private router: Router) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -81,11 +81,16 @@ export class PerfilComponent implements OnInit {
       in: this.perfilForm.value.in,
       resumen: this.perfilForm.value.cv
     };
-    this.subirArchivo(datos);
+    if (this.cambiaFoto) {
+      this.subirArchivo(datos);
+    } else {
+      this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
+        this.finalizado = true;
+      });
+    }
   }
-
-
   public seleccionarFoto(event) {
+    this.cambiaFoto = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
         this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
@@ -97,12 +102,11 @@ export class PerfilComponent implements OnInit {
       this.mensajeArchivo = 'No hay un archivo seleccionado';
     }
   }
-
   // Sube el archivo a Cloud Storage
   public subirArchivo(datos) {
     this.finalizado = false;
     if (!this.URLPublica.includes('www.lorempixel.com')) {
-      this.viejaFoto = this.URLPublica.split('foto-perfil%2F')[1];//.split('?')[0];
+      this.viejaFoto = this.URLPublica.split('foto-perfil%2F')[1];
       this.viejaFoto = this.viejaFoto.split('?')[0];
       const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
         localStorage.getItem('userid') + '/foto-perfil/' + this.viejaFoto);
@@ -124,6 +128,7 @@ export class PerfilComponent implements OnInit {
           datos.foto = URL;
           this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
             this.finalizado = true;
+            this.cambiaFoto = false;
           });
         });
       }
