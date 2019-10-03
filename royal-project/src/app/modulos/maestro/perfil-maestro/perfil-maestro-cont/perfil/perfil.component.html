@@ -1,3 +1,186 @@
-<p>
-  perfil works!
-</p>
+<div class="col-md-12 fondoadmin">
+  <div class="text-center vertical-center">
+    <label class="h1">Mi Perfil</label>
+  </div>
+
+  <form [formGroup]="perfilForm">
+    <mat-card>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Nombre:</mat-label>
+              <input matInput placeholder="Ingresa tu nombre" required formControlName="nombre">
+              <mat-error>
+                <span *ngIf="!perfilForm.get('nombre').valid && perfilForm.get('nombre').touched">Agrega
+                  tu nombre.</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Apellido Paterno:</mat-label>
+              <input matInput placeholder="Ingresa tu Apellido Paterno:" required formControlName="apPaterno">
+              <mat-error>
+                <span *ngIf="!perfilForm.get('apPaterno').valid && perfilForm.get('apPaterno').touched">Agrega
+                  tu apellido paterno.</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Apellido Materno:</mat-label>
+              <input matInput placeholder="Ingresa tu Apellido Materno:" required formControlName="apMaterno">
+              <mat-error>
+                <span *ngIf="!perfilForm.get('apMaterno').valid && perfilForm.get('apMaterno').touched">Agrega
+                  tu apellido materno.</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7 vertical-center">
+            <mat-form-field class="field-login">
+              <mat-label>Sexo</mat-label>
+              <select matNativeControl required formControlName="sexo">
+                <option value=1>Hombre</option>
+                <option value=2>Mujer</option>
+                <option value=3>No especificar</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-5 text-center">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de Nacimiento:</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" required
+                formControlName="fechaNac">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error>
+                <span *ngIf="!perfilForm.get('fechaNac').valid && perfilForm.get('fechaNac').touched">Agrega
+                  tu fecha de nacimiento.</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <!--Enlaces-->
+        <div class="row p-0">
+          <div class="col-md-6">
+            <p class="p-0 m-0 ml-3">Enlaces:</p>
+          </div>
+          <div class="col-md-6 text-center">
+            <p class="p-0 m-0 ml-3">Resumen de CV:</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 mr-3">
+              <div class="row">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Página Web:</mat-label>
+                  <input matInput placeholder="(Http(s)://..)" formControlName="web">
+                </mat-form-field>
+              </div>
+              <!--FB-->
+              <div class="row">
+                <div class="input-group input-group-sm vertical-center">
+                  <img class="icon-nav" src="./../../../assets/icons/fb.svg">
+                  <div class="col-md-11 vertical-center">
+                    <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                      <mat-label>Facebook:</mat-label>
+                      <input matInput placeholder="(http://www.facebook.com/)" formControlName="fb">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <!--FB cierre-->
+              <!--Linked-->
+              <div class="row ">
+
+                <div class="input-group input-group-sm vertical-center">
+                  <img class="icon-nav" src="./../../../assets/icons/link.svg">
+                  <div class="col-md-11 vertical-center">
+                    <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                      <mat-label>Linkedin</mat-label>
+                      <input matInput placeholder="(http://www.linkedin.com/)" formControlName="in">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+
+              <!--Linked cierre-->
+              <!--Youtube-->
+              <div class="row">
+                <div class="input-group input-group-sm vertical-center">
+                  <img class="icon-nav" src="./../../../assets/icons/yt.svg">
+                  <div class="col-md-11 vertical-center">
+                    <mat-form-field appearance="outline" style=" margin-bottom: -1.25em">
+                      <mat-label>Youtube:</mat-label>
+                      <input matInput placeholder="(http://www.youtube.com/)" formControlName="yt">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div class="col-md-5 ml-4">
+              <div class="row">
+                <mat-form-field appearance="outline" class="field-login2">
+                  <mat-label>CV:</mat-label>
+                  <textarea matInput placeholder="Agrega un resumen de tu cv" cdkTextareaAutosize cdkAutosizeMinRows="4"
+                    cdkAutosizeMaxRows="10" required formControlName="cv"></textarea>
+                  <mat-error>
+                    <span *ngIf="!perfilForm.get('cv').valid && perfilForm.get('cv').touched">Agrega
+                      tu resumen.</span>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="text-center">
+                <label>
+                  <img width="200" [src]="URLPublica">
+                </label>
+              </div>
+              <div class="row p-0">
+                <p class="p-0 m-0 ml-3">Foto de Perfil:</p>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Subir Foto</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" formControlName="foto"
+                      (change)="seleccionarFoto($event)">
+                    <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
+                  </div>
+                </div>
+                <progress *ngIf="!finalizado" class="progress is-large is-success"
+                  value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!--Youtube cierre-->
+
+          <br>
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <!-- <a href="/"> -->
+              <button type="button" class="btn btn-success btn-md " (click)="guardar()">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">
+                Guardar</button>
+              <!-- </a> -->
+            </div>
+            <div class="col-md-6 text-center">
+              <button type="button" class="btn btn-danger btn-md" [routerLink]="['/maestro']">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">
+                Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+  <br>
+</div>
+<br>

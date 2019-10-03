@@ -1,4 +1,4 @@
-<div class="col-md-12 fondoadmin" >
+<div class="col-md-12 fondoadmin">
   <div class="text-center vertical-center">
     <label class="h1">Nuevo Usuario</label>
   </div>
@@ -65,7 +65,17 @@
 
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Sexo</mat-label>
+              <select matNativeControl required formControlName="sexo">
+                <option value=1>Hombre</option>
+                <option value=2>Mujer</option>
+                <option value=3>No especificar</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Rol de Usuario:</mat-label>
               <select matNativeControl required formControlName="altaRol">
@@ -75,21 +85,6 @@
                 <option value="3">Alumno</option>
               </select>
             </mat-form-field>
-          </div>
-          <div class="col-md-8 vertical-center field-login2">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Subir Foto</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" formControlName="altaFoto">
-                <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
-                <mat-error>
-                  <span *ngIf="!altaForm.get('altaFoto').valid && altaForm.get('altaFoto').touched">Agrega una
-                    foto</span>
-                </mat-error>
-              </div>
-            </div>
           </div>
         </div>
         <div class="row">

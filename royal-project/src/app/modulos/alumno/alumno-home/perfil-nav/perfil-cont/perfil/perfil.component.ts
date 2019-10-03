@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsuariosService } from '../../../../../../servicios/usuarios.service';
+import { FirebaseService } from '../../../../../../servicios/firebase.service';
 
 @Component({
   selector: 'app-perfil',
@@ -14,9 +14,20 @@ export class PerfilComponent implements OnInit {
     msg: '',
     detail: ''
   };
+  viejaFoto = '';
+  cambiaFoto = false;
+
+  public mensajeArchivo = 'No hay un archivo seleccionado';
+  public datosFormulario = new FormData();
+  public nombreArchivo = '';
+  public URLPublica = '';
+  public porcentaje = 0;
+  public finalizado = true;
+
   perfilForm: FormGroup;
 
-  constructor(private usuario: UsuariosService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private firebase: FirebaseService, private usuario: UsuariosService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -31,7 +42,7 @@ export class PerfilComponent implements OnInit {
       yt: [''],
       in: [''],
       cv: ['', Validators.required],
-      foto: ['']
+      foto: new FormControl(null, Validators.required)
     });
 
     this.getUser(localStorage.getItem('userid'));
@@ -40,7 +51,7 @@ export class PerfilComponent implements OnInit {
   getUser(id) {
     this.usuario.getUser(id).subscribe(user => {
       this.respuesta = user;
-      console.log(user);
+      this.URLPublica = this.respuesta.detail[0].foto;
       this.perfilForm.setValue({
         nombre: this.respuesta.detail[0].nombre,
         apPaterno: this.respuesta.detail[0].apPaterno,
@@ -63,13 +74,64 @@ export class PerfilComponent implements OnInit {
       apMaterno: this.perfilForm.value.apMaterno,
       sexo: this.perfilForm.value.sexo,
       fechaNac: this.perfilForm.value.fechaNac,
-      foto: this.perfilForm.value.foto,
+      foto: this.URLPublica,
       web: this.perfilForm.value.web,
       fb: this.perfilForm.value.fb,
       yt: this.perfilForm.value.yt,
       in: this.perfilForm.value.in,
       resumen: this.perfilForm.value.cv
     };
-    this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => { });
+    if (this.cambiaFoto) {
+      this.subirArchivo(datos);
+    } else {
+      this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
+        this.finalizado = true;
+      });
+    }
+  }
+  public seleccionarFoto(event) {
+    this.cambiaFoto = true;
+    if (event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
+        this.nombreArchivo = event.target.files[i].name;
+        this.datosFormulario.delete('archivo');
+        this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name);
+      }
+    } else {
+      this.mensajeArchivo = 'No hay un archivo seleccionado';
+    }
+  }
+  // Sube el archivo a Cloud Storage
+  public subirArchivo(datos) {
+    this.finalizado = false;
+    if (!this.URLPublica.includes('www.lorempixel.com')) {
+      this.viejaFoto = this.URLPublica.split('foto-perfil%2F')[1];
+      this.viejaFoto = this.viejaFoto.split('?')[0];
+      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
+        localStorage.getItem('userid') + '/foto-perfil/' + this.viejaFoto);
+      referenciaBorrar.delete();
+    }
+
+    this.porcentaje = 0;
+    const archivo = this.datosFormulario.get('archivo');
+    const referencia = this.firebase.referenciaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-perfil/' + this.nombreArchivo);
+    const tarea = this.firebase.tareaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-perfil/' + this.nombreArchivo, archivo);
+    // Cambia el porcentaje
+    tarea.percentageChanges().subscribe((porcentaje) => {
+      this.porcentaje = Math.round(porcentaje);
+      if (this.porcentaje == 100) {
+        referencia.getDownloadURL().subscribe((URL) => {
+          this.URLPublica = URL;
+          datos.foto = URL;
+          this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
+            this.finalizado = true;
+            this.cambiaFoto = false;
+          });
+        });
+      }
+    });
   }
 }
