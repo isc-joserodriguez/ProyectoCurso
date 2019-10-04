@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CursosService } from '../../../servicios/cursos.service';
+import { FirebaseService } from '../../../servicios/firebase.service';
 
 
 @Component({
@@ -27,8 +28,8 @@ export class MaestroNuevoCursoComponent implements OnInit {
     contenidoCurso: [],
     categoria: '',
     subcategoria: '',
-    precio: 0
-    /* , estado: 2 */
+    precio: 0,
+    imagen: ''
   };
 
   generalForm: FormGroup;
@@ -37,7 +38,14 @@ export class MaestroNuevoCursoComponent implements OnInit {
   categorias = ['Tecnología', 'Idiomas'];
   subcategorias = [];
 
-  constructor(private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
+  public mensajeArchivo = 'No hay un archivo seleccionado';
+  public datosFormulario = new FormData();
+  public nombreArchivo = '';
+  public URLPublica = '';
+  public porcentaje = 0;
+  public finalizado = true;
+
+  constructor(private firebase: FirebaseService, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -48,7 +56,8 @@ export class MaestroNuevoCursoComponent implements OnInit {
       subcategoria: ['', Validators.required],
       tipo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      precio: ['', Validators.required]
+      precio: ['', Validators.required],
+      foto: new FormControl(null, Validators.required)
     });
 
     this.temarioForm = this.formBuilder.group({
@@ -58,17 +67,15 @@ export class MaestroNuevoCursoComponent implements OnInit {
   }
 
   filtrarSubcategoria(cadena) {
-    console.log(cadena);
-
-  }
-  getSubcategorias() {
     this.subcategorias = [];
     const categoria = this.generalForm.value.categoria;
     this.cursos.getSubcategorias().subscribe(res => {
       this.respuesta = res;
       this.respuesta.detail.forEach(e => {
         if (e.categoria == categoria) {
-          this.subcategorias.push(e.subcategoria);
+          if (e.subcategoria.toLowerCase().includes(cadena.toLowerCase())) {
+            this.subcategorias.push(e.subcategoria);
+          }
         }
       });
       const a = [];
@@ -77,6 +84,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
       });
       this.subcategorias = a;
     });
+
   }
 
   get objetivos() {
@@ -91,7 +99,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
     return (this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray;
   }
 
-  subir() {
+  guardar() {
     this.cursoNuevo.nombreCompleto = this.generalForm.value.nombreCompleto;
     this.cursoNuevo.nombreCorto = this.generalForm.value.nombreCorto;
     this.cursoNuevo.descripcionCurso = this.generalForm.value.descripcion;
@@ -100,12 +108,47 @@ export class MaestroNuevoCursoComponent implements OnInit {
     this.cursoNuevo.categoria = this.generalForm.value.categoria;
     this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
     this.cursoNuevo.precio = this.generalForm.value.precio;
-
     this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
       this.respuesta = res;
       this.router.navigate(['/maestro/']);
     });
   }
+
+  //Archivos
+  public seleccionarFoto(event) {
+    if (event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
+        this.nombreArchivo = event.target.files[i].name;
+        this.datosFormulario.delete('archivo');
+        this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name);
+      }
+    } else {
+      this.mensajeArchivo = 'No hay un archivo seleccionado';
+    }
+  }
+  // Sube el archivo a Cloud Storage
+  public subir() {
+    this.finalizado = false;
+    this.porcentaje = 0;
+    const archivo = this.datosFormulario.get('archivo');
+    const referencia = this.firebase.referenciaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-curso/' + this.nombreArchivo);
+    const tarea = this.firebase.tareaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/foto-curso/' + this.nombreArchivo, archivo);
+    // Cambia el porcentaje
+    tarea.percentageChanges().subscribe((porcentaje) => {
+      this.porcentaje = Math.round(porcentaje);
+      if (this.porcentaje == 100) {
+        referencia.getDownloadURL().subscribe((URL) => {
+          this.cursoNuevo.imagen = URL;
+          this.guardar();
+        });
+      }
+    });
+  }
+
+
 
   primeraMay(cad) {
     return cad.charAt(0).toUpperCase() + cad.slice(1);
@@ -154,5 +197,4 @@ export class MaestroNuevoCursoComponent implements OnInit {
   prevStep() {
     this.step--;
   }
-
 }

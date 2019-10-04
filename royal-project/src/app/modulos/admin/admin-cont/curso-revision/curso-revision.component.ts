@@ -34,7 +34,8 @@ export class CursoRevisionComponent implements OnInit {
   infoMaestro = {
     foto: 'http://www.lorempixel.com/200/200',
     nombreCompleto: 'Carla Reyes Godinez',
-    resumen: 'Ingeniera en sistemas, Dos años de experiencia en IBM, Certificado en Diseño Web'
+    resumen: 'Ingeniera en sistemas, Dos años de experiencia en IBM, Certificado en Diseño Web',
+    id:0
   };
 
   revisionForm: FormGroup;
@@ -55,7 +56,7 @@ export class CursoRevisionComponent implements OnInit {
       this.respuesta = curso;
       this.infoCurso.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
       this.infoCurso.precio = this.respuesta.detail[0].precio;
-      this.infoCurso.videoPrincipal = 'http://www.lorempixel.com/900/500';
+      this.infoCurso.videoPrincipal = this.respuesta.detail[0].imagen;
       this.infoCurso.descripcion = this.respuesta.detail[0].descripcionCurso;
       this.infoCurso.valoracion = 5;
       this.infoCurso.inscritos = 5;
@@ -72,6 +73,7 @@ export class CursoRevisionComponent implements OnInit {
   getInfoMaestro(id) {
     this.usuarios.getUser(id).subscribe(usuario => {
       this.respuesta = usuario;
+      this.infoMaestro.id = this.respuesta.detail[0]._id;
       this.infoMaestro.foto = this.respuesta.detail[0].foto;
       this.infoMaestro.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
       this.infoMaestro.resumen = this.respuesta.detail[0].resumen;

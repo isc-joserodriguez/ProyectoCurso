@@ -78,6 +78,17 @@ export class NavAlumnoComponent implements OnInit {
           this.categoriasLen.push(e.subcategoria);
         }
       });
+      var a = [];
+      new Set(this.categoriasTec).forEach(e => {
+        a.push(e);
+      });
+      this.categoriasTec = a;
+      a=[];
+      new Set(this.categoriasLen).forEach(e => {
+        a.push(e);
+      });
+      this.categoriasTec = a;
+
     });
   }
 

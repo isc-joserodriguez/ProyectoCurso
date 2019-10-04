@@ -5,8 +5,9 @@
   </div>
   <mat-divider></mat-divider>
   <div class="row pl-3">
-    <!--div video-->
     <div class="col-md-8 mt-3 pl-3 mx-4">
+      <!--div video-->
+      <img [src]="infoCurso.videoPrincipal">
       <!--div descripcion-->
       <div class="row">
         <div class="col-md-12 p-3 mr-4 ">
@@ -76,6 +77,8 @@
                 <div class="card-body">
                   <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
                   <p class="card-text">{{infoMaestro.resumen}}</p>
+                  <button mat-button color="primary" [routerLink]="['/admin/usuario',infoMaestro.id]">Ver
+                    perfil</button>
                 </div>
               </div>
             </div>
@@ -86,29 +89,31 @@
     </div>
     <!--div inf precios-->
     <div class="col-md-3  ml-4 pt-4 py-4">
-        <form [formGroup]="revisionForm">
-            <mat-card>
-              <!-- Precio -->
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Precio:</mat-label>
-                <input matInput placeholder="Ingresa el precio:" required [(ngModel)]="infoCurso.precio" formControlName="precio">
-              </mat-form-field>
-              <!-- Descripción -->
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Notas:</mat-label>
-                <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize cdkAutosizeMinRows="2"
-                  cdkAutosizeMaxRows="15" formControlName="notas" [(ngModel)]="infoCurso.notas"></textarea>
-                <mat-error>
-                  <span *ngIf="!revisionForm.get('notas').valid && revisionForm.get('notas').touched">Agrega
-                    una descripción del curso.</span>
-                </mat-error>
-              </mat-form-field>
-              <div class="row">
-                <button [disabled]="!revisionForm.valid" mat-button color="primary" (click)="aceptarCurso()">Aceptar</button>
-                <button [disabled]="!revisionForm.valid" mat-button color="warn" (click)="rechazarCurso()">Rechazar</button>
-              </div>
-            </mat-card>
-          </form>
+      <form [formGroup]="revisionForm">
+        <mat-card>
+          <!-- Precio -->
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Precio:</mat-label>
+            <input matInput placeholder="Ingresa el precio:" required [(ngModel)]="infoCurso.precio"
+              formControlName="precio">
+          </mat-form-field>
+          <!-- Descripción -->
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Notas:</mat-label>
+            <textarea matInput placeholder="Agrega la descripción del curso" cdkTextareaAutosize cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="15" formControlName="notas" [(ngModel)]="infoCurso.notas"></textarea>
+            <mat-error>
+              <span *ngIf="!revisionForm.get('notas').valid && revisionForm.get('notas').touched">Agrega
+                una descripción del curso.</span>
+            </mat-error>
+          </mat-form-field>
+          <div class="row">
+            <button [disabled]="!revisionForm.valid" mat-button color="primary"
+              (click)="aceptarCurso()">Aceptar</button>
+            <button [disabled]="!revisionForm.valid" mat-button color="warn" (click)="rechazarCurso()">Rechazar</button>
+          </div>
+        </mat-card>
+      </form>
     </div>
 
   </div>
