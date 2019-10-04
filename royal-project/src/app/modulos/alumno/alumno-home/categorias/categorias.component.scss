@@ -1,0 +1,62 @@
+.btncarrusell{
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    top: 50%;
+    align-items: center;
+    justify-content: center;
+    right: 96%;
+    color: #fff;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+  }
+  .btncarruselr{
+    position: absolute;
+    left: 96%;
+    bottom: 0;
+    z-index: 1;
+    top: 50%;
+    align-items: center;
+    justify-content: center;
+    
+    color: #fff;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+  }
+
+  .divisor{
+    border: 2px solid #ddd;
+    
+}
+
+.descri{
+    background-color: rgba(126, 124, 121, 0.068); 
+    border-radius: 19px 19px 19px 19px;
+}
+
+.preciocar{
+    color: #BC8F37;
+    text-shadow: -1px 2px 2px #020101;
+    font-size: 2rem;
+    font-weight: bold; 
+}
+
+.icon-check{
+  width: 20px
+}
+
+.txtTodos{
+  color: #3a383893;
+  font-weight: bold;
+}
+
+.negrita{
+  font-weight: bold; 
+}
+
+.colorbtn{
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
