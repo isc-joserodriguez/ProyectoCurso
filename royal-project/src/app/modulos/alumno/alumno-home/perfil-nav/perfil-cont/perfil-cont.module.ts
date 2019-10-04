@@ -30,10 +30,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule } from 'angular-bootstrap-md';
 import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
-import { RedirectComponent } from './redirect/redirect.component';
 
 @NgModule({
-  declarations: [PerfilComponent, CuentaComponent, PagosComponent, HistorialComprasComponent, CertificadosComponent, RedirectComponent],
+  declarations: [PerfilComponent, CuentaComponent, PagosComponent, HistorialComprasComponent, CertificadosComponent],
   imports: [
     CommonModule,
     PerfilContRoutingModule,

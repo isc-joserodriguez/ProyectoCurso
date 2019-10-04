@@ -26,6 +26,10 @@ module.exports = (wagner) => {
         personaCtrl.updateTipo(req, res);
     });
 
+    personaRouter.put("/editCredencial/:id", (req, res) => {
+        personaCtrl.updateCredencial(req, res);
+    });
+
     //AUTH
     personaRouter.get('/userInfo', token.checkJWT, (req, res) => {
         personaCtrl.info(req, res);

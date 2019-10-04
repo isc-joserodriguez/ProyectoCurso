@@ -213,6 +213,60 @@ const updateTipo = (req, res) => {
         });
 }
 
+const updateCredencial = (req, res) => {
+    const id = req.params.id;
+    const credencial = req.body.credencial;
+    hash.comparePassword(req.body.confirm, req.body.contra).then(contraseñaCorrecta => {
+        if (!contraseñaCorrecta) {
+            console.log('correo')
+            res.status(200).json({
+                code: 400,
+                msg: "Error: La contraseña es incorrecta",
+                detail: []
+            });
+        } else {
+            if (req.body.op == 1) {
+                hash.hashPassword(req.body.credencial.contraseña).then(contraseña => {
+                    credencial.contraseña = contraseña;
+                    _persona.update({ _id: id }, { $set: { credencial: credencial } }).then(data => {
+                        res.status(200);
+                        res.json({
+                            code: 200,
+                            mgs: "Se editó con éxito",
+                            detail: data
+                        });
+                    }).catch(error => {
+                        res.status(400);
+                        res.json({
+                            code: 400,
+                            msg: "Error.",
+                            detail: error
+                        });
+                    });
+                });
+            } else {
+                _persona.update({ _id: id }, { $set: { credencial: credencial } }).then(data => {
+                    res.status(200);
+                    res.json({
+                        code: 200,
+                        mgs: "Se editó con éxito",
+                        detail: data
+                    });
+                }).catch(error => {
+                    res.status(400);
+                    res.json({
+                        code: 400,
+                        msg: "Error.",
+                        detail: error
+                    });
+                });
+            }
+
+        }
+
+    });
+}
+
 const update = (req, res) => {
     const { id } = req.params;
     const persona = req.body;
@@ -249,9 +303,10 @@ const update = (req, res) => {
         });
 }
 
+
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateTipo
+        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial
     });
 }

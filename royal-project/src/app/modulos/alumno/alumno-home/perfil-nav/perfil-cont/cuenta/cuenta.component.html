@@ -2,39 +2,52 @@
   <div class="text-center vertical-center">
     <label class="h1">Cuenta</label>
   </div>
+  <!-- Primer form -->
+  <mat-card>
 
-  <form>
-    <mat-card>
-      <div class="row p-0">
-        <label class="p-0 m-0 ml-3 h6">
-          Correo Electrónico:
-        </label>
-      </div>
-      <br>
+    <div class="row p-0">
+      <label class="p-0 m-0 ml-3 h6">
+        Correo Electrónico:
+      </label>
+    </div>
+    <br>
+    <form [formGroup]="correoForm">
       <div class="row">
         <div class="col-md-7">
           <mat-form-field appearance="outline" class="field-login">
             <mat-label>Correo Electrónico:</mat-label>
-            <input matInput placeholder="Ingresa tu Correo Electrónico:" required>
+            <input matInput placeholder="Ingresa tu correo electrónico:" required formControlName="correo">
+            <mat-error>
+              <span *ngIf="!correoForm.get('correo').valid && correoForm.get('correo').touched">Agrega un
+                correo.</span>
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col-md-7">
           <mat-form-field appearance="outline" class="field-login">
-            <mat-label>Correo Electrónico:</mat-label>
-            <input matInput placeholder="Repite tu Correo Electrónico:" required>
+            <mat-label>Contraseña:</mat-label>
+            <input matInput type="password" placeholder="Ingresa tu contraseña:" required formControlName="pass">
+            <mat-error>
+              <span *ngIf="!correoForm.get('pass').valid && correoForm.get('pass').touched">Agrega tu contraseña.</span>
+              <br>
+              <span *ngIf="errorCorreo">Contraseña incorrecta.</span>
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="col-md-5 text-center">
-          <button type="button" class="btn btn-success btn-md " (click)="alta()">
+          <button type="button" class="btn btn-success btn-md " [disabled]="!correoForm.valid"
+            (click)="guardarCorreo()">
             <img class="icon-nav mr-1" src="./../../../assets/icons/editar.svg">
             Cambiar Correo Electrónico</button>
         </div>
       </div>
       <mat-divider></mat-divider>
       <br>
-      <!--2do form-->
+    </form>
+    <!--2do form-->
+    <form [formGroup]="passForm">
       <div class="row p-0">
         <label class="p-0 m-0 ml-3 h6">
           Contraseña:
@@ -45,7 +58,14 @@
         <div class="col-md-7">
           <mat-form-field appearance="outline" class="field-login">
             <mat-label>Contraseña Actual:</mat-label>
-            <input matInput placeholder="Ingresa tu Contraseña Actual:" required>
+            <input matInput type="password" placeholder="Ingresa tu Contraseña Actual:" required
+              formControlName="actual">
+            <mat-error>
+              <span *ngIf="!passForm.get('actual').valid && passForm.get('actual').touched">Ingresa tu contraseña
+                actual.</span>
+                <br>
+                <span *ngIf="errorPass">Contraseña incorrecta.</span>
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -53,25 +73,34 @@
         <div class="col-md-7">
           <mat-form-field appearance="outline" class="field-login">
             <mat-label>Nueva Contraseña:</mat-label>
-            <input matInput placeholder="Ingresa tu Nueva Contraseña:" required>
+            <input matInput type="password" placeholder="Ingresa tu Nueva Contraseña:" required formControlName="pass">
+            <mat-error>
+              <span *ngIf="passForm.controls.pass.errors!=null && passForm.controls.pass.touched">Agrega
+                tu contraseña</span>
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col-md-7">
           <mat-form-field appearance="outline" class="field-login">
-            <mat-label>Nueva Contraseña:</mat-label>
-            <input matInput placeholder="Repite tu Nueva Contraseña:" required>
+            <mat-label>Confirmar:</mat-label>
+            <input matInput type="password" placeholder="Repite tu Nueva Contraseña:" required
+              formControlName="passConfirm">
+            <mat-error>
+              <span *ngIf="passForm.controls.passConfirm.errors!=null && passForm.controls.passConfirm.touched">Las
+                contraseñas no coinciden</span>
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="col-md-5 text-center">
-          <button type="button" class="btn btn-success btn-md " (click)="alta()">
+          <button type="button" class="btn btn-success btn-md " (click)="guardarPass()" [disabled]="!passForm.valid">
             <img class="icon-nav mr-1" src="./../../../assets/icons/editar.svg">
             Cambiar Contraseña</button>
         </div>
       </div>
       <br>
-    </mat-card>
-  </form>
+    </form>
+  </mat-card>
   <br>
 </div>

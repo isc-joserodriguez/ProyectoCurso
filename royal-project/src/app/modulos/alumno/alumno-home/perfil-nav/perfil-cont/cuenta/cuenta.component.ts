@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsuariosService } from '../../../../../../servicios/usuarios.service';
+import { Match } from '../../../../../../helper/match.validator';
 
 @Component({
   selector: 'app-cuenta',
@@ -6,11 +9,83 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cuenta.component.scss']
 })
 export class CuentaComponent implements OnInit {
+  correoForm: FormGroup;
+  passForm: FormGroup;
 
-  constructor() { }
+  respuesta: any = {
+    code: 0,
+    msg: '',
+    detail: ''
+  };
+  errorPass = false;
+  errorCorreo = false;
+
+  hash = '';
+
+  persona = {
+    credencial: {
+      correo: '',
+      contraseña: ''
+    }
+  };
+
+  constructor(private usuario: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.correoForm = this.formBuilder.group({
+      correo: ['', Validators.required],
+      pass: ['', Validators.required]
+    });
+    this.passForm = this.formBuilder.group({
+      actual: ['', Validators.required],
+      pass: ['', Validators.required],
+      passConfirm: ['', Validators.required]
+    }, {
+      validator: Match('pass', 'passConfirm')
+    });
+    this.inicializar(localStorage.getItem('userid'));
   }
 
+  inicializar(id) {
+    this.usuario.getId(id).subscribe(res => {
+      this.respuesta = res;
+      this.persona.credencial = this.respuesta.detail[0].credencial;
+      this.hash = this.persona.credencial.contraseña;
+      this.correoForm.setValue({
+        correo: this.persona.credencial.correo,
+        pass: ''
+      });
+      this.passForm.setValue({
+        actual: '',
+        pass: '',
+        passConfirm: ''
+      });
+    });
+    this.errorPass = false;
+    this.errorCorreo = false;
+  }
+
+  guardarCorreo() {
+    this.persona.credencial.correo = this.correoForm.value.correo;
+    this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.correoForm.value.pass, op: 0 }).subscribe(res => {
+      console.log(res)
+      this.respuesta = res;
+      this.inicializar(localStorage.getItem('userid'));
+      if (this.respuesta.code == 400) {
+        this.errorCorreo = true;
+      }
+    });
+  }
+
+  guardarPass() {
+    this.persona.credencial.contraseña = this.passForm.value.pass;
+    this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe(res => {
+      this.respuesta = res;
+      this.inicializar(localStorage.getItem('userid'));
+      if (this.respuesta.code == 400) {
+        this.errorPass = true;
+      }
+    });
+  }
 }

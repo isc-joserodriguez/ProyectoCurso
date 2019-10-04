@@ -26,4 +26,7 @@ export class UsuariosService {
   updateDatos(id, datos) {
     return this.http.put(apiUrl + '/editDatos/' + id, datos);
   }
+  updateCredencial(id, datos) {
+    return this.http.put(apiUrl + '/editCredencial/' + id, datos);
+  }
 }
