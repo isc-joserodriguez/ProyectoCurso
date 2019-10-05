@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 
+
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
@@ -24,6 +25,9 @@ export class CategoriasComponent implements OnInit {
     window.scrollTo(0, 0);
     this.categoria = this.primeraMay(this.route.snapshot.params.categoria);
     this.getCursos(this.route.snapshot.params.categoria);
+  }
+  onScroll() {
+    console.log('scrolled!!');
   }
   getCursos(cat) {
     this.cursos.getSubcategorias().subscribe(res => {

@@ -34,6 +34,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 // Environment
 import { environment } from '../environments/environment';
 
+//scroll infinito
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     MatSelectModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
