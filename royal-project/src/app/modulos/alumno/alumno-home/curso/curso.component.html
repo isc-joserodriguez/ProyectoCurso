@@ -106,6 +106,85 @@
             </div>
           </div>
         </div>
+        <br>
+        <!--Comentarios-->
+
+
+        <div class="col-md-12 p-2">
+          <h4 class="pl-2 mb-0"><b>Comentarios</b></h4>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="container text-center">
+                <label class="txtprom m-0">8.6</label>
+              </div>
+              <!--ranking star-->
+              <div class="container text-center">
+                <div class="rate m-0 p-0">
+                  <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                  <label for="star5" title="text">5 stars</label>
+                  <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                  <label for="star4" title="text">4 stars</label>
+                  <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                  <label for="star3" title="text">3 stars</label>
+                  <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                  <label for="star2" title="text">2 stars</label>
+                  <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                  <label for="star1" title="text">1 star</label>
+                </div>
+              </div>
+              <div class="container text-center">
+                <h6 class="letrastar mb-0">Valoración del curso</h6>
+              </div>
+            </div>
+            <!--Barras-->
+            <div class="col-md-5">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                </div>
+              </div>
+              <br>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+              <br>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+              <br>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+              <br>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+            </div>
+            <!--estrellas-->
+            <div class="col-md-3">
+               <!--ranking star-->
+               <div class="container text-center">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" edit="false"/>
+                    <label for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Fin comentarios-->
 
       </div>
     </div>
