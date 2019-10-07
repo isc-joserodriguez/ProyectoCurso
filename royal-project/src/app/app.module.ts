@@ -33,6 +33,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // Environment
 import { environment } from '../environments/environment';
+import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuario-desactivado.component';
 
 //scroll infinito
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -43,7 +44,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     NavAlumnoComponent,
     NavMaestroComponent,
     NavCoordinadorComponent,
-    NavAdministradorComponent
+    NavAdministradorComponent,
+    UsuarioDesactivadoComponent
   ],
   imports: [
     BrowserModule,

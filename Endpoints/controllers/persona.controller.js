@@ -80,7 +80,6 @@ const login = (req, res) => {
                         });
                     } else {
                         const tokenTTL = `${1000 * 60 * 60 * 24 * 30}ms`; // ms * s * m * h * d
-                        console.log(usuario);
                         const payload = {
                             id: usuario._id,
                             tipo: usuario.tipo,
@@ -118,10 +117,8 @@ const info = (req, res) => {
         iat: req.decoded.iat,
         exp: req.decoded.exp
     }
-    console.log(res);
     _persona.find({ _id: req.decoded.id })
         .then(persona => {
-            console.log(persona)
             datos.id = persona[0]._id;
             datos.tipo = persona[0].tipo;
             datos.nombre = persona[0].nombre;
@@ -218,7 +215,6 @@ const updateCredencial = (req, res) => {
     const credencial = req.body.credencial;
     hash.comparePassword(req.body.confirm, req.body.contra).then(contraseñaCorrecta => {
         if (!contraseñaCorrecta) {
-            console.log('correo')
             res.status(200).json({
                 code: 400,
                 msg: "Error: La contraseña es incorrecta",

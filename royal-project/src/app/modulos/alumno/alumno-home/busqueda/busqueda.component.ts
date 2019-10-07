@@ -27,7 +27,6 @@ export class BusquedaComponent implements OnInit {
     this.listaCursos = [];
     const buscar = busqueda.replace(/-/g, ' ');
     this.cursos.getBusqueda(buscar).subscribe(res => {
-      console.log(res);
       this.respuesta = res;
       this.respuesta.detail.forEach(e => {
         this.listaCursos.push(e);

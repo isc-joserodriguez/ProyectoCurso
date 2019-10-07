@@ -33,7 +33,6 @@ export class CategoriasComponent implements OnInit {
     this.cursos.getSubcategorias().subscribe(res => {
       this.respuesta = res;
       this.respuesta.detail.forEach(e => {
-        console.log(e);
         if (e.categoria == this.primeraMay(cat)) {
           this.listaCursos.push(e);
         }

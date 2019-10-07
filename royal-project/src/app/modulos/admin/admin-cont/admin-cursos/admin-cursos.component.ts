@@ -148,7 +148,6 @@ export class AdminCursosComponent implements OnInit {
   }
   revisarCurso(id) {
     this.router.navigate(['/admin/cursos/revisar/', id]);
-    console.log('se revisó el curso ' + id);
   }
   editarCurso(id) {
     console.log('Se editó el curso ' + id);

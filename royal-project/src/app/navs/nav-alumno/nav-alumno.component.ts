@@ -78,6 +78,17 @@ export class NavAlumnoComponent implements OnInit {
           this.categoriasLen.push(e.subcategoria);
         }
       });
+      var a = [];
+      new Set(this.categoriasTec).forEach(e => {
+        a.push(e);
+      });
+      this.categoriasTec = (a.length == 0) ? ['No disponible'] : a;
+      a = [];
+      new Set(this.categoriasLen).forEach(e => {
+        a.push(e);
+      });
+      this.categoriasLen = (a.length == 0) ? ['No disponible'] : a;
+
     });
   }
 
@@ -127,12 +138,19 @@ export class NavAlumnoComponent implements OnInit {
         } else if (this.respuesta.detail.tipo[1].coord != undefined) {
           this.router.navigate(['/coord/']);
         } else if (this.respuesta.detail.tipo[2].maestro != undefined) {
+          if (!this.respuesta.detail.tipo[2].maestro) {
+            this.router.navigate(['/usuario-inhabilitado']);
+          }
           this.router.navigate(['/maestro/']);
+        } else {
+          this.usuario = this.respuesta.detail.nombre;
+          this.logueado = true;
+          this.sexo = this.respuesta.detail.sexo;
+          localStorage.setItem('userid', this.respuesta.detail.id);
+          if (!this.respuesta.detail.tipo[3].alumno) {
+            this.router.navigate(['/usuario-inhabilitado']);
+          }
         }
-        this.usuario = this.respuesta.detail.nombre;
-        this.logueado = true;
-        this.sexo = this.respuesta.detail.sexo;
-        localStorage.setItem('userid', this.respuesta.detail.id);
       }, err => {
         console.log(err);
       });

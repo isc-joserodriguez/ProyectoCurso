@@ -54,7 +54,7 @@
             <div class="col-md-3">
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Categoría del Curso:</mat-label>
-                <select matNativeControl required formControlName="categoria" (change)="getSubcategorias()">
+                <select matNativeControl required formControlName="categoria">
                   <option *ngFor="let categoria of categorias" value={{categoria}}>{{categoria}}</option>
                 </select>
                 <mat-error>
@@ -72,7 +72,8 @@
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Subcategoría del Curso:</mat-label>
                 <input type="text" placeholder="Selecciona o agrega uno" aria-label="Number" matInput
-                  [matAutocomplete]="auto" formControlName="subcategoria" (keyup)="filtrarSubcategoria($event.target.value)">
+                  [matAutocomplete]="auto" formControlName="subcategoria"
+                  (keyup)="filtrarSubcategoria($event.target.value)">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let subcategoria of subcategorias" [value]="subcategoria">
                     {{subcategoria}}
@@ -119,21 +120,25 @@
 
           <!-- Fila 5 -->
           <div class="row">
-              <div class="col-md-7 pl-4">
-                <mat-form-field appearance="outline" class="field-login">
-                  <mat-label>Precio del curso:</mat-label>
-                  <input matInput placeholder="Ingresa el precio del curso" required
-                    formControlName="precio">
-                  <mat-error>
-                    <span
-                      *ngIf="!generalForm.get('precio').valid && generalForm.get('precio').touched">Agrega
-                      el del curso.</span>
-                  </mat-error>
-                </mat-form-field>
-              </div>
+            <div class="col-md-7 pl-4">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Precio del curso:</mat-label>
+                <input matInput placeholder="Ingresa el precio del curso" required formControlName="precio">
+                <mat-error>
+                  <span *ngIf="!generalForm.get('precio').valid && generalForm.get('precio').touched">Agrega
+                    el del curso.</span>
+                </mat-error>
+              </mat-form-field>
             </div>
+          </div>
           <!-- Fila 5 -->
-
+          <!-- Fila 6 -->
+          <div class="row">
+            <div class="col-md-7 pl-4">
+              <img width="200" [src]="URLPublica">
+            </div>
+          </div>
+          <!-- Fila 6 -->
         </form>
         <!-- form -->
         <mat-action-row>
@@ -246,10 +251,12 @@
             src="./../../../assets/icons/edit.svg"> Agregar unidad</button>
 
         <mat-action-row>
-          <button mat-button color="warn" [routerLink]="['../']">Cancelar</button>
-          <button mat-button
+          <button *ngIf="finalizado" mat-button color="warn" [routerLink]="['../']">Cancelar</button>
+          <button *ngIf="finalizado" mat-button
             [disabled]="!(generalForm.valid && temarioForm.valid && temarioForm.value.objetivos.length!=0 && temarioForm.value.unidades.length!=0)"
             color="primary" (click)="subir()">Subir</button>
+          <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"
+            max="100">{{porcentaje}}%</progress>
         </mat-action-row>
       </mat-expansion-panel>
       <!--tercer acordeon-->

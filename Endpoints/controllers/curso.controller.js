@@ -140,7 +140,6 @@ const create = (req, res) => {
     _curso.find({}).sort({ _id: -1 }).then(regs => {
         curso._id = parseInt((regs.length == 0) ? 0 : (regs[0].id)) + 1;
         curso.ruta = curso.nombreCompleto.toLowerCase().replace(/ /g, "-").replace(/á/g, "a").replace(/é/g, "e").replace(/í/g, "i").replace(/ó/g, "o").replace(/ú/g, "u").replace(/ü/g, "u") + "-" + curso._id;
-        console.log(curso);
         _curso.create(curso)
             .then(data => {
                 res.status(200);

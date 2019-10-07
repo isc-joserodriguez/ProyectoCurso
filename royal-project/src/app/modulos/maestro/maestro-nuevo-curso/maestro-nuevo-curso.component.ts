@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CursosService } from '../../../servicios/cursos.service';
 
 
@@ -27,8 +27,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
     contenidoCurso: [],
     categoria: '',
     subcategoria: '',
-    precio: 0
-    /* , estado: 2 */
+    precio: 0,
   };
 
   generalForm: FormGroup;
@@ -36,6 +35,13 @@ export class MaestroNuevoCursoComponent implements OnInit {
 
   categorias = ['Tecnología', 'Idiomas'];
   subcategorias = [];
+
+  public mensajeArchivo = 'No hay un archivo seleccionado';
+  public datosFormulario = new FormData();
+  public nombreArchivo = '';
+  public URLPublica = '';
+  public porcentaje = 0;
+  public finalizado = true;
 
   constructor(private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
@@ -58,17 +64,15 @@ export class MaestroNuevoCursoComponent implements OnInit {
   }
 
   filtrarSubcategoria(cadena) {
-    console.log(cadena);
-
-  }
-  getSubcategorias() {
     this.subcategorias = [];
     const categoria = this.generalForm.value.categoria;
     this.cursos.getSubcategorias().subscribe(res => {
       this.respuesta = res;
       this.respuesta.detail.forEach(e => {
         if (e.categoria == categoria) {
-          this.subcategorias.push(e.subcategoria);
+          if (e.subcategoria.toLowerCase().includes(cadena.toLowerCase())) {
+            this.subcategorias.push(e.subcategoria);
+          }
         }
       });
       const a = [];
@@ -77,6 +81,7 @@ export class MaestroNuevoCursoComponent implements OnInit {
       });
       this.subcategorias = a;
     });
+
   }
 
   get objetivos() {
@@ -100,7 +105,6 @@ export class MaestroNuevoCursoComponent implements OnInit {
     this.cursoNuevo.categoria = this.generalForm.value.categoria;
     this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
     this.cursoNuevo.precio = this.generalForm.value.precio;
-
     this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
       this.respuesta = res;
       this.router.navigate(['/maestro/']);
@@ -154,5 +158,4 @@ export class MaestroNuevoCursoComponent implements OnInit {
   prevStep() {
     this.step--;
   }
-
 }

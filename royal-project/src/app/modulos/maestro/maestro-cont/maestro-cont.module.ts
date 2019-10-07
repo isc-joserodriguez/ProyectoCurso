@@ -8,6 +8,8 @@ import { MaestroCursoComponent } from './maestro-curso/maestro-curso.component';
 //material
 import {MatTableModule} from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
+
 
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -22,7 +24,8 @@ import { CursoConfigComponent } from './curso-config/curso-config.component';
     CarouselModule,
     CardsFreeModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCardModule
   ]
 })
 export class MaestroContModule { }

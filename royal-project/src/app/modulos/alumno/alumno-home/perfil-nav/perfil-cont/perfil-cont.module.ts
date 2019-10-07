@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SafePipeModule } from 'safe-pipe';
+
 import { PerfilContRoutingModule } from './perfil-cont-routing.module';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
@@ -54,7 +56,8 @@ import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    SafePipeModule
   ]
 })
 export class PerfilContModule { }

@@ -49,10 +49,14 @@ export class NavMaestroComponent implements OnInit {
         this.router.navigate(['/coord/']);
       } else if (this.respuesta.detail.tipo[3].alumno != undefined) {
         this.router.navigate(['/']);
+      } else {
+        this.usuario = this.respuesta.detail.nombre;
+        this.sexo = this.respuesta.detail.sexo;
+        localStorage.setItem('userid', this.respuesta.detail.id);
+        if (!this.respuesta.detail.tipo[2].maestro) {
+          this.router.navigate(['/usuario-inhabilitado']);
+        }
       }
-      this.usuario = this.respuesta.detail.nombre;
-      this.sexo = this.respuesta.detail.sexo;
-      localStorage.setItem('userid', this.respuesta.detail.id);
     }, err => {
       console.log(err);
     });

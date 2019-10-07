@@ -13,7 +13,7 @@ const cursoSchema = new mongoose.Schema({
     imagen: { type: String, default: 'http://www.lorempixel.com/200/200' },
     categoria: { type: String, required: true },
     subcategoria: { type: String, required: true },
-    introduccionVideo: { type: String },
+    introduccionVideo: { type: String, default: 'http://vjs.zencdn.net/v/oceans.mp4' },
     contenidoCurso: [
         {
             unidad: { type: String },
