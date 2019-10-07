@@ -30,7 +30,7 @@ export class CuentaComponent implements OnInit {
     }
   };
 
-  constructor(private usuario: UsuariosService, private formBuilder: FormBuilder, private router:Router) { }
+  constructor(private usuario: UsuariosService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -70,11 +70,12 @@ export class CuentaComponent implements OnInit {
   guardarCorreo() {
     this.persona.credencial.correo = this.correoForm.value.correo;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.correoForm.value.pass, op: 0 }).subscribe(res => {
-      console.log(res)
       this.respuesta = res;
-      this.ngOnInit();
       if (this.respuesta.code == 400) {
         this.errorCorreo = true;
+        this.inicializar(localStorage.getItem('userid'));
+      } else {
+        this.ngOnInit();
       }
     });
   }
@@ -83,9 +84,11 @@ export class CuentaComponent implements OnInit {
     this.persona.credencial.contraseña = this.passForm.value.pass;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe(res => {
       this.respuesta = res;
-      this.ngOnInit();
       if (this.respuesta.code == 400) {
         this.errorPass = true;
+        this.inicializar(localStorage.getItem('userid'));
+      } else {
+        this.ngOnInit();
       }
     });
   }

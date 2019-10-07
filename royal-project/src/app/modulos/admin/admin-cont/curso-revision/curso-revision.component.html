@@ -7,7 +7,12 @@
   <div class="row pl-3">
     <div class="col-md-8 mt-3 pl-3 mx-4">
       <!--div video-->
-      <img [src]="infoCurso.videoPrincipal">
+      <div class="row">
+        <video id='videoId' class='video-js' controls preload='auto' width='600' height='300'
+          [poster]='infoCurso.imagen'>
+        </video>
+
+      </div>
       <!--div descripcion-->
       <div class="row">
         <div class="col-md-12 p-3 mr-4 ">

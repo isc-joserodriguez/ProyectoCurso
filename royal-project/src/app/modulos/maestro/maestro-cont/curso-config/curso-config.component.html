@@ -1,51 +1,59 @@
 <div class="col-md-12 p-0">
-  <div class="row pl-5">
-    <label class="h1 letracursotitulo mb-0"><b> {{infoCurso.nombreCompleto}} </b></label>
-  </div>
+  <p class="h1 letracursotitulo"><b> {{infoCurso.nombreCompleto}} </b></p>
   <mat-divider></mat-divider>
+  <div class="row justify-content-center">
+    <div class="col-md-5 px-5">
+      <mat-card>
+        <mat-card-header class="justify-content-center">
+          <mat-card-title>Portada</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]='infoCurso.imagen' height='250'>
+        <mat-card-content>
+          <p class="text-center">
+            Esta imagen se mostrará en las busquedas y miniaturas del curso.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Cambiar</button>
+          <button mat-button>Guardar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="col-md-5 pl-5">
+      <mat-card>
+        <mat-card-header class="justify-content-center">
+          <mat-card-title>Video principal</mat-card-title>
+        </mat-card-header>
+        <video mat-card-image id='videoId' class='video-js' controls preload='auto' width='200' height='250'
+          [poster]='infoCurso.imagen'>
+        </video>
+        <mat-card-content>
+          <p class="text-center">
+            Este video será la presentación de tu curso y se mostrará en su página principal.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Cambiar</button>
+          <button mat-button>Guardar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <br>
+    <br>
+
+  </div>
+
   <!--Competencias-->
   <div class="col-md-12 p-2">
     <div class="card">
       <div class="card-header bg-light text-center">
         Competencias
       </div>
-
       <div class="example-container mat-elevation-z8">
         <!-- Tabla -->
-        
+
         <!-- Tabla -->
-      </div>
-
-      <div class="accordion" id="accordionExample">
-        <div class="card">
-          <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                aria-expanded="true" aria-controls="collapseOne">
-                <b>Unidad</b>
-              </button>
-            </h2>
-          </div>
-
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-6 text-right">
-                    <button type="button" class="btn btn-success btn-md " (click)="guardar()">
-                      <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
-                      Guardar</button>
-                  </div>
-                  <div class="col-md-6">
-                    <button type="button" class="btn btn-success btn-md " (click)="guardar()">
-                      <img class="icon-nav mr-1" src="./../../../assets/icons/agregar-user2.svg">
-                      Guardar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

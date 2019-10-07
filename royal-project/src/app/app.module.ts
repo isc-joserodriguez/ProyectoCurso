@@ -33,6 +33,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // Environment
 import { environment } from '../environments/environment';
+import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuario-desactivado.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { environment } from '../environments/environment';
     NavAlumnoComponent,
     NavMaestroComponent,
     NavCoordinadorComponent,
-    NavAdministradorComponent
+    NavAdministradorComponent,
+    UsuarioDesactivadoComponent
   ],
   imports: [
     BrowserModule,

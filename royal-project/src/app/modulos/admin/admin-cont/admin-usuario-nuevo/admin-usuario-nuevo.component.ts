@@ -59,8 +59,7 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     this.persona.fechaNac = DateConvert(this.altaForm.value.altaNac);
     this.persona.credencial.correo = this.altaForm.value.altaCorreo;
     this.persona.credencial.contraseña = this.altaForm.value.altaNombre.substring(0, 2) +
-      this.altaForm.value.altaApPaterno.substring(0, 2)+ this.persona.fechaNac.replace(/-/g, '');
-      console.log(this.persona.credencial.contraseña)
+      this.altaForm.value.altaApPaterno.substring(0, 2) + this.persona.fechaNac.replace(/-/g, '');
     this.persona.nombre = this.altaForm.value.altaNombre;
     this.persona.apPaterno = this.altaForm.value.altaApPaterno;
     this.persona.apMaterno = this.altaForm.value.altaApMaterno;

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+declare let videojs: any;
 
 @Component({
   selector: 'app-curso-revision',
   templateUrl: './curso-revision.component.html',
   styleUrls: ['./curso-revision.component.scss']
 })
-export class CursoRevisionComponent implements OnInit {
+export class CursoRevisionComponent implements OnInit, OnDestroy {
   respuesta: any = {
     code: 0,
     msg: '',
@@ -18,24 +19,21 @@ export class CursoRevisionComponent implements OnInit {
   infoCurso = {
     nombreCompleto: '',
     precio: 0,
-    videoPrincipal: 'http://www.lorempixel.com/900/500',
-    descripcion: '👩🏼‍🎓Cada nivel tiene una duración de 10 semanas 🎓Son 8 niveles' +
-      ' para adquirir un nivel profesional 🌎Y a partir de 4 puedes realizar la certificación' +
-      ' internacional 👥Grupos reducidos mínimo 5 máximo 16 estudiantes 🇩🇪HORARIOS ALEMÁN | 1' +
-      ' GRUPO ⏰MARTES Y JUEVES 6-8pm Inicio 27 Agosto 👩🏻‍🏫Maestros Lic en Lingüística Aplicada y' +
-      ' Comercio Internacional 📍Inscripciones e información en Insurgentes #88 entre Puebla y ' +
-      'Veracruz',
-    valoracion: 3,
-    inscritos: 32,
-    objetivos: ['Aprender Algo', 'Aplicar lo aprendido', 'Enseñar todo'],
+    introduccionVideo: '',
+    imagen: '',
+    descripcion: '',
+    valoracion: 0,
+    inscritos: 0,
+    objetivos: [],
     contenidoCurso: [{}],
-    notas: 'hola'
+    notas: ''
   };
+
   infoMaestro = {
-    foto: 'http://www.lorempixel.com/200/200',
-    nombreCompleto: 'Carla Reyes Godinez',
-    resumen: 'Ingeniera en sistemas, Dos años de experiencia en IBM, Certificado en Diseño Web',
-    id:0
+    foto: '',
+    nombreCompleto: '',
+    resumen: '',
+    id: 0
   };
 
   revisionForm: FormGroup;
@@ -50,13 +48,18 @@ export class CursoRevisionComponent implements OnInit {
     });
     this.getInfoCurso(this.route.snapshot.params.id);
   }
+  ngOnDestroy(): void {
+    var oldPlayer = document.getElementById('videoId');
+    videojs(oldPlayer).dispose();
+  }
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe(curso => {
       //Pendientes
       this.respuesta = curso;
       this.infoCurso.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
       this.infoCurso.precio = this.respuesta.detail[0].precio;
-      this.infoCurso.videoPrincipal = this.respuesta.detail[0].imagen;
+      this.infoCurso.introduccionVideo = this.respuesta.detail[0].introduccionVideo;
+      this.infoCurso.imagen = this.respuesta.detail[0].imagen;
       this.infoCurso.descripcion = this.respuesta.detail[0].descripcionCurso;
       this.infoCurso.valoracion = 5;
       this.infoCurso.inscritos = 5;
@@ -65,6 +68,14 @@ export class CursoRevisionComponent implements OnInit {
       this.infoCurso.objetivos = [];
       this.respuesta.detail[0].objetivos.forEach(elemento => {
         this.infoCurso.objetivos.push(elemento.objetivo);
+      });
+      videojs("videoId", {
+        sources: [{
+          src: this.infoCurso.introduccionVideo,
+          type: 'video/mp4'
+        }]
+      }, function () {
+        // Player (this) is initialized and ready.
       });
       this.infoCurso.contenidoCurso = this.respuesta.detail[0].contenidoCurso;
       this.getInfoMaestro(this.respuesta.detail[0].idMaestro);

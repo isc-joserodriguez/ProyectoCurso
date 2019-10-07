@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsuariosService } from '../../../../../../servicios/usuarios.service';
 import { FirebaseService } from '../../../../../../servicios/firebase.service';
@@ -9,6 +9,7 @@ import { FirebaseService } from '../../../../../../servicios/firebase.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+
   respuesta: any = {
     code: 0,
     msg: '',
@@ -47,11 +48,11 @@ export class PerfilComponent implements OnInit {
 
     this.getUser(localStorage.getItem('userid'));
   }
-
   getUser(id) {
     this.usuario.getUser(id).subscribe(user => {
       this.respuesta = user;
       this.URLPublica = this.respuesta.detail[0].foto;
+      
       this.perfilForm.setValue({
         nombre: this.respuesta.detail[0].nombre,
         apPaterno: this.respuesta.detail[0].apPaterno,
