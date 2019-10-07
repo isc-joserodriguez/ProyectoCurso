@@ -35,6 +35,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuario-desactivado.component';
 
+//scroll infinito
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +67,8 @@ import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuar
     HttpClientModule,
     MatSelectModule,
     MatMenuModule,
-    MatDividerModule
+    MatDividerModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
