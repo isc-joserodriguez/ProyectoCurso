@@ -82,12 +82,12 @@ export class NavAlumnoComponent implements OnInit {
       new Set(this.categoriasTec).forEach(e => {
         a.push(e);
       });
-      this.categoriasTec = a;
+      this.categoriasTec = (a.length == 0) ? ['No disponible'] : a;
       a = [];
       new Set(this.categoriasLen).forEach(e => {
         a.push(e);
       });
-      this.categoriasTec = a;
+      this.categoriasLen = (a.length == 0) ? ['No disponible'] : a;
 
     });
   }
