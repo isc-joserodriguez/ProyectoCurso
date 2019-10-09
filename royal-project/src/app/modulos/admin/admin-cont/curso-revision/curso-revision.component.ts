@@ -28,18 +28,14 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
     contenidoCurso: [{}],
     notas: ''
   };
-
   infoMaestro = {
     foto: '',
     nombreCompleto: '',
     resumen: '',
     id: 0
   };
-
   revisionForm: FormGroup;
-
   constructor(private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
-
   ngOnInit() {
     window.scrollTo(0, 0);
     this.revisionForm = this.formBuilder.group({

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CursosService } from '../../../../servicios/cursos.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CursosService } from '../../../../servicios/cursos.service';
+import { FirebaseService } from '../../../../servicios/firebase.service';
 declare let videojs: any;
 
 @Component({
@@ -27,10 +29,38 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
     notas: ''
   };
 
-  constructor(private cursos: CursosService, private route: ActivatedRoute) { }
+  viejaFoto = ''
+  finalizadoFoto = true;
+  cambiaFoto = false;
+  mensajeFoto = 'No hay foto';
+  datosFormularioFoto = new FormData();
+  nombreFoto = '';
+  URLFoto = '';
+  porcentajeFoto = 0;
+  fotoForm: FormGroup;
+
+  viejoVideo = ''
+  finalizadoVideo = true;
+  cambiaVideo = false;
+  mensajeVideo = 'No hay video';
+  datosFormularioVideo = new FormData();
+  nombreVideo = '';
+  URLVideo = '';
+  porcentajeVideo = 0;
+  videoForm: FormGroup;
+
+
+
+  constructor(private firebase: FirebaseService, private cursos: CursosService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.fotoForm = this.formBuilder.group({
+      foto: new FormControl(null, Validators.required)
+    });
+    this.videoForm = this.formBuilder.group({
+      video: new FormControl(null, Validators.required)
+    });
     this.getCurso(this.route.snapshot.params.id);
   }
 
@@ -52,6 +82,109 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
         // Player (this) is initialized and ready.
       });
       console.log(this.infoCurso);
+    });
+  }
+
+  public seleccionarFoto(event) {
+    this.cambiaFoto = true;
+    if (event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.mensajeFoto = `${event.target.files[i].name}`.substring(0, 12) + '...';
+        this.nombreFoto = event.target.files[i].name;
+        this.datosFormularioFoto.delete('archivo');
+        this.datosFormularioFoto.append('archivo', event.target.files[i], event.target.files[i].name);
+      }
+    } else {
+      this.mensajeFoto = 'No hay foto';
+    }
+  }
+  public seleccionarVideo(event) {
+    this.cambiaVideo = true;
+    if (event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        this.mensajeVideo = `${event.target.files[i].name}`.substring(0, 9);
+        this.nombreVideo = event.target.files[i].name;
+        this.datosFormularioVideo.delete('archivo');
+        this.datosFormularioVideo.append('archivo', event.target.files[i], event.target.files[i].name);
+      }
+    } else {
+      this.mensajeVideo = 'No hay video';
+    }
+  }
+
+  public subirFoto() {
+    this.URLFoto = this.infoCurso.imagen;
+    this.viejaFoto = this.infoCurso.imagen;
+    var datos = {
+      imagen: this.infoCurso.imagen,
+      introduccionVideo: this.infoCurso.introduccionVideo
+    }
+    this.finalizadoFoto = false;
+    if (!this.URLFoto.includes('www.lorempixel.com')) {
+      this.viejaFoto = this.URLFoto.split('imagen%2F')[1];
+      this.viejaFoto = this.viejaFoto.split('?')[0];
+      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
+        localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/imagen/' + this.viejaFoto);
+      referenciaBorrar.delete();
+    }
+    this.porcentajeFoto = 0;
+    const archivo = this.datosFormularioFoto.get('archivo');
+    const referencia = this.firebase.referenciaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/imagen/' + this.nombreFoto);
+    const tarea = this.firebase.tareaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/imagen/' + this.nombreFoto, archivo);
+    // Cambia el porcentaje
+    tarea.percentageChanges().subscribe((porcentaje) => {
+      this.porcentajeFoto = Math.round(porcentaje);
+      if (this.porcentajeFoto == 100) {
+        referencia.getDownloadURL().subscribe((URL) => {
+          this.URLFoto = URL;
+          datos.imagen = URL;
+          this.cursos.updateFotoVideo(this.route.snapshot.params.id, datos).subscribe(res => {
+            this.finalizadoFoto = true;
+            this.cambiaFoto = false;
+            console.log('guardado');
+          });
+        });
+      }
+    });
+  }
+
+  public subirVideo() {
+    this.URLVideo = this.infoCurso.introduccionVideo;
+    this.viejoVideo = this.infoCurso.introduccionVideo;
+    var datos = {
+      imagen: this.infoCurso.imagen,
+      introduccionVideo: this.infoCurso.introduccionVideo
+    }
+    this.finalizadoVideo = false;
+    if (!this.URLVideo.includes('vjs.zencdn.net/v/oceans.mp4')) {
+      this.viejoVideo = this.URLVideo.split('video%2F')[1];
+      this.viejoVideo = this.viejoVideo.split('?')[0];
+      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
+        localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/video/' + this.viejoVideo);
+      referenciaBorrar.delete();
+    }
+    this.porcentajeVideo = 0;
+    const archivo = this.datosFormularioVideo.get('archivo');
+    const referencia = this.firebase.referenciaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/video/' + this.nombreVideo);
+    const tarea = this.firebase.tareaCloudStorage('usuario/' +
+      localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/video/' + this.nombreVideo, archivo);
+    // Cambia el porcentaje
+    tarea.percentageChanges().subscribe((porcentaje) => {
+      this.porcentajeVideo = Math.round(porcentaje);
+      if (this.porcentajeVideo == 100) {
+        referencia.getDownloadURL().subscribe((URL) => {
+          this.URLVideo = URL;
+          datos.introduccionVideo = URL;
+          this.cursos.updateFotoVideo(this.route.snapshot.params.id, datos).subscribe(res => {
+            this.finalizadoVideo = true;
+            this.cambiaVideo = false;
+            console.log('guardado');
+          });
+        });
+      }
     });
   }
 

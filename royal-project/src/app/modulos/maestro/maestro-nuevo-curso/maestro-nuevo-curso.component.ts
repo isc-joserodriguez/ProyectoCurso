@@ -96,6 +96,10 @@ export class MaestroNuevoCursoComponent implements OnInit {
     return (this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray;
   }
 
+  clases(i, j) {
+    return ((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray;
+  }
+
   subir() {
     this.cursoNuevo.nombreCompleto = this.generalForm.value.nombreCompleto;
     this.cursoNuevo.nombreCorto = this.generalForm.value.nombreCorto;
@@ -115,10 +119,22 @@ export class MaestroNuevoCursoComponent implements OnInit {
     return cad.charAt(0).toUpperCase() + cad.slice(1);
   }
 
+  agregarClase(i, j) {
+    const claseFormGroup = this.formBuilder.group({
+      clase: ['Nombre clase ' + ((((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray).length + 1),
+      Validators.required]
+    });
+    (((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray).push(claseFormGroup);
+  }
+  removerClase(i, j, k) {
+    (((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray).removeAt(k);
+  }
+
   agregarSubtema(i) {
     const subtemaFormGroup = this.formBuilder.group({
       subtema: ['Nombre subtema ' + (((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).length + 1),
-      Validators.required]
+      Validators.required],
+      clases: this.formBuilder.array([])
     });
     ((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).push(subtemaFormGroup);
   }

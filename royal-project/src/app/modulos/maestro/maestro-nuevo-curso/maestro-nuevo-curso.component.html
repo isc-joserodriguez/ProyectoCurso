@@ -214,7 +214,7 @@
                   <button mat-button color="warn" (click)="removerUnidad(i)">Remover</button>
                 </div>
               </div>
-              <div class="aling-subtemas">
+              <div class="align-subtemas">
                 <label class="h5 text-right">Subtemas:</label>
                 <!-- Temas -->
                 <div formArrayName="subtemas" *ngFor="let subtema of subtemas(i).controls; let j = index">
@@ -234,7 +234,36 @@
                         <button mat-button color="warn" (click)="removerSubtema(i,j)">Remover</button>
                       </div>
                     </div>
+                    <div class="align-clases">
+                      <label class="h5 text-right">Clases:</label>
+                      <!-- Clases -->
+                      <div formArrayName="clases" *ngFor="let clase of clases(i,j).controls; let k = index">
+                        <div [formGroupName]="k">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field appearance="outline">
+                                <mat-label>Clase {{k+1}}:</mat-label>
+                                <input matInput placeholder="Ingresa el nombre de la clase" required
+                                  formControlName="clase">
+                                <mat-error>
+                                  <span *ngIf="!clase.valid && clase.touched">Agrega el nombre de la clase.</span>
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-2 vertical-center">
+                              <button mat-button color="warn" (click)="removerClase(i,j,k)">Remover</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- Clases -->
+                      <button class="btn btn-success" (click)="agregarClase(i,j)"><img class="icon-opcion"
+                          src="./../../../assets/icons/edit.svg"> Agregar clase a subtema {{j+1}} unidad {{i+1}}
+                      </button>
+                    </div>
                   </div>
+
                 </div>
                 <!-- Temas -->
                 <button class="btn btn-success" (click)="agregarSubtema(i)"><img class="icon-opcion"

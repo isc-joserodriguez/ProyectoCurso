@@ -17,29 +17,36 @@ const cursoSchema = new mongoose.Schema({
     contenidoCurso: [
         {
             unidad: { type: String },
-            subtemas: [
-                {
-                    subtema: { type: String },
-                    datos: [{
+            ponderacionUnidad: { type: Number },
+            subtemas: [{
+                subtema: { type: String },
+                ponderacionSubtemas: { type: Number },
+                clases: [{
+                    clase: { type: String },
+                    ponderacionSubtemas: { type: Number },
+                    contenidoClase: [{
                         ponderacion: { type: Number },
-                        tipoPlantilla: { type: Number },
-                        recursos: { type: String },//Recursos del contenido de la leccion
+                        tipoPlantilla: { type: Number },//0 - Video y Texto | 1 -  Recurso | 2 - Texto
+                        video: { type: String },
+                        texto: { type: String },
+                        recursos: [{ type: String }],//Recursos del contenido de la leccion
                         tarea: [{ recurso: { type: String }, envios: [{ _id: { type: String }, idAlumno: { type: String }, estatus: { type: String }, calificacion: { type: String }, fecha: { type: Date }, retroalimentacion: { type: String } }] }],//Recursos de la tarea
                         comentarios: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String }, respuestas: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String } }] }]
                     }]
-                }
-            ],
+                }]
+            }],
             evaluacion: { type: String } //Evaluación de la unidad (opcional).
         }
     ],
-    insignias: [{ nombreInsignia: { type: String, required: true }, descripcionInsignia: { type: String, required: true }, imagen: { type: String, required: true } }],
+    insignias: [{ nombreInsignia: { type: String }, descripcionInsignia: { type: String }, imagen: { type: String } }],
     precio: { type: Number },
     cursosRelacionados: [{ _id: { type: String, required: true } }],
     estado: { type: Number, default: 1 }, //1:En revisión, 2:Aceptado, 3:Rechazado
     publicacion: { type: Boolean, default: false },
     fechaSolicitud: { type: Date, default: Date.now() },
     royal: { type: Boolean, default: false },
-    notas: { type: String }
+    notas: { type: String },
+    alumnosInscritos: [{ idAlumno: { type: Number } }]
 });
 
 //modelo Curso

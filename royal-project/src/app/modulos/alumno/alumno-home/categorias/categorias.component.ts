@@ -18,6 +18,7 @@ export class CategoriasComponent implements OnInit {
   };
 
   listaCursos = [];
+  subcategorias=[];
 
   constructor(private route: ActivatedRoute, private cursos: CursosService) { }
 
@@ -35,8 +36,14 @@ export class CategoriasComponent implements OnInit {
       this.respuesta.detail.forEach(e => {
         if (e.categoria == this.primeraMay(cat)) {
           this.listaCursos.push(e);
+          this.subcategorias.push(e.subcategoria)
         }
       });
+      var a = [];
+      new Set(this.subcategorias).forEach(e => {
+        a.push(e);
+      });
+      this.subcategorias = a;
     });
   }
 

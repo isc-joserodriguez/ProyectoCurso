@@ -47,4 +47,8 @@ export class CursosService {
     return this.http.get(apiUrl + '/getBusqueda/'+busqueda);
   }
 
+  updateFotoVideo(id, datos){
+    return this.http.put(apiUrl + '/updateFotoVideo/' + id, datos);
+  }
+
 }

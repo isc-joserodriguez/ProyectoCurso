@@ -26,8 +26,7 @@ export class PerfilComponent implements OnInit {
 
   perfilForm: FormGroup;
 
-  constructor(private firebase: FirebaseService, private usuario: UsuariosService,
-    private formBuilder: FormBuilder) { }
+  constructor(private firebase: FirebaseService, private usuario: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);

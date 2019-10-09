@@ -1,99 +1,22 @@
 <div class="col-md-12 p-0">
-  <br>
-  <div class="row pl-5">
+  <div class="row justify-content-center">
     <label class="h1 letracursotitulo mb-0"><b> {{infoCurso.nombreCompleto}} </b></label>
   </div>
   <mat-divider></mat-divider>
-  <div class="row pl-3">
-    <div class="col-md-8 mt-3 pl-3 mx-4">
-      <!--div video-->
-      <div class="row">
+  <br>
+  <div class="row">
+    <!-- Video Principal -->
+    <div class="col-md-8">
+      <div class="row justify-content-center">
         <video id='videoId' class='video-js' controls preload='auto' width='600' height='300'
           [poster]='infoCurso.imagen'>
         </video>
-
-      </div>
-      <!--div descripcion-->
-      <div class="row">
-        <div class="col-md-12 p-3 mr-4 ">
-          <h4><b>Descripción</b></h4>
-          <p class="text-center mb-0">
-            {{infoCurso.descripcion}}
-          </p>
-        </div>
-        <!--Objetivos-->
-        <div class="col-md-12 p-2">
-          <div class="card">
-            <div class="card-header bg-light text-center">
-              ¿Qué aprenderé?
-            </div>
-            <div class="card-body">
-              <ul>
-                <li *ngFor="let objetivo of infoCurso.objetivos" class="card-title">{{objetivo}}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!--Temario-->
-        <div class="col-md-12 p-2">
-          <div class="card">
-            <div class="card-header bg-light text-center">
-              Temario
-            </div>
-            <div class="card-body">
-              <!--Acordeon-->
-              <mat-accordion class="example-headers-align">
-                <div class="col-md-12">
-                  <!--primer acordeon-->
-                  <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index">
-                    <mat-expansion-panel-header class="acordeon-enc">
-                      <mat-panel-title>
-                        <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
-                      </mat-panel-title>
-                      <mat-panel-description>
-                        <span> </span>
-                        <mat-icon>assignment</mat-icon>
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <br>
-                    <!-- Contenido -->
-                    <ul>
-                      <li *ngFor="let subtema of unidad.subtemas">
-                        {{subtema.subtema}}
-                      </li>
-                    </ul>
-                  </mat-expansion-panel>
-                  <!--primer acordeon-->
-                </div>
-              </mat-accordion>
-              <!--Accordion-->
-            </div>
-          </div>
-        </div>
-        <!--Profesor-->
-        <div class="col-md-12 p-2">
-          <h4 class="pl-2"><b>Profesor Asignado</b></h4>
-          <div class="card mb-12">
-            <div class="row no-gutters">
-              <div class="col-md-2">
-                <img [src]="infoMaestro.foto" class="card-img">
-              </div>
-              <div class="col-md-10">
-                <div class="card-body">
-                  <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
-                  <p class="card-text">{{infoMaestro.resumen}}</p>
-                  <button mat-button color="primary" [routerLink]="['/admin/usuario',infoMaestro.id]">Ver
-                    perfil</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-    <!--div inf precios-->
-    <div class="col-md-3  ml-4 pt-4 py-4">
+    <!-- Video Principal -->
+
+    <!-- Revision -->
+    <div class="col-md-4">
       <form [formGroup]="revisionForm">
         <mat-card>
           <!-- Precio -->
@@ -120,7 +43,121 @@
         </mat-card>
       </form>
     </div>
+    <!-- Revision -->
 
   </div>
   <br>
+  <!-- Descripción -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-light text-center">
+          <h4><b>Descripción</b></h4>
+        </div>
+        <div class="card-body">
+          {{infoCurso.descripcion}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Descripción -->
+  <br>
+  <!-- Objetivos -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-light text-center">
+          <h4><b>¿Qué aprenderé?</b></h4>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li *ngFor="let objetivo of infoCurso.objetivos" class="card-title">{{objetivo}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Objetivos -->
+  <br>
+  <!-- Temario -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-light text-center">
+          <h4><b>Temario</b></h4>
+        </div>
+        <div class="card-body">
+          <!--Acordeon-->
+          <mat-accordion class="example-headers-align">
+            <div class="col-md-12">
+              <!--primer acordeon-->
+              <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index">
+                <mat-expansion-panel-header class="acordeon-enc">
+                  <mat-panel-title>
+                    <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <span> </span>
+                    <mat-icon>assignment</mat-icon>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <br>
+                <!-- Contenido -->
+                <mat-accordion class="example-headers-align">
+                  <div class="col-md-12">
+                    <!--primer acordeon-->
+                    <mat-expansion-panel hideToggle="true" *ngFor="let subtema of unidad.subtemas; let j=index">
+                      <mat-expansion-panel-header class="acordeon-enc">
+                        <mat-panel-title>
+                          <b>Subtema {{j+1}}: {{subtema.subtema}}</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          <span> </span>
+                          <mat-icon>assignment</mat-icon>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <br>
+                      <!-- Contenido -->
+                      <ul>
+                        <li *ngFor="let clase of subtema.clases">
+                          {{clase.clase}}
+                        </li>
+                      </ul>
+                    </mat-expansion-panel>
+                    <!--primer acordeon-->
+                  </div>
+                </mat-accordion>
+              </mat-expansion-panel>
+              <!--primer acordeon-->
+            </div>
+          </mat-accordion>
+          <!--Accordion-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Temario -->
+  <br>
+  <!-- Profesor -->
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="pl-2"><b>Profesor Asignado</b></h4>
+      <div class="card mb-12">
+        <div class="row no-gutters">
+          <div class="col-md-2">
+            <img [src]="infoMaestro.foto" class="card-img">
+          </div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
+              <p class="card-text">{{infoMaestro.resumen}}</p>
+              <button mat-button color="primary" [routerLink]="['/admin/usuario',infoMaestro.id]">Ver
+                perfil</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Profesor -->
 </div>

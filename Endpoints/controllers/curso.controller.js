@@ -117,7 +117,7 @@ const getSubcategorias = (req, res) => {
 };
 
 const getBusqueda = (req, res) => {
-    _curso.find({nombreCompleto: new RegExp(req.params.busqueda,'i')})
+    _curso.find({ nombreCompleto: new RegExp(req.params.busqueda, 'i') })
         .then(cursos => {
             res.status(200);
             res.json({
@@ -199,16 +199,44 @@ const getById = (req, res) => {
 };
 
 const updateEstado = (req, res) => {
-    
+
     const ruta = req.params.id;
     const notas = req.body.notas;
     const estado = req.body.estado;
     const precio = req.body.precio;
     _curso.update({ ruta: ruta }, {
         $set: {
-            notas:notas,
-            estado:estado,
-            precio:precio
+            notas: notas,
+            estado: estado,
+            precio: precio
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+};
+
+const updateFotoVideo = (req, res) => {
+
+    const ruta = req.params.id;
+    const imagen = req.body.imagen;
+    const introduccionVideo = req.body.introduccionVideo;
+    _curso.update({ ruta: ruta }, {
+        $set: {
+            imagen: imagen,
+            introduccionVideo: introduccionVideo
         }
     }).then(data => {
         res.status(200);
@@ -259,6 +287,6 @@ const update = (req, res) => {
 module.exports = (Curso) => {
     _curso = Curso;
     return ({
-        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda
+        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda, updateFotoVideo
     });
 }
