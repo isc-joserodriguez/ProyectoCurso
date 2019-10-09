@@ -1,145 +1,405 @@
+<br><br><br><br>
 <div class="col-md-12 p-0">
-  <br><br><br><br>
-  <div class="row pl-5">
+  <div class="col-md-12 pl-5">
     <label class="h1 letracursotitulo mb-0"><b> {{infoCurso.nombreCompleto}} </b></label>
   </div>
   <mat-divider></mat-divider>
-  <div class="row pl-3">
-    <!--div video-->
-    <div class="col-md-8 mt-3 pl-3 mx-4">
-      <!-- <div class="embed-responsive embed-responsive-16by9 z-depth-1" autoplay loop controls>
+  <div class="container-fluid">
+    <div class="row">
+      <!--div video-->
+      <div class="col-md-9 divisorder pt-3 pl-5">
+        <!-- <div class="embed-responsive embed-responsive-16by9 z-depth-1" autoplay loop controls>
         <iframe class="embed-responsive-item" src="//player.vimeo.com/video/353296548" allowfullscreen></iframe>
       </div> -->
-      <img [src]="infoCurso.videoPrincipal">
-      <!--div descripcion-->
-      <div class="row">
-        <div class="col-md-12 p-3 mr-4 ">
-          <h4><b>Descripción</b></h4>
-          <p class="text-center mb-0">
-            {{infoCurso.descripcion}}
-          </p>
+        <div class="text-center">
+          <img [src]="infoCurso.videoPrincipal">
         </div>
-        <!--ranking star-->
-        <div class="col-md-6 pt-0">
-          <h4 class="letrastar mb-0">Valoraciones:</h4>
-          <div class="rate">
-            <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-            <label for="star5" title="text">5 stars</label>
-            <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-            <label for="star4" title="text">4 stars</label>
-            <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-            <label for="star3" title="text">3 stars</label>
-            <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-            <label for="star2" title="text">2 stars</label>
-            <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-            <label for="star1" title="text">1 star</label>
+        <!--div descripcion-->
+        <div class="container">
+          <div class="col-md-12 p-3">
+            <h4><b>Descripción</b></h4>
+            <p class="text-center mb-0">
+              {{infoCurso.descripcion}}
+            </p>
           </div>
+          <!--ranking star-->
+          <div class="col-md-6 pt-0">
+            <h4 class="letrastar mb-0">Valoraciones:</h4>
+            <div class="rate">
+              <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+              <label for="star5" title="text">5 stars</label>
+              <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+              <label for="star4" title="text">4 stars</label>
+              <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+              <label for="star3" title="text">3 stars</label>
+              <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+              <label for="star2" title="text">2 stars</label>
+              <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+              <label for="star1" title="text">1 star</label>
+            </div>
+          </div>
+          <!--Alumnos totales-->
+          <div class="col-md-12 text-right pb-1">
+            <img class="icon-nav" src="./../../../assets/icons/alumnos.svg">
+            <label for="">{{infoCurso.inscritos}} Alumnos</label>
+          </div>
+          <!--Objetivos-->
+          <div class="col-md-12 p-2">
+            <div class="card descridos">
+              <div class="card-header bg-light text-center">
+                ¿Qué aprenderé?
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li *ngFor="let objetivo of infoCurso.objetivos" class="card-title">{{objetivo}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--Temario-->
+          <div class="col-md-12 p-2">
+            <div class="card descridos">
+              <div class="card-header bg-light text-center">
+                Temario
+              </div>
+              <div class="card-body">
+                <!--Acordeon-->
+                <mat-accordion class="example-headers-align">
+                  <div class="col-md-12">
+                    <!--primer acordeon-->
+                    <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index"
+                      class="cuerpo">
+                      <mat-expansion-panel-header class="encabezado">
+                        <mat-panel-title>
+                          <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          <span> </span>
+                          <mat-icon>assignment</mat-icon>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <br>
+                      <!-- Contenido -->
+                      <ul>
+                        <li *ngFor="let subtema of unidad.subtemas">
+                          {{subtema.subtema}}
+                        </li>
+                      </ul>
+                    </mat-expansion-panel>
+                    <!--primer acordeon-->
+                  </div>
+                </mat-accordion>
+                <!--Accordion-->
+              </div>
+            </div>
+          </div>
+          <!--Profesor-->
+          <div class="col-md-12 p-2">
+            <h4 class="pl-2"><b>Profesor Asignado</b></h4>
+            <div class="card mb-12">
+              <div class="row no-gutters">
+                <div class="col-md-2">
+                  <img [src]="infoMaestro.foto" class="card-img">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
+                    <p class="card-text">{{infoMaestro.resumen}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!--Comentarios-->
+          <div class="col-md-12">
+            <h4 class="pl-2 mb-0"><b>Comentarios</b></h4>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="container text-center">
+                  <label class="txtprom m-0">8.6</label>
+                </div>
+                <!--ranking star-->
+                <div class="container ml-3">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                  </div>
+                  <h6 class="letrastar mb-0">Valoración del curso</h6>
+                </div>
+              </div>
+              <!--Barras-->
+              <div class="col-md-5 pt-3">
+                <div class="progress" style="height: 20px;">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+                <br>
+                <div class="progress" style="height: 20px;">
+                  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+                <br>
+                <div class="progress" style="height: 20px;">
+                  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+                <br>
+                <div class="progress" style="height: 20px;">
+                  <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+                <br>
+                <div class="progress" style="height: 20px;">
+                  <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <!--estrellas-->
+              <div class="col-md-4">
+                <!--ranking star-->
+                <div class="input-group input-group-sm vertical-center">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                    <label class="mb-0" for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label class="mb-0" for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label class="mb-0" for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label class="mb-0" for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label class="mb-0" for="star1" title="text">1 star</label>
+                  </div>
+                  <label class="vertical-center ml-2"><b>34%</b></label>
+                </div>
+                <div class="input-group input-group-sm vertical-center">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                    <label class="mb-0" for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label class="mb-0" for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label class="mb-0" for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label class="mb-0" for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label class="mb-0" for="star1" title="text">1 star</label>
+                  </div>
+                  <label class="vertical-center ml-2"><b>34%</b></label>
+                </div>
+                <div class="input-group input-group-sm vertical-center">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                    <label class="mb-0" for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label class="mb-0" for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label class="mb-0" for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label class="mb-0" for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label class="mb-0" for="star1" title="text">1 star</label>
+                  </div>
+                  <label class="vertical-center ml-2"><b>34%</b></label>
+                </div>
+                <div class="input-group input-group-sm vertical-center">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                    <label class="mb-0" for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label class="mb-0" for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label class="mb-0" for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label class="mb-0" for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label class="mb-0" for="star1" title="text">1 star</label>
+                  </div>
+                  <label class="vertical-center ml-2"><b>34%</b></label>
+                </div>
+                <div class="input-group input-group-sm vertical-center">
+                  <div class="rate m-0 p-0">
+                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
+                    <label class="mb-0" for="star5" title="text">5 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
+                    <label class="mb-0" for="star4" title="text">4 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
+                    <label class="mb-0" for="star3" title="text">3 stars</label>
+                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
+                    <label class="mb-0" for="star2" title="text">2 stars</label>
+                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
+                    <label class="mb-0" for="star1" title="text">1 star</label>
+                  </div>
+                  <label class="vertical-center ml-2"><b>34%</b></label>
+                </div>
+
+              </div>
+            </div>
+            <!--Fin comentarios-->
+          </div>
+
+          <!--Reseñas-->
+          <div class="container">
+            <h4 class="pl-2 mb-0"><b>Reseñas</b></h4>
+          </div>
+          <div class="col-md-12 mt-1">
+            <mat-divider></mat-divider>
+            <br>
+            <ul class="list-unstyled">
+              <li class="media">
+                <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
+                  <img src="http://www.lorempixel.com/200/300" class="mr-3" alt="..." width="100" height="100">
+                </div>
+
+                <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
+                  <div class="p-2 bd-highlight">
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
+                      <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
+                    </span>
+                  </div>
+                  <div>
+                    <label>3</label>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
+                      <img class="imgicon" src="./../../../assets/icons/libro.svg" />
+                    </span>
+                  </div>
+                  <div>
+                    <label>2</label>
+                  </div>
+                </div>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">List-based media object</h5>
+                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                  odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                  fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+              </li>
+            </ul>
+
+          </div>
+
         </div>
-        <!--Alumnos totales-->
-        <div class="col-md-6 text-right pt-3">
-          <img class="icon-nav" src="./../../../assets/icons/alumnos.svg">
-          <label for="">{{infoCurso.inscritos}} Alumnos</label>
-        </div>
-        <!--Objetivos-->
-        <div class="col-md-12 p-2">
-          <div class="card">
-            <div class="card-header bg-light text-center">
-              ¿Qué aprenderé?
+      </div>
+
+      <!--div inf precios-->
+      <div class="col-md-3 pt-3">
+        <div class="container">
+          <div class="card text-center">
+            <img class="imgsale align-rigth" src="./../../../assets/icons/sale.svg" />
+            <div class=" card-header light-blue lighten-1 textoprecio p-4">
+              <label>${{infoCurso.precio}} MX</label>
             </div>
             <div class="card-body">
-              <ul>
-                <li *ngFor="let objetivo of infoCurso.objetivos" class="card-title">{{objetivo}}</li>
+              <label class="card-title">Este curso contiene:</label>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item card-text"><i class="fas fa-certificate"></i> Certificado de finalización
+                </li>
+                <li class="list-group-item card-text"><i class="fas fa-sync"></i> Actualizaciones continuas</li>
+                <li class="list-group-item card-text"><i class="fas fa-photo-video"></i> Ejercicios y vídeos incluidos
+                </li>
               </ul>
             </div>
-          </div>
-        </div>
-        <!--Temario-->
-        <div class="col-md-12 p-2">
-          <div class="card">
-            <div class="card-header bg-light text-center">
-              Temario
-            </div>
-            <div class="card-body">
-              <!--Acordeon-->
-              <mat-accordion class="example-headers-align">
-                <div class="col-md-12">
-                  <!--primer acordeon-->
-                  <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index">
-                    <mat-expansion-panel-header class="acordeon-enc">
-                      <mat-panel-title>
-                        <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
-                      </mat-panel-title>
-                      <mat-panel-description>
-                        <span> </span>
-                        <mat-icon>assignment</mat-icon>
-                      </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <br>
-                    <!-- Contenido -->
-                    <ul>
-                      <li *ngFor="let subtema of unidad.subtemas">
-                        {{subtema.subtema}}
-                      </li>
-                    </ul>
-                  </mat-expansion-panel>
-                  <!--primer acordeon-->
-                </div>
-              </mat-accordion>
-              <!--Accordion-->
+            <div class="card-footer text-muted light-blue lighten-1 white-text">
+              <button class="btn-lg p-2 mb-2" mat-raised-button color="warn">
+                ¡Comprar Ahora!
+              </button> <br>
+              <button class="btn-lg" mat-raised-button color="primary"><i class="fas fa-cart-plus"></i></button>
             </div>
           </div>
-        </div>
-        <!--Profesor-->
-        <div class="col-md-12 p-2">
-          <h4 class="pl-2"><b>Profesor Asignado</b></h4>
-          <div class="card mb-12">
-            <div class="row no-gutters">
-              <div class="col-md-2">
-                <img [src]="infoMaestro.foto" class="card-img">
-              </div>
-              <div class="col-md-10">
-                <div class="card-body">
-                  <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
-                  <p class="card-text">{{infoMaestro.resumen}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
+          <br><br><br>
+          <!--Carrusel-->
+          <div class="row pl-4">
+            <h4 class="txtTodos">Cursos Relacionados</h4>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner text-center">
+                <div class="carousel-item active">
+                  <div class="card encuadre" style="width: 15rem;">
+                    <img src="http://www.lorempixel.com/50/50" class="card-img-top" alt="...">
+
+                    <div class="card-body descri">
+                      <h5 class="card-title negrita">Curso</h5>
+                      <div class=" p-3">descripcion</div>
+                      <br>
+                      <div class="row justify-content-between">
+                        <div class="text-center">
+                          <p class="preciocar">$500</p>
+                        </div>
+                        <div class="text-center">
+                          <button type="button" class="btn colorbtn btn-sm">Ir al curso</button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="card encuadre" style="width: 15rem;">
+                    <img src="http://www.lorempixel.com/50/50" class="card-img-top" alt="...">
+
+                    <div class="card-body descri ">
+                      <h5 class="card-title negrita">Curso</h5>
+                      <div class=" p-3">descripcion</div>
+                      <br>
+                      <div class="row justify-content-between">
+                        <div class="text-center">
+                          <p class="preciocar">$500</p>
+                        </div>
+                        <div class="text-center">
+                          <button type="button" class="btn colorbtn btn-sm">Ir al curso</button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+          </div>
+          <br><br>
+          <!--Insignias del curso-->
+          <div class="row px-4">
+            <h4 class="txtTodos">Insignias del curso</h4>
+            <div class="jumbotron backinsignias">
+              <p class="lead text-center">¡Realizando actividades podrás ganar más insignias!</p>
+              <hr class="my-4">
+              <div class="d-flex flex-wrap bd-highlight mb-3">
+                <div class="p-2 bd-highlight"> <img class="imgicon" src="./../../../assets/icons/libro.svg" /></div>
+                <div class="p-2 bd-highlight"> <img class="imgicon" src="./../../../assets/icons/libro.svg" /></div>
+                <div class="p-2 bd-highlight"> <img class="imgicon" src="./../../../assets/icons/libro.svg" /></div>
+                <div class="p-2 bd-highlight"> <img class="imgicon" src="./../../../assets/icons/libro.svg" /></div>
+                <div class="p-2 bd-highlight"> <img class="imgicon" src="./../../../assets/icons/libro.svg" /></div>
+                <div class="p-2 bd-highlight"> <img class="imgicon" src="./../../../assets/icons/libro.svg" /></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <mat-divider [vertical]="true"></mat-divider>
-    <!--div inf precios-->
-    <div class="col-md-3  ml-4 pt-4 py-4">
-      <div class="card text-center">
-        <img class="imgsale align-rigth" src="./../../../assets/icons/sale.svg" />
-        <div class=" card-header light-blue lighten-1 textoprecio p-4">
-          <label>${{infoCurso.precio}} MX</label>
-        </div>
-        <div class="card-body">
-          <label class="card-title">Este curso contiene:</label>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item card-text"><i class="fas fa-certificate"></i> Certificado de finalización</li>
-            <li class="list-group-item card-text"><i class="fas fa-sync"></i> Actualizaciones continuas</li>
-            <li class="list-group-item card-text"><i class="fas fa-photo-video"></i> Ejercicios y vídeos incluidos</li>
-          </ul>
-        </div>
-        <div class="card-footer text-muted light-blue lighten-1 white-text">
-          <button class="btn-lg p-2 mb-2" mat-raised-button color="warn">
-            ¡Comprar Ahora!
-          </button> <br>
-          <button class="btn-lg" mat-raised-button color="primary"><i class="fas fa-cart-plus"></i></button>
-        </div>
-      </div>
-    </div>
-
   </div>
 
 
-  <div class="row pl-5">
-
-  </div>
-
-  <br>
 </div>
