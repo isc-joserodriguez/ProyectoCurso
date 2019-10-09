@@ -70,5 +70,6 @@ export class CursoComponent implements OnInit {
       this.infoMaestro.resumen = this.respuesta.detail[0].resumen;
     });
   }
+  
 
 }
