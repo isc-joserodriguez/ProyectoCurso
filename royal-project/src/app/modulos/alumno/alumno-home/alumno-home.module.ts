@@ -24,6 +24,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { RedirectComponent } from './redirect/redirect.component';
 
 
+//rating star
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
@@ -37,7 +39,8 @@ import { RedirectComponent } from './redirect/redirect.component';
     MatDividerModule,
     MatExpansionModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RatingModule
   ]
 })
 export class AlumnoHomeModule { }

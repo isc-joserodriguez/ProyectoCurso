@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-curso',
@@ -70,6 +71,12 @@ export class CursoComponent implements OnInit {
       this.infoMaestro.resumen = this.respuesta.detail[0].resumen;
     });
   }
-  
+
+  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+    `Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`;
+  }
 
 }
