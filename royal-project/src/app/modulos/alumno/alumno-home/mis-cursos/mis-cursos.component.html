@@ -1,3 +1,65 @@
-<p>
-  mis-cursos works!
-</p>
+<br>
+<br>
+<br>
+<br>
+<div class="col-md-12">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="categorias container mx-auto">
+        <p class="h3 font-weight-bold text-center bg-warning text-dark">MIS CURSOS</p> <br>
+
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Tecnologías">
+            <div class="Tecnologias">
+              <br>
+              <div class="row col-md-12 ">
+                <div class="col-md-3 text-center"
+                  *ngFor="let curso of cursosTec | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <label>
+                    <div class="card">
+                      <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                        <p class="card-text">{{curso.descripcionCurso}}</p>
+                        <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Idiomas">
+            <div class="Idiomas">
+              <br>
+              <div class="row col-md-12 o">
+                <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
+                  <label>
+                    <div class="card">
+                      <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                        <p class="card-text">{{curso.descripcionCurso}}</p>
+                        <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+        <!--No cursos-->
+        <div class="col-md-12 p-2">
+          <div class="card mb-12">
+            <h3>No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
+          </div>
+        </div>
+        <!--No cursos-->
+
+      </div>
+    </div>
+  </div>
+</div>

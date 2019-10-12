@@ -10,6 +10,7 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 })
 export class CategoriasComponent implements OnInit {
   categoria = '';
+  p : number = 1;
 
   respuesta: any = {
     code: 0,

@@ -8,6 +8,7 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   styleUrls: ['./busqueda.component.scss']
 })
 export class BusquedaComponent implements OnInit {
+  p : number = 1;
 
   respuesta: any = {
     code: 0,

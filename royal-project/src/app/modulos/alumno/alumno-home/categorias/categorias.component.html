@@ -30,7 +30,7 @@
                   <div class="col-md-4 ml-4 p-2 text-center">
                     <p class="preciocar">${{curso.precio}}</p>
                   </div>
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <button type="button" class="btn colorbtn btn-lg">Ir al curso</button>
                   </div>
                 </div>
@@ -76,7 +76,7 @@
       </div>
       <div class="col-md-9 container pl-0 ml-0 descri">
         <mat-divider></mat-divider>
-        <div class="col-md-12 p-2" *ngFor="let curso of listaCursos">
+        <div class="col-md-12 p-2" *ngFor="let curso of listaCursos | paginate: { itemsPerPage: 5, currentPage: p }">
           <h4 class="pl-2"><b>{{curso.nombreCompleto}}</b></h4>
           <div class="card mb-12">
             <div class="row no-gutters">
@@ -102,6 +102,7 @@
           <br>
           <mat-divider></mat-divider>
         </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>

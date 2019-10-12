@@ -41,6 +41,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 //rating star
 import { RatingModule } from 'ng-starrating';
 
+//pagination
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,8 @@ import { RatingModule } from 'ng-starrating';
     MatMenuModule,
     MatDividerModule,
     InfiniteScrollModule,
-    RatingModule
+    RatingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
