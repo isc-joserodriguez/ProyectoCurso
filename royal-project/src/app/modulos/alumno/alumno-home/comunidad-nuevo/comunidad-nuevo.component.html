@@ -1,3 +1,105 @@
-<p>
-  comunidad-nuevo works!
-</p>
+<div class="col-md-12 px-0" style="background-color: rgba(126, 124, 121, 0.068);">
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="col-md-12 px-0 paqueteshome">
+    <div class="container">
+      <div class="row ">
+        <h2 class="p-2 letracursotitulo"><b>Comunidad</b></h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <!--div pregunta-->
+            <div class="container">
+              <div class="card">
+
+                <div class="row justify-content-center py-3">
+                  <img class="icon-check mr-1" src="./../../../assets/icons/conversacion.svg">
+                  <h4>¡Haz tu pregunta!</h4>
+                </div>
+
+                <div class="container form col-md-12 px-5">
+                  <mat-form-field appearance="outline" class="field-login">
+                    <mat-label>¿Cuál es tu pregunta?</mat-label>
+                    <input matInput placeholder="Ingresa tu pregunta">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="field-login">
+                    <mat-label>Detalles:</mat-label>
+                    <textarea matInput placeholder="Escribe los detalles de tu pregunta" cdkTextareaAutosize
+                      cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15"></textarea>
+                  </mat-form-field>
+                  <div class="text-right pr-4 pb-3">
+                    <button type="button" class="btn btn-success">Enviar</button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="container">
+            <div class="card">
+              <div class="row justify-content-center p-2 pt-3">
+                <img class="icon-check mr-1" src="./../../../assets/icons/redactar.svg">
+                <h4>Consejos para redactar</h4>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="container text-center consejos pt-2">
+                <label>La comunidad está aquí para ayudarlo con problemas específicos de Tecnología e Idiomas.</label>
+                <label>Evite hacer preguntas basadas en opiniones.</label>
+              </div>
+              <!--acordion-->
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      1.- Resumir el problema
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Incluye detalles sobre tu objetivo</li>
+                    <li class="list-group-item">Describa los resultados esperados y reales.</li>
+                    <li class="list-group-item">Incluir cualquier error obtenido.</li>
+                  </ul>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      2.- Describe lo que has probado.
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="text-center">
+                    <p>Muestre lo que ha probado y díganos qué encontró (en este sitio o en otro lugar) y por qué no
+                      satisfizo sus necesidades. Puede obtener mejores respuestas cuando proporciona investigación.</p>
+                  </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      3.- Incluye un ejemplo.
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="text-center">
+                    <p>Cuando sea apropiado, comparta un ejemplo que otros necesitan para reproducir su problema
+                      (también llamado un ejemplo mínimo y reproducible )</p>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
