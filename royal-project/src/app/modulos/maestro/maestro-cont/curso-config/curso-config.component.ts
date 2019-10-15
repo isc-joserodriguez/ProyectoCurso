@@ -49,7 +49,10 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
   porcentajeVideo = 0;
   videoForm: FormGroup;
 
-
+  mostrarFormObjetivo = false;
+  objetivosForm: FormGroup;
+  editado = 0;
+  editar = false;
 
   constructor(private router: Router, private firebase: FirebaseService, private cursos: CursosService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
@@ -60,6 +63,9 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
     });
     this.videoForm = this.formBuilder.group({
       video: new FormControl(null, Validators.required)
+    });
+    this.objetivosForm = this.formBuilder.group({
+      objetivo: ['', Validators.required]
     });
     this.getCurso(this.route.snapshot.params.id);
   }
@@ -199,6 +205,34 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
           });
         });
       }
+    });
+  }
+
+  guardarObjetivo() {
+    if (this.editar) {
+      this.infoCurso.objetivos[this.editado] = { objetivo: this.objetivosForm.value.objetivo };
+    } else {
+      this.infoCurso.objetivos.push({ objetivo: this.objetivosForm.value.objetivo });
+    }
+    this.cursos.updateObjetivos(this.route.snapshot.params.id, { objetivos: this.infoCurso.objetivos }).subscribe(res => {
+      this.mostrarFormObjetivo = false;
+    });
+  }
+
+  editarObjetivo(i) {
+    this.mostrarFormObjetivo = true;
+    this.objetivosForm.setValue({
+      objetivo: this.infoCurso.objetivos[i].objetivo
+    });
+    this.editado = i
+    this.editar = true
+  }
+  
+  addObjetivo() {
+    this.editar = false
+    this.mostrarFormObjetivo = true;
+    this.objetivosForm.setValue({
+      objetivo: ''
     });
   }
 }

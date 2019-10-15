@@ -17,8 +17,8 @@
                     <button mat-stroked-button (click)="recargarVideo()">Recargar Video</button>
                   </mat-card-title>
                 </mat-card-header>
-                <video oncontextmenu="return false" mat-card-image id='videoId' class='video-js' controls preload='auto' width='200' height='250'
-                  [poster]='portada' controlsList="nodownload">
+                <video oncontextmenu="return false" mat-card-image id='videoId' class='video-js' controls preload='auto'
+                  width='200' height='250' [poster]='portada' controlsList="nodownload">
                 </video>
                 <mat-card-content>
                   <p class="text-center">
@@ -153,7 +153,6 @@
                   </mat-form-field>
                   <button [disabled]="!tareaForm.valid" mat-stroked-button (click)="subirTarea()">Guardar</button>
                 </form>
-
               </div>
             </div>
           </div>
