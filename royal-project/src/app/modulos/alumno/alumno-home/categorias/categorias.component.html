@@ -8,7 +8,7 @@
 </div>
 <br>
 <!--cursosdestacados-->
-<div class="row">
+<div class="container-fluid">
   <h4 class="txtTodos container">Cursos destacados</h4>
 </div>
 <!--Carrusel-->
@@ -30,7 +30,7 @@
                   <div class="col-md-4 ml-4 p-2 text-center">
                     <p class="preciocar">${{curso.precio}}</p>
                   </div>
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <button type="button" class="btn colorbtn btn-lg">Ir al curso</button>
                   </div>
                 </div>
@@ -55,52 +55,54 @@
 <br>
 
 <!--Todos los cursos-->
-<div class="row text-center">
+<div class="container-fluid text-center">
   <h4 class="txtTodos container">Todos los cursos de {{categoria}}</h4>
 </div>
 <br>
 <div class="col-md-12 p-0">
-  <div class="row">
-    <br>
-    <div class="col-md-2 divisor container ml-5">
-      <h5 class="pt-2"><b>Royal Language</b></h5>
-      <div class="input-group input-group-sm vertical-center p-0">
-        <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
-          <span class="text-check"><b> Royal</b></span></mat-checkbox>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 divisor container ml-5">
+        <h5 class="pt-2"><b>Royal Language</b></h5>
+        <div class="input-group input-group-sm vertical-center p-0">
+          <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
+            <span class="text-check"><b> Royal</b></span></mat-checkbox>
+        </div>
+        <mat-divider></mat-divider>
+        <h5 class="pt-2"><b>Subcategorías</b></h5>
+        <div class="row container pt-2" *ngFor="let subcategoria of subcategorias">
+          <mat-checkbox>{{subcategoria}}</mat-checkbox>
+        </div>
       </div>
-      <mat-divider></mat-divider>
-      <h5 class="pt-2"><b>Subcategorías</b></h5>
-      <div class="row container pt-2" *ngFor="let subcategoria of subcategorias">
-        <mat-checkbox>{{subcategoria}}</mat-checkbox>
-      </div>
-    </div>
-    <div class="col-md-9 container pl-0 ml-0 descri">
-      <mat-divider></mat-divider>
-      <div class="col-md-12 p-2" *ngFor="let curso of listaCursos">
-        <h4 class="pl-2"><b>{{curso.nombreCompleto}}</b></h4>
-        <div class="card mb-12">
-          <div class="row no-gutters">
-            <div class="col-md-2">
-              <img [src]="curso.imagen" class="card-img">
-            </div>
-            <div class="col-md-10">
-              <div class="card-body">
-                <h5 class="card-title">{{curso.descripcionCurso}}</h5>
-                <p class="card-text">{{curso.subcategoria}}</p>
-                <div class="row justify-content-between">
-                  <div class="col-4">
-                    <p class="card-title">${{curso.precio}}</p>
-                  </div>
-                  <div class="col-4">
-                    <a href="#" class="btn colorbtn">Ir al curso</a>
+      <div class="col-md-9 container pl-0 ml-0 descri">
+        <mat-divider></mat-divider>
+        <div class="col-md-12 p-2" *ngFor="let curso of listaCursos | paginate: { itemsPerPage: 5, currentPage: p }">
+          <h4 class="pl-2"><b>{{curso.nombreCompleto}}</b></h4>
+          <div class="card mb-12">
+            <div class="row no-gutters">
+              <div class="col-md-2">
+                <img [src]="curso.imagen" class="card-img">
+              </div>
+              <div class="col-md-10">
+                <div class="card-body">
+                  <h5 class="card-title">{{curso.descripcionCurso}}</h5>
+                  <p class="card-text">{{curso.subcategoria}}</p>
+                  <div class="row justify-content-between">
+                    <div class="col-4">
+                      <p class="card-title">${{curso.precio}}</p>
+                    </div>
+                    <div class="col-4">
+                      <a href="#" class="btn colorbtn">Ir al curso</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <br>
+          <mat-divider></mat-divider>
         </div>
-        <br>
-        <mat-divider></mat-divider>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>

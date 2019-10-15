@@ -38,6 +38,12 @@ import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuar
 //scroll infinito
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
+//rating star
+import { RatingModule } from 'ng-starrating';
+
+//pagination
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +74,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatSelectModule,
     MatMenuModule,
     MatDividerModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    RatingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

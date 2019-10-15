@@ -14,7 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
+
 
 
 // mdbootstrap
@@ -24,10 +28,16 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { RedirectComponent } from './redirect/redirect.component';
 
 
+//rating star
+import { RatingModule } from 'ng-starrating';
+
+//pagination
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ComunidadComponent } from './comunidad/comunidad.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
@@ -37,7 +47,11 @@ import { RedirectComponent } from './redirect/redirect.component';
     MatDividerModule,
     MatExpansionModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RatingModule,
+    NgxPaginationModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class AlumnoHomeModule { }

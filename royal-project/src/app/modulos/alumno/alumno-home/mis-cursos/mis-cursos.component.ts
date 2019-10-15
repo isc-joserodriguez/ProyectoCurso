@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mis-cursos.component.scss']
 })
 export class MisCursosComponent implements OnInit {
+  p: number = 1;
 
   constructor() { }
 

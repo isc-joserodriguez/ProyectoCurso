@@ -26,16 +26,7 @@
           <div class="col-md-6 pt-0">
             <h4 class="letrastar mb-0">Valoraciones:</h4>
             <div class="rate">
-              <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-              <label for="star5" title="text">5 stars</label>
-              <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-              <label for="star4" title="text">4 stars</label>
-              <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-              <label for="star3" title="text">3 stars</label>
-              <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-              <label for="star2" title="text">2 stars</label>
-              <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-              <label for="star1" title="text">1 star</label>
+              <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
             </div>
           </div>
           <!--Alumnos totales-->
@@ -105,6 +96,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
                     <p class="card-text">{{infoMaestro.resumen}}</p>
+                    <button type="button" class="btn btn-outline-primary btn-sm">Ver perfil</button>
                   </div>
                 </div>
               </div>
@@ -122,16 +114,7 @@
                 <!--ranking star-->
                 <div class="container ml-3">
                   <div class="rate m-0 p-0">
-                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text">5 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text">4 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text">3 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text">2 stars</label>
-                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text">1 star</label>
+                    <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
                   </div>
                   <h6 class="letrastar mb-0">Valoración del curso</h6>
                 </div>
@@ -139,12 +122,13 @@
               <!--Barras-->
               <div class="col-md-5 pt-3">
                 <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                    aria-valuemax="100">
                   </div>
                 </div>
                 <br>
                 <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                  <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
                 <br>
@@ -154,12 +138,12 @@
                 </div>
                 <br>
                 <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
                 <br>
                 <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+                  <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
               </div>
@@ -168,76 +152,31 @@
                 <!--ranking star-->
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-                    <label class="mb-0" for="star5" title="text">5 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-                    <label class="mb-0" for="star4" title="text">4 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-                    <label class="mb-0" for="star3" title="text">3 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-                    <label class="mb-0" for="star2" title="text">2 stars</label>
-                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-                    <label class="mb-0" for="star1" title="text">1 star</label>
+                    <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
                   </div>
                   <label class="vertical-center ml-2"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-                    <label class="mb-0" for="star5" title="text">5 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-                    <label class="mb-0" for="star4" title="text">4 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-                    <label class="mb-0" for="star3" title="text">3 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-                    <label class="mb-0" for="star2" title="text">2 stars</label>
-                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-                    <label class="mb-0" for="star1" title="text">1 star</label>
+                    <star-rating value="4" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
                   </div>
                   <label class="vertical-center ml-2"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-                    <label class="mb-0" for="star5" title="text">5 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-                    <label class="mb-0" for="star4" title="text">4 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-                    <label class="mb-0" for="star3" title="text">3 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-                    <label class="mb-0" for="star2" title="text">2 stars</label>
-                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-                    <label class="mb-0" for="star1" title="text">1 star</label>
+                    <star-rating value="3" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
                   </div>
                   <label class="vertical-center ml-2"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-                    <label class="mb-0" for="star5" title="text">5 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-                    <label class="mb-0" for="star4" title="text">4 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-                    <label class="mb-0" for="star3" title="text">3 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-                    <label class="mb-0" for="star2" title="text">2 stars</label>
-                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-                    <label class="mb-0" for="star1" title="text">1 star</label>
+                    <star-rating value="2" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
                   </div>
                   <label class="vertical-center ml-2"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <input [attr.checked]="infoCurso.valoracion==5" type="radio" id="star5" name="rate" value="5" />
-                    <label class="mb-0" for="star5" title="text">5 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==4" type="radio" id="star4" name="rate" value="4" />
-                    <label class="mb-0" for="star4" title="text">4 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==3" type="radio" id="star3" name="rate" value="3" />
-                    <label class="mb-0" for="star3" title="text">3 stars</label>
-                    <input [attr.checked]="infoCurso.valoracion==2" type="radio" id="star2" name="rate" value="2" />
-                    <label class="mb-0" for="star2" title="text">2 stars</label>
-                    <input [attr.checked]="false" type="radio" id="star1" name="rate" value="1" />
-                    <label class="mb-0" for="star1" title="text">1 star</label>
+                    <star-rating value="1" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
                   </div>
                   <label class="vertical-center ml-2"><b>34%</b></label>
                 </div>
@@ -288,7 +227,7 @@
             </ul>
 
           </div>
-
+          <!--fin reseñas-->
         </div>
       </div>
 
@@ -337,7 +276,7 @@
                           <p class="preciocar">$500</p>
                         </div>
                         <div class="text-center">
-                          <button type="button" class="btn colorbtn btn-sm">Ir al curso</button>
+                          <button type="button" class="btn btn-outline-danger btn-sm">Ir al curso</button>
                         </div>
                       </div>
                     </div>
@@ -358,7 +297,7 @@
                           <p class="preciocar">$500</p>
                         </div>
                         <div class="text-center">
-                          <button type="button" class="btn colorbtn btn-sm">Ir al curso</button>
+                          <button type="button" class="btn btn-outline-danger btn-sm">Ir al curso</button>
                         </div>
                       </div>
                     </div>

@@ -8,6 +8,7 @@ import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 import { CursoComponent } from './curso/curso.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { ComunidadComponent } from './comunidad/comunidad.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'mis-cursos',
     component: MisCursosComponent
+  },
+  {
+    path: 'comunidad',
+    component: ComunidadComponent
   },
   {
     path: 'busqueda/:ruta',
