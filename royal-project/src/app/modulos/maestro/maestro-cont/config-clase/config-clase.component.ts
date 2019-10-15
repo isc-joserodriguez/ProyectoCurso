@@ -214,7 +214,11 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
     this.infoClase.tipoPlantilla = 1;
     this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
     this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
-      this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
+      this.videoForm.setValue({
+        video: '',
+        texto: this.textoForm.value.texto
+      })
+      //this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
     });
   }
 

@@ -34,10 +34,13 @@ import { RatingModule } from 'ng-starrating';
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ComunidadComponent } from './comunidad/comunidad.component';
+import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.component';
+import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
+import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
