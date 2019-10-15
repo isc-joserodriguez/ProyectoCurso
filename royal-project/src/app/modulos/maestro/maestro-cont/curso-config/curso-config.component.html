@@ -92,6 +92,7 @@
           Temario
         </div>
         <div class="example-container mat-elevation-z8">
+          <br>
           <!--Acordeon-->
           <mat-accordion class="example-headers-align">
             <div class="col-md-12">
@@ -124,32 +125,25 @@
                       <br>
                       <!-- Lista clases -->
                       <ul>
-                        <li *ngFor="let clase of subtema.clases">
-                          {{clase.clase}}
+                        <li *ngFor="let clase of subtema.clases; let k=index">
+                          {{clase.clase}} <button mat-stroked-button [routerLink]="['./temario', i+1, j+1, k+1]">Configurar Contenido</button>
                         </li>
                       </ul>
                       <!-- Lista clases -->
+                      <button mat-stroked-button [routerLink]="['./temario', i+1, j+1]">Editar Subtema</button>
                     </mat-expansion-panel>
                     <!--Clases-->
                   </div>
                 </mat-accordion>
                 <!-- Subtemas -->
+                <button mat-stroked-button [routerLink]="['./temario', i+1]">Editar Unidad</button>
               </mat-expansion-panel>
               <!--Unidades-->
             </div>
           </mat-accordion>
+          <button mat-stroked-button [routerLink]="['./temario']">Editar Temario</button>
           <!--Accordion-->
-          <!-- <ul *ngFor="let unidad of infoCurso.contenidoCurso">
-            <li>{{unidad.unidad}}</li>
-            <ul *ngFor="let subtema of unidad.subtemas">
-              <li>{{subtema.subtema}}</li>
-              <ul *ngFor="let clase of subtema.clases">
-                <li>{{clase.clase}}</li>
-              </ul>
-            </ul>
-            <mat-divider></mat-divider>
-          </ul> -->
-
+          <br>
         </div>
       </div>
     </div>

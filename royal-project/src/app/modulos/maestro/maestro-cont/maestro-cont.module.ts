@@ -13,7 +13,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 // MDBootstrap
@@ -26,9 +29,11 @@ import { CursoConfigComponent } from './curso-config/curso-config.component';
 import { ConfigUnidadComponent } from './config-unidad/config-unidad.component';
 import { ConfigSubtemaComponent } from './config-subtema/config-subtema.component';
 import { ConfigClaseComponent } from './config-clase/config-clase.component';
+import { ConfigTemarioComponent } from './config-temario/config-temario.component';
+import { RedirecComponent } from './redirec/redirec.component';
 
 @NgModule({
-  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent],
+  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent],
   imports: [
     CommonModule,
     MaestroContRoutingModule,
@@ -42,7 +47,10 @@ import { ConfigClaseComponent } from './config-clase/config-clase.component';
     ReactiveFormsModule,
     MatExpansionModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTabsModule
   ]
 })
 export class MaestroContModule { }

@@ -20,22 +20,30 @@ const cursoSchema = new mongoose.Schema({
             ponderacionUnidad: { type: Number },
             subtemas: [{
                 subtema: { type: String },
-                ponderacionSubtemas: { type: Number },
+                ponderacionSubtema: { type: Number },
                 clases: [{
+                    ponderacionClase: { type: Number },
                     clase: { type: String },
-                    ponderacionSubtemas: { type: Number },
-                    contenidoClase: [{
-                        ponderacion: { type: Number },
-                        tipoPlantilla: { type: Number },//0 - Video y Texto | 1 -  Recurso | 2 - Texto
-                        video: { type: String },
-                        texto: { type: String },
-                        recursos: [{ type: String }],//Recursos del contenido de la leccion
-                        tarea: [{ recurso: { type: String }, envios: [{ _id: { type: String }, idAlumno: { type: String }, estatus: { type: String }, calificacion: { type: String }, fecha: { type: Date }, retroalimentacion: { type: String } }] }],//Recursos de la tarea
-                        comentarios: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String }, respuestas: [{ _id: { type: String }, idPersona: { type: String }, comentario: { type: String } }] }]
-                    }]
+                    tipoPlantilla: { type: Number, default: 0 },//0 - Video y Texto | 1 - Texto
+                    video: { type: String, default: 'http://vjs.zencdn.net/v/oceans.mp4' },
+                    texto: { type: String, default: '' },
+                    recursos: {
+                        activo: { type: Boolean, default: false },
+                        urls: [{ urlRecurso: { type: String }, textoRecurso: { type: String } }]
+                    },//Recursos del contenido de la leccion
+                    tarea: {
+                        activo: { type: Boolean, default: false },
+                        instruccion: { type: String },
+                        fechaLimite: { type: Date },
+                        envios: [{ idAlumno: { type: Number }, estatus: { type: Number /* 0 - Sin entregar | 1 - Entregado | 2 - Revisado */ }, aprobado: { type: Number /* 0 - Aprobado | 1 - No Aprobado */ }, fechaEntrega: { type: Date }, fechaRevisión: { type: Date }, retroalimentacion: { type: String } }]
+                    },//Recursos de la tarea
+                    comentarios: [{ idPersona: { type: Number }, comentario: { type: String }, respuestas: [{ idPersona: { type: String }, comentario: { type: String } }] }]
                 }]
             }],
-            evaluacion: { type: String } //Evaluación de la unidad (opcional).
+            evaluacion: {
+                activo: { type: Boolean, default: true },
+                recurso: { type: Number }
+            } //Evaluación de la unidad (opcional).
         }
     ],
     insignias: [{ nombreInsignia: { type: String }, descripcionInsignia: { type: String }, imagen: { type: String } }],

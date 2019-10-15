@@ -132,13 +132,6 @@
             </div>
           </div>
           <!-- Fila 5 -->
-          <!-- Fila 6 -->
-          <div class="row">
-            <div class="col-md-7 pl-4">
-              <img width="200" [src]="URLPublica">
-            </div>
-          </div>
-          <!-- Fila 6 -->
         </form>
         <!-- form -->
         <mat-action-row>
@@ -280,12 +273,10 @@
             src="./../../../assets/icons/edit.svg"> Agregar unidad</button>
 
         <mat-action-row>
-          <button *ngIf="finalizado" mat-button color="warn" [routerLink]="['../']">Cancelar</button>
-          <button *ngIf="finalizado" mat-button
+          <button mat-button color="warn" [routerLink]="['../']">Cancelar</button>
+          <button mat-button
             [disabled]="!(generalForm.valid && temarioForm.valid && temarioForm.value.objetivos.length!=0 && temarioForm.value.unidades.length!=0)"
             color="primary" (click)="subir()">Subir</button>
-          <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"
-            max="100">{{porcentaje}}%</progress>
         </mat-action-row>
       </mat-expansion-panel>
       <!--tercer acordeon-->

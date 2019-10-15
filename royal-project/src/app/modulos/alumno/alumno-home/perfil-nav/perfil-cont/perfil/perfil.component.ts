@@ -52,7 +52,7 @@ export class PerfilComponent implements OnInit {
     this.usuario.getUser(id).subscribe(user => {
       this.respuesta = user;
       this.URLPublica = this.respuesta.detail[0].foto;
-      
+
       this.perfilForm.setValue({
         nombre: this.respuesta.detail[0].nombre,
         apPaterno: this.respuesta.detail[0].apPaterno,
@@ -106,14 +106,6 @@ export class PerfilComponent implements OnInit {
   // Sube el archivo a Cloud Storage
   public subirArchivo(datos) {
     this.finalizado = false;
-    if (!this.URLPublica.includes('www.lorempixel.com')) {
-      this.viejaFoto = this.URLPublica.split('foto-perfil%2F')[1];
-      this.viejaFoto = this.viejaFoto.split('?')[0];
-      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
-        localStorage.getItem('userid') + '/foto-perfil/' + this.viejaFoto);
-      referenciaBorrar.delete();
-    }
-
     this.porcentaje = 0;
     const archivo = this.datosFormulario.get('archivo');
     const referencia = this.firebase.referenciaCloudStorage('usuario/' +
@@ -124,7 +116,17 @@ export class PerfilComponent implements OnInit {
     tarea.percentageChanges().subscribe((porcentaje) => {
       this.porcentaje = Math.round(porcentaje);
       if (this.porcentaje == 100) {
+        var currentTime = new Date().getTime();
+        while (currentTime + 1000 >= new Date().getTime()) {
+        }
         referencia.getDownloadURL().subscribe((URL) => {
+          if (!this.URLPublica.includes('www.lorempixel.com')) {
+            this.viejaFoto = this.URLPublica.split('foto-perfil%2F')[1];
+            this.viejaFoto = this.viejaFoto.split('?')[0];
+            const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
+              localStorage.getItem('userid') + '/foto-perfil/' + this.viejaFoto);
+            referenciaBorrar.delete();
+          }
           this.URLPublica = URL;
           datos.foto = URL;
           this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {

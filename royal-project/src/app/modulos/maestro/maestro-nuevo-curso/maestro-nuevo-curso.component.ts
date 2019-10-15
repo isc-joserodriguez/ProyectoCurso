@@ -36,13 +36,6 @@ export class MaestroNuevoCursoComponent implements OnInit {
   categorias = ['Tecnología', 'Idiomas'];
   subcategorias = [];
 
-  public mensajeArchivo = 'No hay un archivo seleccionado';
-  public datosFormulario = new FormData();
-  public nombreArchivo = '';
-  public URLPublica = '';
-  public porcentaje = 0;
-  public finalizado = true;
-
   constructor(private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -91,11 +84,9 @@ export class MaestroNuevoCursoComponent implements OnInit {
   get unidades() {
     return this.temarioForm.get('unidades') as FormArray;
   }
-
   subtemas(i) {
     return (this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray;
   }
-
   clases(i, j) {
     return ((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray;
   }

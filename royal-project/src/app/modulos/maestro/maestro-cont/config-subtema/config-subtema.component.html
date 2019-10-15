@@ -1,3 +1,46 @@
-<p>
-  config-subtema works!
-</p>
+<!--Subtema-->
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-light text-center">
+          Subtema {{subtema}}: {{nombreSubtema}}
+        </div>
+        <div class="example-container mat-elevation-z8 pl-5">
+          <form [formGroup]="clasesForm">
+            <!-- Clases -->
+            <div formArrayName="clases" *ngFor="let clase of clases.controls; let i = index">
+              <br>
+              <label class="h6">Clase {{i+1}}</label>
+              <br>
+              <div [formGroupName]="i">
+                <div class="row">
+                  <div class="col-md-8">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Clase {{i+1}}:</mat-label>
+                      <input matInput placeholder="Ingresa el nombre del clase" required formControlName="clase">
+                      <mat-error>
+                        <span *ngIf="!clase.valid && clase.touched">Agrega el nombre del clase.</span>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2 vertical-center">
+                    <button mat-button color="warn" (click)="removerClase(i)">Remover</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Clases -->
+          </form>
+          <button class="ml-3 btn btn-success" (click)="agregarClase()"><img class="icon-opcion"
+              src="./../../../assets/icons/edit.svg"> Agregar clase</button>
+  
+          <button mat-button color="warn" [routerLink]="['../../../']">Cancelar</button>
+          <button mat-button [disabled]="!(clasesForm.valid && clasesForm.value.clases.length!=0)" color="primary"
+            (click)="subir()">Subir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <!--Subtema-->
