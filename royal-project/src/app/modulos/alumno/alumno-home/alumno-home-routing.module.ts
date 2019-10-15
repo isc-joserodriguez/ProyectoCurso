@@ -9,6 +9,9 @@ import { CursoComponent } from './curso/curso.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { RedirectComponent } from './redirect/redirect.component';
 import { ComunidadComponent } from './comunidad/comunidad.component';
+import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.component';
+import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
+import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
 
 const routes: Routes = [
   {
@@ -48,6 +51,18 @@ const routes: Routes = [
   {
     path: 'comunidad',
     component: ComunidadComponent
+  },
+  {
+    path: 'comunidad/nueva',
+    component: ComunidadNuevoComponent
+  },
+  {
+    path: 'comunidad/pregunta/:ruta',
+    component: ComunidadPreguntaComponent
+  },
+  {
+    path: 'comunidad/mis-preguntas',
+    component: ComunidadPropiasComponent
   },
   {
     path: 'busqueda/:ruta',
