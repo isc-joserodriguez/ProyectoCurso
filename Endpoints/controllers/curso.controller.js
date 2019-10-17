@@ -281,6 +281,31 @@ const updateTemario = (req, res) => {
     });
 };
 
+const updateObjetivos = (req, res) => {
+    const ruta = req.params.id;
+    const objetivos = req.body.objetivos;
+    _curso.update({ ruta: ruta }, {
+        $set: {
+            objetivos: objetivos
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+};
+
 const update = (req, res) => {
     const { id } = req.params;
     const curso = req.body;
@@ -312,6 +337,6 @@ const update = (req, res) => {
 module.exports = (Curso) => {
     _curso = Curso;
     return ({
-        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda, updateFotoVideo, updateTemario
+        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda, updateFotoVideo, updateTemario, updateObjetivos
     });
 }

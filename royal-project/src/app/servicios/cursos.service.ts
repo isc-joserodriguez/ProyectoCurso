@@ -43,17 +43,21 @@ export class CursosService {
     return this.http.put(apiUrl + '/updateEstado/' + id, estatus);
   }
 
-  getBusqueda(busqueda){
-    return this.http.get(apiUrl + '/getBusqueda/'+busqueda);
+  getBusqueda(busqueda) {
+    return this.http.get(apiUrl + '/getBusqueda/' + busqueda);
   }
 
-  updateFotoVideo(id, datos){
+  updateFotoVideo(id, datos) {
     console.log('ejecucion del update');
     return this.http.put(apiUrl + '/updateFotoVideo/' + id, datos);
   }
 
-  updateTemario(id, datos){
+  updateTemario(id, datos) {
     return this.http.put(apiUrl + '/updateTemario/' + id, datos);
+  }
+
+  updateObjetivos(id, datos) {
+    return this.http.put(apiUrl + '/updateObjetivos/' + id, datos);
   }
 
 }

@@ -71,14 +71,36 @@
   <!--Objetivo-->
   <div class="row">
     <div class="col-md-12">
+
       <div class="card">
         <div class="card-header bg-light text-center">
           Objetivos
         </div>
         <div class="example-container mat-elevation-z8">
-          <ul *ngFor="let objetivo of infoCurso.objetivos">
-            <li>{{objetivo.objetivo}}</li>
-          </ul>
+          <div class="row">
+            <div class="col-md-6">
+              <ul *ngFor="let objetivo of infoCurso.objetivos; let i=index">
+                <li>{{objetivo.objetivo}} <button mat-button color="accent" (click)="editarObjetivo(i)">Editar</button>
+                </li>
+              </ul>
+              <br>
+              <button mat-button color="primary" (click)="addObjetivo()">Agregar Nuevo</button>
+            </div>
+            <div class="col-md-6" *ngIf="mostrarFormObjetivo">
+              <form [formGroup]="objetivosForm">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Objetivo:</mat-label>
+                  <input matInput placeholder="Ingresa el Objetivo:" required formControlName="objetivo">
+                  <mat-error>
+                    <span *ngIf="!objetivosForm.get('objetivo').valid && objetivosForm.get('objetivo').touched">Agrega
+                      el nombre del recurso.</span>
+                  </mat-error>
+                </mat-form-field>
+                <button [disabled]="!objetivosForm.valid" mat-stroked-button
+                  (click)="guardarObjetivo()">Guardar</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -127,7 +149,8 @@
                       <!-- Lista clases -->
                       <ul>
                         <li *ngFor="let clase of subtema.clases; let k=index">
-                          {{clase.clase}} <button mat-stroked-button [routerLink]="['./temario', i+1, j+1, k+1]">Configurar Contenido</button>
+                          {{clase.clase}} <button mat-stroked-button
+                            [routerLink]="['./temario', i+1, j+1, k+1]">Configurar Contenido</button>
                         </li>
                       </ul>
                       <!-- Lista clases -->
