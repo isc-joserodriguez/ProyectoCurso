@@ -1,3 +1,127 @@
-<p>
-  comunidad-pregunta works!
-</p>
+<div class="col-md-12 px-0" style="background-color: rgba(126, 124, 121, 0.068);">
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="col-md-12 px-0 paqueteshome">
+    <div class="container">
+      <div class="row ">
+        <h2 class="p-2 letracursotitulo"><b>Comunidad</b></h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <!--div categorias-->
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-6 container">
+                  <div class="card">
+                    <div class="text-center p-2">
+                      <h5>Categorías</h5>
+                    </div>
+                    <div class="container text-center p-2">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                          value="option1" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                          Idiomas
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                          value="option2">
+                        <label class="form-check-label" for="exampleRadios2">
+                          Tecnologías
+                        </label>
+                      </div>
+                    </div>
+                    <div class="text-right py-3 pr-4">
+                      <button type="button" class="btn btn-success btn-sm">
+                        <img class="icon-edit mr-1" src="./../../../assets/icons/guardar.svg">
+                        Guardar</button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+              <br>
+            </div>
+
+            <!--div pregunta-->
+            <div class="container">
+              <div class="card">
+                <!--titulo-->
+                <div class="text-right pt-3 pr-4">
+                  <button type="button" class="btn btn-outline-warning btn-sm">
+                    Modificar Categoría</button>
+                </div>
+                <!--Pregunta y Respuesta-->
+                <div class="container col-md-12 px-5">
+                  <h5><b>¿Por qué dios me hizo así?</b></h5>
+                  <br>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta amet assumenda, a ipsam vel
+                    voluptatibus dolore odit esse ducimus voluptas iusto eligendi alias fuga et accusamus suscipit animi
+                    unde nihil.</p>
+
+                  <div class="text-right pr-4 pb-3">
+                    <button type="button" class="btn btn-warning">
+                      <img class="icon-edit mr-1" src="./../../../assets/icons/edit.svg">
+                      Editar</button>
+                  </div>
+
+                </div>
+                <!--Editar-->
+                <div class="container col-md-12 px-5">
+                  <mat-divider></mat-divider>
+                  <br>
+                  <mat-form-field appearance="outline" class="field-login">
+                    <mat-label>Actualizar pregunta:</mat-label>
+                    <textarea matInput placeholder="Agrega más información a tu pregunta" cdkTextareaAutosize
+                      cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15"></textarea>
+                  </mat-form-field>
+                  <div class="text-right pr-4 pb-3">
+                    <button type="button" class="btn btn-success btn-sm">
+                      <img class="icon-edit mr-1" src="./../../../assets/icons/guardar.svg">
+                      Guardar</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-4 pl-4">
+          <div class="container">
+            <div class="card">
+
+              <div class="row justify-content-center py-3">
+                <img class="icon-check mr-1" src="./../../../assets/icons/conversacion.svg">
+                <h4>¡Haz tu pregunta!</h4>
+              </div>
+
+              <div class="container form col-md-12">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Pregunta:</mat-label>
+                  <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="15"></textarea>
+                </mat-form-field>
+                <div class="text-right pr-4 pb-3">
+                  <button type="button" class="btn colorbtn">Enviar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
