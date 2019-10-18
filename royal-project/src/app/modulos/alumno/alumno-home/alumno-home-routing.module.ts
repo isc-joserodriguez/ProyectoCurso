@@ -20,7 +20,7 @@ const routes: Routes = [
     component: AlumnoHomeComponent
   },
   {
-    path:'alumno/perfil-publico',
+    path:'alumno/perfil-publico/:ruta',
     component:PerfilPublicoComponent
   },
   {
