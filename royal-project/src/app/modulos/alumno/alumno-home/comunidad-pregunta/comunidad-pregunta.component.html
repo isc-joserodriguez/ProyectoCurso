@@ -79,6 +79,8 @@
                   </div>
                   <br>
                   <b>{{infoPregunta.fecha | date}}</b>
+                  <br>
+                  <a (click)="navegarCat()">{{infoPregunta.categoria}}</a>
 
                   <div class="text-right pr-4 pb-3" *ngIf="propia">
                     <button type="button" class="btn btn-warning" (click)="editarPregunta=true">
@@ -142,20 +144,40 @@
                 </div>
                 <div class="card-body">
                   <div class="container">
-                    <a href="#">¿Por qué dios me hizo así?</a>
-                    <br>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum aut ullam neque similique, cumque
-                      beatae
-                      quaerat adipisci pariatur eum ut voluptate distinctio ab, eos impedit voluptatum, expedita saepe.
-                      Ad,
-                      eius.</p>
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                      <div class="p-2 bd-highlight txtTodos">1 Respuesta(s)</div>
-                      <div class="p-2 bd-highlight">
-                        <a href="#">Idiomas</a></div>
-                      <div class="p-2 bd-highlight txtTodos">12/05/2019</div>
+
+                    <!-- Respuestas -->
+                    <div class="card mb-12" *ngFor="let respuesta of infoRespuestas">
+                      <div class="row no-gutters">
+                        <div class="col-md-2">
+                          <img [src]="respuesta.foto" class="card-img">
+                        </div>
+                        <div class="col-md-10">
+                          <div class="card-body">
+                            <h5 class="card-title"><a href="#">{{respuesta.nombreCompleto}}</a></h5>
+                            <p class="card-text">{{respuesta.comentario}}</p>
+                            <div class="p-2 bd-highlight txtTodos">{{respuesta.fecha | date}}</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <!-- Respuestas -->
                     <mat-divider></mat-divider>
+                    <form [formGroup]="respuestaForm">
+                      <mat-form-field appearance="outline" class="field-login">
+                        <mat-label>Respuesta:</mat-label>
+                        <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="15" formControlName="respuesta"></textarea>
+                      </mat-form-field>
+                      <mat-error>
+                        <span
+                          *ngIf="!respuestaForm.get('respuesta').valid && respuestaForm.get('respuesta').touched">Agrega
+                          tu respuesta</span>
+                      </mat-error>
+                      <div class="text-right pr-4 pb-3">
+                        <button [disabled]="!respuestaForm.valid || !iduser" type="button" class="btn colorbtn"
+                          (click)="enviarRespuesta()">Enviar</button>
+                      </div>
+                    </form>
                     <br>
                   </div>
                 </div>

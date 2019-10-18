@@ -12,7 +12,7 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 export class ComunidadPreguntaComponent implements OnInit {
   iduser = localStorage.getItem('userid');
   propia = false
-  numPreguntas=0;
+  numPreguntas = 0;
 
   respuesta: any = {
     code: 0,
@@ -27,7 +27,7 @@ export class ComunidadPreguntaComponent implements OnInit {
     id: 0
   };
 
-  ifoRespuestas=[];
+  infoRespuestas = [];
 
   infoPregunta: any = {
     actualizaciones: [],
@@ -43,6 +43,7 @@ export class ComunidadPreguntaComponent implements OnInit {
   editarCategoria = false;
   editarPregunta = false;
 
+  respuestaForm: FormGroup;
   preguntaForm: FormGroup;
   actualizacionForm: FormGroup;
 
@@ -58,6 +59,10 @@ export class ComunidadPreguntaComponent implements OnInit {
       actualizacion: ['', Validators.required]
     });
 
+    this.respuestaForm = this.formBuilder.group({
+      respuesta: ['', Validators.required]
+    })
+
     this.getPregunta(this.route.snapshot.params.ruta);
 
   }
@@ -66,12 +71,32 @@ export class ComunidadPreguntaComponent implements OnInit {
     this.comunidad.getPregunta(ruta).subscribe(res => {
       this.respuesta = res;
       this.infoPregunta = this.respuesta.detail[0];
-      console.log(this.infoPregunta);
-      this.numPreguntas=this.infoPregunta.respuestas.length;
+      if(this.infoPregunta.categoria=='tecnologia'){
+        this.infoPregunta.categoria='Tecnología'
+      }else{
+        this.infoPregunta.categoria='Idiomas'
+      }
+      this.numPreguntas = this.infoPregunta.respuestas.length;
       if (this.infoPregunta.idPersona == this.iduser) {
         this.propia = true;
       }
       this.getinfoPersona(this.infoPregunta.idPersona);
+      this.infoRespuestas = [];
+      this.infoPregunta.respuestas.forEach(respuesta => {
+        this.usuarios.getUser(respuesta.idPersona).subscribe(usuario => {
+          let nuevaRes: any = {
+            nombreCompleto: '',
+            comentario: respuesta.comentario,
+            fecha: respuesta.fecha,
+            foto: '',
+            id: respuesta.idPersona
+          }
+          this.respuesta = usuario;
+          nuevaRes.foto = this.respuesta.detail[0].foto;
+          nuevaRes.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
+          this.infoRespuestas.push(nuevaRes);
+        });
+      });
     });
     if (localStorage.getItem('pregunta') != null) {
       this.preguntaForm.setValue({
@@ -112,6 +137,28 @@ export class ComunidadPreguntaComponent implements OnInit {
         actualizacion: ['', Validators.required]
       });
     });
+  }
+
+  enviarRespuesta() {
+    this.infoPregunta.respuestas.push({
+      idPersona: localStorage.getItem('userid'),
+      comentario: this.respuestaForm.value.respuesta
+    });
+
+    this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+      this.respuestaForm = this.formBuilder.group({
+        respuesta: ['', Validators.required]
+      });
+    });
+  }
+
+  navegarCat(){
+    if(this.infoPregunta.categoria=='Tecnología'){
+      this.router.navigate(['/comunidad/tecnologia']);
+    }else{
+      this.router.navigate(['/comunidad/idiomas']);
+    }
   }
 
 }
