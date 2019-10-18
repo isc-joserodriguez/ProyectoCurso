@@ -32,7 +32,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // Environment
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment';
 import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuario-desactivado.component';
 
 //scroll infinito

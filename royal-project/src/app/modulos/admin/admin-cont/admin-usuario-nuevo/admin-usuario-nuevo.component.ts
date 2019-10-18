@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../servicios/auth.service';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 // Convertidor fecha
-import { DateConvert } from '../../../../helper/date.convert';
+import { DateConvert } from 'src/app/helper/date.convert';
 
 @Component({
   selector: 'app-admin-usuario-nuevo',

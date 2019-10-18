@@ -4,7 +4,7 @@
 <br>
 <div class="col-md-12">
   <div class="container text-right txtTodos">
-    <h5><b>Categoría: Tecnología</b></h5>
+    <h5><b>Categoría: {{categoria}}</b></h5>
   </div>
 </div>
 
@@ -99,14 +99,20 @@
             </div>
 
             <div class="container form col-md-12">
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Pregunta:</mat-label>
-                <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
-                  cdkAutosizeMaxRows="15"></textarea>
-              </mat-form-field>
-              <div class="text-right pr-4 pb-3">
-                <button type="button" class="btn colorbtn">Enviar</button>
-              </div>
+              <form [formGroup]="preguntaForm">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Pregunta:</mat-label>
+                  <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="15" formControlName="pregunta"></textarea>
+                </mat-form-field>
+                <mat-error>
+                  <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega tu
+                    pregunta</span>
+                </mat-error>
+                <div class="text-right pr-4 pb-3">
+                  <button [disabled]="!preguntaForm.valid || iduser" type="button" class="btn colorbtn" (click)="hacerPregunta()">Enviar</button>
+                </div>
+              </form>
             </div>
           </div>
           <!--Insignias del curso-->

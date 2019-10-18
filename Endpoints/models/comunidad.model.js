@@ -3,17 +3,19 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const comunidadSchema = new mongoose.Schema({
-    _id:{type:String, required:true},
-    idPersona:{type: String, required:true},
-    nombreTema:{type:String,required:true},
-    cuerpoTema:{type:String, required:true},
-    fechaTema:{type:Date, required:true},
-    categoriaTema:{type:Number,required:true},
-    repuestas:[{_id:{type:String, required:true},idPersona:{type: String, required:true},comentario:{type: String, required:true},fecha:{type:Date,required:true}}]
+    _id: { type: Number, required: true },
+    idPersona: { type: Number, required: true },
+    pregunta: { type: String, required: true },
+    detalles: { type: String, required: true },
+    actualizaciones: [{ actualizacion: { type: String } }],
+    fecha: { type: Date, default: Date.now() },
+    categoria: { type: String, required: true }, //tecnologia - idiomas
+    repuestas: [{ idPersona: { type: Number }, comentario: { type: String }, fecha: { type: Date, default: Date.now() } }],
+    ruta: { type: String, required: true }
 });
 
 //modelo Curso
-const comunidadModel = mongoose.model('Comunidad', comunidadSchema,'comunidades');
+const comunidadModel = mongoose.model('Comunidad', comunidadSchema, 'comunidades');
 
 //exportar
-module.exports= comunidadModel;
+module.exports = comunidadModel;

@@ -17,7 +17,7 @@
         <div class="col-md-8">
           <div class="row">
             <!--div categorias-->
-            <div class="container">
+            <div class="container" *ngIf="editarCategoria">
               <div class="row justify-content-center">
                 <div class="col-md-6 container">
                   <div class="card">
@@ -27,23 +27,27 @@
                     <div class="container text-center p-2">
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                          value="option1" checked>
+                          value="idiomas" [(ngModel)]="infoPregunta.categoria">
                         <label class="form-check-label" for="exampleRadios1">
                           Idiomas
                         </label>
                       </div>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                          value="option2">
+                          value="tecnologia" [(ngModel)]="infoPregunta.categoria">
                         <label class="form-check-label" for="exampleRadios2">
                           Tecnologías
                         </label>
                       </div>
                     </div>
                     <div class="text-right py-3 pr-4">
-                      <button type="button" class="btn btn-success btn-sm">
+                      <button type="button" class="btn btn-success btn-sm" (click)="cambiarCategoria()">
                         <img class="icon-edit mr-1" src="./../../../assets/icons/guardar.svg">
-                        Guardar</button>
+                        Guardar
+                      </button>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="editarCategoria=false">
+                        Cancelar
+                      </button>
                     </div>
 
                   </div>
@@ -58,41 +62,105 @@
               <div class="card">
                 <!--titulo-->
                 <div class="text-right pt-3 pr-4">
-                  <button type="button" class="btn btn-outline-warning btn-sm">
+                  <button type="button" class="btn btn-outline-warning btn-sm" (click)="editarCategoria=true"
+                    *ngIf="propia">
                     Modificar Categoría</button>
                 </div>
                 <!--Pregunta y Respuesta-->
                 <div class="container col-md-12 px-5">
-                  <h5><b>¿Por qué dios me hizo así?</b></h5>
+                  <b class="h3">{{infoPregunta.pregunta}}</b>
                   <br>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta amet assumenda, a ipsam vel
-                    voluptatibus dolore odit esse ducimus voluptas iusto eligendi alias fuga et accusamus suscipit animi
-                    unde nihil.</p>
+                  <p>{{infoPregunta.detalles}}</p>
+                  <br>
+                  <div *ngFor="let actualizacion of infoPregunta.actualizaciones; let i=index">
+                    <b>Actualización {{i+1}}: </b>
+                    <p> {{actualizacion.actualizacion}} </p>
+                    <mat-divider></mat-divider>
+                  </div>
+                  <br>
+                  <b>{{infoPregunta.fecha | date}}</b>
 
-                  <div class="text-right pr-4 pb-3">
-                    <button type="button" class="btn btn-warning">
+                  <div class="text-right pr-4 pb-3" *ngIf="propia">
+                    <button type="button" class="btn btn-warning" (click)="editarPregunta=true">
                       <img class="icon-edit mr-1" src="./../../../assets/icons/edit.svg">
-                      Editar</button>
+                      Actualizar
+                    </button>
                   </div>
 
                 </div>
                 <!--Editar-->
-                <div class="container col-md-12 px-5">
+                <div class="container col-md-12 px-5" *ngIf="editarPregunta">
                   <mat-divider></mat-divider>
                   <br>
-                  <mat-form-field appearance="outline" class="field-login">
-                    <mat-label>Actualizar pregunta:</mat-label>
-                    <textarea matInput placeholder="Agrega más información a tu pregunta" cdkTextareaAutosize
-                      cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15"></textarea>
-                  </mat-form-field>
-                  <div class="text-right pr-4 pb-3">
-                    <button type="button" class="btn btn-success btn-sm">
-                      <img class="icon-edit mr-1" src="./../../../assets/icons/guardar.svg">
-                      Guardar</button>
+                  <form [formGroup]="actualizacionForm">
+                    <mat-form-field appearance="outline" class="field-login">
+                      <mat-label>Actualizar pregunta:</mat-label>
+                      <textarea matInput placeholder="Agrega más información a tu pregunta" cdkTextareaAutosize
+                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" formControlName="actualizacion"></textarea>
+                    </mat-form-field>
+                    <mat-error>
+                      <span
+                        *ngIf="!actualizacionForm.get('actualizacion').valid && actualizacionForm.get('actualizacion').touched">Agrega
+                        una actualizacion.</span>
+                    </mat-error>
+                    <div class="text-right pr-4 pb-3">
+                      <button [disabled]="!actualizacionForm.valid" type="button" class="btn btn-success btn-sm"
+                        (click)="agregarActualizacion()">
+                        <img class="icon-edit mr-1" src="./../../../assets/icons/guardar.svg">
+                        Guardar
+                      </button>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="editarPregunta=false">
+                        Cancelar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- Info Persona -->
+              <div class="card mb-12">
+                <div class="row no-gutters">
+                  <div class="col-md-2">
+                    <img [src]="infoPersona.foto" class="card-img">
+                  </div>
+                  <div class="col-md-10">
+                    <div class="card-body">
+                      <h5 class="card-title">{{infoPersona.nombreCompleto}}</h5>
+                      <p class="card-text">{{infoPersona.resumen}}</p>
+                      <button type="button" class="btn btn-outline-warning btn-sm">Ver perfil </button>
+                    </div>
                   </div>
                 </div>
               </div>
+              <!-- Info Persona -->
 
+              <!-- Respuestas -->
+              <div class="card">
+                <div class="card-header bg-light text-center">
+                  <b>
+                    Respuestas ({{numPreguntas}})
+                  </b>
+                </div>
+                <div class="card-body">
+                  <div class="container">
+                    <a href="#">¿Por qué dios me hizo así?</a>
+                    <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum aut ullam neque similique, cumque
+                      beatae
+                      quaerat adipisci pariatur eum ut voluptate distinctio ab, eos impedit voluptatum, expedita saepe.
+                      Ad,
+                      eius.</p>
+                    <div class="d-flex flex-row bd-highlight mb-3">
+                      <div class="p-2 bd-highlight txtTodos">1 Respuesta(s)</div>
+                      <div class="p-2 bd-highlight">
+                        <a href="#">Idiomas</a></div>
+                      <div class="p-2 bd-highlight txtTodos">12/05/2019</div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <!-- Respuestas -->
             </div>
 
           </div>
@@ -107,14 +175,21 @@
               </div>
 
               <div class="container form col-md-12">
-                <mat-form-field appearance="outline" class="field-login">
-                  <mat-label>Pregunta:</mat-label>
-                  <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
-                    cdkAutosizeMaxRows="15"></textarea>
-                </mat-form-field>
-                <div class="text-right pr-4 pb-3">
-                  <button type="button" class="btn colorbtn">Enviar</button>
-                </div>
+                <form [formGroup]="preguntaForm">
+                  <mat-form-field appearance="outline" class="field-login">
+                    <mat-label>Pregunta:</mat-label>
+                    <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                      cdkAutosizeMaxRows="15" formControlName="pregunta"></textarea>
+                  </mat-form-field>
+                  <mat-error>
+                    <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega tu
+                      pregunta</span>
+                  </mat-error>
+                  <div class="text-right pr-4 pb-3">
+                    <button [disabled]="!preguntaForm.valid || !iduser" type="button" class="btn colorbtn"
+                      (click)="hacerPregunta()">Enviar</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { DocumentacionComponent } from './documentacion/documentacion.component';
 import { HistorialPagosComponent } from './historial-pagos/historial-pagos.component';
+import { EstatusCursosComponent } from './estatus-cursos/estatus-cursos.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'pagos',
     component: HistorialPagosComponent
+  },
+  {
+    path: 'estado-cursos',
+    component: EstatusCursosComponent
   }
 ];
 

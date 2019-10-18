@@ -48,11 +48,11 @@
           <p class="salto_pag mb-0">Comunidad</p>
         </button>
         <mat-menu #comunidad="matMenu" class="fondo-navbar">
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/busqueda/3tecnologia']">
             <i class="fas fa-laptop-code"></i>Tecnologías
           </button>
           <mat-divider></mat-divider>
-          <button mat-menu-item>
+          <button mat-menu-item [routerLink]="['/busqueda/3idiomas']">
             <i class="fas fa-language"></i> Idiomas
           </button>
         </mat-menu>

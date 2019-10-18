@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsuariosService } from '../../../../../servicios/usuarios.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { Router } from '@angular/router';
-import { Match } from '../../../../../helper/match.validator';
+import { Match } from 'src/app/helper/match.validator';
 
 @Component({
   selector: 'app-cuenta',

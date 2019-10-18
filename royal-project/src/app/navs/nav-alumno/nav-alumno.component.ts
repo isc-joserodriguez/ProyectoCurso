@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../servicios/auth.service';
-import { Match } from '../../helper/match.validator';
-import { CursosService } from '../../servicios/cursos.service';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { Match } from 'src/app/helper/match.validator';
+import { CursosService } from 'src/app/servicios/cursos.service';
 
 
 @Component({

@@ -5,25 +5,29 @@ module.exports = (wagner) => {
     require('../controllers/comunidad.controller')(Comunidad));
     //Definir endPoints
     //CRUD CURSO
-    comunidadRouter.get("/",(req,res)=>{
+    comunidadRouter.post("/nuevaPregunta",(req,res)=>{
+        comunidadCtrl.create(req,res);
+    });
+
+    comunidadRouter.get("/getPreguntas",(req,res)=>{
         comunidadCtrl.getAll(req,res);
     });
 
-    comunidadRouter.get("/:id",(req,res)=>{
+    comunidadRouter.get("/getPregunta/:ruta",(req,res)=>{
         comunidadCtrl.getById(req,res);
-    });
-
-    comunidadRouter.delete("/:id", (req,res)=>{
-        comunidadCtrl.deteleComunidad(req,res);
     });
 
     comunidadRouter.put("/:id",(req,res)=>{
        comunidadCtrl.update(req,res);
     });
-    
-    comunidadRouter.post("/",(req,res)=>{
-        comunidadCtrl.create(req,res);
-    });
+
+    comunidadRouter.put("/cambiaCat/:ruta",(req,res)=>{
+        comunidadCtrl.cambiaCat(req,res);
+     });
+
+     comunidadRouter.put("/agregarAct/:ruta",(req,res)=>{
+        comunidadCtrl.agregarAct(req,res);
+     });
     
     return comunidadRouter;
 }
