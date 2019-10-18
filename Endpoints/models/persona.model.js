@@ -20,6 +20,7 @@ const personaSchema = new mongoose.Schema({
     yt: { type: String, default: ' ' },
     in: { type: String, default: ' ' },
     cursoMaestro: [{}],
+    insignias: [{}],
     cursoAlumno: [{ _id: { type: String, required: true }, estadoCurso: { type: String } }],
     carrito: [{ _id: { type: String, required: true }, codigos: [{ _id: { type: String } }] }],
     historialCompra: [{ _id: { type: String, required: true } }],
