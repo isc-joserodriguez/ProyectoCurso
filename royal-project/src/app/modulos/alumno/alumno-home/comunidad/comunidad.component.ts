@@ -45,9 +45,10 @@ export class ComunidadComponent implements OnInit {
         if (pregunta.categoria == cat) {
           this.usuarios.getUser(pregunta.idPersona).subscribe(info => {
             this.tempRes = info;
+            console.log(this.tempRes.detail[0])
             this.listaPreguntas.push({
               //Pendiente
-              insignias: this.tempRes.detail[0].cursoAlumno.length,
+              insignias: this.tempRes.detail[0].insignias.length,
               cursos: this.tempRes.detail[0].cursoAlumno.length,
               fecha: pregunta.fecha,
               foto: this.tempRes.detail[0].foto,

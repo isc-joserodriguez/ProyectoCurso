@@ -71,10 +71,10 @@ export class ComunidadPreguntaComponent implements OnInit {
     this.comunidad.getPregunta(ruta).subscribe(res => {
       this.respuesta = res;
       this.infoPregunta = this.respuesta.detail[0];
-      if(this.infoPregunta.categoria=='tecnologia'){
-        this.infoPregunta.categoria='Tecnología'
-      }else{
-        this.infoPregunta.categoria='Idiomas'
+      if (this.infoPregunta.categoria == 'tecnologia') {
+        this.infoPregunta.categoria = 'Tecnología'
+      } else {
+        this.infoPregunta.categoria = 'Idiomas'
       }
       this.numPreguntas = this.infoPregunta.respuestas.length;
       if (this.infoPregunta.idPersona == this.iduser) {
@@ -84,16 +84,14 @@ export class ComunidadPreguntaComponent implements OnInit {
       this.infoRespuestas = [];
       this.infoPregunta.respuestas.forEach(respuesta => {
         this.usuarios.getUser(respuesta.idPersona).subscribe(usuario => {
+          this.respuesta = usuario;
           let nuevaRes: any = {
-            nombreCompleto: '',
+            nombreCompleto: this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno,
             comentario: respuesta.comentario,
             fecha: respuesta.fecha,
-            foto: '',
+            foto: this.respuesta.detail[0].foto,
             id: respuesta.idPersona
           }
-          this.respuesta = usuario;
-          nuevaRes.foto = this.respuesta.detail[0].foto;
-          nuevaRes.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
           this.infoRespuestas.push(nuevaRes);
         });
       });
@@ -153,10 +151,10 @@ export class ComunidadPreguntaComponent implements OnInit {
     });
   }
 
-  navegarCat(){
-    if(this.infoPregunta.categoria=='Tecnología'){
+  navegarCat() {
+    if (this.infoPregunta.categoria == 'Tecnología') {
       this.router.navigate(['/comunidad/tecnologia']);
-    }else{
+    } else {
       this.router.navigate(['/comunidad/idiomas']);
     }
   }
