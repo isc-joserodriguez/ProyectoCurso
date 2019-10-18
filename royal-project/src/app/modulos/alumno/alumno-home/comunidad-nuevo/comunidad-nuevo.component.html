@@ -19,26 +19,38 @@
             <!--div pregunta-->
             <div class="container">
               <div class="card">
-
                 <div class="row justify-content-center py-3">
                   <img class="icon-check mr-1" src="./../../../assets/icons/conversacion.svg">
                   <h4>¡Haz tu pregunta!</h4>
                 </div>
-
                 <div class="container form col-md-12 px-5">
-                  <mat-form-field appearance="outline" class="field-login">
-                    <mat-label>¿Cuál es tu pregunta?</mat-label>
-                    <input matInput placeholder="Ingresa tu pregunta">
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" class="field-login">
-                    <mat-label>Detalles:</mat-label>
-                    <textarea matInput placeholder="Escribe los detalles de tu pregunta" cdkTextareaAutosize
-                      cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15"></textarea>
-                  </mat-form-field>
-                  <div class="text-right pr-4 pb-3">
-                    <button type="button" class="btn btn-success">Enviar</button>
-                  </div>
+                  <form [formGroup]="preguntaForm">
+                    <!-- Pregunta -->
+                    <mat-form-field appearance="outline" class="field-login">
+                      <mat-label>¿Cuál es tu pregunta?</mat-label>
+                      <input matInput placeholder="Ingresa tu pregunta" formControlName="pregunta">
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega
+                        tu pregunta</span>
+                    </mat-error>
+                    <!-- Pregunta -->
 
+                    <!-- Detalles -->
+                    <mat-form-field appearance="outline" class="field-login">
+                      <mat-label>Detalles:</mat-label>
+                      <textarea matInput placeholder="Escribe los detalles de tu pregunta" cdkTextareaAutosize
+                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" formControlName="detalles"></textarea>
+                    </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="!preguntaForm.get('detalles').valid && preguntaForm.get('detalles').touched">Agrega
+                        los detalles</span>
+                    </mat-error>
+                    <!-- Detalles -->
+                    <div class="text-right pr-4 pb-3">
+                      <button [disabled]="!preguntaForm.valid" type="button" class="btn btn-success" (click)="subirPregunta()">Enviar</button>
+                    </div>
+                  </form>
                 </div>
               </div>
 

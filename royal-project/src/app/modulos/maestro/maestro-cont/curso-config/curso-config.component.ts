@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CursosService } from '../../../../servicios/cursos.service';
-import { FirebaseService } from '../../../../servicios/firebase.service';
+import { CursosService } from 'src/app/servicios/cursos.service';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
 declare let videojs: any;
 
 @Component({

@@ -12,11 +12,16 @@ import { ComunidadComponent } from './comunidad/comunidad.component';
 import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.component';
 import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
 import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
+import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AlumnoHomeComponent
+  },
+  {
+    path:'alumno/perfil-publico',
+    component:PerfilPublicoComponent
   },
   {
     path: 'curso/:id/vista',
@@ -49,11 +54,11 @@ const routes: Routes = [
     component: MisCursosComponent
   },
   {
-    path: 'comunidad',
+    path: 'comunidad/:categoria',
     component: ComunidadComponent
   },
   {
-    path: 'comunidad/nueva',
+    path: 'comunidad/nueva/:categoria',
     component: ComunidadNuevoComponent
   },
   {
@@ -61,7 +66,7 @@ const routes: Routes = [
     component: ComunidadPreguntaComponent
   },
   {
-    path: 'comunidad/mis-preguntas',
+    path: 'comunidad/preguntas/mis-preguntas',
     component: ComunidadPropiasComponent
   },
   {

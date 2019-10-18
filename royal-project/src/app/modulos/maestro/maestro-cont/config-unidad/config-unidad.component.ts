@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CursosService } from '../../../../servicios/cursos.service';
+import { CursosService } from 'src/app/servicios/cursos.service';
 
 @Component({
   selector: 'app-config-unidad',

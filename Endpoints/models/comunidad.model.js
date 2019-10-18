@@ -5,11 +5,13 @@ const mongoose = require('mongoose');
 const comunidadSchema = new mongoose.Schema({
     _id: { type: Number, required: true },
     idPersona: { type: Number, required: true },
-    nombreTema: { type: String, required: true },
-    cuerpoTema: { type: String, required: true },
-    fechaTema: { type: Date, required: true },
-    categoriaTema: { type: Number, required: true }, //0 - Tecnología 1 - Idiomas
-    repuestas: [{ _id: { type: Number }, idPersona: { type: Number }, comentario: { type: String }, fecha: { type: Date } }]
+    pregunta: { type: String, required: true },
+    detalles: { type: String, required: true },
+    actualizaciones: [{ actualizacion: { type: String } }],
+    fecha: { type: Date, default: Date.now() },
+    categoria: { type: String, required: true }, //tecnologia - idiomas
+    repuestas: [{ idPersona: { type: Number }, comentario: { type: String }, fecha: { type: Date, default: Date.now() } }],
+    ruta: { type: String, required: true }
 });
 
 //modelo Curso

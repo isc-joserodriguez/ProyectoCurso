@@ -7,6 +7,16 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
+import { ComunidadComponent } from './comunidad/comunidad.component';
+import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.component';
+import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
+import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
+import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
+import { CursoClaseComponent } from './curso-clase/curso-clase.component';
+
+
+// Forms
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -17,9 +27,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-
-
-
 
 // mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -33,14 +40,11 @@ import { RatingModule } from 'ng-starrating';
 
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ComunidadComponent } from './comunidad/comunidad.component';
-import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.component';
-import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
-import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
+import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
@@ -54,7 +58,9 @@ import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias
     RatingModule,
     NgxPaginationModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AlumnoHomeModule { }

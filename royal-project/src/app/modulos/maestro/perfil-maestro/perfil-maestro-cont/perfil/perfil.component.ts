@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { UsuariosService } from '../../../../../servicios/usuarios.service';
-import { FirebaseService } from '../../../../../servicios/firebase.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { FirebaseService } from 'src/app/servicios/firebase.service';
 
 @Component({
   selector: 'app-perfil',
