@@ -21,7 +21,9 @@ const personaSchema = new mongoose.Schema({
     in: { type: String, default: ' ' },
     cursoMaestro: [{}],
     insignias: [{}],
-    cursoAlumno: [{ _id: { type: String, required: true }, estadoCurso: { type: String } }],
+    cursoAlumno: [{
+        idCurso: { type: Number, required: true }, fecha: { type: Date, required: true }, avance: { type: String, default: '1-1-1' }, estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
+    }],
     carrito: [{ _id: { type: String, required: true }, codigos: [{ _id: { type: String } }] }],
     historialCompra: [{ _id: { type: String, required: true } }],
     historialCobro: [{ _id: { type: String, required: true } }],
