@@ -45,6 +45,80 @@
             </div>
           </div>
         </div>
+        <div class="col-md-9">
+          <!--categorias-->
+          <div class="categorias container mx-auto">
+            <p class="h5 text-center">Aprendiendo</p> <br>
+
+            <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Tecnologías">
+                <div class="Tecnologias">
+                  <br>
+                  <div class="row col-md-12 ">
+                    <div class="col-md-3 text-center" *ngFor="let curso of cursosTec">
+                      <label>
+                        <div class="card ">
+                          <div class="imgLiquid view overlay zoom z-depth-1 rounded"
+                            style="max-width:255px; height:250px;">
+                            <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255"
+                              height="250">
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                            <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">
+                              {{curso.descripcionCurso}}
+                            </p>
+                            <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Idiomas">
+                <div class="Idiomas">
+                  <br>
+                  <div class="row col-md-12 o">
+                    <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
+                      <label>
+                        <div class="card">
+                          <div class="imgLiquid view overlay zoom z-depth-1 rounded"
+                            style="max-width:255px; height:250px;">
+                            <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255"
+                              height="250">
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                            <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">
+                              {{curso.descripcionCurso}}
+                            </p>
+                            <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+
+          </div>
+          <!--Cierre Categorías-->
+        </div>
+
+      </div>
+      <br>
+      <div class="row">
+
+        <div class="col-md-9 offset-md-3">
+          <div class="card descridos">
+            <div class="card-header bg-light text-center">
+              Certificados
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
