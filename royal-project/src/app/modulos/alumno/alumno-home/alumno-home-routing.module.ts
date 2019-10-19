@@ -13,6 +13,8 @@ import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.compo
 import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
 import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
 import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
+import { CursoClaseComponent } from './curso-clase/curso-clase.component';
+import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,14 @@ const routes: Routes = [
   {
     path: 'curso/:id/vista',
     component: CursoComponent
+  },
+  {
+    path: 'curso/:id',
+    component: CursoResumenComponent
+  },
+  {
+    path: 'curso/:id/clase/:unidad/:subtema/:clase',
+    component: CursoClaseComponent
   },
   {
     path: 'perfil',
