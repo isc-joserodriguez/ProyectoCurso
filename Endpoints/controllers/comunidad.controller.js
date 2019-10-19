@@ -24,7 +24,7 @@ const create = (req, res) => {
 };
 
 const getAll = (req, res) => {
-    _comunidad.find({})
+    _comunidad.find({}).sort({ _id: -1 })
         .then(comunidades => {
             res.status(200);
             res.json({
@@ -139,9 +139,33 @@ const agregarAct = (req, res) => {
     });
 }
 
+const agregarResp = (req, res) => {
+    const ruta = req.params.ruta;
+    const respuestas = req.body.respuestas;
+    _comunidad.update({ ruta: ruta }, {
+        $set: {
+            respuestas: respuestas
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
 module.exports = (Comunidad) => {
     _comunidad = Comunidad;
     return ({
-        getAll, create, getById, update, cambiaCat, agregarAct
+        getAll, create, getById, update, cambiaCat, agregarAct, agregarResp
     });
 }

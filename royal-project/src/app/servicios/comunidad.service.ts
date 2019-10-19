@@ -30,4 +30,8 @@ export class ComunidadService {
   agregarActualizacion(ruta, actualizacion) {
     return this.http.put(apiUrl + '/agregarAct/' + ruta, actualizacion);
   }
+
+  agregarRespuesta(ruta, respuestas) {
+    return this.http.put(apiUrl + '/agregarResp/' + ruta, respuestas);
+  }
 }

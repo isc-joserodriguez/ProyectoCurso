@@ -28,6 +28,11 @@ module.exports = (wagner) => {
      comunidadRouter.put("/agregarAct/:ruta",(req,res)=>{
         comunidadCtrl.agregarAct(req,res);
      });
+
+     comunidadRouter.put("/agregarResp/:ruta",(req,res)=>{
+        comunidadCtrl.agregarResp(req,res);
+     });
+     
     
     return comunidadRouter;
 }
