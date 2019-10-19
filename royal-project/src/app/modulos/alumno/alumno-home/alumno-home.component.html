@@ -48,12 +48,15 @@
         <div class="row col-md-12 ">
           <div class="col-md-3 text-center" *ngFor="let curso of cursosTec">
             <label>
-              <div class="card">
-                <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
+              <div class="card ">
+                <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:255px; height:250px;">
+                  <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255" height="250">
+                </div>
                 <div class="card-body">
                   <h5 class="card-title">{{curso.nombreCorto}}</h5>
-                  <p class="card-text">{{curso.descripcionCurso}}</p>
-                  <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']" >Ver curso</a>
+                  <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">{{curso.descripcionCurso}}
+                  </p>
+                  <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
                 </div>
               </div>
             </label>
@@ -65,18 +68,21 @@
       <div class="Idiomas">
         <br>
         <div class="row col-md-12 o">
-            <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
-                <label>
-                  <div class="card">
-                    <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">{{curso.nombreCorto}}</h5>
-                      <p class="card-text">{{curso.descripcionCurso}}</p>
-                      <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']" >Ver curso</a>
-                    </div>
-                  </div>
-                </label>
+          <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
+            <label>
+              <div class="card">
+                <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:255px; height:250px;">
+                  <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255" height="250">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{curso.nombreCorto}}</h5>
+                  <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">{{curso.descripcionCurso}}
+                  </p>
+                  <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                </div>
               </div>
+            </label>
+          </div>
         </div>
       </div>
     </mat-tab>
@@ -102,15 +108,17 @@
 </div>
 <!--Cierre Texto Paquetes-->
 <!--Imagenes Paquetes-->
-<div class="col-md-12 px-0 paquetes paqueteshome" >
+<div class="col-md-12 px-0 paquetes paqueteshome">
 
   <div class="paquetes-img pb-3 container">
     <br>
     <div class="row col-md-12">
       <div class="col-md-3 text-center ">
         <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid wow bounceInUp" alt="zoom" max-width="100%" height="160" style=" visibility: visible; animation-name: bounceInUp;">
+          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
+            style="max-width:100%; height:150px;">
+            <img src="http://www.lorempixel.com/500/500" class="img-fluid wow bounceInUp" alt="zoom" max-width="100%"
+              height="160" style=" visibility: visible; animation-name: bounceInUp;">
             <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
             <div class="mask flex-center waves-effect waves-light">
               <p class="white-text abajo font-weight-bold">3 Cursos</p>
