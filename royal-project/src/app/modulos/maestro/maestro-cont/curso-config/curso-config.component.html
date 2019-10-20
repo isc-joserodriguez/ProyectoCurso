@@ -39,7 +39,7 @@
         <mat-card-header class="justify-content-center">
           <mat-card-title>Video principal</mat-card-title>
         </mat-card-header>
-        <video mat-card-image id='videoId' class='video-js' controls preload='auto' width='200' height='250'
+        <video mat-card-image oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js' controls preload='auto' width='200' height='250'
           [poster]='infoCurso.imagen'>
         </video>
         <mat-card-content>
