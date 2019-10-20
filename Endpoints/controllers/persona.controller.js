@@ -3,7 +3,7 @@ const hash = require('../middlewares/password');
 const tkn = require('../middlewares/token');
 
 const getAll = (req, res) => {
-    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1 })
+    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1, credencial: 1, cursoAlumno: 1 })
         .then(personas => {
             res.status(200);
             res.json({
@@ -181,6 +181,33 @@ const getById = (req, res) => {
         });
 }
 
+const inscribirAlumno = (req, res) => {
+    const id = req.params.id;
+    cursoAlumno = req.body
+    _persona.update({ _id: id }, {
+        $set: {
+            cursoAlumno: cursoAlumno
+        }
+    })
+        .then(data => {
+            res.status(200);
+            res.json({
+                code: 200,
+                mgs: "Se editó con éxito",
+                detail: data
+            });
+
+        }).catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                msg: "Error.",
+                detail: error
+            });
+        });
+}
+
+
 const updateTipo = (req, res) => {
     const { id } = req.params;
     const nuevo = (req.body.credencialNuevo != undefined) ? {
@@ -263,6 +290,8 @@ const updateCredencial = (req, res) => {
     });
 }
 
+
+
 const update = (req, res) => {
     const { id } = req.params;
     const persona = req.body;
@@ -303,6 +332,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial
+        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno
     });
 }

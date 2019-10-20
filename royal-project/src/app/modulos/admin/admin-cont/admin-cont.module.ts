@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -34,6 +35,7 @@ import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisti
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-info.component';
 import { CursoRevisionComponent } from './curso-revision/curso-revision.component';
+import { AdminInscripcionComponent } from './admin-inscripcion/admin-inscripcion.component';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { CursoRevisionComponent } from './curso-revision/curso-revision.componen
     AdminEstadisticasComponent,
     AdminUsuarioNuevoComponent,
     AdminUsuarioInfoComponent,
-    CursoRevisionComponent
+    CursoRevisionComponent,
+    AdminInscripcionComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +71,8 @@ import { CursoRevisionComponent } from './curso-revision/curso-revision.componen
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatAutocompleteModule
   ]
 })
 export class AdminContModule { }

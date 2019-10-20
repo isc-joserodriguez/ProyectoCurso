@@ -8,6 +8,9 @@ import { ConfigSubtemaComponent } from './config-subtema/config-subtema.componen
 import { ConfigClaseComponent } from './config-clase/config-clase.component';
 import { ConfigTemarioComponent } from './config-temario/config-temario.component';
 import { RedirecComponent } from './redirec/redirec.component';
+import { MaestroAlumnosComponent } from './maestro-alumnos/maestro-alumnos.component';
+import { MaestroRevisionComponent } from './maestro-revision/maestro-revision.component';
+import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias.component';
 
 const routes: Routes = [
   {
@@ -37,6 +40,18 @@ const routes: Routes = [
   {
     path: 'curso/config/:id/temario/:unidad/:subtema/:clase',
     component: ConfigClaseComponent
+  },
+  {
+    path:'curso/:id/alumnos',
+    component: MaestroAlumnosComponent
+  },
+  {
+    path:'curso/:id/revisar/:alumno',
+    component: MaestroRevisionComponent
+  },
+  {
+    path:'curso/:id/insignias',
+    component:MaestroInsigniasComponent
   },
   {
     path: 'curso/config/:id/redirec/:ruta',
