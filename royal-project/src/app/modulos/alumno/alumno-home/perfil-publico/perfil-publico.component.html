@@ -16,38 +16,44 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <div class="card" style="height: 25rem;">
-            <div class="imgLiquidFill imgLiquid card-img-top" style="width:255px; height:250px;">
-              <img src="http://www.lorempixel.com/400/350" alt="..." width="255" height="250">
+          <div class="card border-light" style="height: 25rem;">
+            <div class="imgLiquidFill imgLiquid card-img-top" style="width:250px; height:250px;">
+              <img src="http://www.lorempixel.com/400/350" alt="..." width="253" height="250">
             </div>
-            <div class="card-body pt-5">
-              <div class="row">
-                <div class="col">
-                  <a href="#">
-                    <img class="icon-nav" src="./../../../assets/icons/fb.svg">
-                  </a>
+            <div class="card-body pt-5" style="background-color: rgb(37, 35, 35);">
+
+              <div class="col">
+                <div class="row justify-content-around pb-4">
+                  <div class="col-4">
+                    <a href="#">
+                      <img class="icon-redes light-shadow saturate" src="./../../../assets/icons/fb.svg">
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a href="#">
+                      <img class="icon-redes light-shadow" src="./../../../assets/icons/link.svg">
+                    </a>
+                  </div>
                 </div>
-                <div class="col">
-                  <a href="#">
-                    <img class="icon-nav" src="./../../../assets/icons/link.svg">
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="#">
-                    <img class="icon-nav" src="./../../../assets/icons/yt.svg">
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="#">
-                    <img class="icon-nav" src="./../../../assets/icons/internet.svg">
-                  </a>
+                <div class="row justify-content-around">
+                  <div class="col-4">
+                    <a href="#">
+                      <img class="icon-redes light-shadow" src="./../../../assets/icons/yt.svg">
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a href="#">
+                      <img class="icon-redes light-shadow" src="./../../../assets/icons/internet.svg">
+                    </a>
+                  </div>
                 </div>
               </div>
 
             </div>
           </div>
         </div>
-        <div class="col-md-9">
+
+        <div class="col-md-8 offset-md-1">
           <!--categorias-->
           <div class="categorias container mx-auto">
             <p class="h5 text-center">Aprendiendo</p> <br>
@@ -56,50 +62,58 @@
               <mat-tab label="Tecnologías">
                 <div class="Tecnologias">
                   <br>
-                  <div class="row col-md-12 ">
-                    <div class="col-md-3 text-center" *ngFor="let curso of cursosTec">
-                      <label>
-                        <div class="card ">
-                          <div class="imgLiquid view overlay zoom z-depth-1 rounded"
-                            style="max-width:255px; height:250px;">
-                            <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255"
-                              height="250">
-                          </div>
-                          <div class="card-body">
-                            <h5 class="card-title">{{curso.nombreCorto}}</h5>
-                            <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">
-                              {{curso.descripcionCurso}}
-                            </p>
-                            <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
-                          </div>
+                  <div class="col-md-12 ">
+
+                    <div class="row text-center">
+
+                      <div class="card descri col-md-4 mx-5 mb-2">
+                        <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-2"
+                          style="max-width:200px; height:150px;">
+                          <img class="card-img-top" src="http://www.lorempixel.com/400/350" alt="Card image cap"
+                            max-width="200" height="150">
                         </div>
-                      </label>
+                        <div class="card-body">
+                          <h5 class="card-title text-break text-truncate">holarrrrrrrrrrrrrrrrrrrrrrrr</h5>
+                          <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio esse distinctio,
+                            necessitatibus eos nihil reiciendis minus! Quidem possimus excepturi incidunt esse,
+                            doloremque ad, omnis laborum culpa distinctio, enim consequuntur voluptatem.
+                          </p>
+                          <a class="btn btn-primary btn-sm">Ver curso</a>
+                        </div>
+                      </div>
+
                     </div>
+
                   </div>
                 </div>
               </mat-tab>
               <mat-tab label="Idiomas">
                 <div class="Idiomas">
                   <br>
-                  <div class="row col-md-12 o">
-                    <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
-                      <label>
-                        <div class="card">
-                          <div class="imgLiquid view overlay zoom z-depth-1 rounded"
-                            style="max-width:255px; height:250px;">
-                            <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255"
-                              height="250">
-                          </div>
-                          <div class="card-body">
-                            <h5 class="card-title">{{curso.nombreCorto}}</h5>
-                            <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">
-                              {{curso.descripcionCurso}}
-                            </p>
-                            <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
-                          </div>
+                  <div class="col-md-12 ">
+
+                    <div class="row text-center">
+
+                      <div class="card descri col-md-4 mx-5 mb-2">
+                        <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-2"
+                          style="max-width:200px; height:150px;">
+                          <img class="card-img-top" src="http://www.lorempixel.com/400/350" alt="Card image cap"
+                            max-width="200" height="150">
                         </div>
-                      </label>
+                        <div class="card-body">
+                          <h5 class="card-title text-break text-truncate">holarrrrrrrrrrrrrrrrrrrrrrrr</h5>
+                          <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio esse distinctio,
+                            necessitatibus eos nihil reiciendis minus! Quidem possimus excepturi incidunt esse,
+                            doloremque ad, omnis laborum culpa distinctio, enim consequuntur voluptatem.
+                          </p>
+                          <a class="btn btn-primary btn-sm">Ver curso</a>
+                        </div>
+                      </div>
+
                     </div>
+
                   </div>
                 </div>
               </mat-tab>
@@ -112,46 +126,16 @@
 
       </div>
       <br>
-
+      <!--Certificados-->
       <div class="row">
-        <!--Insignias del curso-->
-        <div class="col-md-3">
-          <h4 class="txtTodos">Insignias Obtenidas</h4>
-          <div class="jumbotron backinsignias">
-            <div class="d-flex flex-wrap bd-highlight mb-3">
-              <div class="p-2 bd-highlight">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                  <img class="imgicon" src="./../../../assets/icons/libro.svg" />holdjjfnejfnejfnejfnjfnejnfejfnjenf
-                </span>
-              </div>
-              <div class="p-2 bd-highlight">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                  <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                </span>
-              </div>
-              <div class="p-2 bd-highlight">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                  <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                </span>
-              </div>
-              <div class="p-2 bd-highlight">
-                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                  <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                </span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!--Certificados-->
-        <div class="col-md-9">
-          <div class="card descridos">
-            <div class="card-header bg-light text-center">
+        <div class="col-md-10 offset-md-1">
+          <div class="card">
+            <div class="card-header paqueteshome text-center">
               Certificados
             </div>
-            <div class="card-body">
+            <div class="card-body descri">
               <div class="row">
-                <div class="card mb-3 descri mx-3" style="max-width: 350px;">
+                <div class="card mb-3 mx-3" style="max-width: 350px;">
                   <div class="row no-gutters">
                     <div class="col-md-4 vertical-center">
                       <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:100px; height:100px;">
@@ -171,7 +155,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="card mb-3 descri mx-3" style="max-width: 350px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!--Insignias del curso-->
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="card">
+            <div class="card-header  text-center paqueteshome">
+              Insignias Obtenidas
+            </div>
+            <div class="card-body descri">
+              <div class="row">
+                <div class="card mb-3 mx-3" style="max-width: 350px;">
                   <div class="row no-gutters">
                     <div class="col-md-4 vertical-center">
                       <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:100px; height:100px;">
