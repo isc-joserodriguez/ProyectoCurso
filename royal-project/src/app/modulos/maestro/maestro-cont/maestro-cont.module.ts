@@ -17,6 +17,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 // MDBootstrap
@@ -31,9 +32,12 @@ import { ConfigSubtemaComponent } from './config-subtema/config-subtema.componen
 import { ConfigClaseComponent } from './config-clase/config-clase.component';
 import { ConfigTemarioComponent } from './config-temario/config-temario.component';
 import { RedirecComponent } from './redirec/redirec.component';
+import { MaestroAlumnosComponent } from './maestro-alumnos/maestro-alumnos.component';
+import { MaestroRevisionComponent } from './maestro-revision/maestro-revision.component';
+import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias.component';
 
 @NgModule({
-  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent],
+  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent],
   imports: [
     CommonModule,
     MaestroContRoutingModule,
@@ -50,7 +54,8 @@ import { RedirecComponent } from './redirec/redirec.component';
     MatProgressBarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule
   ]
 })
 export class MaestroContModule { }

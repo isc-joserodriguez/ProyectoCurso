@@ -8,11 +8,10 @@
     <div class="row">
       <!--div video-->
       <div class="col-md-9 divisorder pt-3 pl-5">
-        <!-- <div class="embed-responsive embed-responsive-16by9 z-depth-1" autoplay loop controls>
-        <iframe class="embed-responsive-item" src="//player.vimeo.com/video/353296548" allowfullscreen></iframe>
-      </div> -->
-        <div class="text-center">
-          <img [src]="infoCurso.videoPrincipal">
+        <div class="row justify-content-center">
+          <video oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js' controls
+            preload='auto' width='900' height='500' [poster]='infoCurso.imagen'>
+          </video>
         </div>
         <!--div descripcion-->
         <div class="container">
@@ -57,8 +56,8 @@
                 <!--Acordeon-->
                 <mat-accordion class="example-headers-align">
                   <div class="col-md-12">
-                    <!--primer acordeon-->
-                    <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index"
+                    <!--Unidades-->
+                    <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso; let i=index"
                       class="cuerpo">
                       <mat-expansion-panel-header class="encabezado">
                         <mat-panel-title>
@@ -70,14 +69,35 @@
                         </mat-panel-description>
                       </mat-expansion-panel-header>
                       <br>
-                      <!-- Contenido -->
-                      <ul>
-                        <li *ngFor="let subtema of unidad.subtemas">
-                          {{subtema.subtema}}
-                        </li>
-                      </ul>
+                      <!--Acordeon-->
+                      <mat-accordion class="example-headers-align">
+                        <div class="col-md-12">
+                          <!--Subtemas-->
+                          <mat-expansion-panel hideToggle="true"
+                            *ngFor="let subtema of unidad.subtemas; let i=index" class="cuerpo">
+                            <mat-expansion-panel-header class="encabezado">
+                              <mat-panel-title>
+                                <b>Subtema {{i+1}}: {{subtema.subtema}}</b>
+                              </mat-panel-title>
+                              <mat-panel-description>
+                                <span> </span>
+                                <mat-icon>assignment</mat-icon>
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <br>
+                            <!-- Contenido -->
+                            <ul>
+                              <li *ngFor="let clase of subtema.clases">
+                                {{clase.clase}}
+                              </li>
+                            </ul>
+                          </mat-expansion-panel>
+                          <!--Subtemas-->
+                        </div>
+                      </mat-accordion>
+                      <!--Accordion-->
                     </mat-expansion-panel>
-                    <!--primer acordeon-->
+                    <!--Unidades-->
                   </div>
                 </mat-accordion>
                 <!--Accordion-->

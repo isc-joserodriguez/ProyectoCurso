@@ -60,4 +60,8 @@ export class CursosService {
     return this.http.put(apiUrl + '/updateObjetivos/' + id, datos);
   }
 
+  inscribirAlumno(id, datos) {
+    return this.http.put(apiUrl + '/inscribirAlumno/' + id, datos);
+  }
+
 }
