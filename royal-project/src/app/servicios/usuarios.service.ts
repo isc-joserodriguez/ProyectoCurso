@@ -35,6 +35,10 @@ export class UsuariosService {
     return this.http.put(apiUrl + '/editCredencial/' + id, datos);
   }
 
+  updateAvance(id, datos) {
+    return this.http.put(apiUrl + '/updateAvance/' + id, datos);
+  }
+
   inscribirAlumno(id, datos) {
     return this.http.put(apiUrl + '/inscribirAlumno/' + id, datos);
   }

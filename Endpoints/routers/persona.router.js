@@ -30,6 +30,10 @@ module.exports = (wagner) => {
         personaCtrl.updateCredencial(req, res);
     });
 
+    personaRouter.put("/updateAvance/:id", (req, res) => {
+        personaCtrl.updateAvance(req, res);
+    });
+
     personaRouter.put("/inscribirAlumno/:id", (req, res) => {
         personaCtrl.inscribirAlumno(req, res);
     });

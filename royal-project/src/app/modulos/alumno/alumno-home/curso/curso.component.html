@@ -270,10 +270,14 @@
               </ul>
             </div>
             <div class="card-footer text-muted light-blue lighten-1 white-text">
-              <button class="btn-lg p-2 mb-2" mat-raised-button color="warn">
+              <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" *ngIf="!comprado">
                 ¡Comprar Ahora!
-              </button> <br>
-              <button class="btn-lg" mat-raised-button color="primary"><i class="fas fa-cart-plus"></i></button>
+              </button> 
+              <button class="btn-lg p-2 mb-2" mat-raised-button color="primary" *ngIf="comprado" [routerLink]="['../']">
+                Ir al curso
+              </button> 
+              <br>
+              <button class="btn-lg" mat-raised-button color="primary" *ngIf="!comprado"><i class="fas fa-cart-plus"></i></button>
             </div>
           </div>
 

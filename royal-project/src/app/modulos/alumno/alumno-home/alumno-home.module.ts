@@ -27,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -41,10 +42,11 @@ import { RatingModule } from 'ng-starrating';
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
+import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, CursoClaseInfoComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
@@ -60,7 +62,8 @@ import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.componen
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule
   ]
 })
 export class AlumnoHomeModule { }

@@ -35,7 +35,14 @@ const cursoSchema = new mongoose.Schema({
                         activo: { type: Boolean, default: false },
                         instruccion: { type: String },
                         fechaLimite: { type: Date },
-                        envios: [{ idAlumno: { type: Number }, estatus: { type: Number /* 0 - Sin entregar | 1 - Entregado | 2 - Revisado */ }, aprobado: { type: Number /* 0 - Aprobado | 1 - No Aprobado */ }, fechaEntrega: { type: Date }, fechaRevisión: { type: Date }, retroalimentacion: { type: String } }]
+                        envios: [{
+                            idAlumno: { type: Number },
+                            tarea: { type: String },
+                            fechaRevisión: { type: Date },
+                            retroalimentacion: { type: String },
+                            estatus: { type: Number, default: 0 /* 0 - Entregado | 1 - Aprobado | 2 - No Aprobado */ },
+                            fechaEntrega: { type: Date, default: Date.now() }
+                        }]
                     },//Recursos de la tarea
                     comentarios: [{ idPersona: { type: Number }, comentario: { type: String }, respuestas: [{ idPersona: { type: String }, comentario: { type: String } }] }]
                 }]

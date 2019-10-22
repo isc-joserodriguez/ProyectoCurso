@@ -27,7 +27,8 @@ export class CursoComponent implements OnInit, OnDestroy {
     inscritos: 0,
     objetivos: [],
     contenidoCurso: [{}],
-    imagen: ''
+    imagen: '',
+    alumnosInscritos: []
   };
   infoMaestro = {
     foto: '',
@@ -35,6 +36,7 @@ export class CursoComponent implements OnInit, OnDestroy {
     resumen: ''
   };
 
+  comprado = false;
   constructor(private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
@@ -47,8 +49,6 @@ export class CursoComponent implements OnInit, OnDestroy {
   }
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe(curso => {
-      // Pendientes
-      console.log(curso);
       this.respuesta = curso;
       this.infoCurso.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
       this.infoCurso.precio = this.respuesta.detail[0].precio;
@@ -62,6 +62,13 @@ export class CursoComponent implements OnInit, OnDestroy {
       this.respuesta.detail[0].objetivos.forEach(elemento => {
         this.infoCurso.objetivos.push(elemento.objetivo);
       });
+      this.infoCurso.alumnosInscritos = this.respuesta.detail[0].alumnosInscritos;
+      this.infoCurso.alumnosInscritos = [];
+      this.respuesta.detail[0].alumnosInscritos.forEach(elemento => {
+        this.infoCurso.alumnosInscritos.push(elemento.idAlumno);
+      });
+      this.comprado = this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')));
+
       videojs("videoId", {
         sources: [{
           src: this.infoCurso.videoPrincipal,

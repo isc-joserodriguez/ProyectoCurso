@@ -15,6 +15,7 @@ import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias
 import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 import { CursoClaseComponent } from './curso-clase/curso-clase.component';
 import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
+import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.component';
 
 const routes: Routes = [
   {
@@ -22,8 +23,8 @@ const routes: Routes = [
     component: AlumnoHomeComponent
   },
   {
-    path:'alumno/perfil-publico/:ruta',
-    component:PerfilPublicoComponent
+    path: 'alumno/perfil-publico/:ruta',
+    component: PerfilPublicoComponent
   },
   {
     path: 'curso/:id/vista',
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'curso/:id/clase/:unidad/:subtema/:clase',
     component: CursoClaseComponent
+  },
+  {
+    path: 'curso/:id/info/:unidad/:subtema/:clase',
+    component: CursoClaseInfoComponent
   },
   {
     path: 'perfil',
