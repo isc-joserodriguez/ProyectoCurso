@@ -39,7 +39,7 @@ import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuar
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 //rating star
-import { RatingModule } from 'ng-starrating';
+import { BarRatingModule } from "ngx-bar-rating";
 
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -75,7 +75,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MatMenuModule,
     MatDividerModule,
     InfiniteScrollModule,
-    RatingModule,
+    BarRatingModule,
     NgxPaginationModule
   ],
   providers: [],

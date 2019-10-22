@@ -28,6 +28,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
+
 // mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CursoComponent } from './curso/curso.component';
@@ -36,7 +37,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 
 
 //rating star
-import { RatingModule } from 'ng-starrating';
+import { BarRatingModule } from "ngx-bar-rating";
 
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -55,7 +56,7 @@ import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.componen
     MatExpansionModule,
     MatIconModule,
     MatCheckboxModule,
-    RatingModule,
+    BarRatingModule,
     NgxPaginationModule,
     MatFormFieldModule,
     MatInputModule,

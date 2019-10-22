@@ -1,3 +1,5 @@
+@import '~ngx-bar-rating/themes/br-default-theme'; 
+
 /* You can add global styles to this file, and also import other style files */
 .icon-nav {
   width: 30px
@@ -167,18 +169,7 @@ text-shadow: 2px 2px 9px rgba(145,145,145,0.89);
   font-weight: bold;
 }
 
-.rate {
-  float: left;
-  height: 46px;
-  padding: 0 10px;
-}
 
-
-//fin raking start
-
-.rate-popover {
-  cursor: pointer;
-}
 
 .negrita{
   font-weight: bold;

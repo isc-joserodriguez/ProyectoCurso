@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { StarRatingComponent } from 'ng-starrating';
+
+
 declare let videojs: any;
 
 @Component({
@@ -83,11 +84,5 @@ export class CursoComponent implements OnInit, OnDestroy {
     });
   }
 
-  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
-    `Old Value:${$event.oldValue}, 
-      New Value: ${$event.newValue}, 
-      Checked Color: ${$event.starRating.checkedcolor}, 
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`;
-  }
-
+  
 }
