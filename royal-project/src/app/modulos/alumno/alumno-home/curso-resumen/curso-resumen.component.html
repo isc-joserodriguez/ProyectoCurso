@@ -26,7 +26,7 @@
           <div class="col-md-6 pt-0">
             <h4 class="letrastar mb-0">Valoraciones:</h4>
             <div class="rate">
-              <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+              <!-- <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating> -->
             </div>
           </div>
           <!--Alumnos totales-->
@@ -90,7 +90,8 @@
                             <!-- Contenido -->
                             <ul>
                               <li *ngFor="let clase of subtema.clases;let k=index">
-                                <button class="btn-lg p-2 mb-2" mat-raised-button color="primary" (click)="goClase(i,j,k)">
+                                <button class="btn-lg p-2 mb-2" mat-raised-button color="primary"
+                                  (click)="goClase(i,j,k)">
                                   {{clase.clase}}
                                 </button>
                               </li>
@@ -137,36 +138,37 @@
                 </div>
                 <!--ranking star-->
                 <div class="container ml-3">
-                  <div class="rate m-0 p-0">
-                    <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
-                  </div>
+
+
+                  <bar-rating [(rate)]="rate" [max]="5" [readOnly]="true"></bar-rating>
+
                   <h6 class="letrastar mb-0">Valoración del curso</h6>
                 </div>
               </div>
               <!--Barras-->
-              <div class="col-md-5 pt-3">
-                <div class="progress" style="height: 20px;">
+              <div class="col-md-5 pt-4">
+                <div class="progress mb-1" style="height: 20px;">
                   <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0"
                     aria-valuemax="100">
                   </div>
                 </div>
                 <br>
-                <div class="progress" style="height: 20px;">
+                <div class="progress mb-1" style="height: 20px;">
                   <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
                 <br>
-                <div class="progress" style="height: 20px;">
+                <div class="progress mb-1" style="height: 20px;">
                   <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
                 <br>
-                <div class="progress" style="height: 20px;">
+                <div class="progress mb-1" style="height: 20px;">
                   <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
                 <br>
-                <div class="progress" style="height: 20px;">
+                <div class="progress mb-1" style="height: 20px;">
                   <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
                     aria-valuemax="100"></div>
                 </div>
@@ -175,34 +177,34 @@
               <div class="col-md-4">
                 <!--ranking star-->
                 <div class="input-group input-group-sm vertical-center">
-                  <div class="rate m-0 p-0">
-                    <star-rating value="5" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+                  <div class="vertical-center">
+                    <bar-rating [rate]="5" [max]="5" [readOnly]="true"></bar-rating>
                   </div>
-                  <label class="vertical-center ml-2"><b>34%</b></label>
+                  <label class="vertical-center pl-2 mb-1"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <star-rating value="4" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+                    <bar-rating [rate]="4" [max]="5" [readOnly]="true"></bar-rating>
                   </div>
-                  <label class="vertical-center ml-2"><b>34%</b></label>
+                  <label class="vertical-center pl-2 mb-1"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <star-rating value="3" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+                    <bar-rating [rate]="3" [max]="5" [readOnly]="true"></bar-rating>
                   </div>
-                  <label class="vertical-center ml-2"><b>34%</b></label>
+                  <label class="vertical-center pl-2 mb-1"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <star-rating value="2" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+                    <bar-rating [rate]="2" [max]="5" [readOnly]="true"></bar-rating>
                   </div>
-                  <label class="vertical-center ml-2"><b>34%</b></label>
+                  <label class="vertical-center pl-2 mb-1"><b>34%</b></label>
                 </div>
                 <div class="input-group input-group-sm vertical-center">
                   <div class="rate m-0 p-0">
-                    <star-rating value="1" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+                    <bar-rating [rate]="1" [max]="5" [readOnly]="true"></bar-rating>
                   </div>
-                  <label class="vertical-center ml-2"><b>34%</b></label>
+                  <label class="vertical-center pl-2 mb-1"><b>34%</b></label>
                 </div>
 
               </div>
@@ -215,41 +217,48 @@
             <h4 class="pl-2 mb-0"><b>Reseñas</b></h4>
           </div>
           <div class="col-md-12 mt-1">
-            <mat-divider></mat-divider>
-            <br>
-            <ul class="list-unstyled">
-              <li class="media">
-                <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
-                  <img src="http://www.lorempixel.com/200/300" class="mr-3" alt="..." width="100" height="100">
-                </div>
-
-                <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
-                  <div class="p-2 bd-highlight">
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
-                      <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
-                    </span>
+            <div class="row divisortop2">
+              <br>
+              <ul class="list-unstyled mb-0">
+                <li class="media">
+                  <div class="imgLiquidFill imgLiquid pt-4" style="width:100px; height:100px;">
+                    <img src="http://www.lorempixel.com/200/300" class="mr-3" alt="..." width="100" height="100">
                   </div>
-                  <div>
-                    <label>3</label>
+                  <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
+                    <div class="p-2 bd-highlight">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
+                        <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
+                      </span>
+                    </div>
+                    <div>
+                      <label>3</label>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
+                        <img class="imgicon" src="./../../../assets/icons/libro.svg" />
+                      </span>
+                    </div>
+                    <div>
+                      <label>2</label>
+                    </div>
                   </div>
-                  <div class="p-2 bd-highlight">
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                      <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                    </span>
+                  <div class="media-body">
+                    <div class="row justify-content-between">
+                      <div class="col-4 pt-3">
+                        <h5 class="mt-0 mb-1">List-based media object</h5>
+                      </div>
+                      <div class="col-4 pb-2">
+                        <bar-rating [rate]="1" [max]="5" [readOnly]="true"></bar-rating>
+                      </div>
+                    </div>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                    purus
+                    odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                    fringilla. Donec lacinia congue felis in faucibus.
                   </div>
-                  <div>
-                    <label>2</label>
-                  </div>
-                </div>
-                <div class="media-body">
-                  <h5 class="mt-0 mb-1">List-based media object</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-                  odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                  fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-              </li>
-            </ul>
-
+                </li>
+              </ul>
+            </div>
           </div>
           <!--fin reseñas-->
         </div>
