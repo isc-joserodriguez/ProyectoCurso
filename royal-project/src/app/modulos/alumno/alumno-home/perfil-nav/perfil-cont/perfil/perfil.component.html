@@ -135,13 +135,16 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-              <div class="text-center">
+              <div class="text-center mb-3">
+                <p class="p-0 m-0 ml-3 mb-2">Foto de Perfil:</p>
                 <label>
-                  <img width="200" [src]="URLPublica">
+                  <div class="imgLiquidFill imgLiquid" style="width:150px; height:150px;">
+                    <img [src]="URLPublica" class="mr-3 sombraimg" alt="..." width="150" height="150">
+                  </div>
                 </label>
               </div>
               <div class="row p-0">
-                <p class="p-0 m-0 ml-3">Foto de Perfil:</p>
+
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Subir Foto</span>
@@ -181,6 +184,7 @@
       </div>
     </mat-card>
   </form>
+  <br>
   <br>
 </div>
 <br>

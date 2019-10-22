@@ -29,6 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+
 // mdbootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CursoComponent } from './curso/curso.component';
@@ -37,7 +38,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 
 
 //rating star
-import { RatingModule } from 'ng-starrating';
+import { BarRatingModule } from "ngx-bar-rating";
 
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -57,7 +58,7 @@ import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.com
     MatExpansionModule,
     MatIconModule,
     MatCheckboxModule,
-    RatingModule,
+    BarRatingModule,
     NgxPaginationModule,
     MatFormFieldModule,
     MatInputModule,

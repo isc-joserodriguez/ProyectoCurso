@@ -1,3 +1,5 @@
+@import '~ngx-bar-rating/themes/br-default-theme'; 
+
 /* You can add global styles to this file, and also import other style files */
 .icon-nav {
   width: 30px
@@ -167,18 +169,7 @@ text-shadow: 2px 2px 9px rgba(145,145,145,0.89);
   font-weight: bold;
 }
 
-.rate {
-  float: left;
-  height: 46px;
-  padding: 0 10px;
-}
 
-
-//fin raking start
-
-.rate-popover {
-  cursor: pointer;
-}
 
 .negrita{
   font-weight: bold;
@@ -211,4 +202,9 @@ text-shadow: 2px 2px 9px rgba(145,145,145,0.89);
 .mat-success {
   background-color: rgba(18, 184, 18, 0.74);
   color: #fff;
+}
+
+.subtitulo{
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.84);
+color: #FFFFFF;
 }

@@ -1,3 +1,76 @@
-<p>
-  maestro-insignias works!
-</p>
+<div class="col-md-12 ">
+  <div class="container-fluid">
+    <br>
+    <div class="vertical-center p-2 fondoadmin px-4">
+      <!--todos los cursos-->
+      <div class="text-center vertical-center">
+        <label class="h3 subtitulo">Insignias</label>
+        <div class="row">
+          <div class="col-md-7">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+            </mat-form-field>
+          </div>
+          <div class="col-md-5 pb-2">
+            <div class="text-right">
+              <button type="button" class="btn btn-success btn-sm m-0">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/marcador.svg">
+                Agregar Nueva Insignia</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--tabla-->
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <!-- Columna Foto -->
+          <ng-container matColumnDef="foto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Foto </th>
+            <td mat-cell *matCellDef="let row"><img width="50" [src]="row.foto"></td>
+          </ng-container>
+
+          <!-- Columna Nombre Insignia -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</th>
+            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+          </ng-container>
+
+
+          <!-- Columna Estatus -->
+
+          <ng-container matColumnDef="estatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</th>
+            <td mat-cell *matCellDef="let row"> {{row.estatus}} </td>
+          </ng-container>
+
+          <!-- Columna Otorgadas -->
+
+          <ng-container matColumnDef="otorgadas">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Otorgadas</th>
+            <td mat-cell *matCellDef="let row"> {{row.otorgadas}} </td>
+          </ng-container>
+
+          <!-- Columna Editar -->
+
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-mini-fab color="primary" (click)="editar(row.ruta)"><img class="icon-opcion"
+                  src="./../../../assets/icons/edit.svg"></button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+      <!--fin tabla-->
+      <br>
+    </div>
+  </div>
+</div>
