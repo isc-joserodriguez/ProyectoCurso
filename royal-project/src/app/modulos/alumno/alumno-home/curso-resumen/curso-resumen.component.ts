@@ -135,11 +135,6 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
 
   }
 
-  onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
-    `Old Value:${$event.oldValue}, 
-      New Value: ${$event.newValue}, 
-      Checked Color: ${$event.starRating.checkedcolor}, 
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`;
-  }
+
 
 }
