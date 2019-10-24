@@ -38,6 +38,7 @@ const cursoSchema = new mongoose.Schema({
                         envios: [{
                             idAlumno: { type: Number },
                             tarea: { type: String },
+                            nombreTarea: { type: String },
                             fechaRevisión: { type: Date },
                             retroalimentacion: { type: String },
                             estatus: { type: Number, default: 0 /* 0 - Entregado | 1 - Aprobado | 2 - No Aprobado */ },

@@ -49,7 +49,7 @@
         </div>
         <div class="card-body">
           {{infoClase.tarea.instruccion}}
-          <div class="subir" *ngIf="!tareaArriba">
+          <div class="subir" *ngIf="!tareaEntregada">
             <form [formGroup]="tareaForm">
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -66,13 +66,18 @@
               </mat-progress-bar>
             </form>
           </div>
+          <div *ngIf="tareaEntregada">
+            <a target="_blank" rel="noopener noreferrer" [href]="infoTarea.tarea">Archivo: {{infoTarea.nombreTarea}}</a>
+            <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" (click)="eliminarTarea()">
+              Eliminar archivo
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <br>
-  <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" [routerLink]="['../../../../']"
-    routerLinkActive="router-link-active">
+  <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" [routerLink]="['../../../../']">
     volver
   </button>
   <button class="btn-lg p-2 mb-2" mat-raised-button color="primary" (click)="claseSiguiente(avance)">
