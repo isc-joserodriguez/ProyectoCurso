@@ -6,8 +6,8 @@
   <!--titulo-->
   <div class="col-md-12 px-0 paqueteshome">
     <div class="container">
-      <h2 class="letrablanca"><b>José Antonio Rodriguez Hernandez</b></h2>
-      <h5 class="letracursotitulo">Estudiante de Ingeniería en Sistemas Computacionales</h5>
+      <h2 class="letrablanca"><b>{{infoAlumno.nombre}} {{infoAlumno.apPaterno}} {{infoAlumno.apMaterno}}</b></h2>
+      <h5 class="letracursotitulo">{{infoAlumno.resumen}}</h5>
     </div>
   </div>
   <br>
@@ -18,31 +18,31 @@
         <div class="col-md-3">
           <div class="card border-light" style="height: 25rem;">
             <div class="imgLiquidFill imgLiquid card-img-top" style="width:250px; height:250px;">
-              <img src="http://www.lorempixel.com/400/350" alt="..." width="253" height="250">
+              <img [src]="infoAlumno.foto" width="253" height="250">
             </div>
             <div class="card-body pt-5" style="background-color: rgb(37, 35, 35);">
 
               <div class="col">
                 <div class="row justify-content-around pb-4">
                   <div class="col-4">
-                    <a href="#">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoAlumno.fb">
                       <img class="icon-redes light-shadow saturate" src="./../../../assets/icons/fb.svg">
                     </a>
                   </div>
                   <div class="col-4">
-                    <a href="#">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoAlumno.in">
                       <img class="icon-redes light-shadow" src="./../../../assets/icons/link.svg">
                     </a>
                   </div>
                 </div>
                 <div class="row justify-content-around">
                   <div class="col-4">
-                    <a href="#">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoAlumno.yt">
                       <img class="icon-redes light-shadow" src="./../../../assets/icons/yt.svg">
                     </a>
                   </div>
                   <div class="col-4">
-                    <a href="#">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoAlumno.web">
                       <img class="icon-redes light-shadow" src="./../../../assets/icons/internet.svg">
                     </a>
                   </div>

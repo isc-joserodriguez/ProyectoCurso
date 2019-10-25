@@ -23,6 +23,7 @@ export class MaestroComponent implements OnInit {
   }
 
   getCursos(id) {
+    console.log(id);
     this.cursos.getCursosMaestro(id).subscribe(res => {
       this.respuesta = res;
       this.respuesta.detail.forEach(e => {

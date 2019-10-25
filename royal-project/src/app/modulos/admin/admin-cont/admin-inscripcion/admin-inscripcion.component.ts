@@ -26,7 +26,7 @@ export class AdminInscripcionComponent implements OnInit {
 
   nuevoAlumno = '';
 
-  error='';
+  error = '';
 
   infoCurso: any = {
     _id: 0,
@@ -36,7 +36,8 @@ export class AdminInscripcionComponent implements OnInit {
     precio: 0,
     subcategoria: '',
     imagen: 'http://www.lorempixel.com/200/200',
-    alumnosInscritos: []
+    alumnosInscritos: [],
+    ruta: ''
   }
 
   inscribir = false;
@@ -109,7 +110,6 @@ export class AdminInscripcionComponent implements OnInit {
       this.respuesta = res;
       this.infoCurso = this.respuesta.detail[0];
       this.inscribir = true;
-      console.log(this.infoCurso);
     });
   }
 
@@ -143,23 +143,22 @@ export class AdminInscripcionComponent implements OnInit {
           if (nuevo.toLowerCase().includes(this.nuevoAlumno.toLowerCase()) && this.nuevoAlumno != '') {
             var repetido = false;
             usuario.cursoAlumno.forEach(curso => {
-              if (curso.idCurso == this.infoCurso._id) {
+              if (curso.ruta == this.infoCurso.ruta) {
                 repetido = true
-                console.log('se repitió');
               }
             });
             if (!repetido) {
-              usuario.cursoAlumno.push({ idCurso: this.infoCurso._id });
-              this.usuarios.inscribirAlumno(usuario._id, usuario.cursoAlumno).subscribe(res => {
+              usuario.cursoAlumno.push({ ruta: this.infoCurso.ruta });
+              console.log(usuario.cursoAlumno);
+              this.usuarios.inscribirAlumno(usuario._id, { cursoAlumno: usuario.cursoAlumno, puntaje: usuario.puntaje + 100 }).subscribe(res => {
                 this.infoCurso.alumnosInscritos.push({ idAlumno: usuario._id });
-                console.log(this.infoCurso.alumnosInscritos);
                 this.cursos.inscribirAlumno(this.infoCurso._id, this.infoCurso.alumnosInscritos).subscribe(res => {
                   this.inscribir = false;
-                  this.error='';
+                  this.error = '';
                 });
               });
-            }else{
-              this.error='El usuario ya está registrado';
+            } else {
+              this.error = 'El usuario ya está registrado';
             }
           }
 

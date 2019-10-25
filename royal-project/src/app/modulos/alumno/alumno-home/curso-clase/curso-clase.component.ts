@@ -166,7 +166,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.usuarios.getUser(id).subscribe(res => {
       this.respuesta = res;
       this.respuesta.detail[0].cursoAlumno.forEach(element => {
-        if (element.idCurso == this.infoCurso._id) {
+        if (element.ruta == this.infoCurso.ruta) {
           element.avance = this.avance[0] + '-' + this.avance[1] + '-' + this.avance[2]
         }
         this.cursosAlumno.push(element);

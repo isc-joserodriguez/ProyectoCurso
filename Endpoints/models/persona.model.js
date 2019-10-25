@@ -22,7 +22,7 @@ const personaSchema = new mongoose.Schema({
     cursoMaestro: [{}],
     insignias: [{}],
     cursoAlumno: [{
-        idCurso: { type: Number, required: true }, fecha: { type: Date, default: Date.now() }, avance: { type: String, default: '0-0-0' }, estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
+        ruta: { type: String, required: true }, fecha: { type: Date, default: Date.now() }, avance: { type: String, default: '0-0-0' }, estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
     }],
     carrito: [{ _id: { type: String, required: true }, codigos: [{ _id: { type: String } }] }],
     historialCompra: [{ _id: { type: String, required: true } }],
@@ -33,7 +33,8 @@ const personaSchema = new mongoose.Schema({
     curriculum: { type: String },
     notificaciones: [{ _id: { type: String, required: true }, personaId: { type: String, required: true }, fecha: { type: Date, required: true }, descripción: { type: String, required: true }, estado: { type: Boolean, required: true } }],
     resumen: { type: String, default: ' ' },
-    puntaje: { type: Number, default: 0 }
+    puntaje: { type: Number, default: 0 },
+    ruta: { type: String }
 });
 
 //modelo Persona

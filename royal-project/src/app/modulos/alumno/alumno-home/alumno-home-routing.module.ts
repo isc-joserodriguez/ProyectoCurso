@@ -23,7 +23,7 @@ const routes: Routes = [
     component: AlumnoHomeComponent
   },
   {
-    path: 'alumno/perfil-publico/:ruta',
+    path: 'alumno/perfil-publico/:id',
     component: PerfilPublicoComponent
   },
   {
