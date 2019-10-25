@@ -15,6 +15,7 @@ import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
 import { CursoClaseComponent } from './curso-clase/curso-clase.component';
 
 
+
 // Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -45,6 +46,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.component';
 
+//edit text
+import { NgxEditorModule } from 'ngx-editor';
+
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
     PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, CursoClaseInfoComponent],
@@ -64,7 +68,8 @@ import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.com
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxEditorModule
   ]
 })
 export class AlumnoHomeModule { }
