@@ -44,6 +44,7 @@ export class AdminInscripcionComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     // inic. cursos
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

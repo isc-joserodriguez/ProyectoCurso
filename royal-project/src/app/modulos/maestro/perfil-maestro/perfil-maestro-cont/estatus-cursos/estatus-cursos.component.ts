@@ -24,6 +24,7 @@ export class EstatusCursosComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     // inic. cursos
     this.datosCursos.paginator = this.paginator;
     this.datosCursos.sort = this.sort;
