@@ -43,13 +43,35 @@
         </div>
         <div class="card-body">
           {{infoClase.tarea.instruccion}}
+          <div class="subir" *ngIf="!tareaEntregada">
+            <form [formGroup]="tareaForm">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Subir Tarea</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" formControlName="tarea"
+                    (change)="seleccionarTarea($event)">
+                  <label class="custom-file-label" for="inputGroupFile01">{{mensajeTarea}}</label>
+                </div>
+              </div>
+              <button mat-stroked-button (click)="subirTarea()">Guardar</button>
+              <mat-progress-bar *ngIf="!finalizadoTarea" mode="determinate" [value]="porcentajeTarea">
+              </mat-progress-bar>
+            </form>
+          </div>
+          <div *ngIf="tareaEntregada">
+            <a target="_blank" rel="noopener noreferrer" [href]="infoTarea.tarea">Archivo: {{infoTarea.nombreTarea}}</a>
+            <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" (click)="eliminarTarea()">
+              Eliminar archivo
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <br>
-  <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" [routerLink]="['../../../../']"
-    routerLinkActive="router-link-active">
+  <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" [routerLink]="['../../../../']">
     volver
   </button>
   <button class="btn-lg p-2 mb-2" mat-raised-button color="primary" (click)="claseSiguiente(avance)">

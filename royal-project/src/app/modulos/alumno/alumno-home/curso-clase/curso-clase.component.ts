@@ -32,7 +32,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     tarea: { activo: false, envios: [] },
     comentarios: []
   };
-  infoTarea: any = {};
   avance = [];
   cursosAlumno: any = [];
 
@@ -47,8 +46,9 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   URLTarea = '';
   porcentajeTarea = 0;
   tareaEntregada = false;
-  urlTarea='';
-
+  urlTarea = '';
+  indexTarea = 0;
+  infoTarea: any = {};
   tareaForm: FormGroup;
   constructor(private firebase: FirebaseService, private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
 
@@ -87,7 +87,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       this.player.src({ type: "video/mp4", src: this.infoClase.video });
       this.player.poster(this.infoCurso.imagen);
 
-      console.log(this.infoClase);
+      //console.log(this.infoClase);
       this.setAvance(localStorage.getItem('userid'));
       this.getTareas();
 
@@ -95,18 +95,17 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getTareas() {
-    this.infoTarea = this.infoClase.tarea;
-    this.infoTarea.envios.forEach((tarea) => {
-      if(tarea.idAlumno==localStorage.getItem('userid')){
-        this.tareaEntregada=true;
-        this.urlTarea=tarea.tarea;
+    this.tareaEntregada = false;
+    this.infoClase.tarea.envios.forEach((tarea, index) => {
+      if (tarea.idAlumno == localStorage.getItem('userid')) {
+        this.tareaEntregada = true;
+        this.infoTarea = tarea;
+        this.indexTarea = index;
       }
     });
-
   }
 
   public seleccionarTarea(event) {
-    this.cambiaTarea = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
         this.mensajeTarea = `${event.target.files[i].name}`.substring(0, 9);
@@ -117,6 +116,16 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.mensajeTarea = 'No hay tarea';
     }
+  }
+
+  public eliminarTarea() {
+    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].tarea.envios.splice(this.indexTarea, 1);
+    this.curso.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
+      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' + localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/tarea/' + this.route.snapshot.params.unidad + '-' + this.route.snapshot.params.subtema + '-' + this.route.snapshot.params.clase + this.infoTarea.nombreTarea)
+      referenciaBorrar.delete().subscribe(() => {
+        this.ngOnInit();
+      });
+    });
   }
 
   public subirTarea() {
@@ -134,36 +143,25 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
         while (currentTime + 1000 >= new Date().getTime()) {
         }
         referencia.getDownloadURL().subscribe((URL) => {
-
-          //this.infoClase.tarea = this.infoTarea;
-          this.infoClase.video = URL;
+          this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].tarea.envios.push(
+            {
+              idAlumno: localStorage.getItem('userid'),
+              tarea: URL,
+              nombreTarea: this.nombreTarea
+            }
+          );
           this.curso.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
             this.finalizadoTarea = true;
-            this.cambiaTarea = false;
-            /* if (!this.viejoVideo.includes('vjs.zencdn.net/v/oceans.mp4')) {
-              this.viejoVideo = this.viejoVideo.split('video%2F')[1];
-              this.viejoVideo = this.viejoVideo.split('?')[0];
-              if (!this.viejoVideo.includes(this.nombreVideo)) {
-                const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
-                  localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/video/' + this.unidad + '-' + this.subtema + '-' + this.clase + this.viejoVideo);
-                referenciaBorrar.delete().subscribe(() => {
-                  this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
-                });
-              } else {
-                this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
-              }
-            } */
+            this.tareaEntregada = true;
+            this.ngOnInit();
           });
         });
       }
     });
 
   }
-
-
-
-
   setAvance(id) {
+    this.cursosAlumno = [];
     this.avance = [parseInt(this.route.snapshot.params.unidad) - 1, parseInt(this.route.snapshot.params.subtema) - 1, parseInt(this.route.snapshot.params.clase) - 1];
     this.usuarios.getUser(id).subscribe(res => {
       this.respuesta = res;
@@ -173,6 +171,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         this.cursosAlumno.push(element);
       });
+      console.log(this.cursosAlumno);
       this.usuarios.updateAvance(id, this.cursosAlumno).subscribe(res => {
       });
     });
@@ -198,7 +197,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             infoAvance[1] = 0;
             infoAvance[2] = 0;
             if (infoAvance[0] > this.infoCurso.contenidoCurso.length - 1) {
-              console.log('reiniciamos');
+              this.router.navigate(['/curso/', this.route.snapshot.params.id]);
             }
           }
           this.goClase(infoAvance[0], infoAvance[1], infoAvance[2]);
@@ -207,5 +206,4 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
   }
-
 }
