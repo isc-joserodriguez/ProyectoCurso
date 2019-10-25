@@ -3,7 +3,7 @@ const hash = require('../middlewares/password');
 const tkn = require('../middlewares/token');
 
 const getAll = (req, res) => {
-    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1, credencial: 1, cursoAlumno: 1 })
+    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1, credencial: 1, cursoAlumno: 1, puntaje: 1 })
         .then(personas => {
             res.status(200);
             res.json({
@@ -25,6 +25,7 @@ const create = (req, res) => {
     const persona = req.body;
     _persona.find({}).sort({ _id: -1 }).then(regs => {
         persona._id = parseInt((regs.length == 0) ? 0 : (regs[0].id)) + 1;
+        persona.ruta = (persona.nombre + '-' + persona.apPaterno + '-' + persona.apMaterno).toLowerCase().replace(/ /g, "-").replace(/á/g, "a").replace(/é/g, "e").replace(/í/g, "i").replace(/ó/g, "o").replace(/ú/g, "u").replace(/ü/g, "u") + "-" + persona._id;
         if (!persona.credencial.correo || !persona.credencial.contraseña) {
             res.status(400).json({
                 code: 400,
@@ -40,19 +41,18 @@ const create = (req, res) => {
         } else {
             hash.hashPassword(req.body.credencial.contraseña).then(contraseña => {
                 persona.credencial.contraseña = contraseña;
-                _persona.create(persona)
-                    .then(data => {
-                        res.status(200).json({
-                            code: 200, msg: "Saved!!!",
-                            detail: data
-                        });
-                    }).catch(error => {
-                        res.status(400).json({
-                            code: 400,
-                            msg: "No se pudo insertar!!!",
-                            detail: error
-                        });
+                _persona.create(persona).then(data => {
+                    res.status(200).json({
+                        code: 200, msg: "Saved!!!",
+                        detail: data
                     });
+                }).catch(error => {
+                    res.status(400).json({
+                        code: 400,
+                        msg: "No se pudo insertar!!!",
+                        detail: error
+                    });
+                });
             });
         }
     });
@@ -208,10 +208,14 @@ const updateAvance = (req, res) => {
 
 const inscribirAlumno = (req, res) => {
     const id = req.params.id;
-    cursoAlumno = req.body
+    cursoAlumno = req.body.cursoAlumno;
+    puntaje = req.body.puntaje;
+    console.log(cursoAlumno);
+    console.log(puntaje);
     _persona.update({ _id: id }, {
         $set: {
-            cursoAlumno: cursoAlumno
+            cursoAlumno: cursoAlumno,
+            puntaje: puntaje
         }
     })
         .then(data => {

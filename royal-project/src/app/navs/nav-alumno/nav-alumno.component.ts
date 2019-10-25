@@ -131,6 +131,7 @@ export class NavAlumnoComponent implements OnInit {
     } else {
       this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
         this.respuesta = res;
+        localStorage.setItem('userid', this.respuesta.detail.id);
         if (this.respuesta.detail.token != undefined) {
           this.logout();
         } else if (this.respuesta.detail.tipo[0].admin != undefined) {
