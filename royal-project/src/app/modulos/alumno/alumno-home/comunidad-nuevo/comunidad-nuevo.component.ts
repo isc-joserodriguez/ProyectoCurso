@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComunidadService } from 'src/app/servicios/comunidad.service';
@@ -9,6 +9,11 @@ import { ComunidadService } from 'src/app/servicios/comunidad.service';
   styleUrls: ['./comunidad-nuevo.component.scss']
 })
 export class ComunidadNuevoComponent implements OnInit {
+  name = 'ng2-ckeditor';
+  ckeConfig: any;
+  mycontent: string;
+  log: string = '';
+  @ViewChild("myckeditor") ckeditor: any;
   categoria = this.route.snapshot.params.categoria;
   iduser = localStorage.getItem('userid');
   preguntaForm: FormGroup;
@@ -17,6 +22,29 @@ export class ComunidadNuevoComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.ckeConfig = {
+      allowedContent: false,
+      forcePasteAsPlainText: true,
+      font_names: 'Arial;Times New Roman;Verdana',
+      toolbarGroups: [
+        { name: 'document', groups: ['mode', 'document', 'doctools'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },
+        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+        { name: 'forms', groups: ['forms'] },
+        '/',
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        { name: 'links', groups: ['links'] },
+        { name: 'insert', groups: ['insert','Smiley,'] },
+        '/',
+        { name: 'styles', groups: ['styles'] },
+        { name: 'colors', groups: ['colors'] },
+        { name: 'tools', groups: ['tools'] },
+        { name: 'others', groups: ['others'] },
+        { name: 'about', groups: ['about'] }
+      ],
+      removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
+    };
     if (this.iduser == null) {
       this.router.navigate(['/']);
     }
@@ -51,5 +79,13 @@ export class ComunidadNuevoComponent implements OnInit {
       this.router.navigate(['/comunidad/pregunta/', res.detail.ruta]);
     });
   }
+  onChange($event: any): void {
+    console.log("onChange");
+    //this.log += new Date() + "<br />";
+  }
 
+  onPaste($event: any): void {
+    console.log("onPaste");
+    //this.log += new Date() + "<br />";
+  }
 }
