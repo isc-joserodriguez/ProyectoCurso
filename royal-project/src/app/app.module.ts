@@ -44,11 +44,6 @@ import { BarRatingModule } from "ngx-bar-rating";
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
 
-//editor text
-import { NgxEditorModule } from 'ngx-editor';
-
-//boostrap ngx
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 //editor ckeditor
 
@@ -88,8 +83,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
     InfiniteScrollModule,
     BarRatingModule,
     NgxPaginationModule,
-    NgxEditorModule,
-    TooltipModule,
     CKEditorModule  
   ],
   providers: [],

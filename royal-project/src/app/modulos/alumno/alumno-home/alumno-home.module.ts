@@ -46,8 +46,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.component';
 
-//edit text
-import { NgxEditorModule } from 'ngx-editor';
+
 
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -72,7 +71,6 @@ import { CKEditorModule } from 'ng2-ckeditor';
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    NgxEditorModule,
     CKEditorModule
   ]
 })
