@@ -44,6 +44,13 @@ import { BarRatingModule } from "ngx-bar-rating";
 //pagination
 import {NgxPaginationModule} from 'ngx-pagination';
 
+//editor text
+import { NgxEditorModule } from 'ngx-editor';
+
+//boostrap ngx
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +83,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MatDividerModule,
     InfiniteScrollModule,
     BarRatingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxEditorModule,
+    TooltipModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
