@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 
 
@@ -10,31 +10,30 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 })
 export class CategoriasComponent implements OnInit {
   categoria = '';
-  p : number = 1;
-
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
+  p: number = 1;
   listaCursos = [];
-  subcategorias=[];
+  subcategorias = [];
 
   constructor(private route: ActivatedRoute, private cursos: CursosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
-    this.categoria = this.primeraMay(this.route.snapshot.params.categoria);
-    this.getCursos(this.route.snapshot.params.categoria);
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      window.scrollTo(0, 0);
+      this.categoria = '';
+      this.p = 1;
+      this.listaCursos = [];
+      this.subcategorias = [];
+      this.categoria = this.primeraMay(params.get('categoria'));
+      this.getCursos(params.get('categoria'));
+    });
+
   }
   onScroll() {
     console.log('scrolled!!');
   }
   getCursos(cat) {
-    this.cursos.getSubcategorias().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(e => {
+    this.cursos.getSubcategorias().subscribe((res: any) => {
+      res.detail.forEach(e => {
         if (e.categoria == this.primeraMay(cat)) {
           this.listaCursos.push(e);
           this.subcategorias.push(e.subcategoria)

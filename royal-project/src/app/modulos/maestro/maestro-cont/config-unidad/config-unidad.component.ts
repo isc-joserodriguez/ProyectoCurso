@@ -9,12 +9,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   styleUrls: ['./config-unidad.component.scss']
 })
 export class ConfigUnidadComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   temario = [];
   nombreUnidad = '';
   unidad = this.route.snapshot.params.unidad;;
@@ -31,9 +25,8 @@ export class ConfigUnidadComponent implements OnInit {
   }
 
   infoCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe(res => {
-      this.respuesta = res;
-      this.temario = this.respuesta.detail[0].contenidoCurso;
+    this.cursos.getCursoInfo(id).subscribe((res:any) => {
+      this.temario = res.detail[0].contenidoCurso;
       const i = this.route.snapshot.params.unidad - 1;
       this.nombreUnidad = this.temario[i].unidad;
 
@@ -73,7 +66,6 @@ export class ConfigUnidadComponent implements OnInit {
       unidad: this.nombreUnidad
     }
     this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
-      this.respuesta = res;
       this.router.navigate(['/maestro/curso/config', this.route.snapshot.params.id]);
     });
   }

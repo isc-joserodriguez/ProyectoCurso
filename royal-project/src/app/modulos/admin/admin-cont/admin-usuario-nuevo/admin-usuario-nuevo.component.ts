@@ -13,13 +13,6 @@ import { DateConvert } from 'src/app/helper/date.convert';
 })
 export class AdminUsuarioNuevoComponent implements OnInit {
   altaForm: FormGroup;
-
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   persona = {
     credencial: {
       correo: '',
@@ -67,9 +60,8 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     this.persona.tipo = this.getVal(this.altaForm.value.altaRol);
     this.persona.sexo = this.altaForm.value.sexo;
 
-    this.auth.signup(this.persona).subscribe(resp => {
-      this.respuesta = resp;
-      this.router.navigate(['/admin/usuario', this.respuesta.detail._id]);
+    this.auth.signup(this.persona).subscribe((resp: any) => {
+      this.router.navigate(['/admin/usuario', resp.detail._id]);
     }, err => {
       console.log(err);
     });

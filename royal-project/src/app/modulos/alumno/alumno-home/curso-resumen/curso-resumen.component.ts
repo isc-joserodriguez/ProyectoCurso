@@ -11,11 +11,6 @@ declare let videojs: any;
   styleUrls: ['./curso-resumen.component.scss']
 })
 export class CursoResumenComponent implements OnInit, OnDestroy {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
   infoCurso: any = {
     idMaestro: 0,
     nombreCompleto: '',
@@ -47,23 +42,22 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
     videojs(oldPlayer).dispose();
   }
   getInfoCurso(id) {
-    this.curso.getCursoInfo(id).subscribe(curso => {
-      this.respuesta = curso;
-      this.infoCurso.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
-      this.infoCurso.precio = this.respuesta.detail[0].precio;
-      this.infoCurso.imagen = this.respuesta.detail[0].imagen;
-      this.infoCurso.videoPrincipal = this.respuesta.detail[0].introduccionVideo;
-      this.infoCurso.descripcion = this.respuesta.detail[0].descripcionCurso;
+    this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
+      this.infoCurso.precio = curso.detail[0].precio;
+      this.infoCurso.imagen = curso.detail[0].imagen;
+      this.infoCurso.videoPrincipal = curso.detail[0].introduccionVideo;
+      this.infoCurso.descripcion = curso.detail[0].descripcionCurso;
       this.infoCurso.valoracion = 5;
       this.infoCurso.inscritos = 5;
-      this.infoCurso.objetivos = this.respuesta.detail[0].objetivos;
+      this.infoCurso.objetivos = curso.detail[0].objetivos;
       this.infoCurso.objetivos = [];
-      this.respuesta.detail[0].objetivos.forEach(elemento => {
+      curso.detail[0].objetivos.forEach(elemento => {
         this.infoCurso.objetivos.push(elemento.objetivo);
       });
-      this.infoCurso.alumnosInscritos = this.respuesta.detail[0].alumnosInscritos;
+      this.infoCurso.alumnosInscritos = curso.detail[0].alumnosInscritos;
       this.infoCurso.alumnosInscritos = [];
-      this.respuesta.detail[0].alumnosInscritos.forEach(elemento => {
+      curso.detail[0].alumnosInscritos.forEach(elemento => {
         this.infoCurso.alumnosInscritos.push(elemento.idAlumno);
       });
       if (!this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')))) {
@@ -77,16 +71,15 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
       }, function () {
         // Player (this) is initialized and ready.
       });
-      this.infoCurso.contenidoCurso = this.respuesta.detail[0].contenidoCurso;
+      this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
       this.getAvance(localStorage.getItem('userid'));
-      this.getInfoMaestro(this.respuesta.detail[0].idMaestro);
+      this.getInfoMaestro(curso.detail[0].idMaestro);
     });
   }
   getAvance(id) {
     this.avance = [];
-    this.usuarios.getUser(id).subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail[0].cursoAlumno.forEach(curso => {
+    this.usuarios.getUser(id).subscribe((res: any) => {
+      res.detail[0].cursoAlumno.forEach(curso => {
         this.avance[0] = parseInt(curso.avance[0]);
         this.avance[1] = parseInt(curso.avance[2]);
         this.avance[2] = parseInt(curso.avance[4]);
@@ -94,11 +87,10 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
     })
   }
   getInfoMaestro(id) {
-    this.usuarios.getUser(id).subscribe(usuario => {
-      this.respuesta = usuario;
-      this.infoMaestro.foto = this.respuesta.detail[0].foto;
-      this.infoMaestro.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
-      this.infoMaestro.resumen = this.respuesta.detail[0].resumen;
+    this.usuarios.getUser(id).subscribe((usuario: any) => {
+      this.infoMaestro.foto = usuario.detail[0].foto;
+      this.infoMaestro.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
+      this.infoMaestro.resumen = usuario.detail[0].resumen;
     });
   }
   claseActual() {

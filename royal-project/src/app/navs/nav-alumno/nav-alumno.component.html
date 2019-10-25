@@ -11,11 +11,11 @@
           <p class="salto_pag mb-0">Categorías</p>
         </button>
         <mat-menu #categorias="matMenu" class="fondo-navbar">
-          <button mat-menu-item [matMenuTriggerFor]="Tecnologias" [routerLink]="['/busqueda/1tecnología']">
+          <button mat-menu-item [matMenuTriggerFor]="Tecnologias" [routerLink]="['/categoria/tecnología']">
             <i class="fas fa-laptop-code"></i>Tecnología
           </button>
           <mat-divider></mat-divider>
-          <button mat-menu-item [matMenuTriggerFor]="Idiomas" [routerLink]="['/busqueda/1idiomas']">
+          <button mat-menu-item [matMenuTriggerFor]="Idiomas" [routerLink]="['/categoria/idiomas']">
             <i class="fas fa-language"></i> Idiomas
           </button>
         </mat-menu>
@@ -48,11 +48,11 @@
           <p class="salto_pag mb-0">Comunidad</p>
         </button>
         <mat-menu #comunidad="matMenu" class="fondo-navbar">
-          <button mat-menu-item [routerLink]="['/busqueda/3tecnologia']">
+          <button mat-menu-item [routerLink]="['/comunidad/tecnologia']">
             <i class="fas fa-laptop-code"></i>Tecnologías
           </button>
           <mat-divider></mat-divider>
-          <button mat-menu-item [routerLink]="['/busqueda/3idiomas']">
+          <button mat-menu-item [routerLink]="['/comunidad/idiomas']">
             <i class="fas fa-language"></i> Idiomas
           </button>
         </mat-menu>

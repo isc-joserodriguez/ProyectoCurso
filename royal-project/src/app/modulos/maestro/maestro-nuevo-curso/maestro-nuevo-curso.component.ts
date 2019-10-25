@@ -12,12 +12,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 export class MaestroNuevoCursoComponent implements OnInit {
   step = 0;
 
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   cursoNuevo = {
     idMaestro: localStorage.getItem('userid'),
     nombreCompleto: '',
@@ -59,9 +53,8 @@ export class MaestroNuevoCursoComponent implements OnInit {
   filtrarSubcategoria(cadena) {
     this.subcategorias = [];
     const categoria = this.generalForm.value.categoria;
-    this.cursos.getSubcategorias().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(e => {
+    this.cursos.getSubcategorias().subscribe((res: any) => {
+      res.detail.forEach(e => {
         if (e.categoria == categoria) {
           if (e.subcategoria.toLowerCase().includes(cadena.toLowerCase())) {
             this.subcategorias.push(e.subcategoria);
@@ -101,7 +94,6 @@ export class MaestroNuevoCursoComponent implements OnInit {
     this.cursoNuevo.subcategoria = this.primeraMay(this.generalForm.value.subcategoria);
     this.cursoNuevo.precio = this.generalForm.value.precio;
     this.cursos.addCursoNuevo(this.cursoNuevo).subscribe(res => {
-      this.respuesta = res;
       this.router.navigate(['/maestro/']);
     });
   }

@@ -12,18 +12,6 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
   styleUrls: ['./admin-inscripcion.component.scss']
 })
 export class AdminInscripcionComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
-  resUsuario: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   nuevoAlumno = '';
 
   error = '';
@@ -63,9 +51,8 @@ export class AdminInscripcionComponent implements OnInit {
     this.getAlumnos();
   }
   getAlumnos() {
-    this.usuarios.getAll().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(usuario => {
+    this.usuarios.getAll().subscribe((res: any) => {
+      res.detail.forEach(usuario => {
         if (usuario.tipo[3].alumno) {
           this.listaAlumno.push(usuario.nombre + ' ' + usuario.apPaterno + ' ' + usuario.apMaterno + ' - ' + usuario.credencial.correo);
         }
@@ -74,14 +61,12 @@ export class AdminInscripcionComponent implements OnInit {
   }
   getCursos() {
     this.listaCursos = [];
-    this.cursos.getCursos().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(curso => {
-        this.usuarios.getId(curso.idMaestro).subscribe(maestro => {
-          this.resUsuario = maestro;
+    this.cursos.getCursos().subscribe((res: any) => {
+      res.detail.forEach(curso => {
+        this.usuarios.getId(curso.idMaestro).subscribe((maestro: any) => {
           this.listaCursos.push({
-            nombre: this.resUsuario.detail[0].nombre + ' ' +
-              this.resUsuario.detail[0].apPaterno + ' ' + this.resUsuario.detail[0].apMaterno,
+            nombre: maestro.detail[0].nombre + ' ' +
+              maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,
             id: curso._id,
             curso: curso.nombreCorto,
             fecha: curso.fechaSolicitud,
@@ -106,9 +91,8 @@ export class AdminInscripcionComponent implements OnInit {
     }
   }
   mostrarCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe(res => {
-      this.respuesta = res;
-      this.infoCurso = this.respuesta.detail[0];
+    this.cursos.getCursoInfo(id).subscribe((res: any) => {
+      this.infoCurso = res.detail[0];
       this.inscribir = true;
     });
   }
@@ -121,9 +105,8 @@ export class AdminInscripcionComponent implements OnInit {
   }
   filtrarAlumno(cadena) {
     this.listaAlumno = [];
-    this.usuarios.getAll().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(usuario => {
+    this.usuarios.getAll().subscribe((res: any) => {
+      res.detail.forEach(usuario => {
         if (usuario.tipo[3].alumno) {
           var nuevo = usuario.nombre + ' ' + usuario.apPaterno + ' ' + usuario.apMaterno + ' - ' + usuario.credencial.correo
           if (nuevo.toLowerCase().includes(cadena.toLowerCase())) {
@@ -135,9 +118,8 @@ export class AdminInscripcionComponent implements OnInit {
   }
 
   inscribirAlumno() {
-    this.usuarios.getAll().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(usuario => {
+    this.usuarios.getAll().subscribe((res: any) => {
+      res.detail.forEach(usuario => {
         if (usuario.tipo[3].alumno) {
           var nuevo = usuario.nombre + ' ' + usuario.apPaterno + ' ' + usuario.apMaterno + ' - ' + usuario.credencial.correo
           if (nuevo.toLowerCase().includes(this.nuevoAlumno.toLowerCase()) && this.nuevoAlumno != '') {

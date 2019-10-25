@@ -9,12 +9,6 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class NavAdministradorComponent implements OnInit {
 
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   persona = {
     credencial: {
       correo: '',
@@ -37,20 +31,19 @@ export class NavAdministradorComponent implements OnInit {
   }
 
   verificarToken() {
-    this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
-      this.respuesta = res;
-      if (this.respuesta.detail.token != undefined) {
+    this.auth.infoUser(localStorage.getItem('token')).subscribe((res: any) => {
+      if (res.detail.token != undefined) {
         this.logout();
-      } else if (this.respuesta.detail.tipo[1].coord != undefined) {
+      } else if (res.detail.tipo[1].coord != undefined) {
         this.router.navigate(['/coord/']);
-      } else if (this.respuesta.detail.tipo[2].maestro != undefined) {
+      } else if (res.detail.tipo[2].maestro != undefined) {
         this.router.navigate(['/maestro/']);
-      } else if (this.respuesta.detail.tipo[3].alumno != undefined) {
+      } else if (res.detail.tipo[3].alumno != undefined) {
         this.router.navigate(['/']);
       }
-      this.usuario = this.respuesta.detail.nombre;
-      this.sexo = this.respuesta.detail.sexo;
-      localStorage.setItem('userid', this.respuesta.detail.id);
+      this.usuario = res.detail.nombre;
+      this.sexo = res.detail.sexo;
+      localStorage.setItem('userid', res.detail.id);
     }, err => {
       console.log(err);
     });

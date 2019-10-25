@@ -12,12 +12,6 @@ import { Match } from 'src/app/helper/match.validator';
 export class CuentaComponent implements OnInit {
   correoForm: FormGroup;
   passForm: FormGroup;
-
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
   errorPass = false;
   errorCorreo = false;
 
@@ -49,9 +43,8 @@ export class CuentaComponent implements OnInit {
   }
 
   inicializar(id) {
-    this.usuario.getId(id).subscribe(res => {
-      this.respuesta = res;
-      this.persona.credencial = this.respuesta.detail[0].credencial;
+    this.usuario.getId(id).subscribe((res: any) => {
+      this.persona.credencial = res.detail[0].credencial;
       this.hash = this.persona.credencial.contraseña;
       this.correoForm.setValue({
         correo: this.persona.credencial.correo,
@@ -69,9 +62,8 @@ export class CuentaComponent implements OnInit {
 
   guardarCorreo() {
     this.persona.credencial.correo = this.correoForm.value.correo;
-    this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.correoForm.value.pass, op: 0 }).subscribe(res => {
-      this.respuesta = res;
-      if (this.respuesta.code == 400) {
+    this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.correoForm.value.pass, op: 0 }).subscribe((res: any) => {
+      if (res.code == 400) {
         this.errorCorreo = true;
         this.inicializar(localStorage.getItem('userid'));
       } else {
@@ -82,9 +74,8 @@ export class CuentaComponent implements OnInit {
 
   guardarPass() {
     this.persona.credencial.contraseña = this.passForm.value.pass;
-    this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe(res => {
-      this.respuesta = res;
-      if (this.respuesta.code == 400) {
+    this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe((res: any) => {
+      if (res.code == 400) {
         this.inicializar(localStorage.getItem('userid'));
       } else {
         this.ngOnInit();

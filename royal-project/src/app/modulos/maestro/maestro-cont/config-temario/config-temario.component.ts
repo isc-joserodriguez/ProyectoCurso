@@ -9,12 +9,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   styleUrls: ['./config-temario.component.scss']
 })
 export class ConfigTemarioComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   temario = [];
   nombreCurso = '';
   temarioForm: FormGroup;
@@ -30,10 +24,9 @@ export class ConfigTemarioComponent implements OnInit {
   }
 
   infoCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe(res => {
-      this.respuesta = res;
-      this.temario = this.respuesta.detail[0].contenidoCurso;
-      this.nombreCurso = this.respuesta.detail[0].nombreCompleto;
+    this.cursos.getCursoInfo(id).subscribe((res: any) => {
+      this.temario = res.detail[0].contenidoCurso;
+      this.nombreCurso = res.detail[0].nombreCompleto;
       this.temario.forEach((unidades, i) => {
         const unidadFormGroup = this.formBuilder.group({
           unidad: [unidades.unidad, Validators.required],
@@ -74,9 +67,8 @@ export class ConfigTemarioComponent implements OnInit {
 
   subir() {
     this.temario = this.temarioForm.value.unidades;
-    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
-      this.respuesta = res;
-      this.router.navigate(['/maestro/curso/config',this.route.snapshot.params.id]);
+    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe((res: any) => {
+      this.router.navigate(['/maestro/curso/config', this.route.snapshot.params.id]);
     });
   }
 

@@ -12,11 +12,6 @@ declare let videojs: any;
   styleUrls: ['./curso-clase.component.scss']
 })
 export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
   infoCurso: any = {
     contenidoCurso: [{}],
     imagen: '',
@@ -69,16 +64,15 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player = videojs("videoId");
   }
   getInfoClase(id) {
-    this.curso.getCursoInfo(id).subscribe(curso => {
-      this.respuesta = curso;
-      this.infoCurso._id = this.respuesta.detail[0]._id;
-      this.infoCurso.imagen = this.respuesta.detail[0].imagen;
-      this.infoCurso.alumnosInscritos = this.respuesta.detail[0].alumnosInscritos;
+    this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso._id = curso.detail[0]._id;
+      this.infoCurso.imagen = curso.detail[0].imagen;
+      this.infoCurso.alumnosInscritos = curso.detail[0].alumnosInscritos;
       this.infoCurso.alumnosInscritos = [];
-      this.respuesta.detail[0].alumnosInscritos.forEach(elemento => {
+      curso.detail[0].alumnosInscritos.forEach(elemento => {
         this.infoCurso.alumnosInscritos.push(elemento.idAlumno);
       });
-      this.infoCurso.contenidoCurso = this.respuesta.detail[0].contenidoCurso;
+      this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
       if (!this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')))) {
         this.router.navigate(['/curso', this.route.snapshot.params.id, 'vista']);
       }
@@ -86,8 +80,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       //Video
       this.player.src({ type: "video/mp4", src: this.infoClase.video });
       this.player.poster(this.infoCurso.imagen);
-
-      //console.log(this.infoClase);
       this.setAvance(localStorage.getItem('userid'));
       this.getTareas();
 
@@ -163,15 +155,13 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   setAvance(id) {
     this.cursosAlumno = [];
     this.avance = [parseInt(this.route.snapshot.params.unidad) - 1, parseInt(this.route.snapshot.params.subtema) - 1, parseInt(this.route.snapshot.params.clase) - 1];
-    this.usuarios.getUser(id).subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail[0].cursoAlumno.forEach(element => {
+    this.usuarios.getUser(id).subscribe((res: any) => {
+      res.detail[0].cursoAlumno.forEach(element => {
         if (element.ruta == this.infoCurso.ruta) {
           element.avance = this.avance[0] + '-' + this.avance[1] + '-' + this.avance[2]
         }
         this.cursosAlumno.push(element);
       });
-      console.log(this.cursosAlumno);
       this.usuarios.updateAvance(id, this.cursosAlumno).subscribe(res => {
       });
     });

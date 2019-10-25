@@ -7,7 +7,6 @@ import { MisCursosComponent } from './mis-cursos/mis-cursos.component';
 import { PerfilNavComponent } from './perfil-nav/perfil-nav.component';
 import { CursoComponent } from './curso/curso.component';
 import { CategoriasComponent } from './categorias/categorias.component';
-import { RedirectComponent } from './redirect/redirect.component';
 import { ComunidadComponent } from './comunidad/comunidad.component';
 import { ComunidadNuevoComponent } from './comunidad-nuevo/comunidad-nuevo.component';
 import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregunta.component';
@@ -83,10 +82,6 @@ const routes: Routes = [
   {
     path: 'comunidad/preguntas/mis-preguntas',
     component: ComunidadPropiasComponent
-  },
-  {
-    path: 'busqueda/:ruta',
-    component: RedirectComponent
   }
 ];
 
