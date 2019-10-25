@@ -11,11 +11,6 @@ declare let videojs: any;
   styleUrls: ['./config-clase.component.scss']
 })
 export class ConfigClaseComponent implements OnInit, OnDestroy {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
   numPlantilla = 0;
 
   infoClase: any = {};
@@ -90,10 +85,9 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   }
 
   infoCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe(res => {
-      this.respuesta = res;
-      this.temario = this.respuesta.detail[0].contenidoCurso;
-      this.portada = this.respuesta.detail[0].imagen;
+    this.cursos.getCursoInfo(id).subscribe((res: any) => {
+      this.temario = res.detail[0].contenidoCurso;
+      this.portada = res.detail[0].imagen;
       this.infoClase = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1];
       this.nombreClase = this.infoClase.clase;
       this.numPlantilla = this.infoClase.tipoPlantilla;
@@ -218,23 +212,20 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
         video: '',
         texto: this.textoForm.value.texto
       })
-      //this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
     });
   }
 
   getRecursos() {
-    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe(res => {
-      this.respuesta = res;
-      this.temario = this.respuesta.detail[0].contenidoCurso;
+    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe((res: any) => {
+      this.temario = res.detail[0].contenidoCurso;
       this.infoClase = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1];
       this.listaRecursos = this.infoClase.recursos.urls;
     });
   }
 
   getTarea() {
-    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe(res => {
-      this.respuesta = res;
-      this.temario = this.respuesta.detail[0].contenidoCurso;
+    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe((res: any) => {
+      this.temario = res.detail[0].contenidoCurso;
       this.infoClase = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1];
       this.objTarea = this.infoClase.tarea;
       this.tareaForm.setValue({

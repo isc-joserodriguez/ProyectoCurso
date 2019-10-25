@@ -11,11 +11,6 @@ declare let videojs: any;
   styleUrls: ['./curso-revision.component.scss']
 })
 export class CursoRevisionComponent implements OnInit, OnDestroy {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
   infoCurso = {
     nombreCompleto: '',
     precio: 0,
@@ -49,20 +44,18 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
     videojs(oldPlayer).dispose();
   }
   getInfoCurso(id) {
-    this.curso.getCursoInfo(id).subscribe(curso => {
-      //Pendientes
-      this.respuesta = curso;
-      this.infoCurso.nombreCompleto = this.respuesta.detail[0].nombreCompleto;
-      this.infoCurso.precio = this.respuesta.detail[0].precio;
-      this.infoCurso.introduccionVideo = this.respuesta.detail[0].introduccionVideo;
-      this.infoCurso.imagen = this.respuesta.detail[0].imagen;
-      this.infoCurso.descripcion = this.respuesta.detail[0].descripcionCurso;
+    this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
+      this.infoCurso.precio = curso.detail[0].precio;
+      this.infoCurso.introduccionVideo = curso.detail[0].introduccionVideo;
+      this.infoCurso.imagen = curso.detail[0].imagen;
+      this.infoCurso.descripcion = curso.detail[0].descripcionCurso;
       this.infoCurso.valoracion = 5;
       this.infoCurso.inscritos = 5;
-      this.infoCurso.notas = this.respuesta.detail[0].notas;
-      this.infoCurso.objetivos = this.respuesta.detail[0].objetivos;
+      this.infoCurso.notas = curso.detail[0].notas;
+      this.infoCurso.objetivos = curso.detail[0].objetivos;
       this.infoCurso.objetivos = [];
-      this.respuesta.detail[0].objetivos.forEach(elemento => {
+      curso.detail[0].objetivos.forEach(elemento => {
         this.infoCurso.objetivos.push(elemento.objetivo);
       });
       videojs("videoId", {
@@ -73,17 +66,16 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
       }, function () {
         // Player (this) is initialized and ready.
       });
-      this.infoCurso.contenidoCurso = this.respuesta.detail[0].contenidoCurso;
-      this.getInfoMaestro(this.respuesta.detail[0].idMaestro);
+      this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
+      this.getInfoMaestro(curso.detail[0].idMaestro);
     });
   }
   getInfoMaestro(id) {
-    this.usuarios.getUser(id).subscribe(usuario => {
-      this.respuesta = usuario;
-      this.infoMaestro.id = this.respuesta.detail[0]._id;
-      this.infoMaestro.foto = this.respuesta.detail[0].foto;
-      this.infoMaestro.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
-      this.infoMaestro.resumen = this.respuesta.detail[0].resumen;
+    this.usuarios.getUser(id).subscribe((usuario: any) => {
+      this.infoMaestro.id = usuario.detail[0]._id;
+      this.infoMaestro.foto = usuario.detail[0].foto;
+      this.infoMaestro.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
+      this.infoMaestro.resumen = usuario.detail[0].resumen;
     });
   }
   aceptarCurso() {

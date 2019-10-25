@@ -35,7 +35,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CursoComponent } from './curso/curso.component';
 import { CategoriasComponent } from './categorias/categorias.component';
-import { RedirectComponent } from './redirect/redirect.component';
 
 
 //rating star
@@ -53,7 +52,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, CursoClaseInfoComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, CursoClaseInfoComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,

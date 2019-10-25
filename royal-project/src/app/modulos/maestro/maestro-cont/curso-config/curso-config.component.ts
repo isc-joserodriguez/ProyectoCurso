@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 declare let videojs: any;
@@ -10,12 +10,7 @@ declare let videojs: any;
   templateUrl: './curso-config.component.html',
   styleUrls: ['./curso-config.component.scss']
 })
-export class CursoConfigComponent implements OnInit, OnDestroy {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: []
-  }
+export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
   infoCurso = {
     nombreCompleto: '',
     precio: 0,
@@ -54,20 +49,24 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
   editado = 0;
   editar = false;
 
+  player: any;
+
   constructor(private router: Router, private firebase: FirebaseService, private cursos: CursosService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
-    this.fotoForm = this.formBuilder.group({
-      foto: new FormControl(null, Validators.required)
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      window.scrollTo(0, 0);
+      this.fotoForm = this.formBuilder.group({
+        foto: new FormControl(null, Validators.required)
+      });
+      this.videoForm = this.formBuilder.group({
+        video: new FormControl(null, Validators.required)
+      });
+      this.objetivosForm = this.formBuilder.group({
+        objetivo: ['', Validators.required]
+      });
+      this.getCurso(params.get('id'));
     });
-    this.videoForm = this.formBuilder.group({
-      video: new FormControl(null, Validators.required)
-    });
-    this.objetivosForm = this.formBuilder.group({
-      objetivo: ['', Validators.required]
-    });
-    this.getCurso(this.route.snapshot.params.id);
   }
 
   ngOnDestroy(): void {
@@ -75,19 +74,17 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
     videojs(oldPlayer).dispose();
   }
 
+  ngAfterViewInit(): void {
+    this.player = videojs("videoId");
+  }
+
   getCurso(ruta) {
-    this.cursos.getCursoInfo(ruta).subscribe(curso => {
-      this.respuesta = curso;
-      this.infoCurso = this.respuesta.detail[0];
-      videojs("videoId", {
-        sources: [{
-          src: this.infoCurso.introduccionVideo,
-          type: 'video/mp4'
-        }]
-      }, function () {
-        // Player (this) is initialized and ready.
-      });
-      console.log(this.infoCurso);
+    this.cursos.getCursoInfo(ruta).subscribe((curso: any) => {
+      this.infoCurso = curso.detail[0];
+
+      //Video
+      this.player.src({ type: "video/mp4", src: this.infoCurso.introduccionVideo });
+      this.player.poster(this.infoCurso.imagen);
     });
   }
 
@@ -150,13 +147,13 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
                 const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
                   localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/imagen/' + this.viejaFoto);
                 referenciaBorrar.delete().subscribe(() => {
-                  this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', 1]);
+                  this.ngOnInit();
                 });
               } else {
-                this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', 1]);
+                this.ngOnInit();
               }
             } else {
-              this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', 1]);
+              this.ngOnInit();
             }
           });
         });
@@ -194,13 +191,13 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
                 const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' +
                   localStorage.getItem('userid') + '/curso/' + this.route.snapshot.params.id + '/video/' + this.viejoVideo);
                 referenciaBorrar.delete().subscribe(() => {
-                  this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', 1]);
+                  this.ngOnInit();
                 });
               } else {
-                this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', 1]);
+                this.ngOnInit();
               }
             } else {
-              this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', 1]);
+              this.ngOnInit();
             }
           });
         });
@@ -227,7 +224,7 @@ export class CursoConfigComponent implements OnInit, OnDestroy {
     this.editado = i
     this.editar = true
   }
-  
+
   addObjetivo() {
     this.editar = false
     this.mostrarFormObjetivo = true;

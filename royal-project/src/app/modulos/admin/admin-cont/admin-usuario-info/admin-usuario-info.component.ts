@@ -11,12 +11,6 @@ export class AdminUsuarioInfoComponent implements OnInit {
   tempCoord = true;
   permisoUsuario = 0;
 
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   usuario = {
     id: 1,
     credencial: { correo: '', contraseña: '' },
@@ -33,20 +27,19 @@ export class AdminUsuarioInfoComponent implements OnInit {
     this.getUsuario(this.route.snapshot.params.id);
   }
   getUsuario(id) {
-    this.usuarios.getId(id).subscribe(resp => {
-      this.respuesta = resp;
-      this.usuario.tipo = this.respuesta.detail[0].tipo;
+    this.usuarios.getId(id).subscribe((resp: any) => {
+      this.usuario.tipo = resp.detail[0].tipo;
 
       this.permisoUsuario = this.usuario.tipo[0].admin == true ? 0 : 1;
-      this.tempCoord = this.respuesta.detail[0].tipo[1].coord != undefined ? this.respuesta.detail[0].tipo[1].coord : false;
+      this.tempCoord = resp.detail[0].tipo[1].coord != undefined ? resp.detail[0].tipo[1].coord : false;
 
-      this.usuario.id = this.respuesta.detail[0]._id;
-      this.usuario.foto = this.respuesta.detail[0].foto;
-      this.usuario.nombre = this.respuesta.detail[0].nombre;
-      this.usuario.apMaterno = this.respuesta.detail[0].apMaterno;
-      this.usuario.apPaterno = this.respuesta.detail[0].apPaterno;
-      this.usuario.fechaNac = this.respuesta.detail[0].fechaNac;
-      this.usuario.credencial = this.respuesta.detail[0].credencial;
+      this.usuario.id = resp.detail[0]._id;
+      this.usuario.foto = resp.detail[0].foto;
+      this.usuario.nombre = resp.detail[0].nombre;
+      this.usuario.apMaterno = resp.detail[0].apMaterno;
+      this.usuario.apPaterno = resp.detail[0].apPaterno;
+      this.usuario.fechaNac = resp.detail[0].fechaNac;
+      this.usuario.credencial = resp.detail[0].credencial;
     }, err => {
       console.log(err);
     });

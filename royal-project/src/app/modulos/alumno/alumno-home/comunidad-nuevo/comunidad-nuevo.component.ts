@@ -16,12 +16,6 @@ export class ComunidadNuevoComponent implements OnInit {
   @ViewChild("myckeditor") ckeditor: any;
   categoria = this.route.snapshot.params.categoria;
   iduser = localStorage.getItem('userid');
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   preguntaForm: FormGroup;
 
   constructor(private route: ActivatedRoute, private router: Router, private comunidad: ComunidadService, private formBuilder: FormBuilder) { }
@@ -80,10 +74,9 @@ export class ComunidadNuevoComponent implements OnInit {
       categoria: this.categoria,
       repuestas: []
     }
-    this.comunidad.addPreguntaNueva(pregunta).subscribe(res => {
-      this.respuesta = res;
+    this.comunidad.addPreguntaNueva(pregunta).subscribe((res: any) => {
       localStorage.removeItem('pregunta');
-      this.router.navigate(['/comunidad/pregunta/', this.respuesta.detail.ruta]);
+      this.router.navigate(['/comunidad/pregunta/', res.detail.ruta]);
     });
   }
   onChange($event: any): void {

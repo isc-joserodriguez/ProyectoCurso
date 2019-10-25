@@ -9,11 +9,6 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
   viejaFoto = '';
   cambiaFoto = false;
 
@@ -48,20 +43,19 @@ export class PerfilComponent implements OnInit {
   }
 
   getUser(id) {
-    this.usuario.getUser(id).subscribe(user => {
-      this.respuesta = user;
-      this.URLPublica = this.respuesta.detail[0].foto;
+    this.usuario.getUser(id).subscribe((user: any) => {
+      this.URLPublica = user.detail[0].foto;
       this.perfilForm.setValue({
-        nombre: this.respuesta.detail[0].nombre,
-        apPaterno: this.respuesta.detail[0].apPaterno,
-        apMaterno: this.respuesta.detail[0].apMaterno,
-        sexo: this.respuesta.detail[0].sexo,
-        fechaNac: this.respuesta.detail[0].fechaNac,
-        web: this.respuesta.detail[0].web,
-        fb: this.respuesta.detail[0].fb,
-        yt: this.respuesta.detail[0].yt,
-        in: this.respuesta.detail[0].in,
-        cv: this.respuesta.detail[0].resumen,
+        nombre: user.detail[0].nombre,
+        apPaterno: user.detail[0].apPaterno,
+        apMaterno: user.detail[0].apMaterno,
+        sexo: user.detail[0].sexo,
+        fechaNac: user.detail[0].fechaNac,
+        web: user.detail[0].web,
+        fb: user.detail[0].fb,
+        yt: user.detail[0].yt,
+        in: user.detail[0].in,
+        cv: user.detail[0].resumen,
         foto: ''
       });
     });

@@ -14,11 +14,6 @@ export class AdminUsuariosComponent implements OnInit {
   displayedColumns: string[] = ['img', 'nombre', 'apellidos', 'tipo', 'editar'];
   listaUsuarios = [];
   dataSource: MatTableDataSource<any>;
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -43,9 +38,8 @@ export class AdminUsuariosComponent implements OnInit {
 
   getUsuarios() {
     this.listaUsuarios = [];
-    this.usuarios.getAll().subscribe(resp => {
-      this.respuesta = resp;
-      this.respuesta.detail.forEach(usuario => {
+    this.usuarios.getAll().subscribe((resp: any) => {
+      resp.detail.forEach(usuario => {
         this.listaUsuarios.push({
           id: usuario._id,
           img: usuario.foto,

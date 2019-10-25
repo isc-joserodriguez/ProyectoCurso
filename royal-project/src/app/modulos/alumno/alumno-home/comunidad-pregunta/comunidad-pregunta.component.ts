@@ -14,12 +14,6 @@ export class ComunidadPreguntaComponent implements OnInit {
   propia = false
   numPreguntas = 0;
 
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   infoPersona = {
     foto: '',
     nombreCompleto: '',
@@ -68,9 +62,8 @@ export class ComunidadPreguntaComponent implements OnInit {
   }
 
   getPregunta(ruta) {
-    this.comunidad.getPregunta(ruta).subscribe(res => {
-      this.respuesta = res;
-      this.infoPregunta = this.respuesta.detail[0];
+    this.comunidad.getPregunta(ruta).subscribe((res: any) => {
+      this.infoPregunta = res.detail[0];
       if (this.infoPregunta.categoria == 'tecnologia') {
         this.infoPregunta.categoria = 'Tecnología'
       } else {
@@ -83,13 +76,12 @@ export class ComunidadPreguntaComponent implements OnInit {
       this.getinfoPersona(this.infoPregunta.idPersona);
       this.infoRespuestas = [];
       this.infoPregunta.respuestas.forEach(respuesta => {
-        this.usuarios.getUser(respuesta.idPersona).subscribe(usuario => {
-          this.respuesta = usuario;
+        this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
           let nuevaRes: any = {
-            nombreCompleto: this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno,
+            nombreCompleto: usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno,
             comentario: respuesta.comentario,
             fecha: respuesta.fecha,
-            foto: this.respuesta.detail[0].foto,
+            foto: usuario.detail[0].foto,
             id: respuesta.idPersona
           }
           this.infoRespuestas.push(nuevaRes);
@@ -104,12 +96,11 @@ export class ComunidadPreguntaComponent implements OnInit {
   }
 
   getinfoPersona(id) {
-    this.usuarios.getUser(id).subscribe(usuario => {
-      this.respuesta = usuario;
-      this.infoPersona.id = this.respuesta.detail[0]._id;
-      this.infoPersona.foto = this.respuesta.detail[0].foto;
-      this.infoPersona.nombreCompleto = this.respuesta.detail[0].nombre + ' ' + this.respuesta.detail[0].apPaterno + ' ' + this.respuesta.detail[0].apMaterno;
-      this.infoPersona.resumen = this.respuesta.detail[0].resumen;
+    this.usuarios.getUser(id).subscribe((usuario: any) => {
+      this.infoPersona.id = usuario.detail[0]._id;
+      this.infoPersona.foto = usuario.detail[0].foto;
+      this.infoPersona.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
+      this.infoPersona.resumen = usuario.detail[0].resumen;
     });
   }
 

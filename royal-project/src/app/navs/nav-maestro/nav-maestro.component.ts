@@ -8,11 +8,6 @@ import { AuthService } from 'src/app/servicios/auth.service';
   styleUrls: ['./nav-maestro.component.scss']
 })
 export class NavMaestroComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
 
   persona = {
     credencial: {
@@ -39,21 +34,20 @@ export class NavMaestroComponent implements OnInit {
     if (localStorage.getItem('token') == null) {
       this.router.navigate(['/']);
     }
-    this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
-      this.respuesta = res;
-      if (this.respuesta.detail.token != undefined) {
+    this.auth.infoUser(localStorage.getItem('token')).subscribe((res: any) => {
+      if (res.detail.token != undefined) {
         this.logout();
-      } else if (this.respuesta.detail.tipo[0].admin != undefined) {
+      } else if (res.detail.tipo[0].admin != undefined) {
         this.router.navigate(['/admin/']);
-      } else if (this.respuesta.detail.tipo[1].coord != undefined) {
+      } else if (res.detail.tipo[1].coord != undefined) {
         this.router.navigate(['/coord/']);
-      } else if (this.respuesta.detail.tipo[3].alumno != undefined) {
+      } else if (res.detail.tipo[3].alumno != undefined) {
         this.router.navigate(['/']);
       } else {
-        this.usuario = this.respuesta.detail.nombre;
-        this.sexo = this.respuesta.detail.sexo;
-        localStorage.setItem('userid', this.respuesta.detail.id);
-        if (!this.respuesta.detail.tipo[2].maestro) {
+        this.usuario = res.detail.nombre;
+        this.sexo = res.detail.sexo;
+        localStorage.setItem('userid', res.detail.id);
+        if (!res.detail.tipo[2].maestro) {
           this.router.navigate(['/usuario-inhabilitado']);
         }
       }

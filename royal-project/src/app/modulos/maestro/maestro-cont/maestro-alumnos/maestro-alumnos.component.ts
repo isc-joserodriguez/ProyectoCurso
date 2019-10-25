@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
@@ -12,18 +12,6 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
   styleUrls: ['./maestro-alumnos.component.scss']
 })
 export class MaestroAlumnosComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
-  infoAlumno: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   // Variables Cursos
   listaAlumnos = [];
   displayedColumns: string[] = ['foto', 'nombre', 'correo', 'calificaciones'];
@@ -37,23 +25,23 @@ export class MaestroAlumnosComponent implements OnInit {
   }
 
   ngOnInit() {
-    // inic. cursos
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.getAlumnos();
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      window.scrollTo(0, 0);
+      this.listaAlumnos = [];
+      this.dataSource = new MatTableDataSource(this.listaAlumnos);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.getAlumnos();
+    });
   }
   getAlumnos() {
-    this.listaAlumnos = [];
-    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail[0].alumnosInscritos.forEach(alumnoInscrito => {
-        this.usuarios.getUser(alumnoInscrito.idAlumno).subscribe(alumnoInfo => {
-          this.infoAlumno = alumnoInfo;
-          console.log(this.infoAlumno.detail[0].foto);
+    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe((res: any) => {
+      res.detail[0].alumnosInscritos.forEach(alumnoInscrito => {
+        this.usuarios.getUser(alumnoInscrito.idAlumno).subscribe((alumnoInfo: any) => {
           this.listaAlumnos.push({
-            foto: this.infoAlumno.detail[0].foto,
-            nombre: this.infoAlumno.detail[0].nombre + ' ' + this.infoAlumno.detail[0].apPaterno + ' ' + this.infoAlumno.detail[0].apMaterno,
-            correo: this.infoAlumno.detail[0].credencial.correo
+            foto: alumnoInfo.detail[0].foto,
+            nombre: alumnoInfo.detail[0].nombre + ' ' + alumnoInfo.detail[0].apPaterno + ' ' + alumnoInfo.detail[0].apMaterno,
+            correo: alumnoInfo.detail[0].credencial.correo
           });
           this.dataSource = new MatTableDataSource(this.listaAlumnos);
           this.dataSource.paginator = this.paginator;

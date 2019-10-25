@@ -9,12 +9,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   styleUrls: ['./config-subtema.component.scss']
 })
 export class ConfigSubtemaComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   temario = [];
   nombreSubtema = '';
   unidad = this.route.snapshot.params.subtema;
@@ -32,9 +26,8 @@ export class ConfigSubtemaComponent implements OnInit {
   }
 
   infoCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe(res => {
-      this.respuesta = res;
-      this.temario = this.respuesta.detail[0].contenidoCurso;
+    this.cursos.getCursoInfo(id).subscribe((res:any) => {
+      this.temario = res.detail[0].contenidoCurso;
       this.nombreSubtema = this.temario[this.unidad - 1].subtemas[this.subtema - 1].subtema;
 
       this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases.forEach((clases) => {
@@ -64,7 +57,6 @@ export class ConfigSubtemaComponent implements OnInit {
     }
 
     this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
-      this.respuesta = res;
       this.router.navigate(['/maestro/curso/config', this.route.snapshot.params.id]);
     });
   }

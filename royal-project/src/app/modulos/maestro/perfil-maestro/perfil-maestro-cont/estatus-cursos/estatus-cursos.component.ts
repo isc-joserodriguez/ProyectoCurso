@@ -11,12 +11,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   styleUrls: ['./estatus-cursos.component.scss']
 })
 export class EstatusCursosComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   // Variables Cursos
   listaCursos = [];
   colCursos: string[] = ['curso', 'fecha', 'estado', 'publicado', 'editar'];
@@ -24,12 +18,13 @@ export class EstatusCursosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router:Router, private cursos: CursosService) {
+  constructor(private router: Router, private cursos: CursosService) {
     // datasource cursos
     this.datosCursos = new MatTableDataSource(this.listaCursos);
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     // inic. cursos
     this.datosCursos.paginator = this.paginator;
     this.datosCursos.sort = this.sort;
@@ -38,9 +33,8 @@ export class EstatusCursosComponent implements OnInit {
 
   getCursos() {
     this.listaCursos = [];
-    this.cursos.getCursos().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(curso => {
+    this.cursos.getCursos().subscribe((res: any) => {
+      res.detail.forEach(curso => {
         console.log(curso)
         if (curso.idMaestro == localStorage.getItem('userid')) {
           this.listaCursos.push({
@@ -67,7 +61,7 @@ export class EstatusCursosComponent implements OnInit {
       return 'Rechazado';
     }
   }
-  configCurso(ruta){
-    this.router.navigate(['/maestro/curso/config/',ruta]);
+  configCurso(ruta) {
+    this.router.navigate(['/maestro/curso/config/', ruta]);
   }
 }

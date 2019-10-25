@@ -12,18 +12,6 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
   styleUrls: ['./admin-cursos.component.scss']
 })
 export class AdminCursosComponent implements OnInit {
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
-  resUsuario: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   solicitudes = false;
   reportes = false;
 
@@ -76,15 +64,13 @@ export class AdminCursosComponent implements OnInit {
 
   getSolicitudesCursos() {
     this.listaSolicitudes = [];
-    this.cursos.getCursosSolicitudes().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(curso => {
-        this.usuarios.getId(curso.idMaestro).subscribe(maestro => {
-          this.resUsuario = maestro;
+    this.cursos.getCursosSolicitudes().subscribe((res: any) => {
+      res.detail.forEach(curso => {
+        this.usuarios.getId(curso.idMaestro).subscribe((maestro: any) => {
           this.listaSolicitudes.push({
             id: curso._id,
-            nombre: this.resUsuario.detail[0].nombre + ' ' +
-              this.resUsuario.detail[0].apPaterno + ' ' + this.resUsuario.detail[0].apMaterno,
+            nombre: maestro.detail[0].nombre + ' ' +
+              maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,
             curso: curso.nombreCorto,
             fecha: curso.fechaSolicitud,
             ruta: curso.ruta
@@ -115,14 +101,12 @@ export class AdminCursosComponent implements OnInit {
 
   getCursos() {
     this.listaCursos = [];
-    this.cursos.getCursos().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(curso => {
-        this.usuarios.getId(curso.idMaestro).subscribe(maestro => {
-          this.resUsuario = maestro;
+    this.cursos.getCursos().subscribe((res: any) => {
+      res.detail.forEach(curso => {
+        this.usuarios.getId(curso.idMaestro).subscribe((maestro: any) => {
           this.listaCursos.push({
-            nombre: this.resUsuario.detail[0].nombre + ' ' +
-              this.resUsuario.detail[0].apPaterno + ' ' + this.resUsuario.detail[0].apMaterno,
+            nombre: maestro.detail[0].nombre + ' ' +
+              maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,
             id: curso._id,
             curso: curso.nombreCorto,
             fecha: curso.fechaSolicitud,

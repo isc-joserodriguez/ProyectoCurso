@@ -18,12 +18,6 @@ export class NavAlumnoComponent implements OnInit {
   categoriasTec = [];
   categoriasLen = [];
 
-  respuesta: any = {
-    code: 0,
-    msg: '',
-    detail: ''
-  };
-
   persona = {
     credencial: {
       correo: '',
@@ -69,9 +63,8 @@ export class NavAlumnoComponent implements OnInit {
   getCategorias() {
     this.categoriasTec = [];
     this.categoriasLen = [];
-    this.cursos.getSubcategorias().subscribe(res => {
-      this.respuesta = res;
-      this.respuesta.detail.forEach(e => {
+    this.cursos.getSubcategorias().subscribe((res: any) => {
+      res.detail.forEach(e => {
         if (e.categoria == 'Tecnología') {
           this.categoriasTec.push(e.subcategoria);
         } else {
@@ -95,9 +88,8 @@ export class NavAlumnoComponent implements OnInit {
   login() {
     this.persona.credencial.correo = this.logForm.value.logCorreo;
     this.persona.credencial.contraseña = this.logForm.value.logContrasenia;
-    this.auth.login(this.persona).subscribe(res => {
-      this.respuesta = res;
-      localStorage.setItem('token', this.respuesta.detail);
+    this.auth.login(this.persona).subscribe((res: any) => {
+      localStorage.setItem('token', res.detail);
       this.ngOnInit();
     }, err => {
       console.log(err);
@@ -113,9 +105,8 @@ export class NavAlumnoComponent implements OnInit {
     this.persona.sexo = this.regForm.value.regSexo;
 
     this.auth.signup(this.persona).subscribe(resp => {
-      this.auth.login(this.persona).subscribe(res => {
-        this.respuesta = res;
-        localStorage.setItem('token', this.respuesta.detail);
+      this.auth.login(this.persona).subscribe((res: any) => {
+        localStorage.setItem('token', res.detail);
         this.verificarToken();
       }, err => {
         console.log(err);
@@ -129,26 +120,25 @@ export class NavAlumnoComponent implements OnInit {
     if (localStorage.getItem('token') == null) {
       this.logueado = false;
     } else {
-      this.auth.infoUser(localStorage.getItem('token')).subscribe(res => {
-        this.respuesta = res;
-        localStorage.setItem('userid', this.respuesta.detail.id);
-        if (this.respuesta.detail.token != undefined) {
+      this.auth.infoUser(localStorage.getItem('token')).subscribe((res: any) => {
+        localStorage.setItem('userid', res.detail.id);
+        if (res.detail.token != undefined) {
           this.logout();
-        } else if (this.respuesta.detail.tipo[0].admin != undefined) {
+        } else if (res.detail.tipo[0].admin != undefined) {
           this.router.navigate(['/admin/']);
-        } else if (this.respuesta.detail.tipo[1].coord != undefined) {
+        } else if (res.detail.tipo[1].coord != undefined) {
           this.router.navigate(['/coord/']);
-        } else if (this.respuesta.detail.tipo[2].maestro != undefined) {
-          if (!this.respuesta.detail.tipo[2].maestro) {
+        } else if (res.detail.tipo[2].maestro != undefined) {
+          if (!res.detail.tipo[2].maestro) {
             this.router.navigate(['/usuario-inhabilitado']);
           }
           this.router.navigate(['/maestro/']);
         } else {
-          this.usuario = this.respuesta.detail.nombre;
+          this.usuario = res.detail.nombre;
           this.logueado = true;
-          this.sexo = this.respuesta.detail.sexo;
-          localStorage.setItem('userid', this.respuesta.detail.id);
-          if (!this.respuesta.detail.tipo[3].alumno) {
+          this.sexo = res.detail.sexo;
+          localStorage.setItem('userid', res.detail.id);
+          if (!res.detail.tipo[3].alumno) {
             this.router.navigate(['/usuario-inhabilitado']);
           }
         }
@@ -166,9 +156,7 @@ export class NavAlumnoComponent implements OnInit {
   }
 
   buscar() {
-    const parametro = '2' + this.busqueda.replace(/ /g, '-');
-
-    this.router.navigate(['/busqueda', parametro]);
+    this.router.navigate(['/buscar', this.busqueda.replace(/ /g, '-')]);
   }
 
 
