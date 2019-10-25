@@ -50,6 +50,10 @@ import { NgxEditorModule } from 'ngx-editor';
 //boostrap ngx
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
+//editor ckeditor
+
+import { CKEditorModule } from 'ng2-ckeditor';
+
 
 @NgModule({
   declarations: [
@@ -85,7 +89,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     BarRatingModule,
     NgxPaginationModule,
     NgxEditorModule,
-    TooltipModule 
+    TooltipModule,
+    CKEditorModule  
   ],
   providers: [],
   bootstrap: [AppComponent]

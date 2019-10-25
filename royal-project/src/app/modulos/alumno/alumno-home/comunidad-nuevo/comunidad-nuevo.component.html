@@ -26,14 +26,22 @@
                 <div class="container form col-md-12 px-5">
                   <form [formGroup]="preguntaForm">
                     <!-- Pregunta -->
-                    <mat-form-field appearance="outline" class="field-login">
-                      <mat-label>¿Cuál es tu pregunta?</mat-label>
+
+
+                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
+                      (change)="onChange($event)" formControlName="pregunta">
+                    </ckeditor>
+
+                    <!-- 
                       <input matInput placeholder="Ingresa tu pregunta" formControlName="pregunta">
-                    </mat-form-field>
+                    -->
+
+                    <!--
                     <mat-error>
                       <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega
                         tu pregunta</span>
                     </mat-error>
+                    -->
                     <!-- Pregunta -->
 
                     <!-- Detalles -->
@@ -48,7 +56,8 @@
                     </mat-error>
                     <!-- Detalles -->
                     <div class="text-right pr-4 pb-3">
-                      <button [disabled]="!preguntaForm.valid" type="button" class="btn btn-success" (click)="subirPregunta()">Enviar</button>
+                      <button [disabled]="!preguntaForm.valid" type="button" class="btn btn-success"
+                        (click)="subirPregunta()">Enviar</button>
                     </div>
                   </form>
                 </div>

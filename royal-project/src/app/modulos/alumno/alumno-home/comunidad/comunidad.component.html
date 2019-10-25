@@ -102,10 +102,11 @@
               <form [formGroup]="preguntaForm">
                 <mat-form-field appearance="outline" class="field-login">
                   <mat-label>Pregunta:</mat-label>
-                  <app-ngx-editor></app-ngx-editor>
 
                   <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
                     cdkAutosizeMaxRows="15" formControlName="pregunta"></textarea>
+
+
                 </mat-form-field>
                 <mat-error>
                   <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega tu

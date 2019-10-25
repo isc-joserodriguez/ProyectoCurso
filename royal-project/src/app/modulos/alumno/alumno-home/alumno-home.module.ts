@@ -49,6 +49,9 @@ import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.com
 //edit text
 import { NgxEditorModule } from 'ngx-editor';
 
+//editor ckeditor
+import { CKEditorModule } from 'ng2-ckeditor';
+
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
     PerfilNavComponent, CursoComponent, CategoriasComponent, RedirectComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, CursoClaseInfoComponent],
@@ -69,7 +72,8 @@ import { NgxEditorModule } from 'ngx-editor';
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    NgxEditorModule
+    NgxEditorModule,
+    CKEditorModule
   ]
 })
 export class AlumnoHomeModule { }
