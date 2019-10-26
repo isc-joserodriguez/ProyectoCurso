@@ -60,6 +60,7 @@ export class PerfilComponent implements OnInit {
       });
     });
   }
+
   guardar() {
     const datos = {
       nombre: this.perfilForm.value.nombre,
@@ -82,6 +83,7 @@ export class PerfilComponent implements OnInit {
       });
     }
   }
+  
   public seleccionarFoto(event) {
     this.cambiaFoto = true;
     if (event.target.files.length > 0) {

@@ -26,38 +26,37 @@
         <table mat-table [dataSource]="dataSource" matSort>
 
           <!-- Columna Foto -->
-          <ng-container matColumnDef="foto">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Foto </th>
-            <td mat-cell *matCellDef="let row"><img width="50" [src]="row.foto"></td>
+          <ng-container matColumnDef="imagen">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </th>
+            <td mat-cell *matCellDef="let row"><img width="50" [src]="row.imagen"></td>
           </ng-container>
 
           <!-- Columna Nombre Insignia -->
-          <ng-container matColumnDef="nombre">
+          <ng-container matColumnDef="nombreInsignia">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</th>
-            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.nombreInsignia}} </td>
           </ng-container>
 
-
-          <!-- Columna Estatus -->
-
-          <ng-container matColumnDef="estatus">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</th>
-            <td mat-cell *matCellDef="let row"> {{row.estatus}} </td>
+          <!-- Columna Descripción -->
+          <ng-container matColumnDef="descripcionInsignia">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+            <td mat-cell *matCellDef="let row"> {{row.descripcionInsignia}} </td>
           </ng-container>
 
-          <!-- Columna Otorgadas -->
-
-          <ng-container matColumnDef="otorgadas">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Otorgadas</th>
-            <td mat-cell *matCellDef="let row"> {{row.otorgadas}} </td>
+          <!-- Columna Otorgar -->
+          <ng-container matColumnDef="otorgar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Otorgar</th>
+            <td mat-cell *matCellDef="let row;let i=index">
+              <button mat-mini-fab color="primary" (click)="otorgar(i)"><img class="icon-opcion"
+                  src="./../../../assets/icons/edit.svg"></button>
+            </td>
           </ng-container>
 
           <!-- Columna Editar -->
-
           <ng-container matColumnDef="editar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
-            <td mat-cell *matCellDef="let row">
-              <button mat-mini-fab color="primary" (click)="editar(row.ruta)"><img class="icon-opcion"
+            <td mat-cell *matCellDef="let row;let i=index">
+              <button mat-mini-fab color="primary" (click)="editar(i)"><img class="icon-opcion"
                   src="./../../../assets/icons/edit.svg"></button>
             </td>
           </ng-container>
@@ -70,6 +69,45 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
       <!--fin tabla-->
+      <br>
+    </div>
+    <br>
+    <div class="col-md-12" *ngIf="divOtorgar">
+      <div class="text-center vertical-center">
+        <label class="h1">Otorgar Insignia</label>
+      </div>
+
+      <ul class="list-unstyled field-login">
+        <li class="media">
+          <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
+            <img [src]="insigniaOtorgar.imagen" class="mr-3" alt="..." width="100" height="100">
+          </div>
+
+          <div class="media-body">
+            <h5 class="mt-0 mb-1">{{insigniaOtorgar.nombreInsignia}}</h5>
+            {{insigniaOtorgar.descripcionInsignia}}
+            <mat-form-field appearance="outline" class="field-login">
+              <mat-label>Filtrar alumno:</mat-label>
+              <input type="text" placeholder="Busca un alumno" aria-label="Number" matInput [matAutocomplete]="auto"
+                (keyup)="filtrarAlumno($event.target.value)" [(ngModel)]="nuevoAlumno">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let alumno of listaAlumno" [value]="alumno">
+                  {{alumno}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div class="row justify-content-between">
+              <div class="pr-5">
+                <button type="button" class="btn btn-success btn-sm" (click)="subirInsignia()">Inscribir</button>
+                <mat-error>
+                  <label>{{error}}</label>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+        </li>
+        <mat-divider></mat-divider>
+      </ul>
       <br>
     </div>
   </div>

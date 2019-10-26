@@ -3,7 +3,7 @@
     <label class="h1">Nueva Insignia</label>
   </div>
   <div class="container">
-    <form [formGroup]="insigniaForm">
+    <form>
       <mat-card>
         <div class="col-md-12">
           <div class="row">
@@ -11,13 +11,7 @@
               <p class="p-0 m-0 ml-3">Nombre:</p>
               <mat-form-field appearance="outline" class="field-login">
                 <mat-label>Nombre:</mat-label>
-                <input matInput placeholder="Ingresa el nombre de la insignia" formControlName="nombreInsignia"
-                  required>
-                <mat-error>
-                  <span
-                    *ngIf="!insigniaForm.get('nombreInsignia').valid && insigniaForm.get('nombreInsignia').touched">Agrega
-                    el nombre.</span>
-                </mat-error>
+                <input matInput placeholder="Ingresa tu nombre" required>
               </mat-form-field>
             </div>
           </div>
@@ -33,20 +27,27 @@
           <div class="col-md-12 mt-2">
             <div class="row">
               <div class="col-md-6 mr-3">
+                <div class="text-center pb-3">
+                  <label>
+                    <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
+                      <img src="http://www.lorempixel.com/200/300" class="mr-3 sombraimg" width="100" height="100">
+                    </div>
+                  </label>
+                </div>
                 <div class="row p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Subir Foto</span>
                     </div>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" (change)="seleccionarFoto($event)">
-                      <label class="custom-file-label" for="inputGroupFile01">{{mensajeArchivo}}</label>
+                      <input type="file" class="custom-file-input">
+                      <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
                     </div>
                   </div>
-
-                  <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"
-                    max="100">{{porcentaje}}%</progress>
-
+                  <!--
+                      <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"
+                        max="100">{{porcentaje}}%</progress>
+                        -->
                 </div>
               </div>
               <mat-divider [vertical]="true"></mat-divider>
@@ -55,12 +56,7 @@
                   <mat-form-field appearance="outline" class="field-login2">
                     <mat-label>Descripción:</mat-label>
                     <textarea matInput placeholder="Agrega una descripción" cdkTextareaAutosize cdkAutosizeMinRows="4"
-                      cdkAutosizeMaxRows="10" formControlName="descripcionInsignia" required></textarea>
-                    <mat-error>
-                      <span
-                        *ngIf="!insigniaForm.get('descripcionInsignia').valid && insigniaForm.get('descripcionInsignia').touched">Agrega
-                        la descripción.</span>
-                    </mat-error>
+                      cdkAutosizeMaxRows="10" required></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -68,14 +64,14 @@
             <br>
             <div class="row">
               <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-success btn-md " [disabled]="!(insigniaForm.valid && archivo)" (click)="subir()">
+                <button type="button" class="btn btn-success btn-md ">
                   <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Guardar
                 </button>
               </div>
               <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-danger btn-md" [routerLink]="['../']">
-                  <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">Cancelar
-                </button>
+                <button type="button" class="btn btn-danger btn-md">
+                  <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">
+                  Cancelar</button>
               </div>
             </div>
           </div>

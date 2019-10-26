@@ -20,7 +20,7 @@ const personaSchema = new mongoose.Schema({
     yt: { type: String, default: ' ' },
     in: { type: String, default: ' ' },
     cursoMaestro: [{}],
-    insignias: [{}],
+    insignias: [{ idInsignia: { type: Number }, ruta: { type: String } }],
     cursoAlumno: [{
         ruta: { type: String, required: true }, fecha: { type: Date, default: Date.now() }, avance: { type: String, default: '0-0-0' }, estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
     }],
