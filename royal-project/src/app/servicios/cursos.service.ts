@@ -43,6 +43,10 @@ export class CursosService {
     return this.http.put(apiUrl + '/updateEstado/' + id, estatus);
   }
 
+  updateInsignias(id, insignias) {
+    return this.http.put(apiUrl + '/updateInsignias/' + id, insignias);
+  }
+
   getBusqueda(busqueda) {
     return this.http.get(apiUrl + '/getBusqueda/' + busqueda);
   }

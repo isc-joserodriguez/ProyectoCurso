@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 // MDBootstrap
@@ -36,9 +37,10 @@ import { MaestroAlumnosComponent } from './maestro-alumnos/maestro-alumnos.compo
 import { MaestroRevisionComponent } from './maestro-revision/maestro-revision.component';
 import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias.component';
 import { MaestroNuevaInsigniaComponent } from './maestro-nueva-insignia/maestro-nueva-insignia.component';
+import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestro-insignia-editar.component';
 
 @NgModule({
-  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent, MaestroNuevaInsigniaComponent],
+  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent, MaestroNuevaInsigniaComponent, MaestroInsigniaEditarComponent],
   imports: [
     CommonModule,
     MaestroContRoutingModule,
@@ -56,7 +58,8 @@ import { MaestroNuevaInsigniaComponent } from './maestro-nueva-insignia/maestro-
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatAutocompleteModule
   ]
 })
 export class MaestroContModule { }

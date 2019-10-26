@@ -14,7 +14,7 @@ export class UsuariosService {
   getAll() {
     return this.http.get(apiUrl + '/getAll');
   }
-  
+
   getId(id) {
     return this.http.get(apiUrl + '/get/' + id);
   }
@@ -37,6 +37,10 @@ export class UsuariosService {
 
   updateAvance(id, datos) {
     return this.http.put(apiUrl + '/updateAvance/' + id, datos);
+  }
+  
+  updateInsignia(id, insignia) {
+    return this.http.put(apiUrl + '/updateInsignia/' + id, insignia);
   }
 
   inscribirAlumno(id, datos) {
