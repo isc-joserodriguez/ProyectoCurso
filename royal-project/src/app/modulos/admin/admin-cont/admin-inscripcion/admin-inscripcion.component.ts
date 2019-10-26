@@ -108,6 +108,7 @@ export class AdminInscripcionComponent implements OnInit {
     this.listaAlumno = [];
     this.usuarios.getAll().subscribe((res: any) => {
       res.detail.forEach(usuario => {
+        console.log(usuario);
         if (usuario.tipo[3].alumno) {
           var nuevo = usuario.nombre + ' ' + usuario.apPaterno + ' ' + usuario.apMaterno + ' - ' + usuario.credencial.correo
           if (nuevo.toLowerCase().includes(cadena.toLowerCase())) {
