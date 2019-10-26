@@ -80,3 +80,11 @@
 .divisortop2{
     border-top: 1px solid #ddd;
   }
+
+  .demo {
+    background: #3F51B5;
+    background: -moz-linear-gradient(-45deg, #3F51B5 0%, #1C6EA4 29%, #ABABC4 100%);
+    background: -webkit-linear-gradient(-45deg, #3F51B5 0%, #1C6EA4 29%, #ABABC4 100%);
+    background: linear-gradient(135deg, #3F51B5 0%, #1C6EA4 29%, #ABABC4 100%);
+    }
+    
