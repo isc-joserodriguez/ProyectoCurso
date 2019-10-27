@@ -14,6 +14,12 @@ module.exports = (wagner) => {
         personaCtrl.getById(req, res);
     });
 
+    personaRouter.get("/getUserByRute/:id", (req, res) => {
+        personaCtrl.getUserByRute(req, res);
+    });
+
+    
+
     personaRouter.delete("/del/:id", (req, res) => {
         personaCtrl.deletePersona(req, res);
     });

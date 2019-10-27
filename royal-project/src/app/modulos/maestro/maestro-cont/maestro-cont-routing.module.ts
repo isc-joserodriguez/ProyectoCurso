@@ -11,7 +11,8 @@ import { RedirecComponent } from './redirec/redirec.component';
 import { MaestroAlumnosComponent } from './maestro-alumnos/maestro-alumnos.component';
 import { MaestroRevisionComponent } from './maestro-revision/maestro-revision.component';
 import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias.component';
-import {MaestroNuevaInsigniaComponent} from './maestro-nueva-insignia/maestro-nueva-insignia.component';
+import { MaestroNuevaInsigniaComponent } from './maestro-nueva-insignia/maestro-nueva-insignia.component';
+import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestro-insignia-editar.component';
 const routes: Routes = [
   {
     path: '',
@@ -42,20 +43,24 @@ const routes: Routes = [
     component: ConfigClaseComponent
   },
   {
-    path:'curso/:id/alumnos',
+    path: 'curso/:id/alumnos',
     component: MaestroAlumnosComponent
   },
   {
-    path:'curso/:id/revisar/:alumno',
+    path: 'curso/:id/revision/:alumno',
     component: MaestroRevisionComponent
   },
   {
-    path:'curso/:id/insignias',
-    component:MaestroInsigniasComponent
+    path: 'curso/:id/insignias',
+    component: MaestroInsigniasComponent
   },
   {
-    path:'curso/:id/insignias/nueva',
-    component:MaestroNuevaInsigniaComponent
+    path: 'curso/:id/insignias/nueva',
+    component: MaestroNuevaInsigniaComponent
+  },
+  {
+    path: 'curso/:id/insignias/editar/:insignia',
+    component: MaestroInsigniaEditarComponent
   },
   {
     path: 'curso/config/:id/redirec/:ruta',

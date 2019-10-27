@@ -54,7 +54,7 @@ const cursoSchema = new mongoose.Schema({
             } //Evaluación de la unidad (opcional).
         }
     ],
-    insignias: [{ nombreInsignia: { type: String }, descripcionInsignia: { type: String }, imagen: { type: String } }],
+    insignias: [{ nombreInsignia: { type: String }, descripcionInsignia: { type: String }, imagen: { type: String }, otorgadas: { type: Number, default: 0 } }],
     precio: { type: Number },
     cursosRelacionados: [{ _id: { type: String, required: true } }],
     estado: { type: Number, default: 1 }, //1:En revisión, 2:Aceptado, 3:Rechazado

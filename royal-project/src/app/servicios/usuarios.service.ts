@@ -27,6 +27,10 @@ export class UsuariosService {
     return this.http.get(apiUrl + '/get/' + id);
   }
 
+  getUserByRute(id) {
+    return this.http.get(apiUrl + '/getUserByRute/' + id);
+  }
+
   updateDatos(id, datos) {
     return this.http.put(apiUrl + '/editDatos/' + id, datos);
   }

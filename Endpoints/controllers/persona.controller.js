@@ -3,7 +3,7 @@ const hash = require('../middlewares/password');
 const tkn = require('../middlewares/token');
 
 const getAll = (req, res) => {
-    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1, credencial: 1, cursoAlumno: 1, puntaje: 1 })
+    _persona.find({}, { foto: 1, nombre: 1, apPaterno: 1, apMaterno: 1, estatus: 1, tipo: 1, credencial: 1, cursoAlumno: 1, puntaje: 1, ruta: 1 })
         .then(personas => {
             res.status(200);
             res.json({
@@ -181,12 +181,34 @@ const getById = (req, res) => {
         });
 }
 
+const getUserByRute = (req, res) => {
+    const id = req.params.id;
+    _persona.find({ ruta: id })
+        .then(persona => {
+            res.status(200);
+            res.json({
+                code: 200,
+                msg: "Consulta exitosa.",
+                detail: persona
+            });
+        }).catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                msg: "Error.",
+                detail: error
+            });
+        });
+}
+
 const updateInsignia = (req, res) => {
     const id = req.params.id;
     insignias = req.body.insignias
+    puntaje = req.body.puntaje
     _persona.update({ _id: id }, {
         $set: {
-            insignias: insignias
+            insignias: insignias,
+            puntaje: puntaje
         }
     }).then(data => {
         res.status(200);
@@ -235,8 +257,6 @@ const inscribirAlumno = (req, res) => {
     const id = req.params.id;
     cursoAlumno = req.body.cursoAlumno;
     puntaje = req.body.puntaje;
-    console.log(cursoAlumno);
-    console.log(puntaje);
     _persona.update({ _id: id }, {
         $set: {
             cursoAlumno: cursoAlumno,
@@ -384,6 +404,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia
+        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute
     });
 }

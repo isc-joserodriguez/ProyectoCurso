@@ -13,14 +13,15 @@ export class MaestroInsigniasComponent implements OnInit {
   displayedColumns: string[] = ['imagen', 'nombreInsignia', 'descripcionInsignia', 'otorgar', 'editar'];
 
   listaInsignias = [];
-  listaAlumno = []
+  listaAlumno = [];
   insigniaOtorgar: any;
   dataSource: MatTableDataSource<any>;
 
   divOtorgar = false;
-  indexInsignia=0;
+  indexInsignia = 0;
 
-  nuevoAlumno='';
+  nuevoAlumno = '';
+  error = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,6 +32,11 @@ export class MaestroInsigniasComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       window.scrollTo(0, 0);
+      this.listaInsignias = [];
+      this.listaAlumno = [];
+      this.divOtorgar = false;
+      this.nuevoAlumno = '';
+      this.error = '';
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.getInsignias(params.get('id'));
@@ -42,6 +48,7 @@ export class MaestroInsigniasComponent implements OnInit {
     this.listaInsignias = [];
     this.cursos.getCursoInfo(id).subscribe((resp: any) => {
       this.listaInsignias = resp.detail[0].insignias;
+      console.log(this.listaInsignias);
       this.dataSource = new MatTableDataSource(this.listaInsignias);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -56,26 +63,39 @@ export class MaestroInsigniasComponent implements OnInit {
         });
       });
     });
-    console.log(this.listaAlumno);
   }
 
   otorgar(i) {
     this.insigniaOtorgar = this.listaInsignias[i];
-    console.log(this.insigniaOtorgar);
-    this.indexInsignia=i;
+    this.indexInsignia = i;
     this.divOtorgar = true;
   }
 
-  subirInsignia(){
+  subirInsignia() {
     this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe((res: any) => {
       res.detail[0].alumnosInscritos.forEach(alumnoInscrito => {
         this.usuarios.getUser(alumnoInscrito.idAlumno).subscribe((usuario: any) => {
           var nuevo = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno + ' - ' + usuario.detail[0].credencial.correo
           if (nuevo.toLowerCase().includes(this.nuevoAlumno.toLowerCase())) {
-            usuario.detail[0].insignias.push({ idInsignia: this.indexInsignia, ruta: this.route.snapshot.params.id })
-            this.usuarios.updateInsignia(usuario.detail[0]._id,{insignias:usuario.detail[0].insignias}).subscribe(res=>{
-              
+            var repetido = false;
+            usuario.detail[0].insignias.forEach(insignia => {
+              if (this.route.snapshot.params.id == insignia.ruta) {
+                if (insignia.idInsignia == this.indexInsignia) {
+                  repetido = true
+                }
+              }
             });
+            if (!repetido) {
+              usuario.detail[0].insignias.push({ idInsignia: this.indexInsignia, ruta: this.route.snapshot.params.id });
+              this.usuarios.updateInsignia(usuario.detail[0]._id, { insignias: usuario.detail[0].insignias, puntaje: usuario.detail[0].puntaje + 15 }).subscribe(res => {
+                this.listaInsignias[this.indexInsignia].otorgadas = this.listaInsignias[this.indexInsignia].otorgadas + 1;
+                this.cursos.updateInsignias(this.route.snapshot.params.id, { insignias: this.listaInsignias }).subscribe(res => {
+                  this.ngOnInit();
+                });
+              });
+            } else {
+              this.error = 'Ya se le ha otorgado esta insignia.'
+            }
           }
         });
       });
@@ -90,7 +110,6 @@ export class MaestroInsigniasComponent implements OnInit {
           var nuevo = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno + ' - ' + usuario.detail[0].credencial.correo
           if (nuevo.toLowerCase().includes(cadena.toLowerCase())) {
             this.listaAlumno.push(nuevo);
-            console.log(usuario);
           }
         });
       });
@@ -98,8 +117,7 @@ export class MaestroInsigniasComponent implements OnInit {
   }
 
   editar(id) {
-    console.log(id);
-    //this.router.navigate(['/admin/usuario', id]);
+    this.router.navigate(['/maestro/curso/', this.route.snapshot.params.id, 'insignias', 'editar', id]);
   }
 
 }

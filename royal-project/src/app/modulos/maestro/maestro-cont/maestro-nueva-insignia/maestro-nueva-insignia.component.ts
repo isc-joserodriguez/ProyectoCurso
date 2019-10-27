@@ -36,7 +36,6 @@ export class MaestroNuevaInsigniaComponent implements OnInit {
   getCurso(id) {
     this.cursos.getCursoInfo(id).subscribe((res: any) => {
       this.cursoInfo = res.detail[0];
-      console.log(this.cursoInfo);
     });
   }
 
