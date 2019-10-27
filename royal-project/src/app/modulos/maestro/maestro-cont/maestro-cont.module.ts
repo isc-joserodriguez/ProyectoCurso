@@ -39,6 +39,9 @@ import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias
 import { MaestroNuevaInsigniaComponent } from './maestro-nueva-insignia/maestro-nueva-insignia.component';
 import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestro-insignia-editar.component';
 
+//editor ckeditor
+import { CKEditorModule } from 'ng2-ckeditor';
+
 @NgModule({
   declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent, MaestroNuevaInsigniaComponent, MaestroInsigniaEditarComponent],
   imports: [
@@ -59,7 +62,8 @@ import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestr
     MatInputModule,
     MatTabsModule,
     MatPaginatorModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    CKEditorModule
   ]
 })
 export class MaestroContModule { }

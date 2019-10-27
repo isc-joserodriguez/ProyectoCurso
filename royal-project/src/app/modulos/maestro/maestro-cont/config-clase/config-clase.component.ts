@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
@@ -11,6 +11,12 @@ declare let videojs: any;
   styleUrls: ['./config-clase.component.scss']
 })
 export class ConfigClaseComponent implements OnInit, OnDestroy {
+  name = 'ng2-ckeditor';
+  ckeConfig: any;
+  mycontent: string;
+  log: string = '';
+  @ViewChild("myckeditor") ckeditor: any;
+
   numPlantilla = 0;
 
   infoClase: any = {};
@@ -59,6 +65,29 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.ckeConfig = {
+      allowedContent: false,
+      forcePasteAsPlainText: true,
+      font_names: 'Arial;Times New Roman;Verdana',
+      toolbarGroups: [
+        { name: 'document', groups: ['mode', 'document', 'doctools'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },
+        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+        { name: 'forms', groups: ['forms'] },
+        '/',
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        { name: 'links', groups: ['links'] },
+        { name: 'insert', groups: ['insert', 'Smiley,'] },
+        '/',
+        { name: 'styles', groups: ['styles'] },
+        { name: 'colors', groups: ['colors'] },
+        { name: 'tools', groups: ['tools'] },
+        { name: 'others', groups: ['others'] },
+        { name: 'about', groups: ['about'] }
+      ],
+      removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
+    };
     this.videoForm = this.formBuilder.group({
       video: [''],
       texto: ['', Validators.required]
@@ -145,7 +174,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
         this.datosFormularioRecurso.append('archivo', event.target.files[i], event.target.files[i].name);
       }
     } else {
-      this.mensajeRecurso = 'No hay video';
+      this.mensajeRecurso = 'No hay recurso';
     }
   }
 
@@ -340,5 +369,15 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
 
   recargarVideo() {
     this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
+  }
+
+  onChange($event: any): void {
+    console.log("onChange");
+    //this.log += new Date() + "<br />";
+  }
+
+  onPaste($event: any): void {
+    console.log("onPaste");
+    //this.log += new Date() + "<br />";
   }
 }
