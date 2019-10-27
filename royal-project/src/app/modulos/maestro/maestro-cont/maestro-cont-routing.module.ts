@@ -47,7 +47,7 @@ const routes: Routes = [
     component: MaestroAlumnosComponent
   },
   {
-    path: 'curso/:id/revisar/:alumno',
+    path: 'curso/:id/revision/:alumno',
     component: MaestroRevisionComponent
   },
   {

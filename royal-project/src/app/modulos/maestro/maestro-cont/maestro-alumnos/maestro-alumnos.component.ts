@@ -41,7 +41,8 @@ export class MaestroAlumnosComponent implements OnInit {
           this.listaAlumnos.push({
             foto: alumnoInfo.detail[0].foto,
             nombre: alumnoInfo.detail[0].nombre + ' ' + alumnoInfo.detail[0].apPaterno + ' ' + alumnoInfo.detail[0].apMaterno,
-            correo: alumnoInfo.detail[0].credencial.correo
+            correo: alumnoInfo.detail[0].credencial.correo,
+            ruta: alumnoInfo.detail[0].ruta
           });
           this.dataSource = new MatTableDataSource(this.listaAlumnos);
           this.dataSource.paginator = this.paginator;
@@ -49,6 +50,10 @@ export class MaestroAlumnosComponent implements OnInit {
         });
       });
     });
+  }
+
+  calificar(id){
+    this.router.navigate(['maestro/curso',this.route.snapshot.params.id,'revision',id]);
   }
 
   applyFilter(filterValue: string) {
