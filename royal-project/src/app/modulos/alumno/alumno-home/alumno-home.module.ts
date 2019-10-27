@@ -46,6 +46,9 @@ import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.componen
 import { CursoClaseInfoComponent } from './curso-clase-info/curso-clase-info.component';
 
 
+//safe pipe
+import { SafePipeModule } from 'safe-pipe';
+
 
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -70,7 +73,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    CKEditorModule
+    CKEditorModule,
+    SafePipeModule
   ]
 })
 export class AlumnoHomeModule { }

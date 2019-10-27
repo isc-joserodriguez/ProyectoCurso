@@ -29,6 +29,12 @@ export class PerfilPublicoComponent implements OnInit {
 
   cursosTec = [];
   cursosId = [];
+  insignias = [];
+  usrTotal = 0;
+  nivel = 0;
+  progreso = 0;
+  porcentajeNivel = 0;
+
 
   constructor(private cursos: CursosService, private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService) { }
 
@@ -37,23 +43,31 @@ export class PerfilPublicoComponent implements OnInit {
     this.getUsuario(this.route.snapshot.params.id);
   }
   getUsuario(id) {
-    this.usuarios.getUser(id).subscribe((alumno: any) => {
+    this.usuarios.getAll().subscribe((alumnos: any) => {
+      this.usrTotal = alumnos.detail.length;
+    });
+    this.usuarios.getUserByRute(id).subscribe((alumno: any) => {
       this.infoAlumno = alumno.detail[0];
-      console.log(this.infoAlumno.cursoAlumno);
-      this.cursos.getCursos().subscribe((cursos: any) => {
-        this.infoAlumno.cursoAlumno.forEach(curso => {
-          cursos.detail.forEach((listCursos: any) => {
-            if (listCursos.ruta == curso.ruta) {
-              if (listCursos.categoria == "Idiomas") {
-                this.cursosId.push(listCursos);
-              } else {
-                this.cursosTec.push(listCursos);
-              }
+      this.infoAlumno.cursoAlumno.forEach(curso => {
+        this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo: any) => {
+          if (cursoInfo.detail[0].categoria == 'Tecnología') {
+            this.cursosTec.push(cursoInfo.detail[0]);
+          } else {
+            this.cursosId.push(cursoInfo.detail[0]);
+          }
+          this.infoAlumno.insignias.forEach(insignia => {
+            if (insignia.ruta == cursoInfo.detail[0].ruta) {
+              var temp = cursoInfo.detail[0].insignias[insignia.idInsignia]
+              temp.otorgadas = Math.round((temp.otorgadas * 100) / this.usrTotal);
+              this.insignias.push(temp);
             }
           });
         });
       });
+
+      this.progreso = this.infoAlumno.puntaje % 1000;
+      this.nivel = ((this.infoAlumno.puntaje - this.progreso) / 1000) + 1;
+      this.porcentajeNivel=Math.round((this.progreso * 100) / 1000);
     });
   }
-
 }
