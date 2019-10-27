@@ -3,13 +3,15 @@
   <mat-divider></mat-divider>
   <div class="row justify-content-center">
     <!-- Foto -->
-    <div class="col-md-5 px-5">
-      <mat-card>
+    <div class="col-md-5">
+      <mat-card class="descritres">
         <mat-card-header class="justify-content-center">
           <mat-card-title>Portada</mat-card-title>
         </mat-card-header>
-        <img mat-card-image [src]='infoCurso.imagen' height='250'>
-        <mat-card-content>
+        <div class="imgLiquid imgLiquidFill view overlay z-depth-1 rounded ml-4" style="max-width:250px; height:250px;">
+          <img [src]='infoCurso.imagen' max-width="250" height="250">
+        </div>
+        <mat-card-content class="mt-3">
           <p class="text-center">
             Esta imagen se mostrará en las busquedas y miniaturas del curso.
           </p>
@@ -31,16 +33,15 @@
         </mat-card-actions>
       </mat-card>
     </div>
-    <!-- Foto -->
-    <mat-divider [vertical]="true"></mat-divider>
+    <!-- Fin Foto -->
     <!-- Video -->
-    <div class="col-md-5 pl-5">
-      <mat-card>
+    <div class="col-md-6 pl-5">
+      <mat-card class="descritres">
         <mat-card-header class="justify-content-center">
           <mat-card-title>Video principal</mat-card-title>
         </mat-card-header>
-        <video mat-card-image oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js' controls preload='auto' width='200' height='250'
-          [poster]='infoCurso.imagen'>
+        <video mat-card-image oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js'
+          controls preload='auto' width='200' height='250' [poster]='infoCurso.imagen'>
         </video>
         <mat-card-content>
           <p class="text-center">
@@ -72,21 +73,22 @@
   <div class="row">
     <div class="col-md-12">
 
-      <div class="card">
-        <div class="card-header bg-light text-center">
+      <div class="card descridos">
+        <div class="card-header paqueteshome text-center text-white">
           Objetivos
         </div>
-        <div class="example-container mat-elevation-z8">
-          <div class="row">
-            <div class="col-md-6">
-              <ul *ngFor="let objetivo of infoCurso.objetivos; let i=index">
-                <li>{{objetivo.objetivo}} <button mat-button color="accent" (click)="editarObjetivo(i)">Editar</button>
-                </li>
-              </ul>
-              <br>
-              <button mat-button color="primary" (click)="addObjetivo()">Agregar Nuevo</button>
-            </div>
-            <div class="col-md-6" *ngIf="mostrarFormObjetivo">
+        <div class="row">
+          <div class="col-md-6 pt-2">
+            <ul *ngFor="let objetivo of infoCurso.objetivos; let i=index">
+              <li>{{objetivo.objetivo}} <button mat-mini-fab (click)="editarObjetivo(i)" color="trans"><img
+                    class="icon-edit" src="./../../../assets/icons/edit.svg"></button>
+              </li>
+            </ul>
+            <br>
+            <button mat-stroked-button color="primary" (click)="addObjetivo()" class="mb-2 ml-3">Agregar Nuevo</button>
+          </div>
+          <div class="col-md-6 pt-2" *ngIf="mostrarFormObjetivo">
+            <div class="container">
               <form [formGroup]="objetivosForm">
                 <mat-form-field appearance="outline" class="field-login">
                   <mat-label>Objetivo:</mat-label>
@@ -96,8 +98,9 @@
                       el nombre del recurso.</span>
                   </mat-error>
                 </mat-form-field>
-                <button [disabled]="!objetivosForm.valid" mat-stroked-button
-                  (click)="guardarObjetivo()">Guardar</button>
+                <button [disabled]="!objetivosForm.valid" mat-stroked-button color="letrasuccess"
+                  (click)="guardarObjetivo()">Guardar <img class="icon-edit"
+                    src="./../../../assets/icons/save.svg"></button>
               </form>
             </div>
           </div>
@@ -110,65 +113,70 @@
   <!--Temario-->
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header bg-light text-center">
+      <div class="card descridos">
+        <div class="card-header paqueteshome text-center text-white">
           Temario
         </div>
-        <div class="example-container mat-elevation-z8">
-          <br>
-          <!--Acordeon-->
-          <mat-accordion class="example-headers-align">
-            <div class="col-md-12">
-              <!--Unidades-->
-              <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index">
-                <mat-expansion-panel-header class="acordeon-enc">
-                  <mat-panel-title>
-                    <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    <span> </span>
-                    <mat-icon>assignment</mat-icon>
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                <br>
-                <!-- Subtemas -->
-                <mat-accordion class="example-headers-align">
-                  <div class="col-md-12">
-                    <!--Clases-->
-                    <mat-expansion-panel hideToggle="true" *ngFor="let subtema of unidad.subtemas; let j=index">
-                      <mat-expansion-panel-header class="acordeon-enc">
-                        <mat-panel-title>
-                          <b>Subtema {{j+1}}: {{subtema.subtema}}</b>
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <span> </span>
-                          <mat-icon>assignment</mat-icon>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
-                      <br>
-                      <!-- Lista clases -->
-                      <ul>
-                        <li *ngFor="let clase of subtema.clases; let k=index">
-                          {{clase.clase}} <button mat-stroked-button
-                            [routerLink]="['./temario', i+1, j+1, k+1]">Configurar Contenido</button>
-                        </li>
-                      </ul>
-                      <!-- Lista clases -->
-                      <button mat-stroked-button [routerLink]="['./temario', i+1, j+1]">Editar Subtema</button>
-                    </mat-expansion-panel>
-                    <!--Clases-->
-                  </div>
-                </mat-accordion>
-                <!-- Subtemas -->
-                <button mat-stroked-button [routerLink]="['./temario', i+1]">Editar Unidad</button>
-              </mat-expansion-panel>
-              <!--Unidades-->
-            </div>
-          </mat-accordion>
-          <button mat-stroked-button [routerLink]="['./temario']">Editar Temario</button>
-          <!--Accordion-->
-          <br>
+        <br>
+        <!--Acordeon-->
+        <mat-accordion class="example-headers-align">
+          <div class="col-md-12">
+            <!--Unidades-->
+            <mat-expansion-panel class="cuerpo" hideToggle="true"
+              *ngFor="let unidad of infoCurso.contenidoCurso let i=index">
+              <mat-expansion-panel-header class="encabezado">
+                <mat-panel-title>
+                  <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <span> </span>
+                  <mat-icon>assignment</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <br>
+              <!-- Subtemas -->
+              <mat-accordion class="example-headers-align">
+                <div class="col-md-12">
+                  <!--Clases-->
+                  <mat-expansion-panel class="cuerpo" hideToggle="true"
+                    *ngFor="let subtema of unidad.subtemas; let j=index">
+                    <mat-expansion-panel-header class="encabezado">
+                      <mat-panel-title>
+                        <b>Subtema {{j+1}}: {{subtema.subtema}}</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        <span> </span>
+                        <mat-icon>assignment</mat-icon>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <br>
+                    <!-- Lista clases -->
+                    <ul>
+                      <li *ngFor="let clase of subtema.clases; let k=index">
+                        {{clase.clase}} <button mat-stroked-button class="mb-3"
+                          [routerLink]="['./temario', i+1, j+1, k+1]" color="primary">Configurar Contenido</button>
+                      </li>
+                    </ul>
+                    <!-- Lista clases -->
+                    <button mat-stroked-button [routerLink]="['./temario', i+1, j+1]" color="accent">Editar
+                      Subtema</button>
+                  </mat-expansion-panel>
+                  <!--Clases-->
+                </div>
+              </mat-accordion>
+              <!-- Subtemas -->
+              <button mat-stroked-button class="mt-2" [routerLink]="['./temario', i+1]" color="accent">Editar
+                Unidad</button>
+            </mat-expansion-panel>
+            <!--Unidades-->
+          </div>
+        </mat-accordion>
+        <div class="text-center mt-3">
+          <button mat-stroked-button btn-sm [routerLink]="['./temario']" color="primary">Editar Temario</button>
         </div>
+        <!--Accordion-->
+        <br>
+
       </div>
     </div>
   </div>

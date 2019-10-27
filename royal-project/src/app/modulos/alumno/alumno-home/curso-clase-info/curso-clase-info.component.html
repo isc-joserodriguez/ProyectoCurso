@@ -2,81 +2,104 @@
 <br>
 <br>
 <br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 pl-5">
+<div class="col-md-12">
+  <div class="container divisorbot">
+    <div class="row pl-5">
       <label class="h1 letracursotitulo mb-0"><b> {{infoClase.clase}} </b></label>
     </div>
   </div>
-  <mat-divider></mat-divider>
   <br>
-  <div class="row">
-    <div class="col-md-12 justify-content-center">
-      {{infoClase.texto}}
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="row" *ngIf="infoClase.recursos.activo">
+
+  <div class="container px-5">
     <div class="col-md-12">
-      <div class="card descridos">
-        <div class="card-header bg-light text-center">
-          Recursos
-        </div>
-        <div class="card-body">
-          <ul>
-            <li *ngFor="let url of infoClase.recursos.urls" class="card-title">
-              <a target="_blank" rel="noopener noreferrer" [href]="url.urlRecurso">{{url.textoRecurso}}</a>
-            </li>
-          </ul>
+      <div class="row">
+        {{infoClase.texto}}
+      </div>
+
+      <br>
+      <br>
+      <div class="row" *ngIf="infoClase.recursos.activo">
+        <div class="col-md-12">
+          <!--Recursos-->
+          <div class="card descridos">
+            <div class="card-header paqueteshome text-center text-white">
+              Recursos
+            </div>
+            <div class="card-body">
+              <ul>
+                <li *ngFor="let url of infoClase.recursos.urls" class="card-title">
+                  <a target="_blank" rel="noopener noreferrer" [href]="url.urlRecurso">{{url.textoRecurso}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="row" *ngIf="infoClase.tarea.activo">
-    <div class="col-md-12">
-      <div class="card descridos">
-        <div class="card-header bg-light text-center">
-          Tarea
-        </div>
-        <div class="card-body">
-          {{infoClase.tarea.instruccion}}
-          <div class="subir" *ngIf="!tareaEntregada">
-            <form [formGroup]="tareaForm">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">Subir Tarea</span>
-                </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" formControlName="tarea"
-                    (change)="seleccionarTarea($event)">
-                  <label class="custom-file-label" for="inputGroupFile01">{{mensajeTarea}}</label>
+      <br>
+      <br>
+      <!--Tareas-->
+      <div class="row" *ngIf="infoClase.tarea.activo">
+        <div class="col-md-12">
+          <div class="card descridos">
+            <div class="card-header paqueteshome text-center text-white">
+              Tarea
+            </div>
+            <div class="card-body">
+              <div class="container divisorbot">
+                {{infoClase.tarea.instruccion}}
+              </div>
+              <div class="subir col-md-6 offset-md-3 mt-3" *ngIf="!tareaEntregada">
+                <form [formGroup]="tareaForm">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Subir Tarea</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" formControlName="tarea"
+                        (change)="seleccionarTarea($event)">
+                      <label class="custom-file-label" for="inputGroupFile01">{{mensajeTarea}}</label>
+                    </div>
+                  </div>
+                  <div class="mt-3 text-center">
+                    <button mat-stroked-button (click)="subirTarea()" color="letrasuccess">Guardar</button>
+                    <mat-progress-bar *ngIf="!finalizadoTarea" mode="determinate" [value]="porcentajeTarea">
+                    </mat-progress-bar>
+                  </div>
+                </form>
+              </div>
+              <br>
+              <div *ngIf="tareaEntregada">
+                <div class="container">
+                  <a target="_blank" rel="noopener noreferrer" [href]="infoTarea.tarea">Archivo:
+                    {{infoTarea.nombreTarea}}</a>
+                  <br>
+                  <div class="mt-3 text-left">
+                    <button class="btn-md p-1 mb-2 " mat-raised-button color="warn" (click)="eliminarTarea()">
+                      Eliminar archivo
+                    </button>
+                  </div>
                 </div>
               </div>
-              <button mat-stroked-button (click)="subirTarea()">Guardar</button>
-              <mat-progress-bar *ngIf="!finalizadoTarea" mode="determinate" [value]="porcentajeTarea">
-              </mat-progress-bar>
-            </form>
-          </div>
-          <div *ngIf="tareaEntregada">
-            <a target="_blank" rel="noopener noreferrer" [href]="infoTarea.tarea">Archivo: {{infoTarea.nombreTarea}}</a>
-            <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" (click)="eliminarTarea()">
-              Eliminar archivo
-            </button>
+            </div>
           </div>
         </div>
       </div>
+      <br>
+      <div class="row justify-content-between">
+        <div class="col-4 text-right">
+          <button class="btn-md p-1 mb-2" mat-raised-button color="primary" [routerLink]="['../../../../']">
+            Volver
+          </button>
+        </div>
+        <div class="col-4">
+          <button class="btn-md p-1 mb-2" mat-raised-button color="success" (click)="claseSiguiente(avance)">
+            Siguiente clase
+          </button>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
-  <br>
-  <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" [routerLink]="['../../../../']">
-    volver
-  </button>
-  <button class="btn-lg p-2 mb-2" mat-raised-button color="primary" (click)="claseSiguiente(avance)">
-    Ir a la siguiente clase
-  </button>
-  <br>
-  <br>
 </div>
