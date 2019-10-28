@@ -114,61 +114,61 @@
 
         <div class="col-md-12 pb-2">
           <div class="container divisorbot">
-            <div class="row ">
-              <div class="row container pl-5 mb-3">
-                <div class="custom-control custom-switch">
-                  <input id="recursos" type="checkbox" [checked]="recursos" class="custom-control-input"
-                    [(ngModel)]="recursos">
-                  <label class="custom-control-label h4 letrastar" for="recursos">Recursos</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="col-md-4 mb-3" *ngIf="recursos">
-                    <ul>
-                      <li *ngFor="let recurso of listaRecursos; let i=index">
-                        <a target="_blank" rel="noopener noreferrer"
-                          [href]="recurso.urlRecurso">{{recurso.textoRecurso}}</a>
-                        <button mat-mini-fab color="trans" (click)="editarRecurso(i)" class="ml-2"><img
-                            class="icon-edit" src="./../../../assets/icons/edit.svg"></button>
-                      </li>
-                    </ul>
-                    <br>
-                    <button mat-stroked-button color="primary" (click)="addRecurso()" class="ml-4"><img
-                        class="icon-edit mr-1" src="./../../../assets/icons/more.svg"> Agregar Nuevo</button>
-                  </div>
-                  <div class="col-md-8" *ngIf="mostrarFormRecurso">
-                    <form [formGroup]="recursosForm">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Subir Recurso</span>
-                        </div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" formControlName="urlRecurso"
-                            (change)="seleccionarRecurso($event)">
-                          <label class="custom-file-label" for="inputGroupFile01">{{mensajeRecurso}}</label>
-                        </div>
-                      </div>
-                      <mat-form-field appearance="outline" class="field-login">
-                        <mat-label>Nombre:</mat-label>
-                        <input matInput placeholder="Ingresa el nombre del recurso:" required
-                          formControlName="textoRecurso">
-                        <mat-error>
-                          <span
-                            *ngIf="!recursosForm.get('textoRecurso').valid && recursosForm.get('textoRecurso').touched">Agrega
-                            el nombre del recurso.</span>
-                        </mat-error>
-                      </mat-form-field>
-                      <button [disabled]="!recursosForm.valid" mat-stroked-button (click)="subirRecurso()"
-                        color="letrasuccess">Guardar <img class="icon-edit"
-                          src="./../../../assets/icons/save.svg"></button>
-                      <mat-progress-bar *ngIf="!finalizadoRecurso" mode="determinate" [value]="porcentajeRecurso">
-                      </mat-progress-bar>
-                    </form>
-                  </div>
-                </div>
+
+            <div class="row container pl-5 mb-3">
+              <div class="custom-control custom-switch">
+                <input id="recursos" type="checkbox" [checked]="recursos" class="custom-control-input"
+                  [(ngModel)]="recursos">
+                <label class="custom-control-label h4 letrastar" for="recursos">Recursos</label>
               </div>
             </div>
+            <div class="row">
+
+              <div class="col-md-4 mb-3" *ngIf="recursos">
+                <ul>
+                  <li *ngFor="let recurso of listaRecursos; let i=index">
+                    <a target="_blank" rel="noopener noreferrer"
+                      [href]="recurso.urlRecurso">{{recurso.textoRecurso}}</a>
+                    <button mat-mini-fab color="trans" (click)="editarRecurso(i)" class="ml-2"><img class="icon-edit"
+                        src="./../../../assets/icons/edit.svg"></button>
+                  </li>
+                </ul>
+                <br>
+                <button mat-stroked-button color="primary" (click)="addRecurso()" class="ml-4"><img
+                    class="icon-edit mr-1" src="./../../../assets/icons/more.svg"> Agregar Nuevo</button>
+              </div>
+
+              <div class="col-md-8" *ngIf="mostrarFormRecurso">
+                <form [formGroup]="recursosForm">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Subir Recurso</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" formControlName="urlRecurso"
+                        (change)="seleccionarRecurso($event)">
+                      <label class="custom-file-label" for="inputGroupFile01">{{mensajeRecurso}}</label>
+                    </div>
+                  </div>
+                  <mat-form-field appearance="outline" class="field-login">
+                    <mat-label>Nombre:</mat-label>
+                    <input matInput placeholder="Ingresa el nombre del recurso:" required
+                      formControlName="textoRecurso">
+                    <mat-error>
+                      <span
+                        *ngIf="!recursosForm.get('textoRecurso').valid && recursosForm.get('textoRecurso').touched">Agrega
+                        el nombre del recurso.</span>
+                    </mat-error>
+                  </mat-form-field>
+                  <button [disabled]="!recursosForm.valid" mat-stroked-button (click)="subirRecurso()"
+                    color="letrasuccess">Guardar <img class="icon-edit" src="./../../../assets/icons/save.svg"></button>
+                  <mat-progress-bar *ngIf="!finalizadoRecurso" mode="determinate" [value]="porcentajeRecurso">
+                  </mat-progress-bar>
+                </form>
+              </div>
+
+            </div>
+
           </div>
         </div>
         <!--tarea-->
