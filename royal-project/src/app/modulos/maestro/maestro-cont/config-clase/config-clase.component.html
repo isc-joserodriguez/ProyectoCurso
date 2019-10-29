@@ -48,13 +48,18 @@
                     <div class="text-center">
                       <h4 class="letrastar">Descripción:</h4>
                     </div>
-                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
-                      (change)="onChange($event)" formControlName="texto">
-                    </ckeditor>
-                    <mat-error>
-                      <span *ngIf="!videoForm.get('texto').valid && videoForm.get('texto').touched">Agrega
-                        una descripción del curso.</span>
-                    </mat-error>
+                    <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate>
+                      <div class="form-group has-feedback"
+                        [ngClass]="{ 'has-error': myckeditor.invalid && myckeditor.touched }">
+                        <ckeditor [(ngModel)]="mycontent" #myckeditor="ngModel" name="myckeditor" required
+                          [config]="ckeConfig" debounce="500" (change)="onChange($event)" (paste)="onPaste($event)" [readonly]="false">
+                        </ckeditor>
+                        <div *ngIf="myckeditor.invalid && myckeditor.touched" class="help-block">Required field.</div>
+                      </div>
+                      <button [disabled]="myForm.invalid" class="btn btn-primary">Save</button>
+                    </form>
+                    <div [innerHTML]="mycontent"></div>
+
                     <!--
                     <mat-form-field appearance="outline" class="field-login">
                       <mat-label>Descripción:</mat-label>
@@ -86,19 +91,18 @@
             <div class="col-md-12">
               <mat-card>
                 <mat-card-header class="justify-content-center">
-                  <mat-card-title>Descripción de la clase</mat-card-title>
+                  <mat-card-title>Descripción de la clase:</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                   <form [formGroup]="textoForm">
-                    <mat-form-field appearance="outline" class="field-login">
-                      <mat-label>Descripción:</mat-label>
-                      <textarea matInput placeholder="Agrega la descripción de la clase" cdkTextareaAutosize
-                        cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15" formControlName="texto"></textarea>
-                      <mat-error>
-                        <span *ngIf="!textoForm.get('texto').valid && textoForm.get('texto').touched">Agrega
-                          una descripción del curso.</span>
-                      </mat-error>
-                    </mat-form-field>
+                    <mat-label>Descripción:</mat-label>
+                    <textarea matInput placeholder="Agrega la descripción de la clase" cdkTextareaAutosize
+                      cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15" formControlName="texto"></textarea>
+                    <mat-error>
+                      <span *ngIf="!textoForm.get('texto').valid && textoForm.get('texto').touched">Agrega
+                        una descripción del curso.</span>
+                    </mat-error>
+
                     <button [disabled]="!textoForm.valid" mat-stroked-button color="letrasuccess"
                       (click)="subirTexto()">Guardar <img class="icon-edit"
                         src="./../../../assets/icons/save.svg"></button>

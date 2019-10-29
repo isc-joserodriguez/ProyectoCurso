@@ -4,15 +4,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComunidadService } from 'src/app/servicios/comunidad.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
+
 @Component({
   selector: 'app-comunidad-pregunta',
   templateUrl: './comunidad-pregunta.component.html',
   styleUrls: ['./comunidad-pregunta.component.scss']
 })
+
+
 export class ComunidadPreguntaComponent implements OnInit {
   iduser = localStorage.getItem('userid');
   propia = false
   numPreguntas = 0;
+
+
 
   infoPersona = {
     foto: '',
@@ -149,5 +154,7 @@ export class ComunidadPreguntaComponent implements OnInit {
       this.router.navigate(['/comunidad/idiomas']);
     }
   }
+
+
 
 }

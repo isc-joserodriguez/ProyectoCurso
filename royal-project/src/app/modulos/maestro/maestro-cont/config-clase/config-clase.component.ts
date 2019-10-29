@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { CKEditorComponent } from 'ng2-ckeditor/esm5/ckeditor.component.js';
 declare let videojs: any;
 
 @Component({
@@ -15,7 +16,8 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   ckeConfig: any;
   mycontent: string;
   log: string = '';
-  @ViewChild("myckeditor") ckeditor: any;
+  @ViewChild(CKEditorComponent) ckeditor: CKEditorComponent;
+ 
 
   numPlantilla = 0;
 

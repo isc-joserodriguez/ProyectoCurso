@@ -70,7 +70,9 @@
                 <div class="container col-md-12 px-5">
                   <b class="h3">{{infoPregunta.pregunta}}</b>
                   <br>
-                  <p>{{infoPregunta.detalles}}</p>
+
+                  <div [innerHTML]="infoPregunta.detalles"></div>
+
                   <br>
                   <div *ngFor="let actualizacion of infoPregunta.actualizaciones; let i=index">
                     <b>Actualización {{i+1}}: </b>

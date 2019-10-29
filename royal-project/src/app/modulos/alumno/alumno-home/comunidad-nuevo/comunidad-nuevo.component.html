@@ -26,34 +26,21 @@
                 <div class="container form col-md-12 px-5">
                   <form [formGroup]="preguntaForm">
                     <!-- Pregunta -->
-
-
-                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
-                      (change)="onChange($event)" formControlName="pregunta">
-                    </ckeditor>
-
-                    <!-- 
-                      <input matInput placeholder="Ingresa tu pregunta" formControlName="pregunta">
-                    -->
-
-                    <!--
+                    <h5>Pregunta:</h5>
+                    <input matInput placeholder="Ingresa tu pregunta" formControlName="pregunta">
                     <mat-error>
                       <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega
                         tu pregunta</span>
                     </mat-error>
-                    -->
+                    <br>
                     <!-- Pregunta -->
 
                     <!-- Detalles -->
-                    <mat-form-field appearance="outline" class="field-login">
-                      <mat-label>Detalles:</mat-label>
-                      <textarea matInput placeholder="Escribe los detalles de tu pregunta" cdkTextareaAutosize
-                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" formControlName="detalles"></textarea>
-                    </mat-form-field>
-                    <mat-error>
-                      <span *ngIf="!preguntaForm.get('detalles').valid && preguntaForm.get('detalles').touched">Agrega
-                        los detalles</span>
-                    </mat-error>
+                    <h5>Detalles:</h5>
+                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
+                      (change)="onChange($event)" formControlName="detalles" >
+                    </ckeditor>
+
                     <!-- Detalles -->
                     <div class="text-right pr-4 pb-3">
                       <button [disabled]="!preguntaForm.valid" type="button" class="btn btn-success"
