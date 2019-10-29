@@ -53,6 +53,8 @@ import { SafePipeModule } from 'safe-pipe';
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
 
+import {NgDompurifyModule} from '@tinkoff/ng-dompurify';
+
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
     PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, CursoClaseInfoComponent],
@@ -74,7 +76,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     ReactiveFormsModule,
     MatProgressBarModule,
     CKEditorModule,
-    SafePipeModule
+    SafePipeModule,
+    NgDompurifyModule
   ]
 })
 export class AlumnoHomeModule { }

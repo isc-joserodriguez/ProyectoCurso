@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComunidadService } from 'src/app/servicios/comunidad.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import {DomSanitizer, SafeValue} from '@angular/platform-browser';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
 export class ComunidadPreguntaComponent implements OnInit {
+  
+  
   iduser = localStorage.getItem('userid');
   propia = false
   numPreguntas = 0;
@@ -46,7 +49,7 @@ export class ComunidadPreguntaComponent implements OnInit {
   preguntaForm: FormGroup;
   actualizacionForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private comunidad: ComunidadService, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private comunidad: ComunidadService, private formBuilder: FormBuilder,@Inject(DomSanitizer) private readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
