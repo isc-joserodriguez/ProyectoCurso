@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject, SecurityContext } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComunidadService } from 'src/app/servicios/comunidad.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import {DomSanitizer, SafeValue} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 
 @Component({
@@ -14,8 +15,16 @@ import {DomSanitizer, SafeValue} from '@angular/platform-browser';
 
 
 export class ComunidadPreguntaComponent implements OnInit {
-  
-  
+  //pagination
+  p: number = 1;
+  //ckeditor
+  name = 'ng2-ckeditor';
+  ckeConfig: any;
+  mycontent: string;
+  log: string = '';
+  @ViewChild("myckeditor") ckeditor: any;
+  //fin ckeditor
+
   iduser = localStorage.getItem('userid');
   propia = false
   numPreguntas = 0;
@@ -49,10 +58,37 @@ export class ComunidadPreguntaComponent implements OnInit {
   preguntaForm: FormGroup;
   actualizacionForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private comunidad: ComunidadService, private formBuilder: FormBuilder,@Inject(DomSanitizer) private readonly sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private comunidad: ComunidadService, private formBuilder: FormBuilder, @Inject(DomSanitizer) private readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
+    this.ckeConfig = {
+      allowedContent: false,
+      forcePasteAsPlainText: true,
+      extraPlugins: 'colorbutton',
+
+      font_names: 'Arial;Times New Roman;Verdana',
+      toolbarGroups: [
+        { name: 'document', groups: ['mode', 'document', 'doctools'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },
+        { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
+        { name: 'forms', groups: ['forms'] },
+        '/',
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        { name: 'links', groups: ['links'] },
+        { name: 'insert', groups: ['insert', 'Smiley,'] },
+        '/',
+        { name: 'styles', groups: ['styles'] },
+        { name: 'colors', groups: ['colors'] },
+        { name: 'tools', groups: ['tools'] },
+        { name: 'others', groups: ['others'] },
+        { name: 'about', groups: ['about'] }
+      ],
+      removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
+
+
+    };
     this.preguntaForm = this.formBuilder.group({
       pregunta: ['', Validators.required]
     });
@@ -158,6 +194,14 @@ export class ComunidadPreguntaComponent implements OnInit {
     }
   }
 
+  onChange($event: any): void {
+    console.log("onChange");
+    //this.log += new Date() + "<br />";
+  }
 
+  onPaste($event: any): void {
+    console.log("onPaste");
+    //this.log += new Date() + "<br />";
+  }
 
 }

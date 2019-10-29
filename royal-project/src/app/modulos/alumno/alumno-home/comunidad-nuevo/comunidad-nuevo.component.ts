@@ -9,11 +9,13 @@ import { ComunidadService } from 'src/app/servicios/comunidad.service';
   styleUrls: ['./comunidad-nuevo.component.scss']
 })
 export class ComunidadNuevoComponent implements OnInit {
+  //ckeditor
   name = 'ng2-ckeditor';
   ckeConfig: any;
   mycontent: string;
   log: string = '';
   @ViewChild("myckeditor") ckeditor: any;
+  //fin ckeditor
   categoria = this.route.snapshot.params.categoria;
   iduser = localStorage.getItem('userid');
   preguntaForm: FormGroup;
