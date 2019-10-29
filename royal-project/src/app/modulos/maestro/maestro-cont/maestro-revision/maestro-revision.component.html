@@ -1,3 +1,100 @@
-<p>
-  maestro-revision works!
-</p>
+<div class="col-md12">
+  <form [formGroup]="temarioForm">
+    <div formArrayName="unidades" *ngFor="let unidad of unidades.controls; let i = index">
+      <h3>{{tareasCurso[i].unidad}}</h3>
+      <mat-divider> </mat-divider>
+      <br>
+      <div [formGroupName]="i">
+        <div formArrayName="subtemas" *ngFor="let subtema of subtemas(i).controls; let j = index">
+          <div [formGroupName]="j">
+            <mat-accordion class="example-headers-align">
+              <div class="col-md-12">
+                <!--acordeon-->
+                <mat-expansion-panel hideToggle="true" class="acordeon-cuerpo">
+                  <mat-expansion-panel-header class="acordeon-enc">
+                    <mat-panel-title>
+                      <b>{{tareasCurso[i].subtemas[j].nombreSubtema}}</b>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      <span> </span>
+                      <i class="fas fa-file-import"></i>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div formArrayName="tareas" *ngFor="let retroalimentacion of clases(i,j).controls; let k = index">
+                    <div [formGroupName]="k">
+                      <mat-card>
+                        <mat-card-header>
+                          <mat-card-title>{{tareasCurso[i].subtemas[j].tareas[k].nombreClase}}</mat-card-title>
+                          <mat-card-subtitle>{{tareasCurso[i].subtemas[j].tareas[k].instruccion}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-divider> </mat-divider>
+                        <br>
+                        <mat-card-content>
+                          <div class="row">
+                            <div class="col-md-5">
+                              <div *ngIf="tareasCurso[i].subtemas[j].tareas[k].entrega">
+                                Fecha de entrega: {{tareasCurso[i].subtemas[j].tareas[k].recurso.fechaEntrega | date}}
+                                <br>
+                                <ul>
+                                  <li>
+                                    <a [href]="tareasCurso[i].subtemas[j].tareas[k].recurso.tarea" target="_blank"
+                                      rel="noopener noreferrer">{{tareasCurso[i].subtemas[j].tareas[k].recurso.nombreTarea}}</a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div *ngIf="!tareasCurso[i].subtemas[j].tareas[k].entrega">
+                                <mat-error>
+                                  Sin entregar
+                                </mat-error>
+                              </div>
+                            </div>
+                            <div class="col-md-7" *ngIf="tareasCurso[i].subtemas[j].tareas[k].entrega">
+                              <div *ngIf="tareasCurso[i].subtemas[j].tareas[k].recurso.estatus==0">
+                                <mat-form-field appearance="outline" class="field-login">
+                                  <mat-label>Retroalimentacion:</mat-label>
+                                  <textarea matInput placeholder="Agrega la retroalimentacion de la tarea"
+                                    cdkTextareaAutosize cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"
+                                    formControlName="retroalimentacion"></textarea>
+                                </mat-form-field>
+                                <button mat-stroked-button (click)="revisar(true,i,j,k)"
+                                  color="letrasuccess">Aprobar</button>
+                                <button mat-stroked-button (click)="revisar(false,i,j,k)" color="warn">Rechazar</button>
+                              </div>
+                              <div *ngIf="tareasCurso[i].subtemas[j].tareas[k].recurso.estatus==1">
+                                <h5>Aprobado</h5>
+                                <br>
+                                <p>{{tareasCurso[i].subtemas[j].tareas[k].recurso.retroalimentacion}}</p>
+                                <br>
+                                <button mat-stroked-button (click)="remover(i,j,k)" color="warn">Remover
+                                  revisión</button>
+                              </div>
+                              <div *ngIf="tareasCurso[i].subtemas[j].tareas[k].recurso.estatus==2">
+                                <h5>Rechazado</h5>
+                                <br>
+                                <p>{{tareasCurso[i].subtemas[j].tareas[k].recurso.retroalimentacion}}</p>
+                                <br>
+                                <button mat-stroked-button (click)="remover(i,j,k)" color="warn">Remover
+                                  revisión</button>
+                              </div>
+                            </div>
+                          </div>
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                    <br>
+                  </div>
+                </mat-expansion-panel>
+                <!--acordeon-->
+              </div>
+            </mat-accordion>
+          </div>
+
+        </div>
+      </div>
+      <br>
+    </div>
+  </form>
+  <div *ngIf="!faltantes==0">
+    Ya se puede agregar el certificado!
+  </div>
+</div>

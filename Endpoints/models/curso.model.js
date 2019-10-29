@@ -40,7 +40,7 @@ const cursoSchema = new mongoose.Schema({
                             tarea: { type: String },
                             nombreTarea: { type: String },
                             fechaRevisión: { type: Date },
-                            retroalimentacion: { type: String },
+                            retroalimentacion: { type: String, default:'' },
                             estatus: { type: Number, default: 0 /* 0 - Entregado | 1 - Aprobado | 2 - No Aprobado */ },
                             fechaEntrega: { type: Date, default: Date.now() }
                         }]

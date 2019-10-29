@@ -259,6 +259,7 @@ const updateFotoVideo = (req, res) => {
 const updateTemario = (req, res) => {
     const ruta = req.params.id;
     const contenidoCurso = req.body.contenidoCurso;
+    console.log(contenidoCurso)
     _curso.update({ ruta: ruta }, {
         $set: {
             contenidoCurso: contenidoCurso

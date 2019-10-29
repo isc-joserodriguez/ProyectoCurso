@@ -57,6 +57,7 @@ export class CursosService {
   }
 
   updateTemario(id, datos) {
+    console.log(datos);
     return this.http.put(apiUrl + '/updateTemario/' + id, datos);
   }
 

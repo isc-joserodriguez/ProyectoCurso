@@ -92,6 +92,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       if (tarea.idAlumno == localStorage.getItem('userid')) {
         this.tareaEntregada = true;
         this.infoTarea = tarea;
+        console.log(this.infoTarea);
         this.indexTarea = index;
       }
     });

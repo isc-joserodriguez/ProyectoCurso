@@ -28,16 +28,20 @@ export class ConfigTemarioComponent implements OnInit {
       this.temario = res.detail[0].contenidoCurso;
       this.nombreCurso = res.detail[0].nombreCompleto;
       this.temario.forEach((unidades, i) => {
+        //Creamos formbuilder de unidad
         const unidadFormGroup = this.formBuilder.group({
           unidad: [unidades.unidad, Validators.required],
           subtemas: this.formBuilder.array([])
         });
+        //Se mete al form group de unidades
         this.unidades.push(unidadFormGroup);
         unidades.subtemas.forEach((subtemas, j) => {
+          //Creamos formbuilder de subtema
           const subtemaFormGroup = this.formBuilder.group({
             subtema: [subtemas.subtema, Validators.required],
             clases: this.formBuilder.array([])
           });
+          //Se mete al form group de subtemas
           ((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).push(subtemaFormGroup);
           subtemas.clases.forEach((clases) => {
             const claseFormGroup = this.formBuilder.group({
