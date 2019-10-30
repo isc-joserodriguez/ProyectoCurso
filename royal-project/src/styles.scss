@@ -231,4 +231,18 @@ table {
 .icon-remove {
   width: 30px;
 }
+.sombraimg {
+  -webkit-box-shadow: 4px 5px 15px 1px rgba(0, 0, 0, 0.55);
+  box-shadow: 4px 5px 15px 1px rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+}
+.descridos {
+  background-color: rgba(126, 124, 121, 0.068);
+  border-bottom-right-radius: 19px;
+  border-bottom-left-radius: 19px;
+}
+
+.descrinuevo {
+  background-color: rgba(126, 124, 121, 0.068);
+}
 

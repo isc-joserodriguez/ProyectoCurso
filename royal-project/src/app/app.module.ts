@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { NgModule, ɵ_sanitizeStyle } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +49,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import { CKEditorModule } from 'ng2-ckeditor';
 
+import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
+
 
 @NgModule({
   declarations: [
@@ -83,9 +85,17 @@ import { CKEditorModule } from 'ng2-ckeditor';
     InfiniteScrollModule,
     BarRatingModule,
     NgxPaginationModule,
-    CKEditorModule  
+    CKEditorModule,
+    NgDompurifyModule  
   ],
-  providers: [],
+  providers: [  {
+    provide: DomSanitizer,
+    useClass: NgDompurifyDomSanitizer,
+},
+{
+    provide: SANITIZE_STYLE,
+    useValue: ɵ_sanitizeStyle,
+},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -70,11 +70,11 @@
                 <div class="container col-md-12 px-5">
                   <b class="h3">{{infoPregunta.pregunta}}</b>
                   <br>
-                  <p>{{infoPregunta.detalles}}</p>
+                  <div [innerHTML]="infoPregunta.detalles"></div>
                   <br>
                   <div *ngFor="let actualizacion of infoPregunta.actualizaciones; let i=index">
                     <b>Actualización {{i+1}}: </b>
-                    <p> {{actualizacion.actualizacion}} </p>
+                    <div [innerHTML]="actualizacion.actualizacion"></div>
                     <mat-divider></mat-divider>
                   </div>
                   <br>
@@ -95,16 +95,12 @@
                   <mat-divider></mat-divider>
                   <br>
                   <form [formGroup]="actualizacionForm">
-                    <mat-form-field appearance="outline" class="field-login">
-                      <mat-label>Actualizar pregunta:</mat-label>
-                      <textarea matInput placeholder="Agrega más información a tu pregunta" cdkTextareaAutosize
-                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" formControlName="actualizacion"></textarea>
-                    </mat-form-field>
-                    <mat-error>
-                      <span
-                        *ngIf="!actualizacionForm.get('actualizacion').valid && actualizacionForm.get('actualizacion').touched">Agrega
-                        una actualizacion.</span>
-                    </mat-error>
+
+                    <h5>Actualizar pregunta:</h5>
+                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
+                      (change)="onChange($event)" formControlName="actualizacion">
+                    </ckeditor>
+
                     <div class="text-right pr-4 pb-3">
                       <button [disabled]="!actualizacionForm.valid" type="button" class="btn btn-success btn-sm"
                         (click)="agregarActualizacion()">
@@ -119,16 +115,16 @@
                 </div>
               </div>
               <!-- Info Persona -->
-              <div class="card mb-12">
+              <div class="card mb-12 descrinfo">
                 <div class="row no-gutters">
-                  <div class="col-md-2">
+                  <div class="col-md-2 p-2">
                     <img [src]="infoPersona.foto" class="card-img">
                   </div>
                   <div class="col-md-10">
                     <div class="card-body">
                       <h5 class="card-title">{{infoPersona.nombreCompleto}}</h5>
                       <p class="card-text">{{infoPersona.resumen}}</p>
-                      <button type="button" class="btn btn-outline-warning btn-sm">Ver perfil </button>
+                      <button mat-stroked-button color="primary" class="btn-sm">Ver perfil </button>
                     </div>
                   </div>
                 </div>
@@ -146,33 +142,31 @@
                   <div class="container">
 
                     <!-- Respuestas -->
-                    <div class="card mb-12" *ngFor="let respuesta of infoRespuestas">
+                    <div class="card mb-12 descri mb-4"
+                      *ngFor="let respuesta of infoRespuestas | paginate: { itemsPerPage: 5, currentPage: p }">
                       <div class="row no-gutters">
-                        <div class="col-md-2">
+                        <div class="col-md-2 vertical-center px-2">
                           <img [src]="respuesta.foto" class="card-img">
                         </div>
                         <div class="col-md-10">
                           <div class="card-body">
                             <h5 class="card-title"><a href="#">{{respuesta.nombreCompleto}}</a></h5>
-                            <p class="card-text">{{respuesta.comentario}}</p>
+                            <div [innerHTML]="respuesta.comentario"></div>
                             <div class="p-2 bd-highlight txtTodos">{{respuesta.fecha | date}}</div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+                    </pagination-controls>
                     <!-- Respuestas -->
                     <mat-divider></mat-divider>
+                    <br>
                     <form [formGroup]="respuestaForm">
-                      <mat-form-field appearance="outline" class="field-login">
-                        <mat-label>Respuesta:</mat-label>
-                        <textarea matInput placeholder="Escribe tu duda" cdkTextareaAutosize cdkAutosizeMinRows="2"
-                          cdkAutosizeMaxRows="15" formControlName="respuesta"></textarea>
-                      </mat-form-field>
-                      <mat-error>
-                        <span
-                          *ngIf="!respuestaForm.get('respuesta').valid && respuestaForm.get('respuesta').touched">Agrega
-                          tu respuesta</span>
-                      </mat-error>
+                      <h5>Respuesta:</h5>
+                      <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
+                        (change)="onChange($event)" formControlName="respuesta">
+                      </ckeditor>
                       <div class="text-right pr-4 pb-3">
                         <button [disabled]="!respuestaForm.valid || !iduser" type="button" class="btn colorbtn"
                           (click)="enviarRespuesta()">Enviar</button>
