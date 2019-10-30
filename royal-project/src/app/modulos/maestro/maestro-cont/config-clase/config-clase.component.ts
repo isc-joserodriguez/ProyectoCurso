@@ -17,7 +17,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   mycontent: string;
   log: string = '';
   @ViewChild(CKEditorComponent) ckeditor: CKEditorComponent;
- 
+
 
   numPlantilla = 0;
 
@@ -71,6 +71,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       allowedContent: false,
       forcePasteAsPlainText: true,
       font_names: 'Arial;Times New Roman;Verdana',
+      extraPlugins: ['colorbutton', 'divarea','div'],
       toolbarGroups: [
         { name: 'document', groups: ['mode', 'document', 'doctools'] },
         { name: 'clipboard', groups: ['clipboard', 'undo'] },
