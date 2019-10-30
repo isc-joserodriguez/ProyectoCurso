@@ -15,8 +15,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   infoCurso: any = {
     contenidoCurso: [{}],
     imagen: '',
-    alumnosInscritos: [],
-    _id: 0
+    alumnosInscritos: []
   };
   infoClase: any = {
     clase: '',
@@ -27,21 +26,16 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     tarea: { activo: false, envios: [] },
     comentarios: []
   };
-  avance = [];
-  cursosAlumno: any = [];
 
   player: any;
 
   viejoTarea = ''
   finalizadoTarea = true;
-  cambiaTarea = false;
   mensajeTarea = 'No hay archivos';
   datosFormularioTarea = new FormData();
   nombreTarea = '';
-  URLTarea = '';
   porcentajeTarea = 0;
   tareaEntregada = false;
-  urlTarea = '';
   indexTarea = 0;
   infoTarea: any = {};
   tareaForm: FormGroup;
@@ -65,7 +59,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   getInfoClase(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
-      this.infoCurso._id = curso.detail[0]._id;
       this.infoCurso.imagen = curso.detail[0].imagen;
       this.infoCurso.alumnosInscritos = curso.detail[0].alumnosInscritos;
       this.infoCurso.alumnosInscritos = [];
@@ -92,7 +85,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       if (tarea.idAlumno == localStorage.getItem('userid')) {
         this.tareaEntregada = true;
         this.infoTarea = tarea;
-        console.log(this.infoTarea);
         this.indexTarea = index;
       }
     });
@@ -154,16 +146,14 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   setAvance(id) {
-    this.cursosAlumno = [];
-    this.avance = [parseInt(this.route.snapshot.params.unidad) - 1, parseInt(this.route.snapshot.params.subtema) - 1, parseInt(this.route.snapshot.params.clase) - 1];
     this.usuarios.getUser(id).subscribe((res: any) => {
-      res.detail[0].cursoAlumno.forEach(element => {
-        if (element.ruta == this.infoCurso.ruta) {
-          element.avance = this.avance[0] + '-' + this.avance[1] + '-' + this.avance[2]
+      var cursos = res.detail[0].cursoAlumno;
+      res.detail[0].cursoAlumno.forEach((element, index) => {
+        if (element.ruta == this.route.snapshot.params.id) {
+          cursos[index].avance = (parseInt(this.route.snapshot.params.unidad) - 1) + '-' + (parseInt(this.route.snapshot.params.subtema) - 1) + '-' + (parseInt(this.route.snapshot.params.clase) - 1);
+          this.usuarios.updateAvance(id, cursos).subscribe(res => {
+          });
         }
-        this.cursosAlumno.push(element);
-      });
-      this.usuarios.updateAvance(id, this.cursosAlumno).subscribe(res => {
       });
     });
   }
@@ -174,7 +164,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       this.router.navigate(['/curso/', this.route.snapshot.params.id, 'info', unidad + 1, subtema + 1, clase + 1])
     }
   }
-  claseSiguiente(infoAvance) {
+  claseSiguiente() {
+    var infoAvance = [(parseInt(this.route.snapshot.params.unidad) - 1), (parseInt(this.route.snapshot.params.subtema) - 1), (parseInt(this.route.snapshot.params.clase) - 1)]
     if (infoAvance[0] <= this.infoCurso.contenidoCurso.length - 1) {
       if (infoAvance[1] <= this.infoCurso.contenidoCurso[infoAvance[0]].subtemas.length - 1) {
         if (infoAvance[2] < this.infoCurso.contenidoCurso[infoAvance[0]].subtemas[infoAvance[1]].clases.length - 1) {

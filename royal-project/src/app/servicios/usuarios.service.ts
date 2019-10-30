@@ -42,9 +42,12 @@ export class UsuariosService {
   updateAvance(id, datos) {
     return this.http.put(apiUrl + '/updateAvance/' + id, datos);
   }
-  
+
   updateInsignia(id, insignia) {
     return this.http.put(apiUrl + '/updateInsignia/' + id, insignia);
+  }
+  updateCert(id, datos) {
+    return this.http.put(apiUrl + '/updateCert/' + id, datos);
   }
 
   inscribirAlumno(id, datos) {

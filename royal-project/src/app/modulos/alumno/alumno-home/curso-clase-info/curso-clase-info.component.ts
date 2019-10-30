@@ -25,8 +25,6 @@ export class CursoClaseInfoComponent implements OnInit {
     tarea: { activo: false, envios: [] },
     comentarios: []
   };
-  avance = [];
-  cursosAlumno: any = [];
 
   viejoTarea = ''
   finalizadoTarea = true;
@@ -139,16 +137,14 @@ export class CursoClaseInfoComponent implements OnInit {
 
   }
   setAvance(id) {
-    this.cursosAlumno = [];
-    this.avance = [parseInt(this.route.snapshot.params.unidad) - 1, parseInt(this.route.snapshot.params.subtema) - 1, parseInt(this.route.snapshot.params.clase) - 1];
     this.usuarios.getUser(id).subscribe((res: any) => {
-      res.detail[0].cursoAlumno.forEach(element => {
-        if (element.ruta == this.infoCurso.ruta) {
-          element.avance = this.avance[0] + '-' + this.avance[1] + '-' + this.avance[2]
+      var cursos = res.detail[0].cursoAlumno;
+      res.detail[0].cursoAlumno.forEach((element, index) => {
+        if (element.ruta == this.route.snapshot.params.id) {
+          cursos[index].avance = (parseInt(this.route.snapshot.params.unidad) - 1) + '-' + (parseInt(this.route.snapshot.params.subtema) - 1) + '-' + (parseInt(this.route.snapshot.params.clase) - 1);
+          this.usuarios.updateAvance(id, cursos).subscribe(res => {
+          });
         }
-        this.cursosAlumno.push(element);
-      });
-      this.usuarios.updateAvance(id, this.cursosAlumno).subscribe(res => {
       });
     });
   }
@@ -159,7 +155,8 @@ export class CursoClaseInfoComponent implements OnInit {
       this.router.navigate(['/curso/', this.route.snapshot.params.id, 'info', unidad + 1, subtema + 1, clase + 1])
     }
   }
-  claseSiguiente(infoAvance) {
+  claseSiguiente() {
+    var infoAvance = [(parseInt(this.route.snapshot.params.unidad) - 1), (parseInt(this.route.snapshot.params.subtema) - 1), (parseInt(this.route.snapshot.params.clase) - 1)]
     if (infoAvance[0] <= this.infoCurso.contenidoCurso.length - 1) {
       if (infoAvance[1] <= this.infoCurso.contenidoCurso[infoAvance[0]].subtemas.length - 1) {
         if (infoAvance[2] < this.infoCurso.contenidoCurso[infoAvance[0]].subtemas[infoAvance[1]].clases.length - 1) {

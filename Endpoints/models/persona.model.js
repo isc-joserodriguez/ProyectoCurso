@@ -28,7 +28,12 @@ const personaSchema = new mongoose.Schema({
     historialCompra: [{ _id: { type: String, required: true } }],
     historialCobro: [{ _id: { type: String, required: true } }],
     metodosPago: [{ _id: { type: String, required: true }, numero: { type: String, required: true }, mes: { type: Number, required: true }, año: { type: Number, required: true }, cvc: { type: Number, required: true } }],
-    certificados: [{ _id: { type: String, required: true }, nombre: { type: String, required: true }, autoridad: { type: String, required: true }, url: { type: String, required: true }, fecha: { type: String, required: true } }],
+    certificados: [{
+        ruta: { type: String, default: 'N/A' },
+        nombre: { type: String, required: true },
+        url: { type: String, required: true },
+        fecha: { type: String, default: Date.now() }
+    }],
     identificacion: { type: String },
     curriculum: { type: String },
     notificaciones: [{ _id: { type: String, required: true }, personaId: { type: String, required: true }, fecha: { type: Date, required: true }, descripción: { type: String, required: true }, estado: { type: Boolean, required: true } }],

@@ -80,9 +80,11 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
     this.avance = [];
     this.usuarios.getUser(id).subscribe((res: any) => {
       res.detail[0].cursoAlumno.forEach(curso => {
-        this.avance[0] = parseInt(curso.avance[0]);
-        this.avance[1] = parseInt(curso.avance[2]);
-        this.avance[2] = parseInt(curso.avance[4]);
+        if (curso.ruta == this.route.snapshot.params.id) {
+          this.avance[0] = parseInt(curso.avance[0]);
+          this.avance[1] = parseInt(curso.avance[2]);
+          this.avance[2] = parseInt(curso.avance[4]);
+        }
       });
     })
   }

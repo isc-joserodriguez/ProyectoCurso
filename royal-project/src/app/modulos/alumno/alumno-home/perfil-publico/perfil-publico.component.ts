@@ -30,6 +30,7 @@ export class PerfilPublicoComponent implements OnInit {
   cursosTec = [];
   cursosId = [];
   insignias = [];
+  certificados = [];
   usrTotal = 0;
   nivel = 0;
   progreso = 0;
@@ -64,10 +65,22 @@ export class PerfilPublicoComponent implements OnInit {
           });
         });
       });
+      this.infoAlumno.certificados.forEach(certificado => {
+        this.cursos.getCursoInfo(certificado.ruta).subscribe((curso: any) => {
+          this.certificados.push({
+            nombreCurso: curso.detail[0].nombreCompleto,
+            imagen: curso.detail[0].imagen,
+            fecha: certificado.fecha,
+            url: certificado.url
+          });
+
+        });
+      });
 
       this.progreso = this.infoAlumno.puntaje % 1000;
       this.nivel = ((this.infoAlumno.puntaje - this.progreso) / 1000) + 1;
-      this.porcentajeNivel=Math.round((this.progreso * 100) / 1000);
+      this.porcentajeNivel = Math.round((this.progreso * 100) / 1000);
+
     });
   }
 }
