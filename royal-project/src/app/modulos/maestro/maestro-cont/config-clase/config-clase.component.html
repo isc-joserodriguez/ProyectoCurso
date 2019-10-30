@@ -48,17 +48,13 @@
                     <div class="text-center">
                       <h4 class="letrastar">Descripción:</h4>
                     </div>
-                    <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate>
-                      <div class="form-group has-feedback"
-                        [ngClass]="{ 'has-error': myckeditor.invalid && myckeditor.touched }">
-                        <ckeditor [(ngModel)]="mycontent" #myckeditor="ngModel" name="myckeditor" required
-                          [config]="ckeConfig" debounce="500" (change)="onChange($event)" (paste)="onPaste($event)"
-                          [readonly]="false">
-                        </ckeditor>
-                        <div *ngIf="myckeditor.invalid && myckeditor.touched" class="help-block">Required field.</div>
-                      </div>
-                    </form>
-
+                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
+                      (change)="onChange($event)" formControlName="texto">
+                    </ckeditor>
+                    <mat-error>
+                      <span *ngIf="!videoForm.get('texto').valid && videoForm.get('texto').touched">Agrega
+                        una descripción del curso.</span>
+                    </mat-error>
                     <!--
                     <mat-form-field appearance="outline" class="field-login">
                       <mat-label>Descripción:</mat-label>
@@ -173,48 +169,48 @@
         <!--tarea-->
         <br>
         <div class="col-md-12">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12 pb-2 divisorbot">
-                <div class="container">
-                  <div class="row container pl-5 mb-3">
-                    <div class="custom-control custom-switch">
-                      <input id="tarea" type="checkbox" [checked]="tarea" class="custom-control-input"
-                        [(ngModel)]="tarea">
-                      <label class="custom-control-label h4 letrastar" for="tarea">Tarea</label>
-                    </div>
-                  </div>
-                  <div class="row" *ngIf="tarea">
-                    <div class="col-md-12">
-                      <form [formGroup]="tareaForm">
-                        <mat-form-field appearance="outline" class="field-login">
-                          <mat-label>Descripción:</mat-label>
-                          <textarea matInput placeholder="Agrega la descripción de la tarea" cdkTextareaAutosize
-                            cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15" formControlName="instruccion"></textarea>
-                          <mat-error>
-                            <span
-                              *ngIf="!tareaForm.get('instruccion').valid && tareaForm.get('instruccion').touched">Agrega
-                              una descripción de la tarea.</span>
-                          </mat-error>
-                        </mat-form-field>
-                        <div class="text-center">
-                          <button [disabled]="!tareaForm.valid" mat-stroked-button (click)="subirTarea()"
-                            color="letrasuccess">Guardar Tarea<img class="icon-edit"
-                              src="./../../../assets/icons/save.svg"></button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
 
+          <div class="row">
+            <div class="col-md-12 pb-2 divisorbot">
+              <div class="container">
+                <div class="row container pl-5 mb-3">
+                  <div class="custom-control custom-switch">
+                    <input id="tarea" type="checkbox" [checked]="tarea" class="custom-control-input"
+                      [(ngModel)]="tarea">
+                    <label class="custom-control-label h4 letrastar" for="tarea">Tarea</label>
+                  </div>
+                </div>
+                <div class="row" *ngIf="tarea">
+                  <div class="col-md-12">
+                    <form [formGroup]="tareaForm">
+                      <mat-form-field appearance="outline" class="field-login">
+                        <mat-label>Descripción:</mat-label>
+                        <textarea matInput placeholder="Agrega la descripción de la tarea" cdkTextareaAutosize
+                          cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15" formControlName="instruccion"></textarea>
+                        <mat-error>
+                          <span
+                            *ngIf="!tareaForm.get('instruccion').valid && tareaForm.get('instruccion').touched">Agrega
+                            una descripción de la tarea.</span>
+                        </mat-error>
+                      </mat-form-field>
+                      <div class="text-center">
+                        <button [disabled]="!tareaForm.valid" mat-stroked-button (click)="subirTarea()"
+                          color="letrasuccess">Guardar Tarea<img class="icon-edit"
+                            src="./../../../assets/icons/save.svg"></button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
 
               </div>
 
             </div>
-            <div class="text-right m-2">
-              <button mat-stroked-button color="warn" [routerLink]="['../../../../']">Cancelar</button>
-            </div>
+
           </div>
+          <div class="text-right m-2">
+            <button mat-stroked-button color="warn" [routerLink]="['../../../../']">Cancelar</button>
+          </div>
+
         </div>
       </div>
     </div>

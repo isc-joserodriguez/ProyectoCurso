@@ -65,7 +65,7 @@ export class ComunidadPreguntaComponent implements OnInit {
     this.ckeConfig = {
       allowedContent: false,
       forcePasteAsPlainText: true,
-      extraPlugins: 'colorbutton',
+      extraPlugins: ['colorbutton','divarea'],
 
       font_names: 'Arial;Times New Roman;Verdana',
       toolbarGroups: [

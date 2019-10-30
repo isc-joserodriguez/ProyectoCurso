@@ -70,8 +70,9 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
     this.ckeConfig = {
       allowedContent: false,
       forcePasteAsPlainText: true,
+      extraPlugins: ['colorbutton','divarea'],
+
       font_names: 'Arial;Times New Roman;Verdana',
-      extraPlugins: ['colorbutton', 'divarea','div'],
       toolbarGroups: [
         { name: 'document', groups: ['mode', 'document', 'doctools'] },
         { name: 'clipboard', groups: ['clipboard', 'undo'] },
@@ -90,6 +91,8 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
         { name: 'about', groups: ['about'] }
       ],
       removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
+
+
     };
     this.videoForm = this.formBuilder.group({
       video: [''],
@@ -141,6 +144,10 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       this.textoForm.setValue({
         texto: this.infoClase.texto
       });
+
+      console.log(this.infoClase.texto)
+      console.log(this.videoForm.value)
+      console.log(this.textoForm.value)
 
       if (this.infoClase.recursos.activo) {
         this.recursos = true;
