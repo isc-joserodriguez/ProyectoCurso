@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Match } from 'src/app/helper/match.validator';
 import { CursosService } from 'src/app/servicios/cursos.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
 @Component({
@@ -29,12 +30,14 @@ export class NavAlumnoComponent implements OnInit {
     sexo: 3
   };
 
+  cursosAlumno = [];
+
   usuario = '';
   logueado = localStorage.getItem('token') != null;
   sexo = 3; // 1= H 2= M 3= Indef
   busqueda = '';
 
-  constructor(private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -58,7 +61,22 @@ export class NavAlumnoComponent implements OnInit {
     });
 
     this.getCategorias();
-
+    this.getCursos();
+  }
+  getCursos() {
+    this.cursosAlumno = [];
+    this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
+      usuario.detail[0].cursoAlumno.forEach(curso => {
+        this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo:any)=>{
+          this.cursosAlumno.push({
+            imagen: cursoInfo.detail[0].imagen,
+            nombre: cursoInfo.detail[0].nombreCorto,
+            ruta: cursoInfo.detail[0].ruta
+          });
+        });
+      });
+      console.log(this.cursosAlumno);
+    });
   }
   getCategorias() {
     this.categoriasTec = [];

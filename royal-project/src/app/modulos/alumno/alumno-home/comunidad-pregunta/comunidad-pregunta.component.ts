@@ -28,6 +28,8 @@ export class ComunidadPreguntaComponent implements OnInit {
   iduser = localStorage.getItem('userid');
   propia = false
   numPreguntas = 0;
+  respuestaCom = '';
+  responderIndex = -1;
 
 
 
@@ -61,11 +63,10 @@ export class ComunidadPreguntaComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private comunidad: ComunidadService, private formBuilder: FormBuilder, @Inject(DomSanitizer) private readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.ckeConfig = {
       allowedContent: false,
       forcePasteAsPlainText: true,
-      extraPlugins: ['colorbutton','divarea'],
+      extraPlugins: ['colorbutton', 'divarea'],
 
       font_names: 'Arial;Times New Roman;Verdana',
       toolbarGroups: [
@@ -86,9 +87,8 @@ export class ComunidadPreguntaComponent implements OnInit {
         { name: 'about', groups: ['about'] }
       ],
       removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
-
-
     };
+
     this.preguntaForm = this.formBuilder.group({
       pregunta: ['', Validators.required]
     });
@@ -99,7 +99,7 @@ export class ComunidadPreguntaComponent implements OnInit {
 
     this.respuestaForm = this.formBuilder.group({
       respuesta: ['', Validators.required]
-    })
+    });
 
     this.getPregunta(this.route.snapshot.params.ruta);
 
@@ -121,12 +121,28 @@ export class ComunidadPreguntaComponent implements OnInit {
       this.infoRespuestas = [];
       this.infoPregunta.respuestas.forEach(respuesta => {
         this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
+          var respuestas = [];
+          respuesta.respuestas.forEach(respuestaCom => {
+            this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
+              let resCom: any = {
+                nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
+                comentario: respuestaCom.comentario,
+                fecha: respuestaCom.fecha,
+                foto: usuarioCom.detail[0].foto,
+                id: respuestaCom.idPersona,
+                ruta: usuarioCom.detail[0].ruta
+              }
+              respuestas.push(resCom);
+            });
+          });
           let nuevaRes: any = {
             nombreCompleto: usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno,
             comentario: respuesta.comentario,
             fecha: respuesta.fecha,
             foto: usuario.detail[0].foto,
-            id: respuesta.idPersona
+            id: respuesta.idPersona,
+            ruta: usuario.detail[0].ruta,
+            respuestas: respuestas
           }
           this.infoRespuestas.push(nuevaRes);
         });
@@ -162,7 +178,6 @@ export class ComunidadPreguntaComponent implements OnInit {
 
   agregarActualizacion() {
     this.infoPregunta.actualizaciones.push({ actualizacion: this.actualizacionForm.value.actualizacion });
-
     this.comunidad.agregarActualizacion(this.route.snapshot.params.ruta, { actualizaciones: this.infoPregunta.actualizaciones }).subscribe(res => {
       this.getPregunta(this.route.snapshot.params.ruta);
       this.editarPregunta = false;
@@ -180,8 +195,8 @@ export class ComunidadPreguntaComponent implements OnInit {
 
     this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
       this.getPregunta(this.route.snapshot.params.ruta);
-      this.respuestaForm = this.formBuilder.group({
-        respuesta: ['', Validators.required]
+      this.respuestaForm.setValue({
+        respuesta: ' '
       });
     });
   }
@@ -194,14 +209,30 @@ export class ComunidadPreguntaComponent implements OnInit {
     }
   }
 
-  onChange($event: any): void {
-    console.log("onChange");
-    //this.log += new Date() + "<br />";
+  setDetalles(detalles) {
+    this.respuestaForm.setValue({
+      respuesta: detalles
+    });
   }
 
-  onPaste($event: any): void {
-    console.log("onPaste");
-    //this.log += new Date() + "<br />";
+  responder(index) {
+    this.responderIndex = index;
+    this.respuestaCom = '';
+    console.log(this.infoRespuestas);
+  }
+  enviarRespuestaCom() {
+    console.log(this.infoPregunta.respuestas[this.responderIndex].respuestas);
+    this.infoPregunta.respuestas[this.responderIndex].respuestas.push({
+      idPersona: localStorage.getItem('userid'),
+      comentario: this.respuestaCom
+    });
+    console.log(this.infoPregunta.respuestas[this.responderIndex].respuestas);
+
+    this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+      this.respuestaCom = '';
+      this.responderIndex=-1;
+    });
   }
 
 }

@@ -145,10 +145,6 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
         texto: this.infoClase.texto
       });
 
-      console.log(this.infoClase.texto)
-      console.log(this.videoForm.value)
-      console.log(this.textoForm.value)
-
       if (this.infoClase.recursos.activo) {
         this.recursos = true;
         this.getRecursos()
@@ -379,15 +375,5 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
 
   recargarVideo() {
     this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
-  }
-
-  onChange($event: any): void {
-    console.log("onChange");
-    //this.log += new Date() + "<br />";
-  }
-
-  onPaste($event: any): void {
-    console.log("onPaste");
-    //this.log += new Date() + "<br />";
   }
 }

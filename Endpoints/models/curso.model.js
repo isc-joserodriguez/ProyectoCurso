@@ -40,12 +40,21 @@ const cursoSchema = new mongoose.Schema({
                             tarea: { type: String },
                             nombreTarea: { type: String },
                             fechaRevisión: { type: Date },
-                            retroalimentacion: { type: String },
+                            retroalimentacion: { type: String, default: '' },
                             estatus: { type: Number, default: 0 /* 0 - Entregado | 1 - Aprobado | 2 - No Aprobado */ },
                             fechaEntrega: { type: Date, default: Date.now() }
                         }]
                     },//Recursos de la tarea
-                    comentarios: [{ idPersona: { type: Number }, comentario: { type: String }, respuestas: [{ idPersona: { type: String }, comentario: { type: String } }] }]
+                    comentarios: [{
+                        idPersona: { type: Number },
+                        comentario: { type: String },
+                        fecha: { type: Date, default: Date.now() },
+                        respuestas: [{
+                            idPersona: { type: Number },
+                            comentario: { type: String },
+                            fecha: { type: Date, default: Date.now() }
+                        }]
+                    }]
                 }]
             }],
             evaluacion: {

@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CursosService } from 'src/app/servicios/cursos.service'
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { StarRatingComponent } from 'ng-starrating';
 declare let videojs: any;
 
 @Component({
@@ -10,7 +9,7 @@ declare let videojs: any;
   templateUrl: './curso-resumen.component.html',
   styleUrls: ['./curso-resumen.component.scss']
 })
-export class CursoResumenComponent implements OnInit, OnDestroy {
+export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
   infoCurso: any = {
     idMaestro: 0,
     nombreCompleto: '',
@@ -31,16 +30,25 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
   };
   avance = [];
 
+  player: any;
+
   constructor(private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
-    this.getInfoCurso(this.route.snapshot.params.id);
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      window.scrollTo(0, 0);
+      this.getInfoCurso(params.get('id'));
+    });
   }
   ngOnDestroy(): void {
     var oldPlayer = document.getElementById('videoId');
     videojs(oldPlayer).dispose();
   }
+
+  ngAfterViewInit(): void {
+    this.player = videojs("videoId");
+  }
+
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
       this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
@@ -63,14 +71,11 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
       if (!this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')))) {
         this.router.navigate(['/curso', this.route.snapshot.params.id, 'vista']);
       }
-      videojs("videoId", {
-        sources: [{
-          src: this.infoCurso.videoPrincipal,
-          type: 'video/mp4'
-        }]
-      }, function () {
-        // Player (this) is initialized and ready.
-      });
+
+      //Video
+      this.player.src({ type: "video/mp4", src: this.infoCurso.videoPrincipal });
+      this.player.poster(this.infoCurso.imagen);
+
       this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
       this.getAvance(localStorage.getItem('userid'));
       this.getInfoMaestro(curso.detail[0].idMaestro);
@@ -80,9 +85,11 @@ export class CursoResumenComponent implements OnInit, OnDestroy {
     this.avance = [];
     this.usuarios.getUser(id).subscribe((res: any) => {
       res.detail[0].cursoAlumno.forEach(curso => {
-        this.avance[0] = parseInt(curso.avance[0]);
-        this.avance[1] = parseInt(curso.avance[2]);
-        this.avance[2] = parseInt(curso.avance[4]);
+        if (curso.ruta == this.route.snapshot.params.id) {
+          this.avance[0] = parseInt(curso.avance[0]);
+          this.avance[1] = parseInt(curso.avance[2]);
+          this.avance[2] = parseInt(curso.avance[4]);
+        }
       });
     })
   }

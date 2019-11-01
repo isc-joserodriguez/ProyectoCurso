@@ -45,8 +45,8 @@ export class PerfilComponent implements OnInit {
   }
   getUser(id) {
     this.usuario.getUser(id).subscribe((user: any) => {
+      console.log(user.detail[0]);
       this.ruta= 'localhost:4200/alumno/perfil-publico/'+user.detail[0].ruta;
-      console.log(this.ruta);
       this.URLPublica = user.detail[0].foto;
 
       this.perfilForm.setValue({
