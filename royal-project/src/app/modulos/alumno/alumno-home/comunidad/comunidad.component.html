@@ -70,11 +70,11 @@
                     </span>
                     <div class="row justify-content-between">
                       <div class="py-2 pl-5 vertical-center">
-                        <a [routerLink]="['/comunidad/pregunta',pregunta.ruta]"
-                          routerLinkActive="router-link-active">Ver más...</a>
+                        <a [routerLink]="['/comunidad/pregunta',pregunta.ruta]">Ver más...</a>
                       </div>
                       <div class="pr-5">
-                        <button type="button" class="btn btn-success btn-sm">Responder</button>
+                        <button type="button" class="btn btn-success btn-sm"
+                          [routerLink]="['/comunidad/pregunta',pregunta.ruta]" fragment="respuesta">Responder</button>
                       </div>
                     </div>
                     <br>

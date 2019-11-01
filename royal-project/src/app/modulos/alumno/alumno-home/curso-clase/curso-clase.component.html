@@ -24,10 +24,7 @@
 
   <div class="container px-5">
     <div class="col-md-12">
-      <div class="row">
-        {{infoClase.texto}}
-      </div>
-
+        <div [innerHTML]="infoClase.texto"></div>
       <br>
       <br>
       <div class="row" *ngIf="infoClase.recursos.activo">

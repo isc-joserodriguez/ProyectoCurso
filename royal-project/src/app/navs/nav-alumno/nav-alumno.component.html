@@ -89,13 +89,12 @@
           <p class="salto_pag mb-0">Mis Cursos</p>
         </button>
         <mat-menu #miscursos="matMenu" class="fondo-navbar">
-          <button mat-menu-item>
-            <i class="fas fa-laptop-code"></i>Tecnologías
-          </button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item>
-            <i class="fas fa-language"></i> Idiomas
-          </button>
+          <div *ngFor="let curso of cursosAlumno">
+            <button mat-menu-item [routerLink]="['/curso/',curso.ruta]">
+              <img class="icon-nav pr-2" [src]="curso.imagen">{{curso.nombre}}
+            </button>
+            <mat-divider></mat-divider>
+          </div>
         </mat-menu>
 
       </div>

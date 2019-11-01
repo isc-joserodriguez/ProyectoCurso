@@ -71,10 +71,16 @@
                   <b class="h3">{{infoPregunta.pregunta}}</b>
                   <br>
                   <div [innerHTML]="infoPregunta.detalles"></div>
+
+                  <button type="button" class="btn colorbtn" [routerLink]="['./']" fragment="caja"
+                    (click)="setDetalles(infoPregunta.detalles)">Corregir</button>
+
                   <br>
                   <div *ngFor="let actualizacion of infoPregunta.actualizaciones; let i=index">
                     <b>Actualización {{i+1}}: </b>
                     <div [innerHTML]="actualizacion.actualizacion"></div>
+                    <button type="button" class="btn colorbtn" [routerLink]="['./']" fragment="caja"
+                      (click)="setDetalles(actualizacion.actualizacion)">Corregir</button>
                     <mat-divider></mat-divider>
                   </div>
                   <br>
@@ -132,7 +138,7 @@
               <!-- Info Persona -->
 
               <!-- Respuestas -->
-              <div class="card">
+              <div class="card" id="respuesta">
                 <div class="card-header bg-light text-center">
                   <b>
                     Respuestas ({{numPreguntas}})
@@ -143,16 +149,54 @@
 
                     <!-- Respuestas -->
                     <div class="card mb-12 descri mb-4"
-                      *ngFor="let respuesta of infoRespuestas | paginate: { itemsPerPage: 5, currentPage: p }">
+                      *ngFor="let respuesta of infoRespuestas | paginate: { itemsPerPage: 5, currentPage: p }; let i=index">
                       <div class="row no-gutters">
-                        <div class="col-md-2 vertical-center px-2">
-                          <img [src]="respuesta.foto" class="card-img">
+                        <div class="col-md-2 px-2">
+                          <img [src]="respuesta.foto" class="card-img pt-5">
                         </div>
                         <div class="col-md-10">
                           <div class="card-body">
-                            <h5 class="card-title"><a href="#">{{respuesta.nombreCompleto}}</a></h5>
+                            <h5 class="card-title"><a
+                                [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                            </h5>
                             <div [innerHTML]="respuesta.comentario"></div>
-                            <div class="p-2 bd-highlight txtTodos">{{respuesta.fecha | date}}</div>
+                            <div class="p-2 bd-highlight txtTodos">
+                              {{respuesta.fecha | date}}
+                              <button [disabled]="!iduser" type="button" class="btn colorbtn"
+                                (click)="responder(i)">Responder</button>
+                            </div>
+                          </div>
+                          <mat-divider> </mat-divider>
+                          <!-- Respuesta al comentario -->
+                          <div *ngFor="let resp of respuesta.respuestas">
+                            <div class="row no-gutters">
+                              <div class="col-md-2 vertical-center px-2">
+                                <img [src]="resp.foto" class="card-img">
+                              </div>
+                              <div class="col-md-10">
+                                <div class="card-body">
+                                  <h5 class="card-title"><a
+                                      [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                  </h5>
+                                  <div [innerHTML]="resp.comentario"></div>
+                                  <div class="p-2 bd-highlight txtTodos">
+                                    {{resp.fecha | date}}
+                                  </div>
+                                </div>
+                                <mat-divider> </mat-divider>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Respuesta al comentario -->
+                          <div *ngIf="responderIndex==i">
+                            <ckeditor required [config]="ckeConfig" debounce="500" [(ngModel)]="respuestaCom">
+                            </ckeditor>
+                            <div class="text-right pr-4 pb-3">
+                              <button [disabled]="respuestaCom==''" type="button" class="btn colorbtn"
+                                (click)="enviarRespuestaCom()">Enviar</button>
+                              <button type="button" class="btn btn-danger"
+                                (click)="responderIndex=-1">Cancelar</button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -163,13 +207,12 @@
                     <mat-divider></mat-divider>
                     <br>
                     <form [formGroup]="respuestaForm">
-                      <h5>Respuesta:</h5>
-                      <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
-                        (change)="onChange($event)" formControlName="respuesta">
+                      <h5 id="caja"> Respuesta:</h5>
+                      <ckeditor required [config]="ckeConfig" debounce="500" formControlName="respuesta">
                       </ckeditor>
                       <div class="text-right pr-4 pb-3">
-                        <button [disabled]="!respuestaForm.valid || !iduser" type="button" class="btn colorbtn"
-                          (click)="enviarRespuesta()">Enviar</button>
+                        <button [disabled]="!respuestaForm.valid || !iduser || respuestaForm.value.respuesta==' '"
+                          type="button" class="btn colorbtn" (click)="enviarRespuesta()">Enviar</button>
                       </div>
                     </form>
                     <br>

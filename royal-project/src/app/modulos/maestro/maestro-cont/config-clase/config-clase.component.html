@@ -48,25 +48,12 @@
                     <div class="text-center">
                       <h4 class="letrastar">Descripción:</h4>
                     </div>
-                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
-                      (change)="onChange($event)" formControlName="texto">
+                    <ckeditor required [config]="ckeConfig" debounce="500" formControlName="texto">
                     </ckeditor>
                     <mat-error>
                       <span *ngIf="!videoForm.get('texto').valid && videoForm.get('texto').touched">Agrega
                         una descripción del curso.</span>
                     </mat-error>
-                    <!--
-                    <mat-form-field appearance="outline" class="field-login">
-                      <mat-label>Descripción:</mat-label>
-                      <textarea matInput placeholder="Agrega la descripción de la clase" cdkTextareaAutosize
-                        cdkAutosizeMinRows="5" cdkAutosizeMaxRows="15" formControlName="texto"></textarea>
-                      <mat-error>
-                        <span *ngIf="!videoForm.get('texto').valid && videoForm.get('texto').touched">Agrega
-                          una descripción del curso.</span>
-                      </mat-error>
-                    </mat-form-field>
-
-                  -->
                     <div class="mt-3 text-center">
                       <button [disabled]="!videoForm.valid" color="letrasuccess" mat-stroked-button
                         (click)="subirVideo()">Guardar Video y/o Descripción <img class="icon-edit"
