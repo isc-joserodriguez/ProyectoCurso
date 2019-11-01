@@ -12,15 +12,6 @@ export class ComprasService {
 
   constructor(private http: HttpClient) {
   }
-
-  //GET localhost:3002/compras/getComprasUsuario/:idLibreria/:idAutor/:fecha
-  /*
-  {
-    code: 200,
-    msg: 'Hurra, perfecto',
-    detail: '[{totalVendido:x,libroMasCaro:'fulano'},{totalVendido:x,libroMasCaro:'fulano'},{totalVendido:x,libroMasCaro:'fulano'},{totalVendido:x,libroMasCaro:'fulano'}]'
-  }
-  */
   getComprasUsuario(libreria, autor, fecha) {
     this.http.get(apiUrl + '/getComprasUsuario/' + libreria + '/' + autor + '/' + fecha);
   }
