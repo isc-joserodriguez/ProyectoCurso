@@ -8,25 +8,24 @@
       <div class="categorias container mx-auto">
         <p class="h3 font-weight-bold text-center bg-warning text-dark">MIS CURSOS</p> <br>
 
-        <mat-tab-group mat-align-tabs="center">
+        <mat-tab-group mat-align-tabs="center" *ngIf="cursosTec.length!=0 || cursosIdiomas.length!=0">
           <mat-tab label="Tecnologías">
             <div class="Tecnologias">
               <br>
               <div class="row col-md-12 ">
                 <div class="col-md-3 text-center"
-                  *ngFor="let curso of cursosTec | paginate: { itemsPerPage: 5, currentPage: p }">
+                  *ngFor="let curso of cursosTec">
                   <label>
                     <div class="card">
                       <img class="card-img-top" [src]="curso.imagen" alt="Card image cap">
                       <div class="card-body">
                         <h5 class="card-title">{{curso.nombreCorto}}</h5>
                         <p class="card-text">{{curso.descripcionCurso}}</p>
-                        <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                        <a class="btn btn-primary" [routerLink]="['curso',curso.ruta]">Ir al curso</a>
                       </div>
                     </div>
                   </label>
                 </div>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
               </div>
             </div>
           </mat-tab>
@@ -41,7 +40,7 @@
                       <div class="card-body">
                         <h5 class="card-title">{{curso.nombreCorto}}</h5>
                         <p class="card-text">{{curso.descripcionCurso}}</p>
-                        <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+                        <a class="btn btn-primary" [routerLink]="['curso',curso.ruta]">Ir al curso</a>
                       </div>
                     </div>
                   </label>
@@ -52,7 +51,7 @@
         </mat-tab-group>
 
         <!--No cursos-->
-        <div class="col-md-12 p-2">
+        <div class="col-md-12 p-2" *ngIf="cursosTec.length==0 && cursosIdiomas.length==0">
           <div class="card mb-12">
             <h3>No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
           </div>
