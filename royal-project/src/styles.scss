@@ -246,3 +246,15 @@ table {
   background-color: rgba(126, 124, 121, 0.068);
 }
 
+.fondocard {
+  background: #024799;
+  background: -moz-linear-gradient(-45deg, #024799 0%, #ffffff 100%);
+  background: -webkit-linear-gradient(-45deg, #024799 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #024799 0%, #ffffff 100%);
+  border: 5px hidden #1c6ea4;
+}
+
+.sombrabaja {
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.28);
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.28);
+}

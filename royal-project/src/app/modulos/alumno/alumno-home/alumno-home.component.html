@@ -45,21 +45,20 @@
     <mat-tab label="Tecnologías">
       <div class="Tecnologias">
         <br>
-        <div class="row col-md-12 ">
-          <div class="col-md-3 text-center" *ngFor="let curso of cursosTec">
-            <label>
-              <div class="card ">
-                <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:255px; height:250px;">
-                  <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255" height="250">
-                </div>
-                <div class="card-body descridos">
-                  <h5 class="card-title">{{curso.nombreCorto}}</h5>
-                  <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">{{curso.descripcionCurso}}
-                  </p>
-                  <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
-                </div>
-              </div>
-            </label>
+        <div class="row col-md-12 mb-3">
+          <div class="col-md-2 card fondocard mx-3 mb-2 sombrabaja" *ngFor="let curso of cursosTec">
+
+            <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3" style="max-width:200px; height:150px;">
+              <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="200" height="150">
+            </div>
+            <div class="card-body text-center px-1">
+              <h5 class="card-title text-wrap text-center">{{curso.nombreCorto}}</h5>
+              <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">{{curso.descripcionCurso}}
+              </p>
+              <p><b>$ 1500</b></p>
+              <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+            </div>
+
           </div>
         </div>
       </div>
@@ -67,21 +66,19 @@
     <mat-tab label="Idiomas">
       <div class="Idiomas">
         <br>
-        <div class="row col-md-12 o">
-          <div class="col-md-3 text-center" *ngFor="let curso of cursosIdiomas">
-            <label>
-              <div class="card">
-                <div class="imgLiquid  view overlay zoom z-depth-1 rounded" style="max-width:255px; height:250px;">
-                  <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="255" height="250">
-                </div>
-                <div class="card-body descridos">
-                  <h5 class="card-title">{{curso.nombreCorto}}</h5>
-                  <p class="card-text d-inline-block text-truncate" style="max-width: 200px;">{{curso.descripcionCurso}}
-                  </p>
-                  <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
-                </div>
-              </div>
-            </label>
+        <div class="row col-md-12 mb-3">
+          <div class="col-md-2 card fondocard mx-3 mb-2 sombrabaja" *ngFor="let curso of cursosIdiomas">
+
+            <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3" style="max-width:200px; height:150px;">
+              <img class="card-img-top" [src]="curso.imagen" alt="Card image cap" max-width="200" height="150">
+            </div>
+            <div class="card-body text-center px-1">
+              <h5 class="card-title text-wrap text-center">{{curso.nombreCorto}}</h5>
+              <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">{{curso.descripcionCurso}}
+              </p>
+              <a class="btn btn-primary" [routerLink]="['curso',curso.ruta,'vista']">Ver curso</a>
+            </div>
+
           </div>
         </div>
       </div>
@@ -90,7 +87,7 @@
 
   <!--Botones Categorias-->
   <div class="row col-md-12">
-    <div class="col-md-12 text-right pr-5">
+    <div class="col-md-12 text-right pr-5 ">
       <button type="button" class="btn btn-outline-info btn-sm">Ver más categorías...</button>
     </div>
   </div>
@@ -128,7 +125,8 @@
       </div>
       <div class="col-md-3 text-center ">
         <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
+            style="max-width:100%; height:150px;">
             <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
             <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
             <div class="mask flex-center waves-effect waves-light">
@@ -139,7 +137,8 @@
       </div>
       <div class="col-md-3 text-center ">
         <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
+            style="max-width:100%; height:150px;">
             <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
             <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
             <div class="mask flex-center waves-effect waves-light">
@@ -150,7 +149,8 @@
       </div>
       <div class="col-md-3 text-center ">
         <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
+            style="max-width:100%; height:150px;">
             <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
             <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
             <div class="mask flex-center waves-effect waves-light">
@@ -164,7 +164,8 @@
     <div class="row col-md-12">
       <div class="col-md-3 text-center ">
         <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
+            style="max-width:100%; height:150px;">
             <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
             <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
             <div class="mask flex-center waves-effect waves-light">
@@ -175,7 +176,8 @@
       </div>
       <div class="col-md-3 text-center ">
         <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
+          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
+            style="max-width:100%; height:150px;">
             <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
             <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
             <div class="mask flex-center waves-effect waves-light">
