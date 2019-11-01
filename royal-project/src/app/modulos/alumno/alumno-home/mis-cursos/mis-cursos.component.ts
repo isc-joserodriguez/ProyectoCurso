@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { CursosService } from 'src/app/servicios/cursos.service';
 
 @Component({
   selector: 'app-mis-cursos',
@@ -6,12 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mis-cursos.component.scss']
 })
 export class MisCursosComponent implements OnInit {
-  p: number = 1;
+  cursosTec=[];
+  cursosIdiomas=[];
 
-  constructor() { }
+  constructor(private usuarios:UsuariosService,private cursos:CursosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    this.getCursos();
   }
-
+  getCursos(){
+    this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario:any)=>{
+      usuario.detail[0].cursoAlumno.forEach(curso=>{
+        this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo:any)=>{
+          cursoInfo.detail.forEach(cursoElement=>{
+            if(cursoElement.categoria=='Tecnología'){
+              this.cursosTec.push(cursoElement);
+            }else{
+              this.cursosIdiomas.push(cursoElement);
+            }
+          });
+        });
+      });
+    });
+  }
 }

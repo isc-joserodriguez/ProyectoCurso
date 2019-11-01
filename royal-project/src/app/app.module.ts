@@ -11,6 +11,7 @@ import { NavAdministradorComponent } from './navs/nav-administrador/nav-administ
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { SafePipeModule } from 'safe-pipe';
 
 // Componentes del MDB
 import { NavbarModule, WavesModule, ButtonsModule, CarouselModule } from 'angular-bootstrap-md';
@@ -86,7 +87,8 @@ import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinko
     BarRatingModule,
     NgxPaginationModule,
     CKEditorModule,
-    NgDompurifyModule  
+    NgDompurifyModule,
+    SafePipeModule
   ],
   providers: [  {
     provide: DomSanitizer,

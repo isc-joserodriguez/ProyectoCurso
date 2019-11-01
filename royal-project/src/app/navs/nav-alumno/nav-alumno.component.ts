@@ -36,6 +36,7 @@ export class NavAlumnoComponent implements OnInit {
   logueado = localStorage.getItem('token') != null;
   sexo = 3; // 1= H 2= M 3= Indef
   busqueda = '';
+  perfilPublico='';
 
   constructor(private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
@@ -66,6 +67,7 @@ export class NavAlumnoComponent implements OnInit {
   getCursos() {
     this.cursosAlumno = [];
     this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
+      this.perfilPublico='/alumno/perfil-publico/'+usuario.detail[0].ruta;
       usuario.detail[0].cursoAlumno.forEach(curso => {
         this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo:any)=>{
           this.cursosAlumno.push({
@@ -75,7 +77,6 @@ export class NavAlumnoComponent implements OnInit {
           });
         });
       });
-      console.log(this.cursosAlumno);
     });
   }
   getCategorias() {

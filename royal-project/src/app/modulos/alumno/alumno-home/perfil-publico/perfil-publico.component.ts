@@ -31,7 +31,6 @@ export class PerfilPublicoComponent implements OnInit {
   cursosId = [];
   insignias = [];
   certificados = [];
-  usrTotal = 0;
   nivel = 0;
   progreso = 0;
   porcentajeNivel = 0;
@@ -44,9 +43,6 @@ export class PerfilPublicoComponent implements OnInit {
     this.getUsuario(this.route.snapshot.params.id);
   }
   getUsuario(id) {
-    this.usuarios.getAll().subscribe((alumnos: any) => {
-      this.usrTotal = alumnos.detail.length;
-    });
     this.usuarios.getUserByRute(id).subscribe((alumno: any) => {
       this.infoAlumno = alumno.detail[0];
       this.infoAlumno.cursoAlumno.forEach(curso => {
@@ -59,7 +55,7 @@ export class PerfilPublicoComponent implements OnInit {
           this.infoAlumno.insignias.forEach(insignia => {
             if (insignia.ruta == cursoInfo.detail[0].ruta) {
               var temp = cursoInfo.detail[0].insignias[insignia.idInsignia]
-              temp.otorgadas = Math.round((temp.otorgadas * 100) / this.usrTotal);
+              temp.otorgadas = Math.round((temp.otorgadas * 100) / cursoInfo.detail[0].alumnosInscritos.length);
               this.insignias.push(temp);
             }
           });
