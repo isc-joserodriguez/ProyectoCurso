@@ -41,9 +41,14 @@
               <br>
               <ul class="list-unstyled field-login" *ngFor="let pregunta of listaPreguntas">
                 <li class="media">
-                  <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
-                    <img [src]="pregunta.foto" class="mr-3 sombraimg" alt="..." width="100" height="100">
-                  </div>
+
+                  <a href="">
+                    <div class="imgLiquidFill imgLiquid ml-2 " style="width:90px; height:90px;">
+                      <img [src]="pregunta.foto" class="rounded-circle sombrabaja" alt="Cinque Terre" width="90"
+                        height="90">
+                    </div>
+                    <p class="text-muted pr-1 text-center">{{pregunta.nombre}}</p>
+                  </a>
 
                   <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
                     <div class="p-2 bd-highlight">

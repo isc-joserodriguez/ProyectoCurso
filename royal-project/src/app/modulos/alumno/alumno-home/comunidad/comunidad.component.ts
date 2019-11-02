@@ -52,7 +52,8 @@ export class ComunidadComponent implements OnInit {
               id: pregunta.idPersona,
               detalles: pregunta.detalles,
               pregunta: pregunta.pregunta,
-              ruta: pregunta.ruta
+              ruta: pregunta.ruta,
+              nombre: info.detail[0].nombre + ' '+info.detail[0].apPaterno + ' '+info.detail[0].apMaterno
             });
 
           });
