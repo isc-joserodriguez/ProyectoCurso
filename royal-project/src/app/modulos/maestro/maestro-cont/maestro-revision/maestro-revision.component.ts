@@ -17,7 +17,6 @@ export class MaestroRevisionComponent implements OnInit {
   faltantes = 0;
   temarioForm: FormGroup;
 
-  viejoCert = ''
   finalizadoCert = true;
   cambiaTarea = false;
   mensajeCert = 'No hay archivos';
@@ -50,6 +49,8 @@ export class MaestroRevisionComponent implements OnInit {
     this.tareasCurso = [];
     this.faltantes = 0;
     this.usuarios.getUserByRute(usuario).subscribe((user: any) => {
+      console.log(user.detail[0]);
+      this.idUsuario = user.detail[0]._id;
       this.infoCert = user.detail[0].certificados;
       this.puntajeUser = user.detail[0].puntaje;
 
@@ -68,7 +69,6 @@ export class MaestroRevisionComponent implements OnInit {
                 var recurso: any = {};
                 clase.tarea.envios.forEach(envio => {
                   if (envio.idAlumno == user.detail[0]._id) {
-                    this.idUsuario = envio.idAlumno;
                     entrega = true
                     recurso = envio;
                   }
@@ -82,7 +82,7 @@ export class MaestroRevisionComponent implements OnInit {
         });
         //console.log(this.tareasCurso);
         this.getFormularios();
-        this.expandir();  
+        this.expandir();
         this.getCertificado();
       });
     });
@@ -191,7 +191,7 @@ export class MaestroRevisionComponent implements OnInit {
   }
 
   getCertificado() {
-    console.log(this.infoCert);
+    //console.log(this.infoCert);
     this.certEntregado = false;
     this.infoCert.forEach((certificado, index) => {
       if (certificado.ruta == this.route.snapshot.params.id) {
@@ -227,20 +227,23 @@ export class MaestroRevisionComponent implements OnInit {
   }
 
   public subirCert() {
-    this.viejoCert = this.infoCert.url;
     this.finalizadoCert = false;
     this.porcentajeCert = 0;
     const archivo = this.datosFormularioCert.get('archivo');
-    const referencia = this.firebase.referenciaCloudStorage('usuario/' + this.idUsuario + '/curso/' + this.route.snapshot.params.id + '/certificado/' + this.infoCert.nombre);
-    const tarea = this.firebase.tareaCloudStorage('usuario/' + this.idUsuario + '/curso/' + this.route.snapshot.params.id + '/certificado/' + this.infoCert.nombre, archivo);
+    console.log(archivo);
+    const referencia = this.firebase.referenciaCloudStorage('usuario/' + this.idUsuario + '/curso/' + this.route.snapshot.params.id + '/certificado/' + this.nombreCert);
+    const tarea = this.firebase.tareaCloudStorage('usuario/' + this.idUsuario + '/curso/' + this.route.snapshot.params.id + '/certificado/' + this.nombreCert, archivo);
+
     // Cambia el porcentaje
     tarea.percentageChanges().subscribe((porcentaje) => {
+      console.log(porcentaje);
       this.porcentajeCert = Math.round(porcentaje);
       if (this.porcentajeCert == 100) {
         var currentTime = new Date().getTime();
         while (currentTime + 1000 >= new Date().getTime()) {
         }
         referencia.getDownloadURL().subscribe((URL) => {
+          console.log(this.infoCert);
           this.infoCert.push(
             {
               ruta: this.route.snapshot.params.id,
@@ -248,7 +251,9 @@ export class MaestroRevisionComponent implements OnInit {
               url: URL
             }
           );
+          console.log(this.infoCert);
           this.usuarios.updateCert(this.idUsuario, { certificados: this.infoCert, puntaje: this.puntajeUser + 100 }).subscribe(res => {
+            console.log(res);
             this.finalizadoCert = true;
             this.certEntregado = true;
             this.ngOnInit();

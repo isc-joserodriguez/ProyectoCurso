@@ -10,19 +10,18 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 })
 export class PerfilPublicoComponent implements OnInit {
   infoAlumno = {
-    nombre: "José Antonio",
-    apMaterno: "Hernandez",
-    apPaterno: "Rodriguez",
-    resumen: " ",
-    fb: " ",
-    web: " ",
-    yt: " ",
-    in: " ",
-
+    nombre: '',
+    apMaterno: '',
+    apPaterno: '',
+    resumen: '',
+    fb: '',
+    web: '',
+    yt: '',
+    in: '',
     cursoAlumno: [],
     certificados: [],
-    fechaNac: "2019-10-18T05:13:01.751Z",
-    foto: "http://www.lorempixel.com/200/200",
+    fechaNac: '',
+    foto: '',
     insignias: [],
     puntaje: 0,
   }
