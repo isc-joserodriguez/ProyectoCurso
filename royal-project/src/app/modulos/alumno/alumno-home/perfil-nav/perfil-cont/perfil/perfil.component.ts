@@ -9,7 +9,6 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  ruta='';
   viejaFoto = '';
   cambiaFoto = false;
 
@@ -46,7 +45,6 @@ export class PerfilComponent implements OnInit {
   getUser(id) {
     this.usuario.getUser(id).subscribe((user: any) => {
       console.log(user.detail[0]);
-      this.ruta= 'localhost:4200/alumno/perfil-publico/'+user.detail[0].ruta;
       this.URLPublica = user.detail[0].foto;
 
       this.perfilForm.setValue({

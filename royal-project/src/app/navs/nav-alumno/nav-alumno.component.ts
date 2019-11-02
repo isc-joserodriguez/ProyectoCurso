@@ -36,12 +36,11 @@ export class NavAlumnoComponent implements OnInit {
   logueado = localStorage.getItem('token') != null;
   sexo = 3; // 1= H 2= M 3= Indef
   busqueda = '';
-  perfilPublico='';
+  perfilPublico = '';
 
   constructor(private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.verificarToken();
 
     this.logForm = this.formBuilder.group({
@@ -60,16 +59,14 @@ export class NavAlumnoComponent implements OnInit {
     }, {
       validator: Match('regContrasenia', 'regRepContrasenia')
     });
-
-    this.getCategorias();
-    this.getCursos();
   }
   getCursos() {
     this.cursosAlumno = [];
+    console.log(localStorage.getItem('userid'));
     this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
-      this.perfilPublico='/alumno/perfil-publico/'+usuario.detail[0].ruta;
+      this.perfilPublico = '/alumno/perfil-publico/' + usuario.detail[0].ruta;
       usuario.detail[0].cursoAlumno.forEach(curso => {
-        this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo:any)=>{
+        this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo: any) => {
           this.cursosAlumno.push({
             imagen: cursoInfo.detail[0].imagen,
             nombre: cursoInfo.detail[0].nombreCorto,
@@ -126,7 +123,7 @@ export class NavAlumnoComponent implements OnInit {
     this.auth.signup(this.persona).subscribe(resp => {
       this.auth.login(this.persona).subscribe((res: any) => {
         localStorage.setItem('token', res.detail);
-        this.verificarToken();
+        this.ngOnInit();
       }, err => {
         console.log(err);
       });
@@ -160,6 +157,8 @@ export class NavAlumnoComponent implements OnInit {
           if (!res.detail.tipo[3].alumno) {
             this.router.navigate(['/usuario-inhabilitado']);
           }
+          this.getCategorias();
+          this.getCursos();
         }
       }, err => {
         console.log(err);
