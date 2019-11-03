@@ -22,13 +22,14 @@
             </div>
             <div class="card-body pt-3 sombra" style="background-color: rgb(0, 0, 0);">
               <div class="col">
-                <div class="col-md-12 text-center mb-3">
-                  Nivel: {{nivel}}
+                <div class="col-md-12 text-center mb-3 text-white">
+                  Nivel: <b>{{nivel}}</b>
                   <div class="progress" style="height: 20px;">
-                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" [style.width]="porcentajeNivel+'%'" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar"
+                      [style.width]="porcentajeNivel+'%'" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                    </div>
                   </div>
-                  <label class="vertical-center ml-2"><b>{{progreso}}</b> puntos</label>
+                  <label class="vertical-center ml-2 text-white"><b>{{progreso}}</b> puntos</label>
                 </div>
                 <div class="row justify-content-around pb-4">
                   <div class="col-4">
@@ -123,7 +124,7 @@
       <br>
       <br>
       <br>
-      
+
     </div>
     <!--Certificados-->
     <div class="container">
