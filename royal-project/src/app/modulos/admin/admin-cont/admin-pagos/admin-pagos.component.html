@@ -192,7 +192,8 @@
             <div class="col-md-6">
               <mat-card>
                 <mat-card-header>
-                  <mat-card-title>Abonos</mat-card-title>
+                  <mat-card-title *ngIf="element.abonos.length!=0">Abonos</mat-card-title>
+                  <mat-card-title *ngIf="element.abonos.length==0">Pagado de contado</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                   <div *ngFor="let abono of element.abonos;let i=index">
