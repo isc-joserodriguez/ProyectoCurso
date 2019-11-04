@@ -1,7 +1,9 @@
 <div class="vertical-center p-2 fondoadmin px-4">
   <!--todos los cursos-->
-  <div class="text-center vertical-center">
-    <label class="h3">Cursos</label>
+  <div class="text-center">
+    <label class="h3 subtitulo">Cursos</label>
+  </div>
+  <div class="col-md-7 text-center vertical-center">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
     </mat-form-field>
@@ -60,27 +62,32 @@
   <!--fin tabla-->
   <br>
 </div>
+<br>
 
-<div class="col-md-12" *ngIf="inscribir">
+<div class="col-md-12 inscripcion" *ngIf="inscribir">
   <div class="text-center vertical-center">
-    <label class="h1">Inscribir alumno</label>
+    <label class="h3 subinscri">Inscribir Alumno</label>
   </div>
 
   <ul class="list-unstyled field-login">
     <li class="media">
-      <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
-        <img [src]="infoCurso.imagen" class="mr-3" alt="..." width="100" height="100">
+      <div class="imgLiquidFill imgLiquid m-3" style="width:100px; height:100px;">
+        <img [src]="infoCurso.imagen" class="mr-3 sombraimg" alt="..." width="100" height="100">
       </div>
 
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">{{infoCurso.nombreCompleto}}</h5>
+      <div class="media-body container">
+        <h5 class="my-2">{{infoCurso.nombreCompleto}}</h5>
         {{infoCurso.descripcionCurso}}
         <br>
-        {{infoCurso.precio}}
+        <label class="mr-2 text-muted">Precio: </label>
+        <label class="precio"> $ {{infoCurso.precio}}</label>
         <br>
+        <label class="mr-2 text-muted">Categoría: </label>
         {{infoCurso.categoria}} - {{infoCurso.subcategoria}}
+        <br>
+        <label class="mr-2 text-muted">Seleccionar Alumno: </label>
         <mat-form-field appearance="outline" class="field-login">
-          <mat-label>Filtrar alumno:</mat-label>
+          <mat-label>Filtrar alumno (Nombre - Correo):</mat-label>
           <input type="text" placeholder="Busca un alumno" aria-label="Number" matInput [matAutocomplete]="auto"
             (keyup)="filtrarAlumno($event.target.value)" [(ngModel)]="nuevoAlumno">
           <mat-autocomplete #auto="matAutocomplete">
@@ -91,7 +98,7 @@
         </mat-form-field>
         <div class="row justify-content-between">
           <div class="py-2 pl-5 vertical-center">
-            <div class="custom-control custom-switch">
+            <div class="custom-control custom-switch mb-3">
               <input type="checkbox" [checked]="abonar" class="custom-control-input" id="switchAbono" (click)="abono()">
               <label class="custom-control-label" for="switchAbono">Abonar</label>
             </div>
@@ -133,7 +140,6 @@
         </div>
       </div>
     </li>
-    <mat-divider></mat-divider>
   </ul>
   <br>
 </div>

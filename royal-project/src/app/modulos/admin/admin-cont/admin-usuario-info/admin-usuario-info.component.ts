@@ -14,7 +14,7 @@ export class AdminUsuarioInfoComponent implements OnInit {
   usuario = {
     id: 1,
     credencial: { correo: '', contraseña: '' },
-    foto: 'http://www.lorempixel.com/200/200',
+    foto: 'http://www.lorempixel.com/100/800',
     nombre: 'Arturo',
     apMaterno: 'Jimenez',
     apPaterno: 'Loera',
