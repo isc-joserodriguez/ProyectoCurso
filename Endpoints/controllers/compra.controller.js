@@ -79,6 +79,34 @@ const getById = (req, res) => {
         });
 }
 
+const guardarAbono = (req, res) => {
+    const { id } = req.params;
+    const abonos = req.body.abonos;
+    const resto = req.body.resto;
+    const estado = req.body.estado;
+    _compra.update({ _id: id }, {
+        $set: {
+            abonos: abonos,
+            resto: resto,
+            estado: estado
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
 const update = (req, res) => {
     const { id } = req.params;
     const compra = req.body;
@@ -111,6 +139,6 @@ const update = (req, res) => {
 module.exports = (Compra) => {
     _compra = Compra;
     return ({
-        getAll, create, deleteCompra, getById, update
+        getAll, create, deleteCompra, getById, update, guardarAbono
     });
 }

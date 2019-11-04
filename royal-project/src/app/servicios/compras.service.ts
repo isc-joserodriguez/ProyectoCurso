@@ -20,4 +20,12 @@ export class ComprasService {
     return this.http.get(apiUrl + '/getAll');
   }
 
+  getCompra(id) {
+    return this.http.get(apiUrl + '/getCompra/'+id);
+  }
+
+  guardarAbono(id, abonos) {
+    return this.http.put(apiUrl + '/guardarAbono/' + id, abonos);
+  }
+
 }

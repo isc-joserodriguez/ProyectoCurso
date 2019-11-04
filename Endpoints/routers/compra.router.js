@@ -9,12 +9,16 @@ module.exports = (wagner) => {
         compraCtrl.getAll(req, res);
     });
 
-    compraRouter.get("/get/:id", (req, res) => {
+    compraRouter.get("/getCompra/:id", (req, res) => {
         compraCtrl.getById(req, res);
     });
 
     compraRouter.put("/update/:id", (req, res) => {
         compraCtrl.update(req, res);
+    });
+
+    compraRouter.put("/guardarAbono/:id", (req, res) => {
+        compraCtrl.guardarAbono(req, res);
     });
 
     compraRouter.post("/addCompra", (req, res) => {

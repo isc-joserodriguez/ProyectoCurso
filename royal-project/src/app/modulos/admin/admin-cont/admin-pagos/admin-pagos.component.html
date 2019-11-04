@@ -19,55 +19,122 @@
       </div>
       <!--tabla-->
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
           <!-- Columna Admin -->
           <ng-container matColumnDef="administrador">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del administrador </th>
-            <td mat-cell *matCellDef="let row">{{row.administrador}}</td>
+            <td mat-cell *matCellDef="let element">{{element.administrador}}</td>
           </ng-container>
 
           <!-- Columna Alumno -->
           <ng-container matColumnDef="persona">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del alumno</th>
-            <td mat-cell *matCellDef="let row"> {{row.persona}} </td>
-          </ng-container>
-
-          <!-- Columna Importe -->
-          <ng-container matColumnDef="importe">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total</th>
-            <td mat-cell *matCellDef="let row"> {{row.importe}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.persona}} </td>
           </ng-container>
 
           <!-- Columna Fecha Compra -->
           <ng-container matColumnDef="fecha">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de compra </th>
-            <td mat-cell *matCellDef="let row"> {{row.fecha | date}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.fecha | date}} </td>
           </ng-container>
 
           <!-- Columna Fecha Límite -->
           <ng-container matColumnDef="fechaLimite">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha límite </th>
-            <td mat-cell *matCellDef="let row"> {{row.fechaLimite|date}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.fechaLimite|date}} </td>
           </ng-container>
+
+          <!-- Columna Importe -->
+          <ng-container matColumnDef="importe">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total</th>
+            <td mat-cell *matCellDef="let element"> ${{element.importe}} </td>
+          </ng-container>
+
 
           <!-- Columna Resto -->
           <ng-container matColumnDef="resto">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Resto</th>
-            <td mat-cell *matCellDef="let row"> {{row.resto}} </td>
+            <td mat-cell *matCellDef="let element"> ${{element.resto}} </td>
           </ng-container>
 
-          <!-- Columna Detalles -->
-          <ng-container matColumnDef="detalles">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalles</th>
-            <td mat-cell *matCellDef="let row">
-              <button mat-mini-fab color="primary" (click)="detalleCompra(row.ruta)"><img class="icon-opcion"
-                  src="./../../../assets/icons/edit.svg"></button>
+          <!-- Expanded -->
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+              <div class="example-element-detail"
+                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <br>
+                <div class="col-md-6">
+                  <mat-card>
+                    <mat-card-header>
+                      <mat-card-title>Abonos</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <div *ngFor="let abono of element.abonos;let i=index">
+                        {{abono.administrador}} | {{abono.fecha | date}} | {{abono.importe}}
+                        <mat-divider *ngIf="element.abonos.length-1!=i"> </mat-divider>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                  <br>
+                  <mat-expansion-panel hideToggle="true" class="acordeon-cuerpo">
+                    <mat-expansion-panel-header class="acordeon-enc">
+                      <mat-panel-title>
+                        <b>Detalles Cursos</b>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        <span> </span>
+                        <i class="fas fa-file-import"></i>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="row" *ngFor="let curso of element.cursos">
+                      <div class="col-md-12">
+                        <div class="card mb-12">
+                          <div class="row no-gutters">
+                            <div class="col-md-2">
+                              <img [src]="curso.imagen" class="card-img">
+                            </div>
+                            <div class="col-md-10">
+                              <div class="card-body">
+                                <h5 class="card-title">{{curso.nombre}}</h5>
+                                <p class="card-text">{{curso.descripcionCurso}}</p>
+                                {{curso.precio}} | {{curso.categoria}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+                <div class="col-md-6">
+                  <mat-card>
+                    <mat-card-header>
+                      <mat-card-title>Nuevo abono</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      Resto: {{element.resto}}
+                      <mat-form-field appearance="outline" class="field-login">
+                        <mat-label>Abono:</mat-label>
+                        <input matInput type="number" placeholder="Ingresa el monto que se va a abonar"
+                          [(ngModel)]="cantAbono">
+                      </mat-form-field>
+                      <br>
+                      <button type="button" [disabled]="cantAbono == 0 || cantAbono == NaN || cantAbono > element.resto"
+                        class="btn btn-success btn-sm" (click)="guardarAbono(element.id)">Abonar</button>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+                <br>
+              </div>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element;inicializar();">
           </tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </table>
 
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
@@ -77,50 +144,106 @@
     <!--cierre primer acordeon-->
   </div>
 </mat-accordion>
+<br>
 <div class="vertical-center p-2 fondoadmin px-4">
   <!--todos los cursos-->
   <div class="text-center vertical-center">
     <label class="h3">Historial de compras</label>
   </div>
+  <br>
+  <div class="text-center vertical-center">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Filtrar">
+    </mat-form-field>
+  </div>
   <!--tabla-->
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="datosCompras" matSort>
+    <table mat-table [dataSource]="datosCompras" matSort multiTemplateDataRows>
       <!-- Columna Admin -->
       <ng-container matColumnDef="administrador">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del administrador </th>
-        <td mat-cell *matCellDef="let row">{{row.administrador}}</td>
+        <td mat-cell *matCellDef="let element">{{element.administrador}}</td>
       </ng-container>
 
       <!-- Columna Alumno -->
       <ng-container matColumnDef="persona">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del alumno</th>
-        <td mat-cell *matCellDef="let row"> {{row.persona}} </td>
-      </ng-container>
-
-      <!-- Columna Importe -->
-      <ng-container matColumnDef="importe">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total</th>
-        <td mat-cell *matCellDef="let row"> {{row.importe}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.persona}} </td>
       </ng-container>
 
       <!-- Columna Fecha Compra -->
       <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de compra </th>
-        <td mat-cell *matCellDef="let row"> {{row.fecha | date}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.fecha | date}} </td>
       </ng-container>
 
-      <!-- Columna Detalles -->
-      <ng-container matColumnDef="detalles">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalles</th>
-        <td mat-cell *matCellDef="let row">
-          <button mat-mini-fab color="primary" (click)="detalleCompra(row.ruta)"><img class="icon-opcion"
-              src="./../../../assets/icons/edit.svg"></button>
+      <!-- Columna Importe -->
+      <ng-container matColumnDef="importe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total</th>
+        <td mat-cell *matCellDef="let element"> ${{element.importe}} </td>
+      </ng-container>
+
+
+      <!-- Expanded -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <br>
+            <div class="col-md-6">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Abonos</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div *ngFor="let abono of element.abonos;let i=index">
+                    {{abono.administrador}} | {{abono.fecha | date}} | {{abono.importe}}
+                    <mat-divider *ngIf="element.abonos.length-1!=i"> </mat-divider>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-md-6">
+              <mat-expansion-panel hideToggle="true" class="acordeon-cuerpo">
+                <mat-expansion-panel-header class="acordeon-enc">
+                  <mat-panel-title>
+                    <b>Detalles Cursos</b>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <span> </span>
+                    <i class="fas fa-file-import"></i>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row" *ngFor="let curso of element.cursos">
+                  <div class="col-md-12">
+                    <div class="card mb-12">
+                      <div class="row no-gutters">
+                        <div class="col-md-2">
+                          <img [src]="curso.imagen" class="card-img">
+                        </div>
+                        <div class="col-md-10">
+                          <div class="card-body">
+                            <h5 class="card-title">{{curso.nombre}}</h5>
+                            <p class="card-text">{{curso.descripcionCurso}}</p>
+                            {{curso.precio}} | {{curso.categoria}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </div>
+            <br>
+          </div>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="colCompras"></tr>
-      <tr mat-row *matRowDef="let row; columns: colCompras;">
+      <tr mat-row *matRowDef="let element; columns: colCompras;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
       </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
 
     <mat-paginator #paginasCompras [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

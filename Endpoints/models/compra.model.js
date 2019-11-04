@@ -17,7 +17,7 @@ const compraSchema = new mongoose.Schema({
     resto: { type: Number, default: 0 },
     estado: { type: Number, required: true }, //0-Pagado | 1-Pendiente
     cursos: [{
-        ruta: { type: Number, required: true }
+        ruta: { type: String, required: true }
     }]
 });
 

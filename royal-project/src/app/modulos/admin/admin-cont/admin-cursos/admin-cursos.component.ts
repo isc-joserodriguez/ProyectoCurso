@@ -13,7 +13,6 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 })
 export class AdminCursosComponent implements OnInit {
   solicitudes = false;
-  reportes = false;
 
   listaSolicitudes = [];
   displayedColumns: string[] = ['maestro', 'curso', 'fecha', 'revision'];
@@ -28,13 +27,6 @@ export class AdminCursosComponent implements OnInit {
   @ViewChild('paginasCursos', { read: MatPaginator }) paginasCursos: MatPaginator;
   @ViewChild(MatSort) ordenCursos: MatSort;
 
-  // Variables reportes cursos
-  listareportes = [];
-  colrepo: string[] = ['curso', 'maestro', 'reporta', 'fecha', 'revision'];
-  datosReportes: MatTableDataSource<any>;
-  @ViewChild('paginaRepor', { read: MatPaginator }) paginaRepor: MatPaginator;
-  @ViewChild(MatSort) ordenRepor: MatSort;
-
   constructor(private router: Router, private cursos: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
@@ -42,8 +34,6 @@ export class AdminCursosComponent implements OnInit {
     this.getSolicitudesCursos();
     // inic. cursos
     this.getCursos();
-    // inic. reportes
-    this.getReportes();
   }
 
   getSolicitudesCursos() {
@@ -66,21 +56,6 @@ export class AdminCursosComponent implements OnInit {
         });
       });
     });
-  }
-
-  getReportes() {
-    this.listareportes = [];
-    this.listareportes = [
-      { id: 1, maestro: 'Marioassads Alberto Gomez', curso: 'Programación', fecha: '12/12/2018', reporta: 'José Antonio' },
-      { id: 2, maestro: 'Maria Lopez Gomez', curso: 'Programación', fecha: '12/12/2018', reporta: 'Carla Reyes' },
-      { id: 3, maestro: 'Mario Alberto Gomez', curso: 'Programación', fecha: '12/12/2018', reporta: 'José Antonio' },
-      { id: 4, maestro: 'Maria Lopez Gomez', curso: 'Programación', fecha: '12/12/2018', reporta: 'Carla Reyes' },
-      { id: 5, maestro: 'Mario Alberto Gomez', curso: 'Programación', fecha: '12/12/2018', reporta: 'José Antonio' },
-      { id: 6, maestro: 'Maria Lopez Gomez', curso: 'Programación', fecha: '12/12/2018', reporta: 'Carla Reyes' }
-    ];
-    this.datosReportes = new MatTableDataSource(this.listareportes);
-    this.datosReportes.paginator = this.paginaRepor;
-    this.datosReportes.sort = this.ordenRepor;
   }
 
   getCursos() {
@@ -119,5 +94,11 @@ export class AdminCursosComponent implements OnInit {
   }
   editarCurso(id) {
     console.log('Se editó el curso ' + id);
+  }
+  applyFilter(filterValue: string) {
+    this.datosCursos.filter = filterValue.trim().toLowerCase();
+    if (this.datosCursos.paginator) {
+      this.datosCursos.paginator.firstPage();
+    }
   }
 }

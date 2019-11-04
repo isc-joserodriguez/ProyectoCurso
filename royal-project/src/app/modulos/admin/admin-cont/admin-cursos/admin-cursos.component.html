@@ -55,74 +55,17 @@
     <!--cierre primer acordeon-->
   </div>
 </mat-accordion>
-<!--segundo acordeon-->
-<mat-accordion class="example-headers-align">
-  <div class="col-md-12">
-    <mat-expansion-panel hideToggle="true" [expanded]="reportes" class="acordeon-cuerpo">
-      <mat-expansion-panel-header class="acordeon-enc">
-        <mat-panel-title>
-          <b>Reportes de Cursos</b>
-        </mat-panel-title>
-        <mat-panel-description>
-          <span> </span>
-          <i class="fas fa-file-excel"></i> 
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <br>
-      <!--tabla-->
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="datosReportes" matSort>
-
-          <!-- Columna Nombre Maestro -->
-          <ng-container matColumnDef="maestro">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del maestro </th>
-            <td mat-cell *matCellDef="let row">{{row.maestro}}</td>
-          </ng-container>
-
-          <!-- Columna Nombre Curso -->
-          <ng-container matColumnDef="curso">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del curso</th>
-            <td mat-cell *matCellDef="let row"> {{row.curso}} </td>
-          </ng-container>
-
-          <!-- Columna Nombre del reportador -->
-          <ng-container matColumnDef="reporta">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Reporta </th>
-            <td mat-cell *matCellDef="let row">{{row.reporta}}</td>
-          </ng-container>
-
-          <!-- Columna Fecha Solicitud -->
-          <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha solicitud </th>
-            <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
-          </ng-container>
-
-          <!-- Columna Revisar -->
-          <ng-container matColumnDef="revision">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Revision</th>
-            <td mat-cell *matCellDef="let row">
-              <button mat-mini-fab color="primary" (click)="revisarCurso(row.ruta)"><img class="icon-opcion"
-                  src="./../../../assets/icons/edit.svg"></button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="colrepo"></tr>
-          <tr mat-row *matRowDef="let row; columns: colrepo;">
-          </tr>
-        </table>
-
-        <mat-paginator #paginaRepor [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-      </div>
-      <!--fin tabla-->
-    </mat-expansion-panel>
-    <!--cierre 2do acordeon-->
-  </div>
-</mat-accordion>
 <br>
 <div class="vertical-center p-2 fondoadmin px-4">
   <!--todos los cursos-->
   <div class="text-center vertical-center">
     <label class="h3">Resumen de cursos</label>
+  </div>
+  <br>
+  <div class="text-center vertical-center">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+    </mat-form-field>
   </div>
   <!--tabla-->
   <div class="mat-elevation-z8">

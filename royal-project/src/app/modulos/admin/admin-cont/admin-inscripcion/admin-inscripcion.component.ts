@@ -113,6 +113,7 @@ export class AdminInscripcionComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  
   filtrarAlumno(cadena) {
     this.listaAlumno = [];
     this.usuarios.getAll().subscribe((res: any) => {
@@ -152,6 +153,7 @@ export class AdminInscripcionComponent implements OnInit {
                     importe: this.infoCurso.precio,
                     //fechaLimite: Date.now(),
                     abonos: [],
+                    cursos: [{ ruta: this.infoCurso.ruta }],
                     resto: 0,
                     estado: 0
                   }
