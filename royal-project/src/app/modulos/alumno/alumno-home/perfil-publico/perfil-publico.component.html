@@ -20,15 +20,16 @@
             <div class="imgLiquidFill imgLiquid card-img-top sombra" style="width:250px; height:250px;">
               <img [src]="infoAlumno.foto" width="253" height="250">
             </div>
-            <div class="card-body pt-5 sombra" style="background-color: rgb(0, 0, 0);">
+            <div class="card-body pt-3 sombra" style="background-color: rgb(0, 0, 0);">
               <div class="col">
-                <div class="col-md-12 text-center">
-                  Nivel: {{nivel}}
+                <div class="col-md-12 text-center mb-3 text-white">
+                  Nivel: <b>{{nivel}}</b>
                   <div class="progress" style="height: 20px;">
-                    <div class="progress-bar" role="progressbar" [style.width]="porcentajeNivel+'%'" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar"
+                      [style.width]="porcentajeNivel+'%'" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                    </div>
                   </div>
-                  <label class="vertical-center ml-2"><b>{{progreso}}</b> puntos</label>
+                  <label class="vertical-center ml-2 text-white"><b>{{progreso}}</b> puntos</label>
                 </div>
                 <div class="row justify-content-around pb-4">
                   <div class="col-4">
@@ -120,7 +121,13 @@
 
       </div>
       <br>
-      <!--Certificados-->
+      <br>
+      <br>
+      <br>
+
+    </div>
+    <!--Certificados-->
+    <div class="container">
       <div class="row">
         <div class="col-md-10 offset-md-1">
           <div class="card">
