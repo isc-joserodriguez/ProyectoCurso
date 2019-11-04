@@ -22,7 +22,6 @@ export class AdminUsuariosComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.getUsuarios();

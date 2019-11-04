@@ -43,7 +43,6 @@ export class CursoClaseInfoComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.tareaForm = this.formBuilder.group({
         tarea: ['']
       });

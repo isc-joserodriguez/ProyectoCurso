@@ -32,7 +32,6 @@ export class AdminUsuarioNuevoComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.altaForm = this.formBuilder.group({
       altaNombre: ['', Validators.required],
       altaApPaterno: ['', Validators.required],

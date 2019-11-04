@@ -14,7 +14,6 @@ export class AlumnoHomeComponent implements OnInit {
   constructor(private cursos: CursosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.getCursos();
   }
 

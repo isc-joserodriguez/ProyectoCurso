@@ -27,7 +27,6 @@ export class CuentaComponent implements OnInit {
   constructor(private usuario: UsuariosService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.correoForm = this.formBuilder.group({
       correo: ['', Validators.required],
       pass: ['', Validators.required]

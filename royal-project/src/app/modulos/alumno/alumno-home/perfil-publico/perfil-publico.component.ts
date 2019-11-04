@@ -38,7 +38,6 @@ export class PerfilPublicoComponent implements OnInit {
   constructor(private cursos: CursosService, private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.getUsuario(this.route.snapshot.params.id);
   }
   getUsuario(id) {

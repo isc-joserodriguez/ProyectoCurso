@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ComprasService } from 'src/app/servicios/compras.service';
 
 @Component({
   selector: 'app-admin-inscripcion',
@@ -12,10 +13,9 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
   styleUrls: ['./admin-inscripcion.component.scss']
 })
 export class AdminInscripcionComponent implements OnInit {
+  abonar = false;
   nuevoAlumno = '';
-
   error = '';
-
   infoCurso: any = {
     _id: 0,
     categoria: '',
@@ -27,9 +27,10 @@ export class AdminInscripcionComponent implements OnInit {
     alumnosInscritos: [],
     ruta: ''
   }
-
   inscribir = false;
   listaAlumno = [];
+
+  cobroForm: FormGroup;
 
   // Variables Cursos
   listaCursos = [];
@@ -38,14 +39,16 @@ export class AdminInscripcionComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private cursos: CursosService, private usuarios: UsuariosService) {
+  constructor(private compras: ComprasService, private cursos: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) {
     // datasource cursos
     this.dataSource = new MatTableDataSource(this.listaCursos);
   }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
-    // inic. cursos
+    this.cobroForm = this.formBuilder.group({
+      abono: ['', [Validators.required, Validators.min(395)]],
+      fecha: ['', Validators.required]
+    });
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.getCursos();
@@ -95,6 +98,12 @@ export class AdminInscripcionComponent implements OnInit {
     this.cursos.getCursoInfo(id).subscribe((res: any) => {
       this.infoCurso = res.detail[0];
       this.inscribir = true;
+      this.error = '';
+      this.cobroForm = this.formBuilder.group({
+        abono: ['', [Validators.required, Validators.min(395)]],
+        fecha: ['', Validators.required]
+      });
+      this.abonar = false;
     });
   }
 
@@ -108,7 +117,6 @@ export class AdminInscripcionComponent implements OnInit {
     this.listaAlumno = [];
     this.usuarios.getAll().subscribe((res: any) => {
       res.detail.forEach(usuario => {
-        console.log(usuario);
         if (usuario.tipo[3].alumno) {
           var nuevo = usuario.nombre + ' ' + usuario.apPaterno + ' ' + usuario.apMaterno + ' - ' + usuario.credencial.correo
           if (nuevo.toLowerCase().includes(cadena.toLowerCase())) {
@@ -120,12 +128,14 @@ export class AdminInscripcionComponent implements OnInit {
   }
 
   inscribirAlumno() {
+    var encontrado = false;
     this.usuarios.getAll().subscribe((res: any) => {
       res.detail.forEach(usuario => {
         if (usuario.tipo[3].alumno) {
           var nuevo = usuario.nombre + ' ' + usuario.apPaterno + ' ' + usuario.apMaterno + ' - ' + usuario.credencial.correo
           if (nuevo.toLowerCase().includes(this.nuevoAlumno.toLowerCase()) && this.nuevoAlumno != '') {
             var repetido = false;
+            encontrado = true;
             usuario.cursoAlumno.forEach(curso => {
               if (curso.ruta == this.infoCurso.ruta) {
                 repetido = true
@@ -133,12 +143,32 @@ export class AdminInscripcionComponent implements OnInit {
             });
             if (!repetido) {
               usuario.cursoAlumno.push({ ruta: this.infoCurso.ruta });
-              console.log(usuario.cursoAlumno);
               this.usuarios.inscribirAlumno(usuario._id, { cursoAlumno: usuario.cursoAlumno, puntaje: usuario.puntaje + 100 }).subscribe(res => {
                 this.infoCurso.alumnosInscritos.push({ idAlumno: usuario._id });
                 this.cursos.inscribirAlumno(this.infoCurso._id, this.infoCurso.alumnosInscritos).subscribe(res => {
-                  this.inscribir = false;
-                  this.error = '';
+                  var detalles: any = {
+                    idAdmin: localStorage.getItem('userid'),
+                    idPersona: usuario._id,
+                    importe: this.infoCurso.precio,
+                    //fechaLimite: Date.now(),
+                    abonos: [],
+                    resto: 0,
+                    estado: 0
+                  }
+                  if (this.abonar) {
+                    detalles.fechaLimite = this.cobroForm.value.fecha;
+                    detalles.abonos.push({
+                      idAdmin: localStorage.getItem('userid'),
+                      importe: this.cobroForm.value.abono
+                    });
+                    detalles.resto = detalles.importe - this.cobroForm.value.abono;
+                    detalles.estado = 1;
+                  }
+                  this.compras.addCompra(detalles).subscribe(res => {
+                    this.inscribir = false;
+                    this.error = '';
+                    this.nuevoAlumno = '';
+                  });
                 });
               });
             } else {
@@ -148,8 +178,12 @@ export class AdminInscripcionComponent implements OnInit {
 
         }
       });
+      if (!encontrado) this.error = 'Usuario no encontrado';
     });
+  }
 
+  abono() {
+    this.abonar = (!this.abonar)
   }
 
 }

@@ -26,7 +26,6 @@ export class MaestroAlumnosComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.listaAlumnos = [];
       this.dataSource = new MatTableDataSource(this.listaAlumnos);
       this.dataSource.paginator = this.paginator;

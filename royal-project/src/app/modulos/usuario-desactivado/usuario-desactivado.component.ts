@@ -11,7 +11,6 @@ export class UsuarioDesactivadoComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
   }
 
   logout() {

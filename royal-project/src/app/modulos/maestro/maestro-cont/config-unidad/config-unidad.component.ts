@@ -17,7 +17,6 @@ export class ConfigUnidadComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.subtemasForm = this.formBuilder.group({
       subtemas: this.formBuilder.array([])
     });

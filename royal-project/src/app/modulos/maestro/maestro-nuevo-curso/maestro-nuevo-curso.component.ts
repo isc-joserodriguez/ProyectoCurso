@@ -33,7 +33,6 @@ export class MaestroNuevoCursoComponent implements OnInit {
   constructor(private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.generalForm = this.formBuilder.group({
       nombreCompleto: ['', Validators.required],
       nombreCorto: ['', Validators.required],

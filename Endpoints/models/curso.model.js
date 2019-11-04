@@ -17,13 +17,11 @@ const cursoSchema = new mongoose.Schema({
     contenidoCurso: [
         {
             unidad: { type: String },
-            ponderacionUnidad: { type: Number },
             subtemas: [{
                 subtema: { type: String },
-                ponderacionSubtema: { type: Number },
                 clases: [{
-                    ponderacionClase: { type: Number },
                     clase: { type: String },
+                    evaluacion: { type: Boolean },
                     tipoPlantilla: { type: Number, default: 0 },//0 - Video y Texto | 1 - Texto
                     video: { type: String, default: 'http://vjs.zencdn.net/v/oceans.mp4' },
                     texto: { type: String, default: '' },
@@ -56,11 +54,7 @@ const cursoSchema = new mongoose.Schema({
                         }]
                     }]
                 }]
-            }],
-            evaluacion: {
-                activo: { type: Boolean, default: true },
-                recurso: { type: Number }
-            } //Evaluación de la unidad (opcional).
+            }]
         }
     ],
     insignias: [{ nombreInsignia: { type: String }, descripcionInsignia: { type: String }, imagen: { type: String }, otorgadas: { type: Number, default: 0 } }],

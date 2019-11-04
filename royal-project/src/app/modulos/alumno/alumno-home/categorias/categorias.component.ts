@@ -18,7 +18,6 @@ export class CategoriasComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.categoria = '';
       this.p = 1;
       this.listaCursos = [];

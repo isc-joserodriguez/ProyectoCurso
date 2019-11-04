@@ -26,7 +26,6 @@ export class MaestroInsigniaEditarComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private firebase: FirebaseService, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.insigniaForm = this.formBuilder.group({
       nombreInsignia: ['', Validators.required],
       descripcionInsignia: ['', Validators.required],

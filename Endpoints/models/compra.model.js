@@ -3,16 +3,26 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const compraSchema = new mongoose.Schema({
-    _id:{type:String, required:true},
-    idPersona:{type: String, required:true},
-    importe:{type:Number,required:true},
-    fecha:{type:Date, required:true},
-    estado:{type:Date, required:true},
-    cursos:[{_id:{type:String,required:true}}]
+    _id: { type: Number },
+    idAdmin: { type: Number, required: true },
+    idPersona: { type: Number, required: true },
+    importe: { type: Number, required: true },
+    fecha: { type: Date, default: Date.now() },
+    fechaLimite: { type: Date, default: Date.now() },
+    abonos: [{
+        idAdmin: { type: Number, required: true },
+        importe: { type: Number, required: true },
+        fecha: { type: Date, default: Date.now() }
+    }],
+    resto: { type: Number, default: 0 },
+    estado: { type: Number, required: true }, //0-Pagado | 1-Pendiente
+    cursos: [{
+        ruta: { type: Number, required: true }
+    }]
 });
 
 //modelo Curso
-const compraModel = mongoose.model('Compra', compraSchema,'compras');
+const compraModel = mongoose.model('Compra', compraSchema, 'compras');
 
 //exportar
-module.exports= compraModel;
+module.exports = compraModel;

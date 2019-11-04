@@ -13,7 +13,6 @@ export class MaestroComponent implements OnInit {
   constructor(private cursos: CursosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.getCursos(localStorage.getItem('userid'));
   }
 

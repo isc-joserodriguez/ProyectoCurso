@@ -55,7 +55,6 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.fotoForm = this.formBuilder.group({
         foto: new FormControl(null, Validators.required)
       });

@@ -91,13 +91,41 @@
         </mat-form-field>
         <div class="row justify-content-between">
           <div class="py-2 pl-5 vertical-center">
-            <mat-form-field appearance="outline" class="field-login">
-              <mat-label>Cobrar:</mat-label>
-              <input matInput type="number" placeholder="Ingresa el monto que se va a cobrar" value="0">
-            </mat-form-field>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" [checked]="abonar" class="custom-control-input" id="switchAbono" (click)="abono()">
+              <label class="custom-control-label" for="switchAbono">Abonar</label>
+            </div>
+            <div *ngIf="abonar">
+              <form [formGroup]="cobroForm">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Cobrar:</mat-label>
+                  <input matInput type="number" placeholder="Ingresa el monto que se va a cobrar"
+                    formControlName="abono">
+                  <mat-error>
+                    <div *ngIf="cobroForm.get('abono').touched">
+                      <span *ngIf="cobroForm.get('abono').errors?.min">La cantidad mínima es 395.</span>
+                      <span *ngIf="cobroForm.get('abono').errors?.required">Ingresa la cantidad a cobrar.</span>
+                    </div>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha de Liquidación:</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Elige una fecha" required
+                    formControlName="fecha">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>
+                    <span *ngIf="!cobroForm.get('fecha').valid && cobroForm.get('fecha').touched">Agrega fecha
+                      deliquidación.</span>
+                  </mat-error>
+                </mat-form-field>
+              </form>
+            </div>
           </div>
           <div class="pr-5">
-            <button type="button" class="btn btn-success btn-sm" (click)="inscribirAlumno()">Inscribir</button>
+            <button type="button" [disabled]="(abonar)? !cobroForm.valid:false" class="btn btn-success btn-sm"
+              (click)="inscribirAlumno()">Inscribir</button>
             <mat-error>
               <label>{{error}}</label>
             </mat-error>

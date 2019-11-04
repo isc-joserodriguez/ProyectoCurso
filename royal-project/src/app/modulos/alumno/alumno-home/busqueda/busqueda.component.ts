@@ -17,7 +17,6 @@ export class BusquedaComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.p = 1;
       this.listaCursos = [];
-      window.scrollTo(0, 0);
       this.getCursos(params.get('busqueda'));
     });
   }

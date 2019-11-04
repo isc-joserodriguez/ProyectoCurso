@@ -35,30 +35,14 @@ export class AdminCursosComponent implements OnInit {
   @ViewChild('paginaRepor', { read: MatPaginator }) paginaRepor: MatPaginator;
   @ViewChild(MatSort) ordenRepor: MatSort;
 
-  constructor(private router: Router, private cursos: CursosService, private usuarios: UsuariosService) {
-    // datasource solicitudes
-    this.dataSource = new MatTableDataSource(this.listaSolicitudes);
-    // datasource cursos
-    this.datosCursos = new MatTableDataSource(this.listaCursos);
-    // datasource reportes
-    this.datosReportes = new MatTableDataSource(this.listareportes);
-  }
+  constructor(private router: Router, private cursos: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     // inic. solicitudes
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.getSolicitudesCursos();
-
     // inic. cursos
-    this.datosCursos.paginator = this.paginasCursos;
-    this.datosCursos.sort = this.ordenCursos;
     this.getCursos();
-
     // inic. reportes
-    this.datosReportes.paginator = this.paginaRepor;
-    this.datosReportes.sort = this.ordenRepor;
     this.getReportes();
   }
 

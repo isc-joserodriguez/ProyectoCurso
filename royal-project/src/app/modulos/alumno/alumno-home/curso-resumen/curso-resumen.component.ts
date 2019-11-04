@@ -36,7 +36,6 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.getInfoCurso(params.get('id'));
     });
   }

@@ -84,12 +84,16 @@
                     </div>
                     <br>
                   </div>
+                  <div *ngIf="tareasCurso[i].subtemas[j].tareas.length==0">
+                    <mat-card>
+                      <h5>No hay tareas en este subtema.</h5>
+                    </mat-card>
+                  </div>
                 </mat-expansion-panel>
                 <!--acordeon-->
               </div>
             </mat-accordion>
           </div>
-
         </div>
       </div>
       <br>

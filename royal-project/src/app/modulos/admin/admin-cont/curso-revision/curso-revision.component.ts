@@ -32,7 +32,6 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
   revisionForm: FormGroup;
   constructor(private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.revisionForm = this.formBuilder.group({
       precio: ['', Validators.required],
       notas: ['', Validators.required]

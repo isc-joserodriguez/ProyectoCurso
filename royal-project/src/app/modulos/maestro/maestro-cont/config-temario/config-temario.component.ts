@@ -16,7 +16,6 @@ export class ConfigTemarioComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.temarioForm = this.formBuilder.group({
       unidades: this.formBuilder.array([])
     });

@@ -10,23 +10,14 @@ const apiUrl = environment.urlMongo + 'compras';
 export class ComprasService {
 
 
-  constructor(private http: HttpClient) {
-  }
-  getComprasUsuario(libreria, autor, fecha) {
-    this.http.get(apiUrl + '/getComprasUsuario/' + libreria + '/' + autor + '/' + fecha);
-  }
+  constructor(private http: HttpClient) { }
 
-
-
-  getTodasLasCompras() {
-    this.http.get(apiUrl + '/getAllCompras/');
+  addCompra(detalles) {
+    return this.http.post(apiUrl + '/addCompra', detalles);
   }
 
-
-
-
-
-  asignarCompraUsuario(variable) {
-    this.http.post(apiUrl + '/createCompraUsuario/:id', variable);
+  getCompras() {
+    return this.http.get(apiUrl + '/getAll');
   }
+
 }

@@ -11,7 +11,6 @@ export class PerfilNavComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     if (localStorage.getItem('token') == undefined) {
       this.router.navigate(['/']);
     }

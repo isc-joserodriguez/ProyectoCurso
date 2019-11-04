@@ -66,7 +66,6 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   constructor(private firebase: FirebaseService, private route: ActivatedRoute, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.ckeConfig = {
       allowedContent: false,
       forcePasteAsPlainText: true,

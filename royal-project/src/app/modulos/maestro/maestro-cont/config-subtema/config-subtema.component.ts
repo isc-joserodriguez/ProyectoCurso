@@ -18,7 +18,6 @@ export class ConfigSubtemaComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.clasesForm = this.formBuilder.group({
       clases: this.formBuilder.array([])
     });

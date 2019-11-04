@@ -26,7 +26,6 @@ export class ComunidadComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.preguntaForm = this.formBuilder.group({
         pregunta: ['', Validators.required]
       });

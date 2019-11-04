@@ -31,7 +31,6 @@ export class MaestroInsigniasComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      window.scrollTo(0, 0);
       this.listaInsignias = [];
       this.listaAlumno = [];
       this.divOtorgar = false;

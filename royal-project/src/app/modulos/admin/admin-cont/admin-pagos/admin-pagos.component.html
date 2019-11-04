@@ -1,3 +1,130 @@
-<p>
-  admin-pagos works!
-</p>
+<mat-accordion class="example-headers-align">
+  <div class="col-md-12">
+    <!--primer acordeon-->
+    <mat-expansion-panel [expanded]="pendientes" hideToggle="true" class="acordeon-cuerpo">
+      <mat-expansion-panel-header class="acordeon-enc">
+        <mat-panel-title>
+          <b>Cursos Pendientes de Pago</b>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span> </span>
+          <i class="fas fa-file-import"></i>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <br>
+      <div class="text-center vertical-center">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+        </mat-form-field>
+      </div>
+      <!--tabla-->
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Columna Admin -->
+          <ng-container matColumnDef="administrador">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del administrador </th>
+            <td mat-cell *matCellDef="let row">{{row.administrador}}</td>
+          </ng-container>
+
+          <!-- Columna Alumno -->
+          <ng-container matColumnDef="persona">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del alumno</th>
+            <td mat-cell *matCellDef="let row"> {{row.persona}} </td>
+          </ng-container>
+
+          <!-- Columna Importe -->
+          <ng-container matColumnDef="importe">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total</th>
+            <td mat-cell *matCellDef="let row"> {{row.importe}} </td>
+          </ng-container>
+
+          <!-- Columna Fecha Compra -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de compra </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha | date}} </td>
+          </ng-container>
+
+          <!-- Columna Fecha Límite -->
+          <ng-container matColumnDef="fechaLimite">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha límite </th>
+            <td mat-cell *matCellDef="let row"> {{row.fechaLimite|date}} </td>
+          </ng-container>
+
+          <!-- Columna Resto -->
+          <ng-container matColumnDef="resto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Resto</th>
+            <td mat-cell *matCellDef="let row"> {{row.resto}} </td>
+          </ng-container>
+
+          <!-- Columna Detalles -->
+          <ng-container matColumnDef="detalles">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalles</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-mini-fab color="primary" (click)="detalleCompra(row.ruta)"><img class="icon-opcion"
+                  src="./../../../assets/icons/edit.svg"></button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+      <!--fin tabla-->
+    </mat-expansion-panel>
+    <!--cierre primer acordeon-->
+  </div>
+</mat-accordion>
+<div class="vertical-center p-2 fondoadmin px-4">
+  <!--todos los cursos-->
+  <div class="text-center vertical-center">
+    <label class="h3">Historial de compras</label>
+  </div>
+  <!--tabla-->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="datosCompras" matSort>
+      <!-- Columna Admin -->
+      <ng-container matColumnDef="administrador">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del administrador </th>
+        <td mat-cell *matCellDef="let row">{{row.administrador}}</td>
+      </ng-container>
+
+      <!-- Columna Alumno -->
+      <ng-container matColumnDef="persona">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del alumno</th>
+        <td mat-cell *matCellDef="let row"> {{row.persona}} </td>
+      </ng-container>
+
+      <!-- Columna Importe -->
+      <ng-container matColumnDef="importe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total</th>
+        <td mat-cell *matCellDef="let row"> {{row.importe}} </td>
+      </ng-container>
+
+      <!-- Columna Fecha Compra -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de compra </th>
+        <td mat-cell *matCellDef="let row"> {{row.fecha | date}} </td>
+      </ng-container>
+
+      <!-- Columna Detalles -->
+      <ng-container matColumnDef="detalles">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalles</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-mini-fab color="primary" (click)="detalleCompra(row.ruta)"><img class="icon-opcion"
+              src="./../../../assets/icons/edit.svg"></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colCompras"></tr>
+      <tr mat-row *matRowDef="let row; columns: colCompras;">
+      </tr>
+    </table>
+
+    <mat-paginator #paginasCompras [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  <!--fin tabla-->
+  <br>
+</div>

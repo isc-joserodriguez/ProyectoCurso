@@ -24,7 +24,6 @@ export class PerfilComponent implements OnInit {
   constructor(private firebase: FirebaseService, private usuario: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
     this.perfilForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apPaterno: ['', Validators.required],
