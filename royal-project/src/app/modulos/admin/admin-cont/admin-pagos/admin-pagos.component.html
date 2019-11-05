@@ -186,7 +186,7 @@
 
       <!-- Expanded -->
       <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="colCompras.length">
           <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <br>
             <div class="col-md-6">

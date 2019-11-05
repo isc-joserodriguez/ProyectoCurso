@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ComprasService } from 'src/app/servicios/compras.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { CursosService } from 'src/app/servicios/cursos.service';
 
 
 @Component({
@@ -11,36 +14,82 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   styleUrls: ['./historial-compras.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
-export class HistorialComprasComponent {
-  //variables tabla Historial
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['cursos', 'fecha', 'importe', 'estado'];
-  expandedElement: PeriodicElement | null;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-}
+export class HistorialComprasComponent implements OnInit {
+  // Compras completas
+  listaCompras = [];
+  colCompras: string[] = ['administrador', 'fecha', 'fechaLimite', 'importe', 'resto'];
+  datosCompras: MatTableDataSource<any>;
+  @ViewChild('paginasCompras', { read: MatPaginator }) paginasCompras: MatPaginator;
+  @ViewChild(MatSort) ordenCompras: MatSort;
 
-  export interface PeriodicElement {
-    cursos: number;
-    fecha: Date;
-    importe: number;
-    estado: String;
-    description: string;
+  expandedElement: any | null;
+
+  constructor(private compras: ComprasService, private usuarios: UsuariosService, private cursos: CursosService) { }
+
+  ngOnInit() {
+    this.getCompras();
   }
-  
-  const ELEMENT_DATA: PeriodicElement[] = [
-    {
-      cursos: 2,
-      fecha: new Date(),
-      importe: 300,
-      estado: 'Aceptado', 
-      description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-          atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`
+  getCompras() {
+    this.listaCompras = [];
+
+    this.compras.getCompras().subscribe((compras: any) => {
+
+      compras.detail.forEach(compra => {
+        if (localStorage.getItem('userid') == compra.idPersona) {
+          this.usuarios.getUser(compra.idAdmin).subscribe((infoAdmin: any) => {
+            var detallesCompra = {
+              administrador: infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
+              importe: compra.importe,
+              fecha: compra.fecha,
+              fechaLimite: compra.fechaLimite,
+              resto: compra.resto,
+              abonos: [],
+              cursos: [],
+              id: compra._id
+            }
+            compra.abonos.forEach(abono => {
+              this.usuarios.getUser(abono.idAdmin).subscribe((infoAdminAbono: any) => {
+                detallesCompra.abonos.push({
+                  administrador: infoAdminAbono.detail[0].nombre + ' ' + infoAdminAbono.detail[0].apPaterno + ' ' + infoAdminAbono.detail[0].apMaterno,
+                  fecha: abono.fecha,
+                  importe: abono.importe
+                });
+              });
+            });
+            compra.cursos.forEach(curso => {
+              this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo: any) => {
+                detallesCompra.cursos.push({
+                  nombre: cursoInfo.detail[0].nombreCompleto,
+                  imagen: cursoInfo.detail[0].imagen,
+                  precio: cursoInfo.detail[0].precio,
+                  categoria: cursoInfo.detail[0].categoria,
+                  descripcionCurso: cursoInfo.detail[0].descripcionCurso
+                });
+              });
+            });
+            this.listaCompras.push(detallesCompra);
+            this.datosCompras = new MatTableDataSource(this.listaCompras);
+            this.datosCompras.paginator = this.paginasCompras;
+            this.datosCompras.sort = this.ordenCompras;
+          });
+        }
+      });
+    });
+  }
+  fechaVencida(fecha) {
+    return new Date(fecha).getTime() < Date.now();
+  }
+
+  applyFilter(filterValue: string) {
+    this.datosCompras.filter = filterValue.trim().toLowerCase();
+    if (this.datosCompras.paginator) {
+      this.datosCompras.paginator.firstPage();
     }
-  ];
+  }
+}

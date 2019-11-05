@@ -27,9 +27,6 @@ export class CategoriasComponent implements OnInit {
     });
 
   }
-  onScroll() {
-    console.log('scrolled!!');
-  }
   getCursos(cat) {
     this.cursos.getSubcategorias().subscribe((res: any) => {
       res.detail.forEach(e => {

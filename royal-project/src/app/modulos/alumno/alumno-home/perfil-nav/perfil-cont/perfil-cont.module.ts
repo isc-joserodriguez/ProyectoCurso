@@ -6,7 +6,6 @@ import { SafePipeModule } from 'safe-pipe';
 import { PerfilContRoutingModule } from './perfil-cont-routing.module';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
-import { PagosComponent } from './pagos/pagos.component';
 import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
 import { CertificadosComponent } from './certificados/certificados.component';
 
@@ -34,7 +33,7 @@ import { CardsFreeModule } from 'angular-bootstrap-md';
 import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
 
 @NgModule({
-  declarations: [PerfilComponent, CuentaComponent, PagosComponent, HistorialComprasComponent, CertificadosComponent],
+  declarations: [PerfilComponent, CuentaComponent, HistorialComprasComponent, CertificadosComponent],
   imports: [
     CommonModule,
     PerfilContRoutingModule,

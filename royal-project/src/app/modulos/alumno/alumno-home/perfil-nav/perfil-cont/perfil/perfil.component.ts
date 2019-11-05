@@ -43,7 +43,6 @@ export class PerfilComponent implements OnInit {
   }
   getUser(id) {
     this.usuario.getUser(id).subscribe((user: any) => {
-      console.log(user.detail[0]);
       this.URLPublica = user.detail[0].foto;
 
       this.perfilForm.setValue({

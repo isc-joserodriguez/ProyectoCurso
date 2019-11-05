@@ -62,7 +62,6 @@ export class NavAlumnoComponent implements OnInit {
   }
   getCursos() {
     this.cursosAlumno = [];
-    console.log(localStorage.getItem('userid'));
     this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
       this.perfilPublico = '/alumno/perfil-publico/' + usuario.detail[0].ruta;
       usuario.detail[0].cursoAlumno.forEach(curso => {

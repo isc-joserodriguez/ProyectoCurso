@@ -18,7 +18,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   ]
 })
 export class AdminPagosComponent implements OnInit {
-
   //idAdmin idPersona importe fecha fechaLimite abonos: [{ idAdmin importe fecha }] resto estado cursos: [ ruta }]
   pendientes = false;
   cantAbono = 0;
@@ -97,7 +96,6 @@ export class AdminPagosComponent implements OnInit {
           });
         });
       });
-      console.log(this.listaPendientes);
     });
   }
 
@@ -107,14 +105,12 @@ export class AdminPagosComponent implements OnInit {
 
   guardarAbono(id) {
     this.compras.getCompra(id).subscribe((compra: any) => {
-      console.log(compra.detail[0]);
       compra.detail[0].abonos.push({
         idAdmin: localStorage.getItem('userid'),
         importe: this.cantAbono
       });
       compra.detail[0].resto = compra.detail[0].resto - this.cantAbono;
       if (compra.detail[0].resto == 0) compra.detail[0].estado = 0;
-      console.log(compra.detail[0]);
       this.compras.guardarAbono(id, { abonos: compra.detail[0].abonos, resto: compra.detail[0].resto, estado: compra.detail[0].estado }).subscribe(res => {
         this.getCompras();
       });
