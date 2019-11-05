@@ -28,6 +28,8 @@ export class CuentaComponent implements OnInit {
   constructor(private usuario: UsuariosService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.errorPass = false;
+    this.errorCorreo = false;
     this.correoForm = this.formBuilder.group({
       correo: ['', Validators.required],
       pass: ['', Validators.required]
@@ -46,23 +48,24 @@ export class CuentaComponent implements OnInit {
     this.usuario.getId(id).subscribe((res: any) => {
       this.persona.credencial = res.detail[0].credencial;
       this.hash = this.persona.credencial.contraseña;
-      this.correoForm.setValue({
-        correo: this.persona.credencial.correo,
-        pass: ''
+      this.correoForm = this.formBuilder.group({
+        correo: [this.persona.credencial.correo, Validators.required],
+        pass: ['', Validators.required]
       });
-      this.passForm.setValue({
-        actual: '',
-        pass: '',
-        passConfirm: ''
+      this.passForm = this.formBuilder.group({
+        actual: ['', Validators.required],
+        pass: ['', Validators.required],
+        passConfirm: ['', Validators.required]
+      }, {
+        validator: Match('pass', 'passConfirm')
       });
     });
-    this.errorPass = false;
-    this.errorCorreo = false;
   }
 
   guardarCorreo() {
     this.persona.credencial.correo = this.correoForm.value.correo;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.correoForm.value.pass, op: 0 }).subscribe((res: any) => {
+      console.log(res.code);
       if (res.code == 400) {
         this.errorCorreo = true;
         this.inicializar(localStorage.getItem('userid'));
@@ -75,6 +78,7 @@ export class CuentaComponent implements OnInit {
   guardarPass() {
     this.persona.credencial.contraseña = this.passForm.value.pass;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe((res: any) => {
+      console.log(res.code);
       if (res.code == 400) {
         this.errorPass = true;
         this.inicializar(localStorage.getItem('userid'));

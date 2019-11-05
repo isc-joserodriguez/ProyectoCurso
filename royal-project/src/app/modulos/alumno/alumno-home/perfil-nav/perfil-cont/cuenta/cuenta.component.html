@@ -31,10 +31,9 @@
             <input matInput type="password" placeholder="Ingresa tu contraseña:" required formControlName="pass">
             <mat-error>
               <span *ngIf="!correoForm.get('pass').valid && correoForm.get('pass').touched">Agrega tu contraseña.</span>
-              <br>
-              <span *ngIf="errorCorreo">Contraseña incorrecta.</span>
             </mat-error>
           </mat-form-field>
+          <mat-error><span *ngIf="errorCorreo">Contraseña incorrecta.</span></mat-error>
         </div>
         <div class="col-md-5 text-center">
           <button type="button" class="btn btn-success btn-md " [disabled]="!correoForm.valid"
@@ -63,10 +62,9 @@
             <mat-error>
               <span *ngIf="!passForm.get('actual').valid && passForm.get('actual').touched">Ingresa tu contraseña
                 actual.</span>
-              <br>
-              <span *ngIf="errorPass">Contraseña incorrecta.</span>
             </mat-error>
           </mat-form-field>
+          <mat-error><span *ngIf="errorPass">Contraseña incorrecta.</span></mat-error>
         </div>
       </div>
       <div class="row">

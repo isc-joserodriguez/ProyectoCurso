@@ -40,7 +40,11 @@
           <!-- Columna Fecha Límite -->
           <ng-container matColumnDef="fechaLimite">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha límite </th>
-            <td mat-cell *matCellDef="let element"> {{element.fechaLimite|date}} </td>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.resto!=0" [ngStyle]="{'color': fechaVencida(element.fechaLimite)?'red':'black'}">
+                {{element.fechaLimite|date}}
+              </span>
+            </td>
           </ng-container>
 
           <!-- Columna Importe -->
@@ -53,7 +57,7 @@
           <!-- Columna Resto -->
           <ng-container matColumnDef="resto">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Resto</th>
-            <td mat-cell *matCellDef="let element"> ${{element.resto}} </td>
+            <td mat-cell *matCellDef="let element"><span [ngStyle]="{'color': 'red'}">${{element.resto}}</span></td>
           </ng-container>
 
           <!-- Expanded -->
@@ -188,7 +192,7 @@
 
       <!-- Expanded -->
       <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="colCompras.length">
           <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <br>
             <div class="col-md-12 row">

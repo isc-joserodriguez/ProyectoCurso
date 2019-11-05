@@ -218,15 +218,12 @@ export class ComunidadPreguntaComponent implements OnInit {
   responder(index) {
     this.responderIndex = index;
     this.respuestaCom = '';
-    console.log(this.infoRespuestas);
   }
   enviarRespuestaCom() {
-    console.log(this.infoPregunta.respuestas[this.responderIndex].respuestas);
     this.infoPregunta.respuestas[this.responderIndex].respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaCom
     });
-    console.log(this.infoPregunta.respuestas[this.responderIndex].respuestas);
 
     this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
       this.getPregunta(this.route.snapshot.params.ruta);

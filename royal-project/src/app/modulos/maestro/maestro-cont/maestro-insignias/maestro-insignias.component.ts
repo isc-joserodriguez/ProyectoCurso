@@ -47,7 +47,6 @@ export class MaestroInsigniasComponent implements OnInit {
     this.listaInsignias = [];
     this.cursos.getCursoInfo(id).subscribe((resp: any) => {
       this.listaInsignias = resp.detail[0].insignias;
-      console.log(this.listaInsignias);
       this.dataSource = new MatTableDataSource(this.listaInsignias);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

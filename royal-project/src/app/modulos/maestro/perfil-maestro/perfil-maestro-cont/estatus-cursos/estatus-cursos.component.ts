@@ -34,7 +34,6 @@ export class EstatusCursosComponent implements OnInit {
     this.listaCursos = [];
     this.cursos.getCursos().subscribe((res: any) => {
       res.detail.forEach(curso => {
-        console.log(curso)
         if (curso.idMaestro == localStorage.getItem('userid')) {
           this.listaCursos.push({
             id: curso._id,

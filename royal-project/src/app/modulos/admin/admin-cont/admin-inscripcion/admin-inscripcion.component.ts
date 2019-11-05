@@ -151,7 +151,6 @@ export class AdminInscripcionComponent implements OnInit {
                     idAdmin: localStorage.getItem('userid'),
                     idPersona: usuario._id,
                     importe: this.infoCurso.precio,
-                    //fechaLimite: Date.now(),
                     abonos: [],
                     cursos: [{ ruta: this.infoCurso.ruta }],
                     resto: 0,

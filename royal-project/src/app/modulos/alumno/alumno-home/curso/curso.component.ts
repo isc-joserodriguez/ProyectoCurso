@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CursosService } from 'src/app/servicios/cursos.service'
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
@@ -13,6 +13,8 @@ declare let videojs: any;
 })
 
 export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
+  tempCarrito = localStorage.getItem('carrito');
+
   infoCurso = {
     idMaestro: 0,
     nombreCompleto: '',
@@ -32,9 +34,9 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
     resumen: ''
   };
 
-  comprado = false;
+  incluido = false;
   player: any;
-  constructor(private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private curso: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -49,6 +51,9 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.player = videojs("videoId");
   }
   getInfoCurso(id) {
+    if (this.tempCarrito != null && this.tempCarrito.includes(this.route.snapshot.params.id)) {
+      this.incluido = true;
+    }
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
       this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
       this.infoCurso.precio = curso.detail[0].precio;
@@ -67,7 +72,9 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
       curso.detail[0].alumnosInscritos.forEach(elemento => {
         this.infoCurso.alumnosInscritos.push(elemento.idAlumno);
       });
-      this.comprado = this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')));
+      if (this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')))) {
+        this.router.navigate(['/curso', this.route.snapshot.params.id]);
+      }
 
       //Video
       this.player.src({ type: "video/mp4", src: this.infoCurso.videoPrincipal });
@@ -83,6 +90,25 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
       this.infoMaestro.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
       this.infoMaestro.resumen = usuario.detail[0].resumen;
     });
+  }
+
+  agregarCurso() {
+    if (localStorage.getItem('carrito') == null) {
+      localStorage.setItem('carrito', this.route.snapshot.params.id + '|');
+      this.incluido = true;
+    } else {
+      localStorage.setItem('carrito', this.tempCarrito + this.route.snapshot.params.id + '|');
+      this.incluido = true;
+    }
+
+  }
+  pagarCurso() {
+    if(!this.incluido){
+      if(this.tempCarrito==null)this.tempCarrito='';
+      localStorage.setItem('carrito', this.tempCarrito + this.route.snapshot.params.id + '|');
+    }
+    this.router.navigate(['/mi-carrito']);
+
   }
 
 

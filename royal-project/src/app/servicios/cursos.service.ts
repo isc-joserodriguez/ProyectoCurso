@@ -52,12 +52,10 @@ export class CursosService {
   }
 
   updateFotoVideo(id, datos) {
-    console.log('ejecucion del update');
     return this.http.put(apiUrl + '/updateFotoVideo/' + id, datos);
   }
 
   updateTemario(id, datos) {
-    console.log(datos);
     return this.http.put(apiUrl + '/updateTemario/' + id, datos);
   }
 

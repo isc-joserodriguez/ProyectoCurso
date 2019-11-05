@@ -18,7 +18,6 @@ import { CursosService } from 'src/app/servicios/cursos.service';
   ]
 })
 export class AdminPagosComponent implements OnInit {
-
   //idAdmin idPersona importe fecha fechaLimite abonos: [{ idAdmin importe fecha }] resto estado cursos: [ ruta }]
   pendientes = false;
   cantAbono = 0;
@@ -52,7 +51,7 @@ export class AdminPagosComponent implements OnInit {
         this.usuarios.getUser(compra.idAdmin).subscribe((infoAdmin: any) => {
           this.usuarios.getUser(compra.idPersona).subscribe((infoAlumno: any) => {
             var detallesCompra = {
-              administrador: infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
+              administrador: (compra.idAdmin == -1) ? 'Adquirido por Sistema' : infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
               persona: infoAlumno.detail[0].nombre + ' ' + infoAlumno.detail[0].apPaterno + ' ' + infoAlumno.detail[0].apMaterno,
               importe: compra.importe,
               fecha: compra.fecha,
@@ -65,7 +64,7 @@ export class AdminPagosComponent implements OnInit {
             compra.abonos.forEach(abono => {
               this.usuarios.getUser(abono.idAdmin).subscribe((infoAdminAbono: any) => {
                 detallesCompra.abonos.push({
-                  administrador: infoAdminAbono.detail[0].nombre + ' ' + infoAdminAbono.detail[0].apPaterno + ' ' + infoAdminAbono.detail[0].apMaterno,
+                  administrador: (abono.idAdmin == -1) ? 'Adquirido por Sistema' : infoAdminAbono.detail[0].nombre + ' ' + infoAdminAbono.detail[0].apPaterno + ' ' + infoAdminAbono.detail[0].apMaterno,
                   fecha: abono.fecha,
                   importe: abono.importe
                 });
@@ -97,7 +96,6 @@ export class AdminPagosComponent implements OnInit {
           });
         });
       });
-      console.log(this.listaPendientes);
     });
   }
 
@@ -107,18 +105,19 @@ export class AdminPagosComponent implements OnInit {
 
   guardarAbono(id) {
     this.compras.getCompra(id).subscribe((compra: any) => {
-      console.log(compra.detail[0]);
       compra.detail[0].abonos.push({
         idAdmin: localStorage.getItem('userid'),
         importe: this.cantAbono
       });
       compra.detail[0].resto = compra.detail[0].resto - this.cantAbono;
       if (compra.detail[0].resto == 0) compra.detail[0].estado = 0;
-      console.log(compra.detail[0]);
       this.compras.guardarAbono(id, { abonos: compra.detail[0].abonos, resto: compra.detail[0].resto, estado: compra.detail[0].estado }).subscribe(res => {
         this.getCompras();
       });
     });
+  }
+  fechaVencida(fecha) {
+    return new Date(fecha).getTime() < Date.now();
   }
 
   applyFilter(filterValue: string) {

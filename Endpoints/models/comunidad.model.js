@@ -20,7 +20,8 @@ const comunidadSchema = new mongoose.Schema({
             fecha: { type: Date, default: Date.now() }
         }]
     }],
-    ruta: { type: String, required: true }
+    ruta: { type: String, required: true },
+    reportes: [{ idAlumno: { type: Number }, ruta: { type: String }, comentario: { type: String }, numReportes: { type: Number } }]
 });
 
 //modelo Curso

@@ -65,7 +65,8 @@ const cursoSchema = new mongoose.Schema({
     fechaSolicitud: { type: Date, default: Date.now() },
     royal: { type: Boolean, default: false },
     notas: { type: String },
-    alumnosInscritos: [{ idAlumno: { type: Number } }]
+    alumnosInscritos: [{ idAlumno: { type: Number } }],
+    reportes: [{ idAlumno: { type: Number }, ruta: { type: String }, clase: { type: String }, numReportes: { type: Number } }]
 });
 
 //modelo Curso
