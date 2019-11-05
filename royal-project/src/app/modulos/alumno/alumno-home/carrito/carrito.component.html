@@ -3,52 +3,30 @@
 <br>
 <br>
 <br>
-<div class="col-md-12 p-0">
+<div class="col-md-12 p-0" *ngIf="listaCursos.length!=0">
   <div class="container">
     <div class="row">
       <div class="col-md-8">
         <div class="row">
-          <div class="card col-md-3 descri mx-4 mb-2 fondocard sombrabaja">
+          <div class="card col-md-3 descri mx-4 mb-2 fondocard sombrabaja" *ngFor="let curso of listaCursos">
             <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3" style="max-width:200px; height:150px;">
-              <img class="card-img-top" src="http://www.lorempixel.com/500/500" max-width="200" height="150">
+              <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
             </div>
             <div class="card-body text-center px-1">
-              <h5 class="card-title text-wrap text-center">Base de datos II</h5>
+              <h5 class="card-title text-wrap text-center">{{curso.nombre}}</h5>
               <p class="card-text d-inline-block text-truncate mb-1" style="max-width: 150px;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste voluptatibus, corrupti cupiditate ratione
-                odio aspernatur numquam quidem, fugiat aut blanditiis praesentium deserunt? Ex facilis repellendus rerum
-                ab earum nesciunt itaque?
+                {{curso.descripcion}}
               </p>
-              <p><b>$ 1500</b></p>
+              <p><b>$ {{curso.precio}}</b></p>
             </div>
             <div class="card-footer d-flex justify-content-between">
-              <a href="" class="text-muted" data-toggle="tooltip" data-placement="top" title="Ver Curso"><i
+              <a class="text-muted" data-toggle="tooltip" data-placement="top" title="Ver Curso"
+                [routerLink]="['/curso', curso.ruta,'vista']" routerLinkActive="router-link-active"><i
                   class="fas fa-eye"></i></a>
-              <a href="" class="text-muted" data-toggle="tooltip" data-placement="top" title="Quitar"><i
-                  class="fas fa-trash-alt"></i></a>
+              <a class="text-muted" data-toggle="tooltip" data-placement="top" title="Quitar"
+                (click)="eliminar(curso.index)"><i class="fas fa-trash-alt"></i></a>
             </div>
           </div>
-          <div class="card col-md-3 descri mx-4 mb-2 fondocard sombrabaja">
-            <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3" style="max-width:200px; height:150px;">
-              <img class="card-img-top" src="http://www.lorempixel.com/500/500" max-width="200" height="150">
-            </div>
-            <div class="card-body text-center px-1">
-              <h5 class="card-title text-wrap text-center">Base de datos II</h5>
-              <p class="card-text d-inline-block text-truncate mb-1" style="max-width: 150px;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste voluptatibus, corrupti cupiditate ratione
-                odio aspernatur numquam quidem, fugiat aut blanditiis praesentium deserunt? Ex facilis repellendus rerum
-                ab earum nesciunt itaque?
-              </p>
-              <p><b>$ 1500</b></p>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <a href="" class="text-muted" data-toggle="tooltip" data-placement="top" title="Ver Curso"><i
-                  class="fas fa-eye"></i></a>
-              <a href="" class="text-muted" data-toggle="tooltip" data-placement="top" title="Quitar"><i
-                  class="fas fa-trash-alt"></i></a>
-            </div>
-          </div>
-
         </div>
       </div>
       <div class="col-md-4">
@@ -56,16 +34,10 @@
         <br>
         <div>
           <ul class="list-group">
-            <li class="list-group-item descrinuevo">
+            <li class="list-group-item descrinuevo" *ngFor="let curso of listaCursos">
               <div class="d-flex bd-highlight">
-                <div class="mr-auto p-2 bd-highlight">Programación Web</div>
-                <div class="p-2 bd-highlight">$ 2500</div>
-              </div>
-            </li>
-            <li class="list-group-item descrinuevo">
-              <div class="d-flex bd-highlight">
-                <div class="mr-auto p-2 bd-highlight">Coreano III</div>
-                <div class="p-2 bd-highlight">$ 1500</div>
+                <div class="mr-auto p-2 bd-highlight">{{curso.nombre}}</div>
+                <div class="p-2 bd-highlight">$ {{curso.precio}}</div>
               </div>
             </li>
           </ul>
@@ -74,17 +46,36 @@
             <li class="list-group-item descrinuevo">
               <div class="d-flex bd-highlight">
                 <div class="mr-auto p-2 bd-highlight">Total</div>
-                <div class="p-2 bd-highlight">$ 3000</div>
+                <div class="p-2 bd-highlight">$ {{total}}</div>
               </div>
             </li>
           </ul>
           <div class="text-center mt-3">
-            <button type="button" class="btn btn-danger btn-lg">Pagar</button>
+            <button type="button" [disabled]="total==0" class="btn btn-danger btn-lg" (click)="pagar()">Pagar</button>
+            <div *ngIf="!paidFor">
+              <h1>Buy this Couch - ${{ total }} OBO</h1>
+            </div>
+            <div *ngIf=paidFor>
+              <h1>Yay, you bought a sweet couch!</h1>
+            </div>
+            <div #paypal></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="categorias container mx-auto">
+  <!--No cursos-->
+  <div class="col-md-12 p-2" *ngIf="listaCursos.length==0">
+    <div class="card mb-12">
+      <h3>No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
+      <div class="text-center mt-3">
+        <button type="button" class="btn btn-danger btn-lg" [routerLink]="['/']">Ver cursos</button>
+      </div>
+    </div>
+  </div>
+  <!--No cursos-->
 </div>
 <br>
 <br>

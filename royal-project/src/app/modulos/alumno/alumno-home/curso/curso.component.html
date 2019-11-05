@@ -277,14 +277,12 @@
               </ul>
             </div>
             <div class="card-footer text-muted light-blue lighten-1 white-text">
-              <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" *ngIf="!comprado">
+              <button class="btn-lg p-2 mb-2" mat-raised-button color="warn" (click)="pagarCurso()">
                 ¡Comprar Ahora!
-              </button> 
-              <button class="btn-lg p-2 mb-2" mat-raised-button color="primary" *ngIf="comprado" [routerLink]="['../']">
-                Ir al curso
-              </button> 
+              </button>
               <br>
-              <button class="btn-lg" mat-raised-button color="primary" *ngIf="!comprado"><i class="fas fa-cart-plus"></i></button>
+              <button [disabled]="incluido" class="btn-lg" mat-raised-button color="primary" (click)="agregarCurso()"><i
+                  class="fas fa-cart-plus"></i></button>
             </div>
           </div>
 

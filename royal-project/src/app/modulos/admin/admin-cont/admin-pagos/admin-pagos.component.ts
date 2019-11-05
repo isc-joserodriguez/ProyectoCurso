@@ -51,7 +51,7 @@ export class AdminPagosComponent implements OnInit {
         this.usuarios.getUser(compra.idAdmin).subscribe((infoAdmin: any) => {
           this.usuarios.getUser(compra.idPersona).subscribe((infoAlumno: any) => {
             var detallesCompra = {
-              administrador: infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
+              administrador: (compra.idAdmin == -1) ? 'Adquirido por Sistema' : infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
               persona: infoAlumno.detail[0].nombre + ' ' + infoAlumno.detail[0].apPaterno + ' ' + infoAlumno.detail[0].apMaterno,
               importe: compra.importe,
               fecha: compra.fecha,
@@ -64,7 +64,7 @@ export class AdminPagosComponent implements OnInit {
             compra.abonos.forEach(abono => {
               this.usuarios.getUser(abono.idAdmin).subscribe((infoAdminAbono: any) => {
                 detallesCompra.abonos.push({
-                  administrador: infoAdminAbono.detail[0].nombre + ' ' + infoAdminAbono.detail[0].apPaterno + ' ' + infoAdminAbono.detail[0].apMaterno,
+                  administrador: (abono.idAdmin == -1) ? 'Adquirido por Sistema' : infoAdminAbono.detail[0].nombre + ' ' + infoAdminAbono.detail[0].apPaterno + ' ' + infoAdminAbono.detail[0].apMaterno,
                   fecha: abono.fecha,
                   importe: abono.importe
                 });
@@ -115,6 +115,9 @@ export class AdminPagosComponent implements OnInit {
         this.getCompras();
       });
     });
+  }
+  fechaVencida(fecha) {
+    return new Date(fecha).getTime() < Date.now();
   }
 
   applyFilter(filterValue: string) {

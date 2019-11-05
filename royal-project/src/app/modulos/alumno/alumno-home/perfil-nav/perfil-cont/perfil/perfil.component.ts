@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -21,8 +22,7 @@ export class PerfilComponent implements OnInit {
 
   perfilForm: FormGroup;
 
-  constructor(private firebase: FirebaseService, private usuario: UsuariosService,
-    private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private firebase: FirebaseService, private usuario: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.perfilForm = this.formBuilder.group({
@@ -44,7 +44,6 @@ export class PerfilComponent implements OnInit {
   getUser(id) {
     this.usuario.getUser(id).subscribe((user: any) => {
       this.URLPublica = user.detail[0].foto;
-
       this.perfilForm.setValue({
         nombre: user.detail[0].nombre,
         apPaterno: user.detail[0].apPaterno,
@@ -79,6 +78,7 @@ export class PerfilComponent implements OnInit {
     } else {
       this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
         this.finalizado = true;
+        this.router.navigate(['/maestro']);
       });
     }
   }
@@ -124,6 +124,7 @@ export class PerfilComponent implements OnInit {
           this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
             this.finalizado = true;
             this.cambiaFoto = false;
+            this.router.navigate(['/maestro']);
           });
         });
       }

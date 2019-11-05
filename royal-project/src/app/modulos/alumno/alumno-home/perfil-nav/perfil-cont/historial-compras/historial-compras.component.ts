@@ -44,7 +44,7 @@ export class HistorialComprasComponent implements OnInit {
         if (localStorage.getItem('userid') == compra.idPersona) {
           this.usuarios.getUser(compra.idAdmin).subscribe((infoAdmin: any) => {
             var detallesCompra = {
-              administrador: infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
+              administrador: (compra.idAdmin == -1) ? 'Adquirido por Sistema' : infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
               importe: compra.importe,
               fecha: compra.fecha,
               fechaLimite: compra.fechaLimite,
