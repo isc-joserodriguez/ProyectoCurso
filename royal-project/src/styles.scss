@@ -88,10 +88,10 @@ body {
 }
 
 .acordeon-enc {
-  background-color: #d8af54;
+  background-color: #64af1dc2;
 }
 .acordeon-cuerpo {
-  background-color: #aa8638;
+  background-color: #48850f;
 }
 
 .example-headers-align .mat-expansion-panel-header-title,
@@ -265,4 +265,13 @@ table {
   background: -webkit-linear-gradient(45deg, #ffffff 0%, #1c6ea4 73%, #00738c 100%);
   background: linear-gradient(45deg, #ffffff 0%, #1c6ea4 73%, #00738c 100%);
   border: 5px hidden #1c6ea4;
+}
+.descri{
+  background-color: rgba(126, 124, 121, 0.068); 
+  border-radius: 19px 19px 19px 19px;
+}
+
+.precio {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.84);
+  color: #dd1515;
 }

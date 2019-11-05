@@ -4,11 +4,11 @@
     <mat-expansion-panel [expanded]="pendientes" hideToggle="true" class="acordeon-cuerpo">
       <mat-expansion-panel-header class="acordeon-enc">
         <mat-panel-title>
-          <b>Cursos Pendientes de Pago</b>
+          <b class="subtitulo">Cursos Pendientes de Pago</b>
         </mat-panel-title>
         <mat-panel-description>
           <span> </span>
-          <i class="fas fa-file-import"></i>
+          <i class="fas fa-file-invoice-dollar"></i>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <br>
@@ -148,10 +148,9 @@
 <div class="vertical-center p-2 fondoadmin px-4">
   <!--todos los cursos-->
   <div class="text-center vertical-center">
-    <label class="h3">Historial de compras</label>
+    <label class="h3 pt-2 subtitulo">Historial de compras</label>
   </div>
-  <br>
-  <div class="text-center vertical-center">
+  <div class="col-md-7 text-center vertical-center">
     <mat-form-field>
       <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Filtrar">
     </mat-form-field>

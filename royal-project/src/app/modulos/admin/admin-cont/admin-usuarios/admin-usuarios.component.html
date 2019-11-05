@@ -2,17 +2,21 @@
     <label class="h1">Lista de Usuarios</label>
 </div>
 <div class="row">
-    <div class="col-md-12 text-right">
+    <div class="col-md-7">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+        </mat-form-field>
+    </div>
+    <div class="col-md-5 text-right">
         <button type="button" class="btn btn-success btn-md " [routerLink]="['../nuevo-usuario']">
             <img class="icon-nav" src="./../../../assets/icons/agregar-user2.svg">
             NUEVO USUARIO</button>
     </div>
+
 </div>
 <div class="row">
     <div class="col-md-12">
-        <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
-        </mat-form-field>
+
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
 
