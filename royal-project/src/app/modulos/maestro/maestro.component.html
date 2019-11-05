@@ -3,7 +3,7 @@
 <br>
 <br>
 <div class="row col-md-12">
-  <div class="col-md-4 mt-1 example-1 ">
+  <div class="col-md-4 mt-1" style="height: 500px; overflow-y: scroll;">
     <div class="card font-weight-bold text-center list-group">
       <a class="list-group-item list-group-item-action btn-warning btn btn-block mat-elevation-z8 subtitulo"
         style="font-size:25px;" [routerLink]="['/maestro']" style="font-size:25px;"> <img class="icon-nav mr-2"
@@ -48,8 +48,14 @@
         [routerLink]="['./curso-nuevo']">Crear nuevo
         curso</button>
       <br>
+      <mat-divider></mat-divider>
+      <button type="button" class="btn btn-primary letracursotitulo mx-3" [routerLink]="['/maestro/perfil/estado-cursos']" >
+        <b>Estado Cursos</b> <img class="icon-nav ml-2" src="./../../../assets/icons/status.svg"></button>
     </div>
+
+
   </div>
+
 
   <div class="col-md-8 ">
     <router-outlet></router-outlet>

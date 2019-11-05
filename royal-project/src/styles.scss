@@ -88,9 +88,16 @@ body {
 }
 
 .acordeon-enc {
-  background-color: #64af1dc2;
+  background-color: #fb3;
 }
 .acordeon-cuerpo {
+  background-color: #fb3;
+}
+
+.acordeon-enc2 {
+  background-color: #64af1dc2;
+}
+.acordeon-cuerpo2 {
   background-color: #48850f;
 }
 
@@ -266,12 +273,26 @@ table {
   background: linear-gradient(45deg, #ffffff 0%, #1c6ea4 73%, #00738c 100%);
   border: 5px hidden #1c6ea4;
 }
-.descri{
-  background-color: rgba(126, 124, 121, 0.068); 
+.descri {
+  background-color: rgba(126, 124, 121, 0.068);
   border-radius: 19px 19px 19px 19px;
 }
 
 .precio {
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.84);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.377);
   color: #dd1515;
+}
+
+.subinscri {
+  text-shadow: 2px 2px 3px rgba(138, 138, 138, 0.84);
+  color: #007791;
+}
+
+.bordecolor {
+  background-color: rgba(126, 124, 121, 0.068);
+  border-radius: 19px 19px 19px 19px;
+  border: 1px solid #ddd;
+}
+.iconacordeon{
+  width: 25px;
 }

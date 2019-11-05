@@ -2,22 +2,22 @@
 <br>
 <br>
 <br>
-<div class="col-md-12" style="background: #f2f6f9">
+<div class="col-md-12">
   <div class="text-center vertical-center">
-    <label class="h3 pt-2">Configuración de Curso</label>
+    <label class="h3 pt-2 subcurso">Configuración de Curso</label>
   </div>
   <!--Acordeon-->
   <mat-accordion class="example-headers-align">
     <div class="col-md-12">
       <!--primer acordeon-->
-      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
-        <mat-expansion-panel-header class="acordeon-enc">
-          <mat-panel-title>
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true" class="acordeon-cuerpo3">
+        <mat-expansion-panel-header class="acordeon-enc3">
+          <mat-panel-title class="h5">
             <b>General</b>
           </mat-panel-title>
           <mat-panel-description>
             <span> </span>
-            <mat-icon>assignment</mat-icon>
+            <img class="icon-nav" src="./../../../assets/icons/crearcurso.svg">
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
@@ -141,14 +141,14 @@
       <!--primer acordeon-->
 
       <!--tercer acordeon-->
-      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
-        <mat-expansion-panel-header class="acordeon-enc">
-          <mat-panel-title>
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true" class="acordeon-cuerpo3">
+        <mat-expansion-panel-header class="acordeon-enc3">
+          <mat-panel-title class="h5">
             <b>Temario</b>
           </mat-panel-title>
           <mat-panel-description>
             <span> </span>
-            <mat-icon>date_range</mat-icon>
+            <img class="icon-nav" src="./../../../assets/icons/temario.svg">
           </mat-panel-description>
         </mat-expansion-panel-header>
         <br>
@@ -175,9 +175,11 @@
                   </mat-form-field>
 
                 </div>
-                <div class="col-md-2 vertical-center">
-                  <button mat-button color="warn" (click)="removerObjetivo(i)">Remover</button>
+                <div class="col-md-2 mt-3">
+                  <a (click)="removerObjetivo(i)"><img class="icon-remove"
+                      src="./../../../assets/icons/remover.svg"></a>
                 </div>
+
               </div>
             </div>
           </div>
@@ -203,8 +205,8 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-md-2 vertical-center">
-                  <button mat-button color="warn" (click)="removerUnidad(i)">Remover</button>
+                <div class="col-md-2 mt-3">
+                  <a (click)="removerUnidad(i)"><img class="icon-remove" src="./../../../assets/icons/remover.svg"></a>
                 </div>
               </div>
               <div class="align-subtemas">
@@ -223,8 +225,9 @@
                           </mat-error>
                         </mat-form-field>
                       </div>
-                      <div class="col-md-2 vertical-center">
-                        <button mat-button color="warn" (click)="removerSubtema(i,j)">Remover</button>
+                      <div class="col-md-2 mt-3">
+                        <a (click)="removerSubtema(i,j)"><img class="icon-remove"
+                            src="./../../../assets/icons/remover.svg"></a>
                       </div>
                     </div>
                     <div class="align-clases">
@@ -243,8 +246,9 @@
                                 </mat-error>
                               </mat-form-field>
                             </div>
-                            <div class="col-md-2 vertical-center">
-                              <button mat-button color="warn" (click)="removerClase(i,j,k)">Remover</button>
+                            <div class="col-md-2 mt-3">
+                              <a (click)="removerClase(i,j,k)"><img class="icon-remove"
+                                  src="./../../../assets/icons/remover.svg"></a>
                             </div>
                           </div>
 

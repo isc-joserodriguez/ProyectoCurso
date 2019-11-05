@@ -8,8 +8,8 @@
     <!-- Video Principal -->
     <div class="col-md-8">
       <div class="row justify-content-center">
-        <video oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js' controls preload='auto' width='600' height='300'
-          [poster]='infoCurso.imagen'>
+        <video oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js' controls
+          preload='auto' width='600' height='300' [poster]='infoCurso.imagen'>
         </video>
       </div>
     </div>
@@ -18,7 +18,10 @@
     <!-- Revision -->
     <div class="col-md-4">
       <form [formGroup]="revisionForm">
-        <mat-card>
+        <mat-card class="bordecolor">
+          <div class="text-center">
+            <p class="h5 subinscri">Revisión</p>
+          </div>
           <!-- Precio -->
           <mat-form-field appearance="outline" class="field-login">
             <mat-label>Precio:</mat-label>
@@ -50,8 +53,8 @@
   <!-- Descripción -->
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header bg-light text-center">
+      <div class="card descri">
+        <div class="card-header paqueteshome text-center subtitulo">
           <h4><b>Descripción</b></h4>
         </div>
         <div class="card-body">
@@ -65,8 +68,8 @@
   <!-- Objetivos -->
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header bg-light text-center">
+      <div class="card descri">
+        <div class="card-header paqueteshome text-center subtitulo">
           <h4><b>¿Qué aprenderé?</b></h4>
         </div>
         <div class="card-body">
@@ -82,8 +85,8 @@
   <!-- Temario -->
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header bg-light text-center">
+      <div class="card descri">
+        <div class="card-header paqueteshome text-center subtitulo">
           <h4><b>Temario</b></h4>
         </div>
         <div class="card-body">
@@ -91,7 +94,7 @@
           <mat-accordion class="example-headers-align">
             <div class="col-md-12">
               <!--primer acordeon-->
-              <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index">
+              <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index" class="acordeon-cuerpo3">
                 <mat-expansion-panel-header class="acordeon-enc">
                   <mat-panel-title>
                     <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
@@ -106,7 +109,7 @@
                 <mat-accordion class="example-headers-align">
                   <div class="col-md-12">
                     <!--primer acordeon-->
-                    <mat-expansion-panel hideToggle="true" *ngFor="let subtema of unidad.subtemas; let j=index">
+                    <mat-expansion-panel hideToggle="true" *ngFor="let subtema of unidad.subtemas; let j=index" class="acordeon-cuerpo3">
                       <mat-expansion-panel-header class="acordeon-enc">
                         <mat-panel-title>
                           <b>Subtema {{j+1}}: {{subtema.subtema}}</b>
