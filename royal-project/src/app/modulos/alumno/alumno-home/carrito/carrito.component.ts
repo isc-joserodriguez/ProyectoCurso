@@ -26,7 +26,7 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit() {
     this.getCursos();
-    paypal
+    /* paypal
       .Buttons({
         createOrder: (data, actions) => {
           return actions.order.create({
@@ -50,7 +50,7 @@ export class CarritoComponent implements OnInit {
           console.log(err);
         }
       })
-      .render(this.paypalElement.nativeElement);
+      .render(this.paypalElement.nativeElement); */
   }
   getCursos() {
     this.listaCursos = [];
