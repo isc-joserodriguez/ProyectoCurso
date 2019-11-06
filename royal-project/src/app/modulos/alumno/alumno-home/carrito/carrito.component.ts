@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { CursosService } from 'src/app/servicios/cursos.service';
@@ -10,32 +10,26 @@ declare var paypal;
   templateUrl: './carrito.component.html',
   styleUrls: ['./carrito.component.scss']
 })
-export class CarritoComponent implements OnInit {
+export class CarritoComponent implements OnInit, AfterViewInit {
   listaCursos = [];
   rutas = [];
   total = 0;
 
   @ViewChild('paypal') paypalElement: ElementRef;
-  product = {
-    price: 777.77,
-    description: 'used couch, decent condition',
-    img: 'assets/couch.jpg'
-  };
-  paidFor = false;
+
   constructor(private compras: ComprasService, private router: Router, private usuarios: UsuariosService, private cursos: CursosService) { }
 
-  ngOnInit() {
-    this.getCursos();
-    /* paypal
+  ngAfterViewInit() {
+    paypal
       .Buttons({
         createOrder: (data, actions) => {
           return actions.order.create({
             purchase_units: [
               {
-                description: this.product.description,
+                description: 'Cursos Royal',
                 amount: {
-                  currency_code: 'USD',
-                  value: this.product.price
+                  currency_code: 'MXN',
+                  value: this.total
                 }
               }
             ]
@@ -43,19 +37,24 @@ export class CarritoComponent implements OnInit {
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
-          this.paidFor = true;
+          this.pagar();
           console.log(order);
         },
         onError: err => {
           console.log(err);
         }
       })
-      .render(this.paypalElement.nativeElement); */
+      .render(this.paypalElement.nativeElement);
+  }
+
+  ngOnInit() {
+    this.getCursos();
+
   }
   getCursos() {
     this.listaCursos = [];
     this.total = 0;
-    this.rutas = localStorage.getItem('carrito').split('|');
+    this.rutas = (localStorage.getItem('carrito') != null) ? localStorage.getItem('carrito').split('|') : [];
     this.rutas.splice(this.rutas.length - 1, 1);
     var index = 0;
     this.rutas.forEach(rutaCurso => {

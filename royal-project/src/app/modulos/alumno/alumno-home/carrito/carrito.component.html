@@ -3,6 +3,18 @@
 <br>
 <br>
 <br>
+<div class="categorias container mx-auto">
+  <!--No cursos-->
+  <div class="col-md-12 p-2" *ngIf="listaCursos.length==0">
+    <div class="card mb-12">
+      <h3>No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
+      <div class="text-center mt-3">
+        <button type="button" class="btn btn-danger btn-lg" [routerLink]="['/']">Ver cursos</button>
+      </div>
+    </div>
+  </div>
+  <!--No cursos-->
+</div>
 <div class="col-md-12 p-0" *ngIf="listaCursos.length!=0">
   <div class="container">
     <div class="row">
@@ -50,33 +62,16 @@
               </div>
             </li>
           </ul>
-          <div class="text-center mt-3">
-            <button type="button" [disabled]="total==0" class="btn btn-danger btn-lg" (click)="pagar()">Pagar</button>
-            <div *ngIf="!paidFor">
-              <h1>Buy this Couch - ${{ total }} OBO</h1>
-            </div>
-            <div *ngIf=paidFor>
-              <h1>Yay, you bought a sweet couch!</h1>
-            </div>
-            <div #paypal></div>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="categorias container mx-auto">
-  <!--No cursos-->
-  <div class="col-md-12 p-2" *ngIf="listaCursos.length==0">
-    <div class="card mb-12">
-      <h3>No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
-      <div class="text-center mt-3">
-        <button type="button" class="btn btn-danger btn-lg" [routerLink]="['/']">Ver cursos</button>
-      </div>
-    </div>
-  </div>
-  <!--No cursos-->
+<div [hidden]="total==0" class="text-center mt-3">
+  <h1>¡Pagar ahora!</h1>
+  <div #paypal></div>
 </div>
+
 <br>
 <br>
 <br>
