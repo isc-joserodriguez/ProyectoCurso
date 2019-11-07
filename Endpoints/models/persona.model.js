@@ -20,14 +20,23 @@ const personaSchema = new mongoose.Schema({
     yt: { type: String, default: ' ' },
     in: { type: String, default: ' ' },
     cursoMaestro: [{}],
-    insignias: [{ idInsignia: { type: Number }, ruta: { type: String } }],
-    cursoAlumno: [{
-        ruta: { type: String, required: true }, fecha: { type: Date, default: Date.now() }, avance: { type: String, default: '0-0-0' }, estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
+    insignias: [{ 
+        idInsignia: { type: Number }, 
+        ruta: { type: String } 
     }],
-    carrito: [{ _id: { type: String, required: true }, codigos: [{ _id: { type: String } }] }],
-    historialCompra: [{ _id: { type: String, required: true } }],
-    historialCobro: [{ _id: { type: String, required: true } }],
-    metodosPago: [{ _id: { type: String, required: true }, numero: { type: String, required: true }, mes: { type: Number, required: true }, año: { type: Number, required: true }, cvc: { type: Number, required: true } }],
+    cursoAlumno: [{
+        ruta: { type: String, required: true }, 
+        fecha: { type: Date, default: Date.now() }, 
+        avance: { type: String, default: '0-0-0' }, 
+        estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
+    }],
+    carrito: [{ 
+        _id: { type: String, required: true }, 
+        codigos: [{ _id: { type: String } }] 
+    }],
+    historialCompra: [{ 
+        _id: { type: String, required: true } 
+    }],
     certificados: [{
         ruta: { type: String, default: 'N/A' },
         nombre: { type: String, required: true },
@@ -36,7 +45,13 @@ const personaSchema = new mongoose.Schema({
     }],
     identificacion: { type: String },
     curriculum: { type: String },
-    notificaciones: [{ _id: { type: String, required: true }, personaId: { type: String, required: true }, fecha: { type: Date, required: true }, descripción: { type: String, required: true }, estado: { type: Boolean, required: true } }],
+    notificaciones: [{ 
+        _id: { type: String, required: true }, 
+        personaId: { type: String, required: true }, 
+        fecha: { type: Date, required: true }, 
+        descripción: { type: String, required: true }, 
+        estado: { type: Boolean, required: true } 
+    }],
     resumen: { type: String, default: ' ' },
     puntaje: { type: Number, default: 0 },
     ruta: { type: String }
