@@ -3,15 +3,21 @@
 <br>
 <br>
 <br>
+<br>
 <div class="categorias container mx-auto">
   <!--No cursos-->
-  <div class="col-md-12 p-2" *ngIf="listaCursos.length==0">
-    <div class="card mb-12">
-      <h3>No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
-      <div class="text-center mt-3">
+  <div class="col-md-12 p-2 mt-3" *ngIf="listaCursos.length==0">
+    <div class="card mb-12 text-center descri">
+      <label>
+        <img class="icon-carrito mt-1" src="./../../../assets/icons/carrovacio.svg">
+      </label>
+      <h3 class="mt-2">No se encontró ningún curso. ¡Anímate a adquirir uno nuevo!</h3>
+      <div class="text-center mt-3 mb-2">
         <button type="button" class="btn btn-danger btn-lg" [routerLink]="['/']">Ver cursos</button>
       </div>
     </div>
+    <br>
+    <br><br>
   </div>
   <!--No cursos-->
 </div>
@@ -47,9 +53,11 @@
         <div>
           <ul class="list-group">
             <li class="list-group-item descrinuevo" *ngFor="let curso of listaCursos">
-              <div class="d-flex bd-highlight">
-                <div class="mr-auto p-2 bd-highlight">{{curso.nombre}}</div>
-                <div class="p-2 bd-highlight">$ {{curso.precio}}</div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-8 text-break">{{curso.nombre}}</div>
+                  <div class="col-md-4">$ {{curso.precio}}</div>
+                </div>
               </div>
             </li>
           </ul>
