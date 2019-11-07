@@ -28,6 +28,27 @@ export class CertificadosComponent implements OnInit {
           });
         });
       });
+      this.certificados = [{
+        nombreCurso: 'Curso',
+        imagen: 'http://www.lorempixel.com/200/200',
+        fecha: Date.now(),
+        url: 'http://www.google.com'
+      }, {
+        nombreCurso: 'Curso',
+        imagen: 'http://www.lorempixel.com/200/200',
+        fecha: Date.now(),
+        url: 'http://www.google.com'
+      }, {
+        nombreCurso: 'Curso',
+        imagen: 'http://www.lorempixel.com/200/200',
+        fecha: Date.now(),
+        url: 'http://www.google.com'
+      }, {
+        nombreCurso: 'Curso',
+        imagen: 'http://www.lorempixel.com/200/200',
+        fecha: Date.now(),
+        url: 'http://www.google.com'
+      }]
     });
   }
 
