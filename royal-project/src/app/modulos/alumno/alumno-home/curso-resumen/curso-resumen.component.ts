@@ -10,6 +10,18 @@ declare let videojs: any;
   styleUrls: ['./curso-resumen.component.scss']
 })
 export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
+  promedios = {
+    uno: 0,
+    dos: 0,
+    tres: 0,
+    cuatro: 0,
+    cinco: 0,
+  }
+  ratingGeneral = 0;
+  rating = 5;
+  review = '';
+  indexRev = -1;
+  valoraciones = [];
   infoCurso: any = {
     idMaestro: 0,
     nombreCompleto: '',
@@ -21,7 +33,8 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
     objetivos: [],
     contenidoCurso: [{}],
     imagen: '',
-    alumnosInscritos: []
+    alumnosInscritos: [],
+    valoraciones: []
   };
   infoMaestro = {
     foto: '',
@@ -50,6 +63,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.valoraciones = curso.detail[0].valoraciones;
       this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
       this.infoCurso.precio = curso.detail[0].precio;
       this.infoCurso.imagen = curso.detail[0].imagen;
@@ -78,6 +92,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
       this.getAvance(localStorage.getItem('userid'));
       this.getInfoMaestro(curso.detail[0].idMaestro);
+      this.getValoraciones();
     });
   }
   getAvance(id) {
@@ -130,9 +145,73 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     }
+  }
+  getValoraciones() {
+    this.infoCurso.valoraciones.forEach((valoracion, index) => {
+      if (valoracion.idPersona == localStorage.getItem('userid')) {
+        this.indexRev = index;
+        this.review = valoracion.comentario;
+        this.rating = valoracion.puntuacion;
+      } else {
+        this.usuarios.getUser(valoracion.idPersona).subscribe((usuario: any) => {
+          this.valoraciones.push({
+            nombre: usuario.detail[0].nombre + ' ' + usuario.detail[0].apMaterno + ' ' + usuario.detail[0].apMaterno,
+            cursos: usuario.detail[0].cursoAlumno.length,
+            insignias: usuario.detail[0].insignias.length,
+            foto: usuario.detail[0].foto,
+            ruta: usuario.detail[0].ruta,
+            comentario: valoracion.comentario,
+            puntuacion: valoracion.puntuacion
+          })
+        })
+      }
+      this.getPromedios();
+    });
+  }
+  getPromedios() {
+    this.promedios = {
+      uno: 0,
+      dos: 0,
+      tres: 0,
+      cuatro: 0,
+      cinco: 0,
+    }
+    var puntaje = 0;
+    this.infoCurso.valoraciones.forEach(valoracion => {
+      puntaje = puntaje + valoracion.puntuacion;
+      if (valoracion.puntuacion == 5) {
+        this.promedios.cinco = this.promedios.cinco + 1;
+      } else if (valoracion.puntuacion == 4) {
+        this.promedios.cuatro = this.promedios.cuatro + 1;
+      } else if (valoracion.puntuacion == 3) {
+        this.promedios.tres = this.promedios.tres + 1;
+      } else if (valoracion.puntuacion == 2) {
+        this.promedios.dos = this.promedios.dos + 1;
+      } else if (valoracion.puntuacion == 1) {
+        this.promedios.uno = this.promedios.uno + 1;
+      }
+    });
+
+    this.promedios.cinco = Math.round((this.promedios.cinco * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.cuatro = Math.round((this.promedios.cuatro * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.tres = Math.round((this.promedios.tres * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.dos = Math.round((this.promedios.dos * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.uno = Math.round((this.promedios.uno * 100) / this.infoCurso.valoraciones.length);
+    console.log(this.promedios);
+    this.ratingGeneral = Math.round(puntaje / this.infoCurso.valoraciones.length);
 
   }
-
-
-
+  subirReview() {
+    if (this.indexRev != -1) {
+      this.infoCurso.valoraciones.splice(this.indexRev, 1);
+    }
+    this.infoCurso.valoraciones.push({
+      idPersona: localStorage.getItem('userid'),
+      comentario: this.review,
+      puntuacion: this.rating
+    });
+    this.curso.updateReview(this.route.snapshot.params.id, { valoraciones: this.infoCurso.valoraciones }).subscribe(res => {
+      this.getInfoCurso(this.route.snapshot.params.id);
+    });
+  }
 }

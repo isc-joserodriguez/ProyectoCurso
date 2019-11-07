@@ -52,7 +52,10 @@ module.exports = (wagner) => {
     cursoRouter.put("/updateInsignias/:id", (req, res) => {
         cursoCtrl.updateInsignias(req, res);
     });
-    
+
+    cursoRouter.put("/updateReview/:id", (req, res) => {
+        cursoCtrl.updateReview(req, res);
+    });
 
     cursoRouter.put("/updateFotoVideo/:id", (req, res) => {
         cursoCtrl.updateFotoVideo(req, res);

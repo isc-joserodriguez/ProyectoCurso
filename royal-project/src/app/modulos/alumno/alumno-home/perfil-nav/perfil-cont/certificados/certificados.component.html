@@ -1,3 +1,35 @@
-<p>
-  certificados works!
-</p>
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <div class="card">
+      <div class="card-header paqueteshome text-center text-white">
+        Certificados
+      </div>
+      <div class="card-body descri">
+        <div class="row" *ngFor="let certificado of certificados">
+          <div class="card mb-3 mx-3" style="max-width: 350px;">
+            <div class="row no-gutters">
+              <div class="col-md-4 vertical-center">
+                <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:100px; height:100px;">
+                  <img [src]="certificado.imagen" width="100" height="100">
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{certificado.nombreCurso}}</h5>
+                  <p class="card-text">Fecha de Obtención: {{certificado.fecha | date}}</p>
+                  <div class="text-right">
+                    <a [href]="certificado.url" target="_blank" rel="noopener noreferrer">
+                      <button mat-mini-fab color="success">
+                        <img class="icon-check" src="./../../../../../../../assets/icons/down.svg">
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

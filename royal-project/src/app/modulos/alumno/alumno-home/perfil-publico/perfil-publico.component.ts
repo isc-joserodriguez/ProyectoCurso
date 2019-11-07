@@ -67,7 +67,6 @@ export class PerfilPublicoComponent implements OnInit {
             fecha: certificado.fecha,
             url: certificado.url
           });
-
         });
       });
 

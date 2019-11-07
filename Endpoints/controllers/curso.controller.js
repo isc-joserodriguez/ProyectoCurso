@@ -331,6 +331,31 @@ const updateInsignias = (req, res) => {
     });
 };
 
+const updateReview = (req, res) => {
+    const ruta = req.params.id;
+    const valoraciones = req.body.valoraciones;
+    _curso.update({ ruta: ruta }, {
+        $set: {
+            valoraciones: valoraciones
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+};
+
 const inscribirAlumno = (req, res) => {
     const id = req.params.id;
     alumnosInscritos = req.body
@@ -388,6 +413,6 @@ const update = (req, res) => {
 module.exports = (Curso) => {
     _curso = Curso;
     return ({
-        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda, updateFotoVideo, updateTemario, updateObjetivos, inscribirAlumno, updateInsignias
+        getAll, create, deleteCurso, getById, update, getCursosMaestro, getSubcategorias, getCursosSolicitudes, getCursosAprobados, getCursosRechazados, updateEstado, getBusqueda, updateFotoVideo, updateTemario, updateObjetivos, inscribirAlumno, updateInsignias, updateReview
     });
 }

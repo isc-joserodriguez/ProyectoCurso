@@ -32,7 +32,7 @@
                       <p class="card-title">${{curso.precio}}</p>
                     </div>
                     <div class="col-4">
-                      <a href="#" class="btn btn-primary">Ir al curso</a>
+                      <a class="btn btn-primary" [routerLink]="['/curso',curso.ruta,'vista']">Ir al curso</a>
                     </div>
                   </div>
 
@@ -45,7 +45,8 @@
           <br>
           <mat-divider></mat-divider>
         </div>
-        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+        </pagination-controls>
         <div class="col-md-12 p-2" *ngIf="listaCursos.length==0">
           <div class="card mb-12">
             <h3>No se encontró ningún resultado. Asegurate de haber usado acentos.</h3>

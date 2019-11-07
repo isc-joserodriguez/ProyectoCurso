@@ -2,7 +2,6 @@
 <br>
 <br>
 <br>
-
 <div class="col-md-12 px-0 paqueteshome">
   <h2 class="p-3 letracursotitulo"><b>{{categoria}}</b></h2>
 </div>
@@ -31,7 +30,8 @@
                     <p class="preciocar">${{curso.precio}}</p>
                   </div>
                   <div class="col-md-4">
-                    <button type="button" class="btn colorbtn btn-lg">Ir al curso</button>
+                    <button type="button" class="btn colorbtn btn-lg" [routerLink]="['/curso',curso.ruta,'vista']">Ir al
+                      curso</button>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@
                       <p class="card-title">${{curso.precio}}</p>
                     </div>
                     <div class="col-4">
-                      <a href="#" class="btn colorbtn">Ir al curso</a>
+                      <a class="btn colorbtn" [routerLink]="['/curso',curso.ruta,'vista']">Ir al curso</a>
                     </div>
                   </div>
                 </div>
@@ -102,7 +102,8 @@
           <br>
           <mat-divider></mat-divider>
         </div>
-        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+        <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+        </pagination-controls>
       </div>
     </div>
   </div>
