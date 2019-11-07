@@ -71,4 +71,8 @@ export class CursosService {
     return this.http.put(apiUrl + '/inscribirAlumno/' + id, datos);
   }
 
+  agregarComentario(ruta, comentarios) {
+    return this.http.put(apiUrl + '/agregarComentario/' + ruta, comentarios);
+  }
+
 }

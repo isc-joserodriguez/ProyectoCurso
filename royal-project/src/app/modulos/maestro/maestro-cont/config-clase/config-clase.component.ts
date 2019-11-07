@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { CKEditorComponent } from 'ng2-ckeditor/esm5/ckeditor.component.js';
 declare let videojs: any;
@@ -17,11 +18,21 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   mycontent: string;
   log: string = '';
   @ViewChild(CKEditorComponent) ckeditor: CKEditorComponent;
-
-
   numPlantilla = 0;
 
-  infoClase: any = {};
+  respuestaCom = '';
+  responderIndex = -1;
+  infoRespuestas = [];
+
+  infoClase: any = {
+    clase: '',
+    tipoPlantilla: 0,
+    video: '',
+    texto: '',
+    recursos: { activo: false, urls: [] },
+    tarea: { activo: false, envios: [] },
+    comentarios: []
+  };
 
   temario = [];
   listaRecursos = [];
@@ -63,13 +74,13 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   editado = 0;
   editar = false;
 
-  constructor(private firebase: FirebaseService, private route: ActivatedRoute, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
+  constructor(private usuarios: UsuariosService, private firebase: FirebaseService, private route: ActivatedRoute, private router: Router, private cursos: CursosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.ckeConfig = {
       allowedContent: false,
       forcePasteAsPlainText: true,
-      extraPlugins: ['colorbutton','divarea'],
+      extraPlugins: ['colorbutton', 'divarea'],
 
       font_names: 'Arial;Times New Roman;Verdana',
       toolbarGroups: [
@@ -123,6 +134,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       this.temario = res.detail[0].contenidoCurso;
       this.portada = res.detail[0].imagen;
       this.infoClase = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1];
+      console.log(this.infoClase);
       this.nombreClase = this.infoClase.clase;
       this.numPlantilla = this.infoClase.tipoPlantilla;
       //Agregar video
@@ -152,6 +164,35 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
         this.tarea = true;
         this.getTarea()
       }
+      this.infoRespuestas = [];
+      this.infoClase.comentarios.forEach(respuesta => {
+        this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
+          var respuestas = [];
+          respuesta.respuestas.forEach(respuestaCom => {
+            this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
+              let resCom: any = {
+                nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
+                comentario: respuestaCom.comentario,
+                fecha: respuestaCom.fecha,
+                foto: usuarioCom.detail[0].foto,
+                id: respuestaCom.idPersona,
+                ruta: usuarioCom.detail[0].ruta
+              }
+              respuestas.push(resCom);
+            });
+          });
+          let nuevaRes: any = {
+            nombreCompleto: usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno,
+            comentario: respuesta.comentario,
+            fecha: respuesta.fecha,
+            foto: usuario.detail[0].foto,
+            id: respuesta.idPersona,
+            ruta: usuario.detail[0].ruta,
+            respuestas: respuestas
+          }
+          this.infoRespuestas.push(nuevaRes);
+        });
+      });
     });
   }
 
@@ -374,5 +415,22 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
 
   recargarVideo() {
     this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
+  }
+
+  responder(index) {
+    this.responderIndex = index;
+    this.respuestaCom = '';
+  }
+  enviarRespuestaCom() {
+    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1].comentarios[this.responderIndex].respuestas.push({
+      idPersona: localStorage.getItem('userid'),
+      comentario: this.respuestaCom
+    });
+
+    this.cursos.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
+      this.infoCurso(this.route.snapshot.params.id);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
   }
 }

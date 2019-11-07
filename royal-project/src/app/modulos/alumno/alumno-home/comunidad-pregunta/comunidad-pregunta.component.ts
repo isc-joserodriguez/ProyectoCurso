@@ -30,9 +30,7 @@ export class ComunidadPreguntaComponent implements OnInit {
   numPreguntas = 0;
   respuestaCom = '';
   responderIndex = -1;
-
-
-
+  
   infoPersona = {
     foto: '',
     nombreCompleto: '',

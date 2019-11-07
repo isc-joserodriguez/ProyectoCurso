@@ -42,6 +42,8 @@ import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestr
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent, MaestroNuevaInsigniaComponent, MaestroInsigniaEditarComponent],
   imports: [
@@ -63,7 +65,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     MatTabsModule,
     MatPaginatorModule,
     MatAutocompleteModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxPaginationModule
   ]
 })
 export class MaestroContModule { }

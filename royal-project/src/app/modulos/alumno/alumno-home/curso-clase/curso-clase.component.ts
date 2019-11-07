@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -12,6 +12,13 @@ declare let videojs: any;
   styleUrls: ['./curso-clase.component.scss']
 })
 export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
+  //pagination
+  p: number = 1;
+
+  respuestaCom = '';
+  responderIndex = -1;
+  infoRespuestas = [];
+
   infoCurso: any = {
     contenidoCurso: [{}],
     imagen: '',
@@ -39,10 +46,14 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   indexTarea = 0;
   infoTarea: any = {};
   tareaForm: FormGroup;
+  respuestaForm: FormGroup;
   constructor(private firebase: FirebaseService, private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
+      this.respuestaForm = this.formBuilder.group({
+        respuesta: ['', Validators.required]
+      });
       this.tareaForm = this.formBuilder.group({
         tarea: ['']
       });
@@ -74,7 +85,35 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       this.player.poster(this.infoCurso.imagen);
       this.setAvance(localStorage.getItem('userid'));
       this.getTareas();
-
+      this.infoRespuestas = [];
+      this.infoClase.comentarios.forEach(respuesta => {
+        this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
+          var respuestas = [];
+          respuesta.respuestas.forEach(respuestaCom => {
+            this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
+              let resCom: any = {
+                nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
+                comentario: respuestaCom.comentario,
+                fecha: respuestaCom.fecha,
+                foto: usuarioCom.detail[0].foto,
+                id: respuestaCom.idPersona,
+                ruta: usuarioCom.detail[0].ruta
+              }
+              respuestas.push(resCom);
+            });
+          });
+          let nuevaRes: any = {
+            nombreCompleto: usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno,
+            comentario: respuesta.comentario,
+            fecha: respuesta.fecha,
+            foto: usuario.detail[0].foto,
+            id: respuesta.idPersona,
+            ruta: usuario.detail[0].ruta,
+            respuestas: respuestas
+          }
+          this.infoRespuestas.push(nuevaRes);
+        });
+      });
     });
   }
 
@@ -186,5 +225,35 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
 
+  }
+
+  enviarRespuesta() {
+    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios.push({
+      idPersona: localStorage.getItem('userid'),
+      comentario: this.respuestaForm.value.respuesta
+    });
+    //console.log(this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios)
+    this.curso.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
+      this.getInfoClase(this.route.snapshot.params.id);
+      this.respuestaForm.setValue({
+        respuesta: ' '
+      });
+    });
+  }
+  responder(index) {
+    this.responderIndex = index;
+    this.respuestaCom = '';
+  }
+  enviarRespuestaCom() {
+    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[this.responderIndex].respuestas.push({
+      idPersona: localStorage.getItem('userid'),
+      comentario: this.respuestaCom
+    });
+
+    this.curso.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
+      this.getInfoClase(this.route.snapshot.params.id);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
   }
 }
