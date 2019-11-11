@@ -214,6 +214,12 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
       this.mostrarFormObjetivo = false;
     });
   }
+  eliminarObjetivo(i) {
+    this.infoCurso.objetivos.splice(i, 1);
+    this.cursos.updateObjetivos(this.route.snapshot.params.id, { objetivos: this.infoCurso.objetivos }).subscribe(res => {
+      this.mostrarFormObjetivo = false;
+    });
+  }
 
   editarObjetivo(i) {
     this.mostrarFormObjetivo = true;

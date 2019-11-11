@@ -3,6 +3,11 @@
 <br>
 <br>
 <div class="col-md-12">
+  <div class="card-header paqueteshome text-center text-white" *ngIf="evaluacion">
+    <h1>
+      Evaluación
+    </h1>
+  </div>
   <div class="container divisorbot">
     <div class="row pl-5">
       <label class="h1 letracursotitulo mb-0"><b> {{infoClase.clase}} </b></label>
@@ -12,7 +17,7 @@
   <div class="row px-0" style="background-color:rgb(0, 0, 0)">
     <div class="container">
       <div class="col-md-10 offset-md-1">
-        <div class="video">
+        <div class="video" [hidden]="!video">
           <video oncontextmenu="return false" controlsList="nodownload" id='videoId' class='video-js' controls
             preload='auto' width='900' height='500' [poster]='infoCurso.imagen'>
           </video>
@@ -167,8 +172,8 @@
                   <!-- Respuesta al comentario -->
                   <div *ngIf="responderIndex==i">
                     <mat-form-field appearance="outline" class="field-login">
-                      <textarea matInput placeholder="Agrega un comentario" cdkTextareaAutosize
-                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="10" [(ngModel)]="respuestaCom"></textarea>
+                      <textarea matInput placeholder="Agrega un comentario" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="10" [(ngModel)]="respuestaCom"></textarea>
                     </mat-form-field>
 
                     <div class="text-right pr-4 pb-3">
@@ -188,8 +193,8 @@
             <form [formGroup]="respuestaForm">
               <h5 id="caja"> Respuesta:</h5>
               <mat-form-field appearance="outline" class="field-login">
-                <textarea matInput placeholder="Agrega un comentario" cdkTextareaAutosize
-                  cdkAutosizeMinRows="2" cdkAutosizeMaxRows="10" formControlName="respuesta"></textarea>
+                <textarea matInput placeholder="Agrega un comentario" cdkTextareaAutosize cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="10" formControlName="respuesta"></textarea>
               </mat-form-field>
               <div class="text-right pr-4 pb-3">
                 <button [disabled]="!respuestaForm.valid || respuestaForm.value.respuesta==' '" type="button"

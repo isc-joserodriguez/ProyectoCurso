@@ -19,23 +19,18 @@ const personaSchema = new mongoose.Schema({
     fb: { type: String, default: ' ' },
     yt: { type: String, default: ' ' },
     in: { type: String, default: ' ' },
-    cursoMaestro: [{}],
-    insignias: [{ 
-        idInsignia: { type: Number }, 
-        ruta: { type: String } 
+    cursoMaestro: [{
+        ruta: { type: String, required: true }
+    }],
+    insignias: [{
+        idInsignia: { type: Number },
+        ruta: { type: String }
     }],
     cursoAlumno: [{
-        ruta: { type: String, required: true }, 
-        fecha: { type: Date, default: Date.now() }, 
-        avance: { type: String, default: '0-0-0' }, 
+        ruta: { type: String, required: true },
+        fecha: { type: Date, default: Date.now() },
+        avance: { type: String, default: '0-0-0' },
         estadoCurso: { type: Number, default: 0 } //0 - Sin terminar | 1- terminado
-    }],
-    carrito: [{ 
-        _id: { type: String, required: true }, 
-        codigos: [{ _id: { type: String } }] 
-    }],
-    historialCompra: [{ 
-        _id: { type: String, required: true } 
     }],
     certificados: [{
         ruta: { type: String, default: 'N/A' },
@@ -45,16 +40,17 @@ const personaSchema = new mongoose.Schema({
     }],
     identificacion: { type: String },
     curriculum: { type: String },
-    notificaciones: [{ 
-        _id: { type: String, required: true }, 
-        personaId: { type: String, required: true }, 
-        fecha: { type: Date, required: true }, 
-        descripción: { type: String, required: true }, 
-        estado: { type: Boolean, required: true } 
+    notificaciones: [{
+        _id: { type: String, required: true },
+        personaId: { type: String, required: true },
+        fecha: { type: Date, required: true },
+        descripción: { type: String, required: true },
+        estado: { type: Boolean, required: true }
     }],
     resumen: { type: String, default: ' ' },
     puntaje: { type: Number, default: 0 },
-    ruta: { type: String }
+    ruta: { type: String },
+    royal: { type: Number, default: 0 }//0-Normal | 1-Royal
 });
 
 //modelo Persona

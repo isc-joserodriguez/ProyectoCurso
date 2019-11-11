@@ -80,8 +80,14 @@
         <div class="row">
           <div class="col-md-6 pt-2">
             <ul *ngFor="let objetivo of infoCurso.objetivos; let i=index">
-              <li>{{objetivo.objetivo}} <button mat-mini-fab (click)="editarObjetivo(i)" color="trans"><img
-                    class="icon-edit" src="./../../../assets/icons/edit.svg"></button>
+              <li>
+                {{objetivo.objetivo}}
+                <button mat-mini-fab (click)="editarObjetivo(i)" color="trans">
+                  <img class="icon-edit" src="./../../../assets/icons/edit.svg">
+                </button>
+                <button mat-mini-fab color="trans" (click)="eliminarObjetivo(i)" class="ml-2">
+                  <img class="icon-edit" src="./../../../assets/icons/remover.svg">
+                </button>
               </li>
             </ul>
             <br>

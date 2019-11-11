@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
@@ -12,8 +12,9 @@ declare let videojs: any;
   templateUrl: './config-clase.component.html',
   styleUrls: ['./config-clase.component.scss']
 })
-export class ConfigClaseComponent implements OnInit, OnDestroy {
+export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   name = 'ng2-ckeditor';
+  player: any;
   ckeConfig: any;
   mycontent: string;
   log: string = '';
@@ -31,7 +32,8 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
     texto: '',
     recursos: { activo: false, urls: [] },
     tarea: { activo: false, envios: [] },
-    comentarios: []
+    comentarios: [],
+    evaluacion: false
   };
 
   temario = [];
@@ -63,11 +65,12 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   porcentajeRecurso = 0;
 
   videoForm: FormGroup;
-  textoForm: FormGroup;
   recursosForm: FormGroup;
   tareaForm: FormGroup;
   recursos = false;
+  video = false;
   tarea = false;
+  evaluacion = false;
   mostrarFormRecurso = false;
   mostrarFormTarea = false;
 
@@ -108,9 +111,6 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       video: [''],
       texto: ['', Validators.required]
     });
-    this.textoForm = this.formBuilder.group({
-      texto: ['', Validators.required]
-    });
     this.recursosForm = this.formBuilder.group({
       urlRecurso: [''],
       textoRecurso: ['', Validators.required]
@@ -123,10 +123,11 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.numPlantilla == 0) {
-      var oldPlayer = document.getElementById('videoId');
-      videojs(oldPlayer).dispose();
-    }
+    var oldPlayer = document.getElementById('videoId');
+    videojs(oldPlayer).dispose();
+  }
+  ngAfterViewInit(): void {
+    this.player = videojs("videoId");
   }
 
   infoCurso(id) {
@@ -134,25 +135,16 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       this.temario = res.detail[0].contenidoCurso;
       this.portada = res.detail[0].imagen;
       this.infoClase = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1];
-      console.log(this.infoClase);
+      this.infoClase.evaluacion = this.evaluacion = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1].evaluacion;
       this.nombreClase = this.infoClase.clase;
       this.numPlantilla = this.infoClase.tipoPlantilla;
+      this.video = (this.numPlantilla == 0) ? true : false;
       //Agregar video
-      videojs("videoId", {
-        sources: [{
-          src: this.infoClase.video,
-          type: 'video/mp4'
-        }]
-      }, function () {
-        // Player (this) is initialized and ready.
-      });
+      this.player.src({ type: "video/mp4", src: this.infoClase.video });
+      this.player.poster(this.portada);
 
       this.videoForm.setValue({
         video: '',
-        texto: this.infoClase.texto
-      });
-
-      this.textoForm.setValue({
         texto: this.infoClase.texto
       });
 
@@ -242,7 +234,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
           referencia.getDownloadURL().subscribe((URL) => {
             this.infoClase.video = URL;
             this.infoClase.texto = this.videoForm.value.texto;
-            this.infoClase.tipoPlantilla = 0;
+            this.infoClase.tipoPlantilla = (this.video) ? 0 : 1;
             this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
             this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
               this.finalizadoVideo = true;
@@ -268,7 +260,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       });
     } else {
       this.infoClase.texto = this.videoForm.value.texto;
-      this.infoClase.tipoPlantilla = 0;
+      this.infoClase.tipoPlantilla = (this.video) ? 0 : 1;
       this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
       this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
         this.finalizadoVideo = true;
@@ -276,18 +268,6 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
         this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
       });
     }
-  }
-
-  subirTexto() {
-    this.infoClase.texto = this.textoForm.value.texto;
-    this.infoClase.tipoPlantilla = 1;
-    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
-    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
-      this.videoForm.setValue({
-        video: '',
-        texto: this.textoForm.value.texto
-      })
-    });
   }
 
   getRecursos() {
@@ -382,6 +362,20 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
       });
     }
   }
+  cambiarRecurso() {
+    this.infoClase.recursos.activo = !this.infoClase.recursos.activo;
+    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
+    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
+      this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
+    });
+  }
+  eliminarRecurso(i) {
+    this.infoClase.recursos.urls.splice(i, 1);
+    this.infoClase.recursos.activo = (this.infoClase.recursos.urls.length == 0) ? false : true;
+    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
+      this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
+    });
+  }
 
   editarRecurso(i) {
     this.mostrarFormRecurso = true;
@@ -394,13 +388,27 @@ export class ConfigClaseComponent implements OnInit, OnDestroy {
   }
 
   subirTarea() {
-    this.infoClase.tarea = {
-      activo: true,
-      instruccion: this.tareaForm.value.instruccion
-    };
+    this.infoClase.tarea.activo = true;
+    this.infoClase.tarea.instruccion = this.tareaForm.value.instruccion;
     this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
     this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
       this.router.navigate(['/maestro/curso/config/', this.route.snapshot.params.id, 'redirec', this.unidad + '-' + this.subtema + '-' + this.clase]);
+    });
+  }
+  cambiarTarea() {
+    this.infoClase.tarea.activo = !this.infoClase.tarea.activo;
+    if (this.infoClase.tarea.activo == false) this.infoClase.evaluacion = false
+    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
+    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
+      this.infoCurso(this.route.snapshot.params.id);
+    });
+  }
+  cambiarEvaluacion() {
+    this.infoClase.evaluacion = !this.infoClase.evaluacion;
+    this.infoClase.tarea.activo = this.infoClase.evaluacion;
+    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1] = this.infoClase;
+    this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
+      this.infoCurso(this.route.snapshot.params.id);
     });
   }
 
