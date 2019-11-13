@@ -48,11 +48,12 @@ export class ComunidadComponent implements OnInit {
               cursos: info.detail[0].cursoAlumno.length,
               fecha: pregunta.fecha,
               foto: info.detail[0].foto,
+              rutaPersona: info.detail[0].ruta,
               id: pregunta.idPersona,
               detalles: pregunta.detalles,
               pregunta: pregunta.pregunta,
               ruta: pregunta.ruta,
-              nombre: info.detail[0].nombre + ' '+info.detail[0].apPaterno + ' '+info.detail[0].apMaterno
+              nombre: info.detail[0].nombre + ' ' + info.detail[0].apPaterno + ' ' + info.detail[0].apMaterno
             });
 
           });
@@ -73,7 +74,7 @@ export class ComunidadComponent implements OnInit {
     this.router.navigate(['/comunidad/nueva', this.categoria]);
   }
 
-  
+
 
 
 

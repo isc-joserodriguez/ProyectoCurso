@@ -21,7 +21,7 @@ const cursoSchema = new mongoose.Schema({
                 subtema: { type: String },
                 clases: [{
                     clase: { type: String },
-                    evaluacion: { type: Boolean },
+                    evaluacion: { type: Boolean, default: false },
                     tipoPlantilla: { type: Number, default: 0 },//0 - Video y Texto | 1 - Texto
                     video: { type: String, default: 'http://vjs.zencdn.net/v/oceans.mp4' },
                     texto: { type: String, default: '' },
@@ -57,7 +57,12 @@ const cursoSchema = new mongoose.Schema({
             }]
         }
     ],
-    insignias: [{ nombreInsignia: { type: String }, descripcionInsignia: { type: String }, imagen: { type: String }, otorgadas: { type: Number, default: 0 } }],
+    insignias: [{
+        nombreInsignia: { type: String },
+        descripcionInsignia: { type: String },
+        imagen: { type: String },
+        otorgadas: { type: Number, default: 0 }
+    }],
     precio: { type: Number },
     cursosRelacionados: [{ _id: { type: String, required: true } }],
     estado: { type: Number, default: 1 }, //1:En revisión, 2:Aceptado, 3:Rechazado
@@ -65,8 +70,15 @@ const cursoSchema = new mongoose.Schema({
     fechaSolicitud: { type: Date, default: Date.now() },
     royal: { type: Boolean, default: false },
     notas: { type: String },
-    alumnosInscritos: [{ idAlumno: { type: Number } }],
-    reportes: [{ idAlumno: { type: Number }, ruta: { type: String }, clase: { type: String }, numReportes: { type: Number } }],
+    alumnosInscritos: [{
+        idAlumno: { type: Number }
+    }],
+    reportes: [{
+        idAlumno: { type: Number },
+        ruta: { type: String },
+        clase: { type: String },
+        numReportes: { type: Number }
+    }],
     valoraciones: [{
         idPersona: { type: String, required: true },
         comentario: { type: String, required: true },

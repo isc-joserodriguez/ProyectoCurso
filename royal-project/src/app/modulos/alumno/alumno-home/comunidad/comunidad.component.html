@@ -42,7 +42,7 @@
               <ul class="list-unstyled field-login" *ngFor="let pregunta of listaPreguntas">
                 <li class="media">
 
-                  <a href="">
+                  <a [href]="'/alumno/perfil-publico/'+pregunta.rutaPersona" target="_blank" rel="noopener noreferrer">
                     <div class="imgLiquidFill imgLiquid ml-2 " style="width:90px; height:90px;">
                       <img [src]="pregunta.foto" class="rounded-circle sombrabaja" alt="Cinque Terre" width="90"
                         height="90">

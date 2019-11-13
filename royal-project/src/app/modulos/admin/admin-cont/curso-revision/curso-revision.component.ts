@@ -49,8 +49,8 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
       this.infoCurso.introduccionVideo = curso.detail[0].introduccionVideo;
       this.infoCurso.imagen = curso.detail[0].imagen;
       this.infoCurso.descripcion = curso.detail[0].descripcionCurso;
-      this.infoCurso.valoracion = 5;
-      this.infoCurso.inscritos = 5;
+      this.infoCurso.valoracion = 0;
+      this.infoCurso.inscritos = 0;
       this.infoCurso.notas = curso.detail[0].notas;
       this.infoCurso.objetivos = curso.detail[0].objetivos;
       this.infoCurso.objetivos = [];

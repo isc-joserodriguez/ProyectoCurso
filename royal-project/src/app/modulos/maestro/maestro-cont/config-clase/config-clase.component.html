@@ -6,91 +6,75 @@
         <b>Clase {{clase}}: {{nombreClase}}</b>
       </div>
       <div class="container descridos">
-        <mat-tab-group mat-stretch-tabs [selectedIndex]="numPlantilla" (selectedIndexChange)="numPlantilla=($event)">
-          <!-- Tab: Video y Texto -->
-          <mat-tab label="Video y Texto">
-            <div class="col-md-12">
-              <mat-card>
-                <mat-card-header class="justify-content-center mb-2">
-
-                  <div class="col-md-7 text-right vertical-center">
-                    <h4 class="letrastar">Video principal</h4>
-                  </div>
-                  <div class="col-md-5 text-right">
-                    <button mat-stroked-button (click)="recargarVideo()" data-toggle="tooltip" class="txtTodos"
-                      data-placement="right" title="Si existen problemas con el vídeo, puedes recargarlo">Recargar Video
-                      <img class="icon-remove" src="./../../../assets/icons/refrescar.svg"></button>
-                  </div>
-
-                </mat-card-header>
-                <video oncontextmenu="return false" controlsList="nodownload" mat-card-image id='videoId'
-                  class='video-js' controls preload='auto' width='200' height='250' [poster]='portada'>
-                </video>
-                <mat-card-content>
-                  <p class="text-center">
-                    Este video será el video principal de la clase.
-                  </p>
-                </mat-card-content>
-                <mat-card-actions>
-                  <form [formGroup]="videoForm">
-                    <div class="col-md-8 offset-md-2 mb-2">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Subir Video</span>
-                        </div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" formControlName="video"
-                            (change)="seleccionarVideo($event)">
-                          <label class="custom-file-label" for="inputGroupFile01">{{mensajeVideo}}</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <h4 class="letrastar">Descripción:</h4>
-                    </div>
-                    <ckeditor required [config]="ckeConfig" debounce="500" formControlName="texto">
-                    </ckeditor>
-                    <mat-error>
-                      <span *ngIf="!videoForm.get('texto').valid && videoForm.get('texto').touched">Agrega
-                        una descripción del curso.</span>
-                    </mat-error>
-                    <div class="mt-3 text-center">
-                      <button [disabled]="!videoForm.valid" color="letrasuccess" mat-stroked-button
-                        (click)="subirVideo()">Guardar Video y/o Descripción <img class="icon-edit"
-                          src="./../../../assets/icons/save.svg"></button>
-                      <mat-progress-bar *ngIf="!finalizadoVideo" mode="determinate" [value]="porcentajeVideo">
-                      </mat-progress-bar>
-                    </div>
-                  </form>
-                </mat-card-actions>
-              </mat-card>
+        <div class="col-md-12">
+          <mat-card>
+            <div class="row container pl-5 mb-3">
+              <div class="custom-control custom-switch">
+                <input id="evaluacion" type="checkbox" [checked]="evaluacion" class="custom-control-input" [(ngModel)]="evaluacion"
+                  (click)="cambiarEvaluacion()">
+                <label class="custom-control-label h4 letrastar" for="evaluacion">Evaluación</label>
+              </div>
             </div>
-          </mat-tab>
-          <!-- Tab: Video y Texto -->
-
-          <!-- Tab: Texto -->
-          <mat-tab label="">
-            <div class="col-md-12">
-              <mat-card>
-                <mat-card-header class="justify-content-center">
-                  <mat-card-title>Descripción de la clase:</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <form [formGroup]="textoForm">
-                    <mat-label>Descripción:</mat-label>
-                    <textarea matInput placeholder="Agrega la descripción de la clase" cdkTextareaAutosize
-                      cdkAutosizeMinRows="10" cdkAutosizeMaxRows="15" formControlName="texto"></textarea>
-                    <button [disabled]="!textoForm.valid" mat-stroked-button color="letrasuccess"
-                      (click)="subirTexto()">Guardar <img class="icon-edit"
-                        src="./../../../assets/icons/save.svg"></button>
-                  </form>
-                </mat-card-content>
-              </mat-card>
+            <mat-divider></mat-divider>
+            <mat-card-header class="justify-content-center mb-2">
+              <div class="col-md-7 text-right vertical-center">
+                <div class="custom-control custom-switch">
+                  <input id="video" type="checkbox" [checked]="video" class="custom-control-input" [(ngModel)]="video">
+                  <label class="custom-control-label h4 letrastar" for="video">Video principal</label>
+                </div>
+              </div>
+              <div class="col-md-5 text-right">
+                <button mat-stroked-button (click)="recargarVideo()" data-toggle="tooltip" class="txtTodos"
+                  data-placement="right" title="Si existen problemas con el vídeo, puedes recargarlo">Recargar Video
+                  <img class="icon-remove" src="./../../../assets/icons/refrescar.svg"></button>
+              </div>
+            </mat-card-header>
+            <br>
+            <br>
+            <div [hidden]="!video">
+              <video oncontextmenu="return false" controlsList="nodownload" mat-card-image id='videoId' class='video-js'
+                controls preload='auto' width='200' height='250' [poster]='portada'>
+              </video>
+              <mat-card-content>
+                <p class="text-center">
+                  Este video será el video principal de la clase.
+                </p>
+              </mat-card-content>
             </div>
-          </mat-tab>
-          <!-- Tab: Texto -->
-          <!--recursos-->
-        </mat-tab-group>
+            <mat-card-actions>
+              <form [formGroup]="videoForm">
+                <div class="col-md-8 offset-md-2 mb-2" [hidden]="!video">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Subir Video</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" formControlName="video"
+                        (change)="seleccionarVideo($event)">
+                      <label class="custom-file-label" for="inputGroupFile01">{{mensajeVideo}}</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <h4 class="letrastar">Descripción:</h4>
+                </div>
+                <ckeditor required [config]="ckeConfig" debounce="500" formControlName="texto">
+                </ckeditor>
+                <mat-error>
+                  <span *ngIf="!videoForm.get('texto').valid && videoForm.get('texto').touched">Agrega
+                    una descripción del curso.</span>
+                </mat-error>
+                <div class="mt-3 text-center">
+                  <button [disabled]="!videoForm.valid" color="letrasuccess" mat-stroked-button
+                    (click)="subirVideo()">Guardar Video y/o Descripción <img class="icon-edit"
+                      src="./../../../assets/icons/save.svg"></button>
+                  <mat-progress-bar *ngIf="!finalizadoVideo" mode="determinate" [value]="porcentajeVideo">
+                  </mat-progress-bar>
+                </div>
+              </form>
+            </mat-card-actions>
+          </mat-card>
+        </div>
         <br>
 
         <div class="col-md-12 pb-2">
@@ -99,19 +83,21 @@
             <div class="row container pl-5 mb-3">
               <div class="custom-control custom-switch">
                 <input id="recursos" type="checkbox" [checked]="recursos" class="custom-control-input"
-                  [(ngModel)]="recursos">
+                  [(ngModel)]="recursos" (click)="cambiarRecurso()">
                 <label class="custom-control-label h4 letrastar" for="recursos">Recursos</label>
               </div>
             </div>
             <div class="row">
 
-              <div class="col-md-4 mb-3" *ngIf="recursos">
+              <div class="col-md-5 mb-3" *ngIf="recursos">
                 <ul>
                   <li *ngFor="let recurso of listaRecursos; let i=index">
                     <a target="_blank" rel="noopener noreferrer"
                       [href]="recurso.urlRecurso">{{recurso.textoRecurso}}</a>
                     <button mat-mini-fab color="trans" (click)="editarRecurso(i)" class="ml-2"><img class="icon-edit"
                         src="./../../../assets/icons/edit.svg"></button>
+                    <button mat-mini-fab color="trans" (click)="eliminarRecurso(i)" class="ml-2"><img class="icon-edit"
+                        src="./../../../assets/icons/remover.svg"></button>
                   </li>
                 </ul>
                 <br>
@@ -119,7 +105,7 @@
                     class="icon-edit mr-1" src="./../../../assets/icons/more.svg"> Agregar Nuevo</button>
               </div>
 
-              <div class="col-md-8" *ngIf="mostrarFormRecurso">
+              <div class="col-md-7" *ngIf="mostrarFormRecurso">
                 <form [formGroup]="recursosForm">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -162,9 +148,9 @@
               <div class="container">
                 <div class="row container pl-5 mb-3">
                   <div class="custom-control custom-switch">
-                    <input id="tarea" type="checkbox" [checked]="tarea" class="custom-control-input"
-                      [(ngModel)]="tarea">
-                    <label class="custom-control-label h4 letrastar" for="tarea">Tarea</label>
+                    <input id="tarea" type="checkbox" [checked]="tarea" class="custom-control-input" [(ngModel)]="tarea"
+                      (click)="cambiarTarea()">
+                    <label class="custom-control-label h4 letrastar" for="tarea">Tarea/Evaluación</label>
                   </div>
                 </div>
                 <div class="row" *ngIf="tarea">

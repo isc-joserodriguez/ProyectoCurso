@@ -30,12 +30,13 @@ export class ComunidadPreguntaComponent implements OnInit {
   numPreguntas = 0;
   respuestaCom = '';
   responderIndex = -1;
-  
+
   infoPersona = {
     foto: '',
     nombreCompleto: '',
     resumen: '',
-    id: 0
+    id: 0,
+    ruta: ''
   };
 
   infoRespuestas = [];
@@ -159,6 +160,7 @@ export class ComunidadPreguntaComponent implements OnInit {
       this.infoPersona.foto = usuario.detail[0].foto;
       this.infoPersona.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
       this.infoPersona.resumen = usuario.detail[0].resumen;
+      this.infoPersona.ruta = usuario.detail[0].ruta;
     });
   }
 
@@ -226,7 +228,7 @@ export class ComunidadPreguntaComponent implements OnInit {
     this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
-      this.responderIndex=-1;
+      this.responderIndex = -1;
     });
   }
 

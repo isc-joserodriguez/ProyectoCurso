@@ -15,6 +15,9 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   //pagination
   p: number = 1;
 
+  video = false;
+  evaluacion = false;
+
   respuestaCom = '';
   responderIndex = -1;
   infoRespuestas = [];
@@ -80,6 +83,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.router.navigate(['/curso', this.route.snapshot.params.id, 'vista']);
       }
       this.infoClase = this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1];
+      this.video = (this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].tipoPlantilla == 0) ? true : false;
+      this.evaluacion = this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].evaluacion;
       //Video
       this.player.src({ type: "video/mp4", src: this.infoClase.video });
       this.player.poster(this.infoCurso.imagen);
@@ -196,11 +201,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   goClase(unidad, subtema, clase) {
-    if (this.infoCurso.contenidoCurso[unidad].subtemas[subtema].clases[clase].tipoPlantilla == 0) {
-      this.router.navigate(['/curso/', this.route.snapshot.params.id, 'clase', unidad + 1, subtema + 1, clase + 1])
-    } else {
-      this.router.navigate(['/curso/', this.route.snapshot.params.id, 'info', unidad + 1, subtema + 1, clase + 1])
-    }
+    this.router.navigate(['/curso/', this.route.snapshot.params.id, 'clase', unidad + 1, subtema + 1, clase + 1]);
   }
   claseSiguiente() {
     var infoAvance = [(parseInt(this.route.snapshot.params.unidad) - 1), (parseInt(this.route.snapshot.params.subtema) - 1), (parseInt(this.route.snapshot.params.clase) - 1)]

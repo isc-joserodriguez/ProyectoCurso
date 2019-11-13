@@ -118,11 +118,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.goClase(this.avance[0], this.avance[1], this.avance[2]);
   }
   goClase(unidad, subtema, clase) {
-    if (this.infoCurso.contenidoCurso[unidad].subtemas[subtema].clases[clase].tipoPlantilla == 0) {
-      this.router.navigate(['/curso/', this.route.snapshot.params.id, 'clase', unidad + 1, subtema + 1, clase + 1])
-    } else {
-      this.router.navigate(['/curso/', this.route.snapshot.params.id, 'info', unidad + 1, subtema + 1, clase + 1])
-    }
+    this.router.navigate(['/curso/', this.route.snapshot.params.id, 'clase', unidad + 1, subtema + 1, clase + 1])
   }
   claseSiguiente(infoAvance) {
     if (infoAvance[0] <= this.infoCurso.contenidoCurso.length - 1) {
@@ -197,7 +193,6 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.promedios.tres = Math.round((this.promedios.tres * 100) / this.infoCurso.valoraciones.length);
     this.promedios.dos = Math.round((this.promedios.dos * 100) / this.infoCurso.valoraciones.length);
     this.promedios.uno = Math.round((this.promedios.uno * 100) / this.infoCurso.valoraciones.length);
-    console.log(this.promedios);
     this.ratingGeneral = Math.round(puntaje / this.infoCurso.valoraciones.length);
 
   }
