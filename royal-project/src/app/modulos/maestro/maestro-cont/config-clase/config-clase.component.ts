@@ -58,7 +58,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   viejoRecurso = ''
   finalizadoRecurso = true;
   cambiaRecurso = false;
-  mensajeRecurso = 'No hay video';
+  mensajeRecurso = 'No hay recurso';
   datosFormularioRecurso = new FormData();
   nombreRecurso = '';
   URLRecurso = '';

@@ -49,6 +49,15 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
+      this.promedios = {
+        uno: 0,
+        dos: 0,
+        tres: 0,
+        cuatro: 0,
+        cinco: 0,
+      }
+      this.ratingGeneral = 0;
+      this.valoraciones = [];
       this.getInfoCurso(params.get('id'));
     });
   }
@@ -63,14 +72,13 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.insignias = curso.detail[0].insignias;
       this.infoCurso.valoraciones = curso.detail[0].valoraciones;
       this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
       this.infoCurso.precio = curso.detail[0].precio;
       this.infoCurso.imagen = curso.detail[0].imagen;
       this.infoCurso.videoPrincipal = curso.detail[0].introduccionVideo;
       this.infoCurso.descripcion = curso.detail[0].descripcionCurso;
-      this.infoCurso.valoracion = 5;
-      this.infoCurso.inscritos = 5;
       this.infoCurso.objetivos = curso.detail[0].objetivos;
       this.infoCurso.objetivos = [];
       curso.detail[0].objetivos.forEach(elemento => {

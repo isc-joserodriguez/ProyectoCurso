@@ -27,6 +27,8 @@
                         <mat-card-header>
                           <mat-card-title>{{tareasCurso[i].subtemas[j].tareas[k].nombreClase}}</mat-card-title>
                           <mat-card-subtitle>{{tareasCurso[i].subtemas[j].tareas[k].instruccion}}</mat-card-subtitle>
+                          <label *ngIf="tareasCurso[i].subtemas[j].tareas[k].evaluacion"
+                            style="color: red;">Evaluación</label>
                         </mat-card-header>
                         <mat-divider> </mat-divider>
                         <br>

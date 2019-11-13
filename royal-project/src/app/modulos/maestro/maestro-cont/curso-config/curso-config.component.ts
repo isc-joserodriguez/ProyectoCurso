@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 declare let videojs: any;
 
 @Component({
@@ -11,6 +12,19 @@ declare let videojs: any;
   styleUrls: ['./curso-config.component.scss']
 })
 export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
+  //Rating
+  ratingGeneral = 0;
+
+  valoraciones = [];
+
+  promedios = {
+    uno: 0,
+    dos: 0,
+    tres: 0,
+    cuatro: 0,
+    cinco: 0,
+  }
+
   infoCurso = {
     nombreCompleto: '',
     precio: 0,
@@ -21,7 +35,8 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
     inscritos: 0,
     objetivos: [],
     contenidoCurso: [{}],
-    notas: ''
+    notas: '',
+    valoraciones: []
   };
 
   viejaFoto = ''
@@ -51,7 +66,7 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
 
   player: any;
 
-  constructor(private router: Router, private firebase: FirebaseService, private cursos: CursosService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private usuarios: UsuariosService, private router: Router, private firebase: FirebaseService, private cursos: CursosService, private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -80,10 +95,10 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
   getCurso(ruta) {
     this.cursos.getCursoInfo(ruta).subscribe((curso: any) => {
       this.infoCurso = curso.detail[0];
-
       //Video
       this.player.src({ type: "video/mp4", src: this.infoCurso.introduccionVideo });
       this.player.poster(this.infoCurso.imagen);
+      this.getValoraciones();
     });
   }
 
@@ -236,5 +251,54 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
     this.objetivosForm.setValue({
       objetivo: ''
     });
+  }
+  getValoraciones() {
+    this.infoCurso.valoraciones.forEach(valoracion => {
+      this.usuarios.getUser(valoracion.idPersona).subscribe((usuario: any) => {
+        this.valoraciones.push({
+          nombre: usuario.detail[0].nombre + ' ' + usuario.detail[0].apMaterno + ' ' + usuario.detail[0].apMaterno,
+          cursos: usuario.detail[0].cursoAlumno.length,
+          insignias: usuario.detail[0].insignias.length,
+          foto: usuario.detail[0].foto,
+          ruta: usuario.detail[0].ruta,
+          comentario: valoracion.comentario,
+          puntuacion: valoracion.puntuacion
+        })
+      })
+      this.getPromedios();
+    });
+  }
+  getPromedios() {
+    this.promedios = {
+      uno: 0,
+      dos: 0,
+      tres: 0,
+      cuatro: 0,
+      cinco: 0,
+    }
+    var puntaje = 0;
+    this.infoCurso.valoraciones.forEach(valoracion => {
+      puntaje = puntaje + valoracion.puntuacion;
+      if (valoracion.puntuacion == 5) {
+        this.promedios.cinco = this.promedios.cinco + 1;
+      } else if (valoracion.puntuacion == 4) {
+        this.promedios.cuatro = this.promedios.cuatro + 1;
+      } else if (valoracion.puntuacion == 3) {
+        this.promedios.tres = this.promedios.tres + 1;
+      } else if (valoracion.puntuacion == 2) {
+        this.promedios.dos = this.promedios.dos + 1;
+      } else if (valoracion.puntuacion == 1) {
+        this.promedios.uno = this.promedios.uno + 1;
+      }
+    });
+
+    this.promedios.cinco = Math.round((this.promedios.cinco * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.cuatro = Math.round((this.promedios.cuatro * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.tres = Math.round((this.promedios.tres * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.dos = Math.round((this.promedios.dos * 100) / this.infoCurso.valoraciones.length);
+    this.promedios.uno = Math.round((this.promedios.uno * 100) / this.infoCurso.valoraciones.length);
+    console.log(this.promedios);
+    this.ratingGeneral = Math.round(puntaje / this.infoCurso.valoraciones.length);
+
   }
 }

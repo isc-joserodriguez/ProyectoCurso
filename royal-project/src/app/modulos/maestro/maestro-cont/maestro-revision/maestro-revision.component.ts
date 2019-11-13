@@ -71,7 +71,7 @@ export class MaestroRevisionComponent implements OnInit {
                     recurso = envio;
                   }
                 });
-                tareasSubtema.push({ nombreClase: clase.clase, instruccion: clase.tarea.instruccion, entrega: entrega, recurso: recurso, clase: numUnidad + '-' + numSubtema + '-' + numClase });
+                tareasSubtema.push({ evaluacion: clase.evaluacion, nombreClase: clase.clase, instruccion: clase.tarea.instruccion, entrega: entrega, recurso: recurso, clase: numUnidad + '-' + numSubtema + '-' + numClase });
               }
             });
             subtemasUnidad.push({ nombreSubtema: subtema.subtema, tareas: tareasSubtema, expand: false });

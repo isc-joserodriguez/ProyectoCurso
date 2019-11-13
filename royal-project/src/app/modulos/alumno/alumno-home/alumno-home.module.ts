@@ -13,6 +13,7 @@ import { ComunidadPreguntaComponent } from './comunidad-pregunta/comunidad-pregu
 import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias.component';
 import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
 import { CursoClaseComponent } from './curso-clase/curso-clase.component';
+import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 
 
 
@@ -42,7 +43,6 @@ import { BarRatingModule } from "ngx-bar-rating";
 
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 
 
 //safe pipe

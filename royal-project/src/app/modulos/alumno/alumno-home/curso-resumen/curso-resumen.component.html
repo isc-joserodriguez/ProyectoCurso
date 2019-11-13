@@ -25,12 +25,12 @@
           <!--ranking star-->
           <div class="col-md-6 pt-0">
             <h4 class="letrastar mb-0">Valoraciones:</h4>
-            <bar-rating [(rate)]="rate" [max]="5" [readOnly]="true"></bar-rating>
+            <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true"></bar-rating>
           </div>
           <!--Alumnos totales-->
           <div class="col-md-12 text-right pb-1">
             <img class="icon-nav" src="./../../../assets/icons/alumnos.svg">
-            <label for="">{{infoCurso.inscritos}} Alumno(s)</label>
+            <label for="">{{infoCurso.alumnosInscritos.length}} Alumno(s)</label>
           </div>
           <!--Objetivos-->
           <div class="col-md-12 p-2">
@@ -382,24 +382,10 @@
               <p class="lead text-center">¡Realizando actividades podrás ganar más insignias!</p>
               <hr class="my-4">
               <div class="d-flex flex-wrap bd-highlight mb-3">
-                <div class="p-2 bd-highlight">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                    <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                  </span>
-                </div>
-                <div class="p-2 bd-highlight">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                    <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                  </span>
-                </div>
-                <div class="p-2 bd-highlight">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                    <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                  </span>
-                </div>
-                <div class="p-2 bd-highlight">
-                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                    <img class="imgicon" src="./../../../assets/icons/libro.svg" />
+                <div class="p-2 bd-highlight" *ngFor="let insignia of infoCurso.insignias">
+                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                    [title]="insignia.descripcionInsignia">
+                    <img class="imgicon" [src]="insignia.imagen" />
                   </span>
                 </div>
               </div>

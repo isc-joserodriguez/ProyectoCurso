@@ -39,6 +39,9 @@ import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias
 import { MaestroNuevaInsigniaComponent } from './maestro-nueva-insignia/maestro-nueva-insignia.component';
 import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestro-insignia-editar.component';
 
+//rating star
+import { BarRatingModule } from "ngx-bar-rating";
+
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
 
@@ -66,7 +69,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatPaginatorModule,
     MatAutocompleteModule,
     CKEditorModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BarRatingModule
   ]
 })
 export class MaestroContModule { }

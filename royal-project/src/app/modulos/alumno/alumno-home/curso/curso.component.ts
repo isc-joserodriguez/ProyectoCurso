@@ -75,8 +75,6 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
       this.infoCurso.imagen = curso.detail[0].imagen;
       this.infoCurso.videoPrincipal = curso.detail[0].introduccionVideo;
       this.infoCurso.descripcion = curso.detail[0].descripcionCurso;
-      this.infoCurso.valoracion = 5;
-      this.infoCurso.inscritos = 5;
       this.infoCurso.objetivos = curso.detail[0].objetivos;
       this.infoCurso.objetivos = [];
       curso.detail[0].objetivos.forEach(elemento => {

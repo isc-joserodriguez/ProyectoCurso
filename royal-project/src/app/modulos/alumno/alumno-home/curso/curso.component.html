@@ -24,13 +24,13 @@
           <!--ranking star-->
           <div class="col-md-6">
             <h4 class="letrastar mb-0">Valoraciones:</h4>
-            <bar-rating [(rate)]="rate" [max]="5" [readOnly]="true"></bar-rating>
+            <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true"></bar-rating>
 
           </div>
           <!--Alumnos totales-->
           <div class="col-md-12 text-right pb-1">
             <img class="icon-nav" src="./../../../assets/icons/alumnos.svg">
-            <label for="">{{infoCurso.inscritos}} Alumnos</label>
+            <label for="">{{infoCurso.alumnosInscritos.length}} Alumnos</label>
           </div>
           <!--Objetivos-->
           <div class="col-md-12 p-2">
