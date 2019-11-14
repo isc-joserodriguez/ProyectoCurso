@@ -217,46 +217,43 @@
           </div>
 
           <div class="col-md-12 mt-1">
-            <div class="row divisortop2">
-              <br>
-              <ul class="list-unstyled mb-0">
-                <li class="media" *ngFor="let review of valoraciones">
-                  <div class="imgLiquidFill imgLiquid pt-4" style="width:100px; height:100px;">
-                    <img [src]="review.foto" class="mr-3" alt="..." width="100" height="100">
-                  </div>
-                  <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
-                    <div class="p-2 bd-highlight">
-                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
-                        <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
-                      </span>
-                    </div>
-                    <div>
-                      <label>{{review.insignias}}</label>
-                    </div>
-                    <div class="p-2 bd-highlight">
-                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                        <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                      </span>
-                    </div>
-                    <div>
-                      <label>{{review.cursos}}</label>
-                    </div>
-                  </div>
-                  <div class="media-body">
-                    <div class="row justify-content-between">
-                      <div class="col-4 pt-3">
-                        <h5 class="mt-0 mb-1">{{review.nombre}}</h5>
-                      </div>
-                      <div class="col-4 pb-2">
-                        <bar-rating [rate]="review.puntuacion" [max]="5" [readOnly]="true"></bar-rating>
-                      </div>
-                    </div>
-                    {{review.comentario}}
-                  </div>
-                </li>
 
-              </ul>
+            <div class="row divisortop2 mb-0" *ngFor="let review of valoraciones">
+              <br>
+              <div class="imgLiquidFill imgLiquid pt-4" style="width:100px; height:100px;">
+                <img [src]="review.foto" class="mr-3" alt="..." width="100" height="100">
+              </div>
+              <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
+                <div class="p-2 bd-highlight">
+                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
+                    <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
+                  </span>
+                </div>
+                <div>
+                  <label>{{review.insignias}}</label>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
+                    <img class="imgicon" src="./../../../assets/icons/libro.svg" />
+                  </span>
+                </div>
+                <div>
+                  <label>{{review.cursos}}</label>
+                </div>
+              </div>
+              <div class="media-body">
+                <div class="row col-md-12">
+                  <div class="col-md-8 pt-3">
+                    <h5 class="mt-0 mb-1">{{review.nombre}}</h5>
+                  </div>
+                  <div class="col-md-4 pb-2 pl-4">
+                    <bar-rating [rate]="review.puntuacion" [max]="5" [readOnly]="true"></bar-rating>
+                  </div>
+                </div>
+                {{review.comentario}}
+              </div>
             </div>
+
           </div>
           <!--fin reseñas-->
         </div>
