@@ -15,6 +15,7 @@ import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.componen
 import { CursoClaseComponent } from './curso-clase/curso-clase.component';
 import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
 import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'categoria/:categoria',
     component: CategoriasComponent
+  },
+  {
+    path: 'subcategoria/:subcategoria',
+    component: SubcategoriaComponent
   },
   {
     path: 'mis-cursos',

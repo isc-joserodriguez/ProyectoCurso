@@ -52,10 +52,11 @@ import { CKEditorModule } from 'ng2-ckeditor';
 
 import {NgDompurifyModule} from '@tinkoff/ng-dompurify';
 import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
+import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, PerfilMaestroComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, PerfilMaestroComponent, SubcategoriaComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,

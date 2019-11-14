@@ -20,10 +20,10 @@
           </button>
         </mat-menu>
         <mat-menu #Tecnologias="matMenu" class="fondo-navbar">
-          <button mat-menu-item *ngFor="let cat of categoriasTec">{{cat}}</button>
+          <button mat-menu-item *ngFor="let cat of categoriasTec" [routerLink]="['/subcategoria',cat]">{{cat}}</button>
         </mat-menu>
         <mat-menu #Idiomas="matMenu" class="fondo-navbar">
-          <button mat-menu-item *ngFor="let cat of categoriasLen">{{cat}}</button>
+          <button mat-menu-item *ngFor="let cat of categoriasLen" [routerLink]="['/subcategoria',cat]">{{cat}}</button>
         </mat-menu>
 
       </div>

@@ -12,7 +12,9 @@ export class CategoriasComponent implements OnInit {
   categoria = '';
   p: number = 1;
   listaCursos = [];
+  cursosFiltrados = [];
   subcategorias = [];
+  filtro = [];
 
   constructor(private route: ActivatedRoute, private cursos: CursosService) { }
 
@@ -22,6 +24,7 @@ export class CategoriasComponent implements OnInit {
       this.p = 1;
       this.listaCursos = [];
       this.subcategorias = [];
+      this.cursosFiltrados = [];
       this.categoria = this.primeraMay(params.get('categoria'));
       this.getCursos(params.get('categoria'));
     });
@@ -32,6 +35,7 @@ export class CategoriasComponent implements OnInit {
       res.detail.forEach(e => {
         if (e.categoria == this.primeraMay(cat)) {
           this.listaCursos.push(e);
+          this.cursosFiltrados.push(e);
           this.subcategorias.push(e.subcategoria)
         }
       });
@@ -45,6 +49,25 @@ export class CategoriasComponent implements OnInit {
 
   primeraMay(cad) {
     return cad.charAt(0).toUpperCase() + cad.slice(1);
+  }
+
+  filtrar(event, element) {
+    if (event.checked == true) {
+      this.filtro.push(element);
+    } else {
+      var index = 0;
+      this.filtro.forEach((e, i) => {
+        if (e == element) index = i;
+      });
+      this.filtro.splice(index, 1);
+    }
+    this.listaCursos = [];
+    this.cursosFiltrados.forEach(curso => {
+      if (this.filtro.includes(curso.subcategoria)) {
+        this.listaCursos.push(curso);
+      }
+    });
+
   }
 
 }
