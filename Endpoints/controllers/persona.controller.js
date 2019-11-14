@@ -254,6 +254,56 @@ const updateInsignia = (req, res) => {
     });
 }
 
+const updateCursosMaestro = (req, res) => {
+    const id = req.params.id;
+    cursoMaestro = req.body.cursoMaestro
+    _persona.update({ _id: id }, {
+        $set: {
+            cursoMaestro: cursoMaestro
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
+const updateDocs = (req, res) => {
+    const id = req.params.id;
+    documentos = req.body.documentos
+    _persona.update({ _id: id }, {
+        $set: {
+            documentos: documentos
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
 const updateAvance = (req, res) => {
     const id = req.params.id;
     cursoAlumno = req.body
@@ -430,6 +480,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute, updateCert
+        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute, updateCert, updateDocs, updateCursosMaestro
     });
 }

@@ -27,6 +27,7 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
     foto: '',
     nombreCompleto: '',
     resumen: '',
+    cursoMaestro: [],
     id: 0
   };
   revisionForm: FormGroup;
@@ -71,6 +72,8 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
   }
   getInfoMaestro(id) {
     this.usuarios.getUser(id).subscribe((usuario: any) => {
+      console.log(usuario.detail[0]);
+      this.infoMaestro.cursoMaestro = usuario.detail[0].cursoMaestro;
       this.infoMaestro.id = usuario.detail[0]._id;
       this.infoMaestro.foto = usuario.detail[0].foto;
       this.infoMaestro.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
@@ -80,7 +83,12 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
   aceptarCurso() {
     const estatus = { estado: 2, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio };
     this.curso.updateEstado(this.route.snapshot.params.id, estatus).subscribe(res => {
-      this.router.navigate(['/admin/cursos']);
+      this.infoMaestro.cursoMaestro.push({
+        ruta: this.route.snapshot.params.id
+      });
+      this.usuarios.updateCursosMaestro(this.infoMaestro.id, { cursoMaestro: this.infoMaestro.cursoMaestro }).subscribe(res => {
+        this.router.navigate(['/admin/cursos']);
+      });
     });
   }
   rechazarCurso() {

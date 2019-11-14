@@ -121,7 +121,9 @@
                   <div class="card-body">
                     <h5 class="card-title">{{infoMaestro.nombreCompleto}}</h5>
                     <p class="card-text">{{infoMaestro.resumen}}</p>
-                    <button type="button" class="btn btn-outline-primary btn-sm">Ver perfil</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm"
+                      [routerLink]="['/perfil-maestro/', infoMaestro.ruta]">Ver
+                      perfil</button>
                   </div>
                 </div>
               </div>

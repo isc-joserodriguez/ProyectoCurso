@@ -1,0 +1,160 @@
+<div class="col-md-12 px-0">
+  <br>
+  <br>
+  <br>
+  <br>
+  <!--titulo-->
+  <div class="col-md-12 px-0 paqueteshome">
+    <div class="container">
+      <h2 class="letrablanca"><b>{{infoMaestro.nombre}} {{infoMaestro.apPaterno}} {{infoMaestro.apMaterno}}</b></h2>
+      <h5 class="letracursotitulo">{{infoMaestro.resumen}}</h5>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card border-light" style="height: 25rem">
+            <div class="imgLiquidFill imgLiquid card-img-top sombra" style="width:250px; height:250px;">
+              <img [src]="infoMaestro.foto" width="253" height="250">
+            </div>
+            <div class="card-body pt-3 sombra" style="background-color: rgb(0, 0, 0);">
+              <div class="col">
+                <div class="row justify-content-around pb-4">
+                  <div class="col-4">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoMaestro.fb | safe: 'resourceUrl'">
+                      <img class="icon-redes light-shadow saturate" src="./../../../assets/icons/fb.svg">
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoMaestro.in | safe: 'resourceUrl'">
+                      <img class="icon-redes light-shadow" src="./../../../assets/icons/link.svg">
+                    </a>
+                  </div>
+                </div>
+                <div class="row justify-content-around">
+                  <div class="col-4">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoMaestro.yt | safe: 'resourceUrl'">
+                      <img class="icon-redes light-shadow" src="./../../../assets/icons/yt.svg">
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <a target="_blank" rel="noopener noreferrer" [href]="infoMaestro.web | safe: 'resourceUrl'">
+                      <img class="icon-redes light-shadow" src="./../../../assets/icons/internet.svg">
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8 offset-md-1">
+          <!--categorias-->
+          <div class="categorias container mx-auto">
+            <p class="h5 text-center">Impartiendo</p> <br>
+
+            <mat-tab-group mat-align-tabs="center">
+              <mat-tab label="Tecnologías">
+                <div class="Tecnologias">
+                  <br>
+                  <div class="col-md-12 ">
+                    <div class="row text-center">
+                      <div class="card col-md-4 descri mx-5 mb-2" *ngFor="let curso of cursosTec">
+                        <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3"
+                          style="max-width:200px; height:150px;">
+                          <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title text-break text-truncate">{{curso.nombreCompleto}}</h5>
+                          <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
+                            {{curso.descripcionCurso}}
+                          </p>
+                          <a class="btn btn-primary btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Idiomas">
+                <div class="Idiomas">
+                  <br>
+                  <div class="col-md-12 ">
+
+                    <div class="row text-center">
+                      <div class="card col-md-4 descri mx-5 mb-2" *ngFor="let curso of cursosId">
+                        <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3"
+                          style="max-width:200px; height:150px;">
+                          <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title text-break text-truncate">{{curso.nombreCompleto}}</h5>
+                          <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
+                            {{curso.descripcionCurso}}
+                          </p>
+                          <a class="btn btn-primary btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+
+          </div>
+          <!--Cierre Categorías-->
+        </div>
+
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+    </div>
+    <!--Certificados-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="card">
+            <div class="card-header paqueteshome text-center text-white">
+              Certificados
+            </div>
+            <div class="card-body descri">
+              <div class="row" *ngFor="let certificado of certificados">
+                <div class="card mb-3 mx-3" style="max-width: 350px;">
+                  <div class="row no-gutters">
+                    <div class="col-md-4 vertical-center">
+                      <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:100px; height:100px;">
+                        <img src="http://www.lorempixel.com/200/200" width="100" height="100">
+                      </div>
+                    </div>
+                    <div class="col-md-8 ">
+                      <div class="card-body">
+                        <h5 class="card-title">{{certificado.nombreCurso}}</h5>
+                        <div class="text-right">
+                          <a [href]="certificado.url" target="_blank" rel="noopener noreferrer">
+                            <button mat-mini-fab color="success">
+                              <img class="icon-check" src="./../../../assets/icons/down.svg">
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>

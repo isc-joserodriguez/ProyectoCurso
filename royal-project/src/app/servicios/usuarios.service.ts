@@ -35,12 +35,20 @@ export class UsuariosService {
     return this.http.put(apiUrl + '/editDatos/' + id, datos);
   }
 
+  updateCursosMaestro(id, datos) {
+    return this.http.put(apiUrl + '/updateCursosMaestro/' + id, datos);
+  }
+
   updateCredencial(id, datos) {
     return this.http.put(apiUrl + '/editCredencial/' + id, datos);
   }
 
   updateAvance(id, datos) {
     return this.http.put(apiUrl + '/updateAvance/' + id, datos);
+  }
+
+  updateDocs(id, datos) {
+    return this.http.put(apiUrl + '/updateDocs/' + id, datos);
   }
 
   updateInsignia(id, insignia) {

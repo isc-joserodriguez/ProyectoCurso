@@ -1,5 +1,5 @@
 const personaRouter = require('express').Router();
-const token=require('../middlewares/token');
+const token = require('../middlewares/token');
 
 module.exports = (wagner) => {
     const personaCtrl = wagner.invoke((Persona) =>
@@ -18,14 +18,16 @@ module.exports = (wagner) => {
         personaCtrl.getUserByRute(req, res);
     });
 
-    
-
     personaRouter.delete("/del/:id", (req, res) => {
         personaCtrl.deletePersona(req, res);
     });
 
     personaRouter.put("/editDatos/:id", (req, res) => {
         personaCtrl.update(req, res);
+    });
+
+    personaRouter.put("/updateCursosMaestro/:id", (req, res) => {
+        personaCtrl.updateCursosMaestro(req, res);
     });
 
     personaRouter.put("/editTipo/:id", (req, res) => {
@@ -44,6 +46,10 @@ module.exports = (wagner) => {
         personaCtrl.updateInsignia(req, res);
     });
 
+    personaRouter.put("/updateDocs/:id", (req, res) => {
+        personaCtrl.updateDocs(req, res);
+    });
+
     personaRouter.put("/updateCert/:id", (req, res) => {
         personaCtrl.updateCert(req, res);
     });
@@ -57,7 +63,7 @@ module.exports = (wagner) => {
         personaCtrl.info(req, res);
     });
 
-    personaRouter.post('/signup',(req, res) => {
+    personaRouter.post('/signup', (req, res) => {
         personaCtrl.create(req, res);
     });
 

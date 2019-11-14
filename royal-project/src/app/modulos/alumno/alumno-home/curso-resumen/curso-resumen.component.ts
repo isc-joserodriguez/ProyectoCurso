@@ -39,7 +39,8 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
   infoMaestro = {
     foto: '',
     nombreCompleto: '',
-    resumen: ''
+    resumen: '',
+    ruta: ''
   };
   avance = [];
 
@@ -120,6 +121,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.infoMaestro.foto = usuario.detail[0].foto;
       this.infoMaestro.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
       this.infoMaestro.resumen = usuario.detail[0].resumen;
+      this.infoMaestro.ruta = usuario.detail[0].ruta;
     });
   }
   claseActual() {

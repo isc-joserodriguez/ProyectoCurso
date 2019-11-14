@@ -44,7 +44,8 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
   infoMaestro = {
     foto: '',
     nombreCompleto: '',
-    resumen: ''
+    resumen: '',
+    ruta: ''
   };
 
   incluido = false;
@@ -103,6 +104,7 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
       this.infoMaestro.foto = usuario.detail[0].foto;
       this.infoMaestro.nombreCompleto = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno;
       this.infoMaestro.resumen = usuario.detail[0].resumen;
+      this.infoMaestro.ruta = usuario.detail[0].ruta;
     });
   }
 
@@ -169,7 +171,6 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.promedios.tres = Math.round((this.promedios.tres * 100) / this.infoCurso.valoraciones.length);
     this.promedios.dos = Math.round((this.promedios.dos * 100) / this.infoCurso.valoraciones.length);
     this.promedios.uno = Math.round((this.promedios.uno * 100) / this.infoCurso.valoraciones.length);
-    console.log(this.promedios);
     this.ratingGeneral = Math.round(puntaje / this.infoCurso.valoraciones.length);
 
   }

@@ -14,6 +14,7 @@ import { ComunidadPropiasComponent } from './comunidad-propias/comunidad-propias
 import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 import { CursoClaseComponent } from './curso-clase/curso-clase.component';
 import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
+import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'alumno/perfil-publico/:id',
     component: PerfilPublicoComponent
+  },
+  {
+    path: 'perfil-maestro/:id',
+    component: PerfilMaestroComponent
   },
   {
     path: 'curso/:id/vista',

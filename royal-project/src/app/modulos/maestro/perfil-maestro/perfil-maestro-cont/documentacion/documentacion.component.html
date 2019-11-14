@@ -8,33 +8,33 @@
         <h5 class="container">Currículum:</h5>
       </div>
       <div class="row">
-
-        <div class="col-md-5 mb-3">
+        <div class="col-md-5 mb-3" *ngIf="docs.curriculum!=null">
           <ul>
             <li>
-              <a href="#">hola</a>
-              <a href="#" class="ml-2 icon-remove"><img class="icon-edit" src="./../../../assets/icons/remover.svg"></a>
+              <a [href]="docs.curriculum" target="_blank" rel="noopener noreferrer">CV</a>
+              <a class="ml-2 icon-remove" (click)="eliminarCv()">
+                <img class="icon-edit" src="./../../../assets/icons/remover.svg">
+              </a>
             </li>
           </ul>
         </div>
-        <div class="col-md-7">
-          <form>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Subir Recurso</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input">
-                <label class="custom-file-label" for="inputGroupFile01">{{mensajeRecurso}}</label>
-              </div>
+        <div class="col-md-7" *ngIf="docs.curriculum==null">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Subir CV</span>
             </div>
-            <br>
-            <button mat-stroked-button color="letrasuccess">Guardar <img class="icon-edit"
-                src="./../../../assets/icons/save.svg"></button>
-
-          </form>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" (change)="seleccionarCv($event)">
+              <label class="custom-file-label text-truncate" for="inputGroupFile01">{{msjCv}}</label>
+            </div>
+          </div>
+          <br>
+          <button [disabled]="!cv" mat-stroked-button color="letrasuccess" (click)="subirCv()">
+            Guardar <img class="icon-edit" src="./../../../assets/icons/save.svg">
+          </button>
+          <mat-progress-bar *ngIf="!finalizadoCv" mode="determinate" [value]="porcentajeCv">
+          </mat-progress-bar>
         </div>
-
       </div>
       <br>
       <mat-divider></mat-divider>
@@ -43,33 +43,33 @@
         <h5 class="container">Identificación:</h5>
       </div>
       <div class="row">
-
-        <div class="col-md-5 mb-3">
+        <div class="col-md-5 mb-3" *ngIf="docs.identificacion!=null">
           <ul>
             <li>
-              <a href="#">hola</a>
-              <a href="#" class="ml-2 icon-remove"><img class="icon-edit" src="./../../../assets/icons/remover.svg"></a>
+              <a [href]="docs.identificacion" target="_blank" rel="noopener noreferrer">Identificación</a>
+              <a class="ml-2 icon-remove" (click)="eliminarId()">
+                <img class="icon-edit" src="./../../../assets/icons/remover.svg">
+              </a>
             </li>
           </ul>
         </div>
-        <div class="col-md-7">
-          <form>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Subir Recurso</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input">
-                <label class="custom-file-label" for="inputGroupFile01">{{mensajeRecurso}}</label>
-              </div>
+        <div class="col-md-7" *ngIf="docs.identificacion==null">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Subir Identificacion</span>
             </div>
-            <br>
-            <button mat-stroked-button color="letrasuccess">Guardar <img class="icon-edit"
-                src="./../../../assets/icons/save.svg"></button>
-
-          </form>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" (change)="seleccionarId($event)">
+              <label class="custom-file-label text-truncate" for="inputGroupFile01">{{msjId}}</label>
+            </div>
+          </div>
+          <br>
+          <button [disabled]="!id" mat-stroked-button color="letrasuccess" (click)="subirId()">
+            Guardar <img class="icon-edit" src="./../../../assets/icons/save.svg">
+          </button>
+          <mat-progress-bar *ngIf="!finalizadoId" mode="determinate" [value]="porcentajeId">
+          </mat-progress-bar>
         </div>
-
       </div>
       <br>
       <mat-divider></mat-divider>
@@ -78,33 +78,37 @@
         <h5 class="container">Certificaciones:</h5>
       </div>
       <div class="row">
-
         <div class="col-md-5 mb-3">
           <ul>
-            <li>
-              <a href="#">hola</a>
-              <a href="#" class="ml-2 icon-remove"><img class="icon-edit" src="./../../../assets/icons/remover.svg"></a>
+            <li *ngFor="let certificado of docs.certificados; let i=index">
+              <a [href]="certificado.url" target="_blank" rel="noopener noreferrer">{{certificado.nombre}}</a>
+              <a class="ml-2 icon-remove" (click)="eliminarCert(i)">
+                <img class="icon-edit" src="./../../../assets/icons/remover.svg">
+              </a>
             </li>
           </ul>
         </div>
         <div class="col-md-7">
-          <form>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Subir Recurso</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input">
-                <label class="custom-file-label" for="inputGroupFile01">{{mensajeRecurso}}</label>
-              </div>
+          <mat-form-field appearance="outline" class="field-login">
+            <mat-label>Nombre:</mat-label>
+            <input matInput placeholder="Ingresa el nombre de la insignia" required [(ngModel)]="nombre">
+          </mat-form-field>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Subir Certificado</span>
             </div>
-            <br>
-            <button mat-stroked-button color="letrasuccess">Guardar <img class="icon-edit"
-                src="./../../../assets/icons/save.svg"></button>
-
-          </form>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" (change)="seleccionarCert($event)">
+              <label class="custom-file-label text-truncate" for="inputGroupFile01">{{msjCert}}</label>
+            </div>
+          </div>
+          <br>
+          <button [disabled]="!cert || nombre==''" mat-stroked-button color="letrasuccess" (click)="subirCert()">
+            Guardar <img class="icon-edit" src="./../../../assets/icons/save.svg">
+          </button>
+          <mat-progress-bar *ngIf="!finalizadoCert" mode="determinate" [value]="porcentajeCert">
+          </mat-progress-bar>
         </div>
-
       </div>
       <br>
     </div>

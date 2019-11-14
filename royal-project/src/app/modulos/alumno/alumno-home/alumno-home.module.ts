@@ -44,19 +44,18 @@ import { BarRatingModule } from "ngx-bar-rating";
 //pagination
 import { NgxPaginationModule } from 'ngx-pagination';
 
-
 //safe pipe
 import { SafePipeModule } from 'safe-pipe';
-
 
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
 
 import {NgDompurifyModule} from '@tinkoff/ng-dompurify';
+import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, PerfilMaestroComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,

@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { MaestroRoutingModule } from './maestro-routing.module';
 import { MaestroComponent } from './maestro.component';
 import { MaestroNuevoCursoComponent } from './maestro-nuevo-curso/maestro-nuevo-curso.component';
+import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
+import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
+import { PerfilAlumnoComponent } from './perfil-alumno/perfil-alumno.component';
 
 // Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,10 +24,13 @@ import { MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
-import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
+import { MatTabsModule } from '@angular/material/tabs';
+
+//safe pipe
+import { SafePipeModule } from 'safe-pipe';
 
 @NgModule({
-  declarations: [MaestroComponent, MaestroNuevoCursoComponent, PerfilMaestroComponent],
+  declarations: [MaestroComponent, MaestroNuevoCursoComponent, PerfilMaestroComponent, PerfilPublicoComponent, PerfilAlumnoComponent],
   imports: [
     CommonModule,
     MaestroRoutingModule,
@@ -39,7 +45,9 @@ import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.componen
     MatAutocompleteModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDividerModule
+    MatDividerModule,
+    SafePipeModule,
+    MatTabsModule
   ]
 })
 export class MaestroModule { }

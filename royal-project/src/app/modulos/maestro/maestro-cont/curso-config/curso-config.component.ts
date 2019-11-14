@@ -297,7 +297,6 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
     this.promedios.tres = Math.round((this.promedios.tres * 100) / this.infoCurso.valoraciones.length);
     this.promedios.dos = Math.round((this.promedios.dos * 100) / this.infoCurso.valoraciones.length);
     this.promedios.uno = Math.round((this.promedios.uno * 100) / this.infoCurso.valoraciones.length);
-    console.log(this.promedios);
     this.ratingGeneral = Math.round(puntaje / this.infoCurso.valoraciones.length);
 
   }

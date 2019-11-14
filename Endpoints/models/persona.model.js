@@ -38,7 +38,6 @@ const personaSchema = new mongoose.Schema({
         url: { type: String, required: true },
         fecha: { type: String, default: Date.now() }
     }],
-    identificacion: { type: String },
     curriculum: { type: String },
     notificaciones: [{
         _id: { type: String, required: true },
@@ -47,6 +46,14 @@ const personaSchema = new mongoose.Schema({
         descripción: { type: String, required: true },
         estado: { type: Boolean, required: true }
     }],
+    documentos: {
+        curriculum: { type: String },
+        identificacion: { type: String },
+        certificados: [{
+            nombre: { type: String },
+            url: { type: String }
+        }]
+    },
     resumen: { type: String, default: ' ' },
     puntaje: { type: Number, default: 0 },
     ruta: { type: String },

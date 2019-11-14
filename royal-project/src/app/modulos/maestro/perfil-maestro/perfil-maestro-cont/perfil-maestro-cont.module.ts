@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 // MDBootstrap
@@ -53,7 +54,8 @@ import { EstatusCursosComponent } from './estatus-cursos/estatus-cursos.componen
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressBarModule
   ]
 })
 export class PerfilMaestroContModule { }

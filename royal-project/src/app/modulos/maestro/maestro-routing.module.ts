@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaestroComponent } from './maestro.component';
 import { MaestroNuevoCursoComponent } from './maestro-nuevo-curso/maestro-nuevo-curso.component';
 import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
+import { PerfilAlumnoComponent } from './perfil-alumno/perfil-alumno.component';
+import { PerfilPublicoComponent } from './perfil-publico/perfil-publico.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,14 @@ const routes: Routes = [
   {
     path: 'curso-nuevo',
     component: MaestroNuevoCursoComponent
+  },
+  {
+    path: 'alumno/:id',
+    component: PerfilAlumnoComponent
+  },
+  {
+    path: 'perfil-publico/:id',
+    component: PerfilPublicoComponent
   }
 ];
 
