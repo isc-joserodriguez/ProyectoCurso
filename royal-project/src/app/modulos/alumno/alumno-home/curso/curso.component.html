@@ -358,7 +358,9 @@
                 <div class="p-2 bd-highlight" *ngFor="let insignia of infoCurso.insignias">
                   <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
                     [title]="insignia.descripcionInsignia">
-                    <img class="imgicon" [src]="insignia.imagen" />
+                    <div class="imgLiquidFill imgLiquid" style="width:40px; height:40px;">
+                      <img [src]="insignia.imagen" width="40" height="40" class="sombrabaja">
+                    </div>
                   </span>
                 </div>
               </div>
