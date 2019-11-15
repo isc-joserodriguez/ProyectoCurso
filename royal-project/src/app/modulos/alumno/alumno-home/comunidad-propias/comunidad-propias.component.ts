@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./comunidad-propias.component.scss']
 })
 export class ComunidadPropiasComponent implements OnInit {
-
+  
   constructor(private comunidad: ComunidadService, private formBuilder: FormBuilder, private router: Router) { }
   preguntas = [];
   preguntaForm: FormGroup;

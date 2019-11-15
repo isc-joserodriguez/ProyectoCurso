@@ -23,7 +23,7 @@
                 <span class="input-group-text">Subir Foto</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" formControlName="foto" (change)="seleccionarFoto($event)">
+                <input type="file" class="custom-file-input text-truncate" formControlName="foto" (change)="seleccionarFoto($event)">
                 <label class="custom-file-label" for="inputGroupFile01">{{mensajeFoto}}</label>
               </div>
             </div>
@@ -55,7 +55,7 @@
                 <span class="input-group-text">Subir Video</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" formControlName="video"
+                <input type="file" class="custom-file-input text-truncate" formControlName="video"
                   (change)="seleccionarVideo($event)">
                 <label class="custom-file-label" for="inputGroupFile01">{{mensajeVideo}}</label>
               </div>

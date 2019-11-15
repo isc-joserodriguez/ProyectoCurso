@@ -16,6 +16,10 @@ import { CursoClaseComponent } from './curso-clase/curso-clase.component';
 import { CursoResumenComponent } from './curso-resumen/curso-resumen.component';
 import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
+import { DiarioComponent } from './diario/diario.component';
+import { DiarioNuevoComponent } from './diario-nuevo/diario-nuevo.component';
+import { DiarioEntradaComponent } from './diario-entrada/diario-entrada.component';
+import { DiarioPropiasComponent } from './diario-propias/diario-propias.component';
 
 const routes: Routes = [
   {
@@ -87,6 +91,22 @@ const routes: Routes = [
   {
     path: 'comunidad/preguntas/mis-preguntas',
     component: ComunidadPropiasComponent
+  },
+  {
+    path: 'diario/entradas',
+    component: DiarioComponent
+  },
+  {
+    path: 'diario/nuevo',
+    component: DiarioNuevoComponent
+  },
+  {
+    path: 'diario/entrada/:ruta',
+    component: DiarioEntradaComponent
+  },
+  {
+    path: 'diario/mis-entradas',
+    component: DiarioPropiasComponent
   }
 ];
 

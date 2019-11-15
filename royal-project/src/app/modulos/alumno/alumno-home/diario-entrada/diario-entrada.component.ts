@@ -1,17 +1,17 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ComunidadService } from 'src/app/servicios/comunidad.service';
+
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DiarioService } from 'src/app/servicios/diario.service';
 
 @Component({
-  selector: 'app-comunidad-pregunta',
-  templateUrl: './comunidad-pregunta.component.html',
-  styleUrls: ['./comunidad-pregunta.component.scss']
+  selector: 'app-diario-entrada',
+  templateUrl: './diario-entrada.component.html',
+  styleUrls: ['./diario-entrada.component.scss']
 })
-
-export class ComunidadPreguntaComponent implements OnInit {
+export class DiarioEntradaComponent implements OnInit {
   //pagination
   p: number = 1;
   //ckeditor
@@ -38,25 +38,19 @@ export class ComunidadPreguntaComponent implements OnInit {
 
   infoRespuestas = [];
 
-  infoPregunta: any = {
-    actualizaciones: [],
+  infoEntrada: any = {
     categoria: '',
-    detalles: '',
+    escrito: '',
     fecha: '',
     idPersona: 0,
-    pregunta: '',
+    titulo: '',
     respuestas: [],
     ruta: ''
   }
 
-  editarCategoria = false;
-  editarPregunta = false;
-
   respuestaForm: FormGroup;
-  preguntaForm: FormGroup;
-  actualizacionForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private comunidad: ComunidadService, private formBuilder: FormBuilder, @Inject(DomSanitizer) private readonly sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService, private diario: DiarioService, private formBuilder: FormBuilder, @Inject(DomSanitizer) private readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.ckeConfig = {
@@ -85,14 +79,6 @@ export class ComunidadPreguntaComponent implements OnInit {
       removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
     };
 
-    this.preguntaForm = this.formBuilder.group({
-      pregunta: ['', Validators.required]
-    });
-
-    this.actualizacionForm = this.formBuilder.group({
-      actualizacion: ['', Validators.required]
-    });
-
     this.respuestaForm = this.formBuilder.group({
       respuesta: ['', Validators.required]
     });
@@ -102,20 +88,15 @@ export class ComunidadPreguntaComponent implements OnInit {
   }
 
   getPregunta(ruta) {
-    this.comunidad.getPregunta(ruta).subscribe((res: any) => {
-      this.infoPregunta = res.detail[0];
-      if (this.infoPregunta.categoria == 'tecnologia') {
-        this.infoPregunta.categoria = 'Tecnología'
-      } else {
-        this.infoPregunta.categoria = 'Idiomas'
-      }
-      this.numPreguntas = this.infoPregunta.respuestas.length;
-      if (this.infoPregunta.idPersona == this.iduser) {
+    this.diario.getEntrada(ruta).subscribe((res: any) => {
+      this.infoEntrada = res.detail[0];
+      this.numPreguntas = this.infoEntrada.respuestas.length;
+      if (this.infoEntrada.idPersona == this.iduser) {
         this.propia = true;
       }
-      this.getinfoPersona(this.infoPregunta.idPersona);
+      this.getinfoPersona(this.infoEntrada.idPersona);
       this.infoRespuestas = [];
-      this.infoPregunta.respuestas.forEach(respuesta => {
+      this.infoEntrada.respuestas.forEach(respuesta => {
         this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
           var respuestas = [];
           respuesta.respuestas.forEach(respuestaCom => {
@@ -144,11 +125,6 @@ export class ComunidadPreguntaComponent implements OnInit {
         });
       });
     });
-    if (localStorage.getItem('pregunta') != null) {
-      this.preguntaForm.setValue({
-        pregunta: localStorage.getItem('pregunta')
-      });
-    }
   }
 
   getinfoPersona(id) {
@@ -161,36 +137,13 @@ export class ComunidadPreguntaComponent implements OnInit {
     });
   }
 
-  hacerPregunta() {
-    localStorage.setItem('pregunta', this.preguntaForm.value.pregunta);
-    this.router.navigate(['/comunidad/nueva', this.infoPregunta.categoria]);
-  }
-
-  cambiarCategoria() {
-    this.comunidad.cambiarCategoria(this.route.snapshot.params.ruta, { categoria: this.infoPregunta.categoria }).subscribe(res => {
-      this.getPregunta(this.route.snapshot.params.ruta);
-      this.editarCategoria = false;
-    });
-  }
-
-  agregarActualizacion() {
-    this.infoPregunta.actualizaciones.push({ actualizacion: this.actualizacionForm.value.actualizacion });
-    this.comunidad.agregarActualizacion(this.route.snapshot.params.ruta, { actualizaciones: this.infoPregunta.actualizaciones }).subscribe(res => {
-      this.getPregunta(this.route.snapshot.params.ruta);
-      this.editarPregunta = false;
-      this.actualizacionForm = this.formBuilder.group({
-        actualizacion: ['', Validators.required]
-      });
-    });
-  }
-
   enviarRespuesta() {
-    this.infoPregunta.respuestas.push({
+    this.infoEntrada.respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaForm.value.respuesta
     });
 
-    this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
+    this.diario.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas }).subscribe(res => {
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaForm.setValue({
         respuesta: ' '
@@ -199,7 +152,7 @@ export class ComunidadPreguntaComponent implements OnInit {
   }
 
   navegarCat() {
-    if (this.infoPregunta.categoria == 'Tecnología') {
+    if (this.infoEntrada.categoria == 'Tecnología') {
       this.router.navigate(['/comunidad/tecnologia']);
     } else {
       this.router.navigate(['/comunidad/idiomas']);
@@ -217,16 +170,15 @@ export class ComunidadPreguntaComponent implements OnInit {
     this.respuestaCom = '';
   }
   enviarRespuestaCom() {
-    this.infoPregunta.respuestas[this.responderIndex].respuestas.push({
+    this.infoEntrada.respuestas[this.responderIndex].respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaCom
     });
 
-    this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
+    this.diario.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas }).subscribe(res => {
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
       this.responderIndex = -1;
     });
   }
-
 }

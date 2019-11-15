@@ -1,0 +1,70 @@
+<div class="col-md-12 px-0">
+  <br>
+  <br>
+  <br>
+  <br>
+  <!--titulo-->
+  <div class="col-md-12 px-0 paqueteshome">
+    <div class="container">
+      <div class="row ">
+        <h2 class="p-2 letracursotitulo"><b>Diario</b></h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!--Temario-->
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="container">
+            <div class="card">
+              <div class="card-header bg-light text-center">
+                <b>
+                  Mis entradas
+                </b>
+              </div>
+              <div class="card-body">
+                <div class="container" *ngFor="let entrada of entradas">
+                  <a [routerLink]="['/diario/entrada/',entrada.ruta]">{{entrada.titulo}}</a>
+                  <br>
+                  <!--resumen entrada-->
+                  <div [innerHTML]="entrada.escrito"></div>
+                  <div class="d-flex flex-row bd-highlight mb-3">
+                    <div class="p-2 bd-highlight txtTodos">{{entrada.respuestas.length}} Respuesta(s)</div>
+                    <div class="p-2 bd-highlight">
+                      <p>{{entrada.categoria}}</p>
+                      
+                    </div>
+                    <div class="p-2 bd-highlight txtTodos">{{entrada.fecha | date}}</div>
+                  </div>
+                  <mat-divider></mat-divider>
+                  <br>
+                </div>
+                <!--Sin entradas-->
+                <div class="container" *ngIf="entradas.length==0">
+                  <h5>Aún no has hecho entradas, ¡Anímate a hacer una nueva!</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 pl-4">
+          <div class="container">
+            <div class="card">
+
+              <div class="row justify-content-center py-3">
+                <img class="icon-check mr-1" src="./../../../assets/icons/conversacion.svg">
+                <h4>¡Crea una entrada nueva!</h4>
+                <button [disabled]="iduser" type="button" class="btn colorbtn"
+                  [routerLink]="['/diario/nuevo']">Nueva</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>

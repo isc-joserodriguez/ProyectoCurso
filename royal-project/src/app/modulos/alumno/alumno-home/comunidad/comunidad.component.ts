@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComunidadService } from 'src/app/servicios/comunidad.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { CKEditorComponent } from 'ng2-ckeditor/ckeditor.component';
 
 @Component({
   selector: 'app-comunidad',
@@ -11,12 +10,6 @@ import { CKEditorComponent } from 'ng2-ckeditor/ckeditor.component';
   styleUrls: ['./comunidad.component.scss']
 })
 export class ComunidadComponent implements OnInit {
-  name = 'ng2-ckeditor';
-  ckeConfig: any;
-  mycontent: string;
-  log: string = '';
-  @ViewChild("myckeditor") ckeditor: any;
-
   categoria = this.route.snapshot.params.categoria;
   iduser = localStorage.getItem('userid') == null;
   listaPreguntas = [];
@@ -73,10 +66,4 @@ export class ComunidadComponent implements OnInit {
     localStorage.setItem('pregunta', this.preguntaForm.value.pregunta);
     this.router.navigate(['/comunidad/nueva', this.categoria]);
   }
-
-
-
-
-
-
 }

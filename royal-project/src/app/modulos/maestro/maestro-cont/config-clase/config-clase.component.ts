@@ -192,7 +192,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cambiaVideo = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeVideo = `${event.target.files[i].name}`.substring(0, 9);
+        this.mensajeVideo = `${event.target.files[i].name}`;
         this.nombreVideo = event.target.files[i].name;
         this.datosFormularioVideo.delete('archivo');
         this.datosFormularioVideo.append('archivo', event.target.files[i], event.target.files[i].name);
@@ -206,7 +206,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cambiaRecurso = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeRecurso = `${event.target.files[i].name}`.substring(0, 9);
+        this.mensajeRecurso = `${event.target.files[i].name}`;
         this.nombreRecurso = event.target.files[i].name;
         this.datosFormularioRecurso.delete('archivo');
         this.datosFormularioRecurso.append('archivo', event.target.files[i], event.target.files[i].name);

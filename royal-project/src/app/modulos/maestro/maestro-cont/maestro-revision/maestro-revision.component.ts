@@ -200,7 +200,7 @@ export class MaestroRevisionComponent implements OnInit {
   public seleccionarCert(event) {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeCert = `${event.target.files[i].name}`.substring(0, 9);
+        this.mensajeCert = `${event.target.files[i].name}`;
         this.nombreCert = event.target.files[i].name;
         this.datosFormularioCert.delete('archivo');
         this.datosFormularioCert.append('archivo', event.target.files[i], event.target.files[i].name);

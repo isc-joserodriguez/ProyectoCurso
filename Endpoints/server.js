@@ -12,6 +12,7 @@ const cursoRouter = require('./routers/curso.router')(wagner);
 const codigoRouter = require('./routers/codigo.router')(wagner);
 const compraRouter = require('./routers/compra.router')(wagner);
 const comunidadRouter = require('./routers/comunidad.router')(wagner);
+const diarioRouter = require('./routers/diario.router')(wagner);
 
 //configurar servidor express
 let app =express();
@@ -35,6 +36,7 @@ app.use("/cursos",cursoRouter);
 app.use("/codigos",codigoRouter);
 app.use("/compras",compraRouter);
 app.use("/comunidad",comunidadRouter);
+app.use("/diario",diarioRouter);
 
 
 module.exports = app;

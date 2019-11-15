@@ -150,9 +150,9 @@
                     <span class="input-group-text">Subir Foto</span>
                   </div>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" formControlName="foto"
+                    <input type="file" class="custom-file-input text-truncate" formControlName="foto"
                       (change)="seleccionarFoto($event)">
-                    <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
+                    <label class="custom-file-label" for="inputGroupFile01">{{mensajeArchivo}}</label>
                   </div>
                 </div>
                 <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"

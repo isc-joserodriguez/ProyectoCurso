@@ -17,6 +17,7 @@ module.exports = (wagner) => {
     const Comunidad = require('./comunidad.model');
     const Codigo = require('./codigo.model');
     const Compra = require('./compra.model');
+    const Diario = require('./diario.model');
 
 
     const models = {
@@ -24,7 +25,8 @@ module.exports = (wagner) => {
         Curso,
         Comunidad,
         Codigo,
-        Compra
+        Compra,
+        Diario
     }
     //recorrer los modelos y ponerlos disponibles
     _.each(models, (v, k) => {

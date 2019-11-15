@@ -49,7 +49,7 @@
                       <span class="input-group-text">Subir Video</span>
                     </div>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" formControlName="video"
+                      <input type="file" class="custom-file-input text-truncate" formControlName="video"
                         (change)="seleccionarVideo($event)">
                       <label class="custom-file-label" for="inputGroupFile01">{{mensajeVideo}}</label>
                     </div>
@@ -112,7 +112,7 @@
                       <span class="input-group-text">Subir Recurso</span>
                     </div>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" formControlName="urlRecurso"
+                      <input type="file" class="custom-file-input text-truncate" formControlName="urlRecurso"
                         (change)="seleccionarRecurso($event)">
                       <label class="custom-file-label" for="inputGroupFile01">{{mensajeRecurso}}</label>
                     </div>

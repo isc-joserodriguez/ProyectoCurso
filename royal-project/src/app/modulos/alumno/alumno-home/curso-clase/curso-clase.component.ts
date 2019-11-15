@@ -136,7 +136,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   public seleccionarTarea(event) {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeTarea = `${event.target.files[i].name}`.substring(0, 9);
+        this.mensajeTarea = `${event.target.files[i].name}`
         this.nombreTarea = event.target.files[i].name;
         this.datosFormularioTarea.delete('archivo');
         this.datosFormularioTarea.append('archivo', event.target.files[i], event.target.files[i].name);

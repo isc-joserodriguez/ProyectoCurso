@@ -6,7 +6,7 @@
   <div class="col-md-12 px-0 paqueteshome">
     <div class="container">
       <div class="row ">
-        <h2 class="p-2 letracursotitulo"><b>Comunidad</b></h2>
+        <h2 class="p-2 letracursotitulo"><b>Diario</b></h2>
       </div>
     </div>
   </div>
@@ -21,30 +21,39 @@
               <div class="card">
                 <div class="row justify-content-center py-3">
                   <img class="icon-check mr-1" src="./../../../assets/icons/conversacion.svg">
-                  <h4>¡Haz tu pregunta!</h4>
+                  <h4>¡La comunidad te va a leer!</h4>
                 </div>
                 <div class="container form col-md-12 px-5">
-                  <form [formGroup]="preguntaForm">
-                    <!-- Pregunta -->
-                    <h5>Pregunta:</h5>
+                  <form [formGroup]="entradaForm">
+                    <h5>Idiomas:</h5>
+                    <mat-form-field>
+                      <mat-label>Idiomas:</mat-label>
+                      <mat-select formControlName="categoria">
+                        <mat-option *ngFor="let idioma of subcategorias" [value]="idioma">
+                          {{idioma}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <!-- Titulo -->
+                    <h5>Título:</h5>
                     <mat-form-field appearance="outline" class="field-login">
-                      <input matInput placeholder="Ingresa tu pregunta" formControlName="pregunta">
+                      <input matInput placeholder="Ingresa el título" formControlName="titulo">
                       <mat-error>
-                        <span *ngIf="!preguntaForm.get('pregunta').valid && preguntaForm.get('pregunta').touched">Agrega
-                          tu pregunta</span>
+                        <span *ngIf="!entradaForm.get('titulo').valid && entradaForm.get('titulo').touched">Agrega
+                          el título</span>
                       </mat-error>
                     </mat-form-field>
                     <br>
-                    <!-- Pregunta -->
+                    <!-- Titulo -->
 
-                    <!-- Detalles -->
-                    <h5>Detalles:</h5>
-                    <ckeditor required [config]="ckeConfig" debounce="500" formControlName="detalles">
+                    <!-- Escrito -->
+                    <h5>Escrito:</h5>
+                    <ckeditor required [config]="ckeConfig" debounce="500" formControlName="escrito">
                     </ckeditor>
 
-                    <!-- Detalles -->
+                    <!-- Escrito -->
                     <div class="text-right pr-4 pb-3">
-                      <button [disabled]="!preguntaForm.valid" type="button" class="btn btn-success"
+                      <button [disabled]="!entradaForm.valid" type="button" class="btn btn-success"
                         (click)="subirPregunta()">Enviar</button>
                     </div>
                   </form>

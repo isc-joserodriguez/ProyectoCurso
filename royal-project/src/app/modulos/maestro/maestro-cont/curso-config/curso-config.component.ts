@@ -106,7 +106,7 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cambiaFoto = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeFoto = `${event.target.files[i].name}`.substring(0, 12) + '...';
+        this.mensajeFoto = `${event.target.files[i].name}`;
         this.nombreFoto = event.target.files[i].name;
         this.datosFormularioFoto.delete('archivo');
         this.datosFormularioFoto.append('archivo', event.target.files[i], event.target.files[i].name);
@@ -119,7 +119,7 @@ export class CursoConfigComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cambiaVideo = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeVideo = `${event.target.files[i].name}`.substring(0, 9);
+        this.mensajeVideo = `${event.target.files[i].name}`;
         this.nombreVideo = event.target.files[i].name;
         this.datosFormularioVideo.delete('archivo');
         this.datosFormularioVideo.append('archivo', event.target.files[i], event.target.files[i].name);

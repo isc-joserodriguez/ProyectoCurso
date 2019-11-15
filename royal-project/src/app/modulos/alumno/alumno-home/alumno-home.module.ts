@@ -27,9 +27,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 
 // mdbootstrap
@@ -50,13 +51,17 @@ import { SafePipeModule } from 'safe-pipe';
 //editor ckeditor
 import { CKEditorModule } from 'ng2-ckeditor';
 
-import {NgDompurifyModule} from '@tinkoff/ng-dompurify';
+import { NgDompurifyModule } from '@tinkoff/ng-dompurify';
 import { PerfilMaestroComponent } from './perfil-maestro/perfil-maestro.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
+import { DiarioComponent } from './diario/diario.component';
+import { DiarioNuevoComponent } from './diario-nuevo/diario-nuevo.component';
+import { DiarioEntradaComponent } from './diario-entrada/diario-entrada.component';
+import { DiarioPropiasComponent } from './diario-propias/diario-propias.component';
 
 @NgModule({
   declarations: [AlumnoHomeComponent, CarritoComponent, BusquedaComponent, MisCursosComponent,
-    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, PerfilMaestroComponent, SubcategoriaComponent],
+    PerfilNavComponent, CursoComponent, CategoriasComponent, ComunidadComponent, ComunidadNuevoComponent, ComunidadPreguntaComponent, ComunidadPropiasComponent, CursoResumenComponent, CursoClaseComponent, PerfilPublicoComponent, PerfilMaestroComponent, SubcategoriaComponent, DiarioComponent, DiarioNuevoComponent, DiarioEntradaComponent, DiarioPropiasComponent],
   imports: [
     CommonModule,
     AlumnoHomeRoutingModule,
@@ -76,7 +81,8 @@ import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
     MatProgressBarModule,
     CKEditorModule,
     SafePipeModule,
-    NgDompurifyModule
+    NgDompurifyModule,
+    MatSelectModule
   ]
 })
 export class AlumnoHomeModule { }
