@@ -22,9 +22,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 // MDBootstrap
@@ -56,7 +57,8 @@ import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
     MatExpansionModule,
     MatIconModule,
     MatDividerModule,
-    SafePipeModule
+    SafePipeModule,
+    MatProgressBarModule
   ]
 })
 export class PerfilContModule { }
