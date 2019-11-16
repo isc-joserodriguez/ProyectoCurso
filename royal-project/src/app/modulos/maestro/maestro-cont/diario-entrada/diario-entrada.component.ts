@@ -96,10 +96,10 @@ export class DiarioEntradaComponent implements OnInit {
       }
       this.getinfoPersona(this.infoEntrada.idPersona);
       this.infoRespuestas = [];
-      this.infoEntrada.respuestas.forEach(respuesta => {
+      this.infoEntrada.respuestas.forEach((respuesta, i) => {
         this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
           var respuestas = [];
-          respuesta.respuestas.forEach(respuestaCom => {
+          respuesta.respuestas.forEach((respuestaCom, j) => {
             this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
               let resCom: any = {
                 nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
@@ -108,9 +108,11 @@ export class DiarioEntradaComponent implements OnInit {
                 foto: usuarioCom.detail[0].foto,
                 id: respuestaCom.idPersona,
                 ruta: usuarioCom.detail[0].ruta,
-                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true
+                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true,
+                i: i,
+                j: j
               }
-              respuestas.push(resCom);
+              if (!respuestaCom.reportado) respuestas.push(resCom);
             });
           });
           let nuevaRes: any = {
@@ -121,9 +123,10 @@ export class DiarioEntradaComponent implements OnInit {
             id: respuesta.idPersona,
             ruta: usuario.detail[0].ruta,
             respuestas: respuestas,
-            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true
+            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true,
+            i: i
           }
-          this.infoRespuestas.push(nuevaRes);
+          if (!respuesta.reportado) this.infoRespuestas.push(nuevaRes);
         });
       });
     });
@@ -171,8 +174,8 @@ export class DiarioEntradaComponent implements OnInit {
     this.responderIndex = index;
     this.respuestaCom = '';
   }
-  enviarRespuestaCom() {
-    this.infoEntrada.respuestas[this.responderIndex].respuestas.push({
+  enviarRespuestaCom(i) {
+    this.infoEntrada.respuestas[i].respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaCom
     });
@@ -181,6 +184,44 @@ export class DiarioEntradaComponent implements OnInit {
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
       this.responderIndex = -1;
+    });
+  }
+  reportarComentarioN1(i) {
+    this.infoEntrada.respuestas[i].reportado = true;
+    this.infoEntrada.reportes.push({
+      tipo: 1,
+      respn1: i,
+      idReporta: localStorage.getItem('userid')
+    });
+    this.diario.agregarReporte(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas, reportado: false, reportes: this.infoEntrada.reportes }).subscribe(res => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
+  }
+
+  reportarComentarioN2(i, j) {
+    this.infoEntrada.respuestas[i].respuestas[j].reportado = true;
+    this.infoEntrada.reportes.push({
+      tipo: 2,
+      respn1: i,
+      respn2: j,
+      idReporta: localStorage.getItem('userid')
+    });
+    this.diario.agregarReporte(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas, reportado: false, reportes: this.infoEntrada.reportes }).subscribe(res => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
+  }
+
+  reportarEntrada() {
+    this.infoEntrada.reportes.push({
+      tipo: 0,
+      idReporta: localStorage.getItem('userid')
+    });
+    this.diario.agregarReporte(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas, reportado: true, reportes: this.infoEntrada.reportes }).subscribe(res => {
+      this.router.navigate(['/diario/entradas']);
     });
   }
 }

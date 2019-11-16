@@ -11,17 +11,26 @@ const comunidadSchema = new mongoose.Schema({
     fecha: { type: Date, default: Date.now() },
     categoria: { type: String, required: true }, //tecnologia - idiomas
     respuestas: [{
+        reportado: { type: Boolean, default: false },
         idPersona: { type: Number },
         comentario: { type: String },
         fecha: { type: Date, default: Date.now() },
         respuestas: [{
+            reportado: { type: Boolean, default: false },
             idPersona: { type: Number },
             comentario: { type: String },
             fecha: { type: Date, default: Date.now() }
         }]
     }],
     ruta: { type: String },
-    reportes: [{ idAlumno: { type: Number }, ruta: { type: String }, comentario: { type: String }, numReportes: { type: Number } }]
+    reportado: { type: Boolean, default: false },
+    reportes: [{
+        activo: { type: Boolean, default: true },
+        tipo: { type: Number }, //0-Entrada principal | 1-Respuesta n1 | 2- Respuesta n2
+        respn1: { type: Number },
+        respn2: { type: Number },
+        idAlumno: { type: Number }
+    }]
 });
 
 //modelo Curso

@@ -33,7 +33,7 @@ export class ComunidadComponent implements OnInit {
     this.listaPreguntas = [];
     this.comunidad.getPreguntas().subscribe((res: any) => {
       res.detail.forEach(pregunta => {
-        if (pregunta.categoria == cat) {
+        if (pregunta.categoria == cat && !pregunta.reportado) {
           this.usuarios.getUser(pregunta.idPersona).subscribe((info: any) => {
             this.listaPreguntas.push({
               //Pendiente

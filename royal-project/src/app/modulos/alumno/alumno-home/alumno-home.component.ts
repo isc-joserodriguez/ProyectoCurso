@@ -42,57 +42,59 @@ export class AlumnoHomeComponent implements OnInit {
   getEntradasDiario() {
     this.diario.getEntradas().subscribe((entradas: any) => {
       entradas.detail.forEach(entrada => {
-        var repetido = false;
-        var index = 0;
-        this.rankingDiario.forEach((cat, i) => {
-          if (cat.categoria == entrada.categoria) {
-            repetido = true;
-            index = i;
-          }
-        });
-        if (repetido) {
-          this.rankingDiario[index].conteo = this.rankingDiario[index].conteo + 1;
-        } else {
-          this.rankingDiario.push({
-            conteo: 1,
-            categoria: entrada.categoria,
-            fecha: entrada.fecha
+        if (!entrada.reportado) {
+          var repetido = false;
+          var index = 0;
+          this.rankingDiario.forEach((cat, i) => {
+            if (cat.categoria == entrada.categoria) {
+              repetido = true;
+              index = i;
+            }
           });
+          if (repetido) {
+            this.rankingDiario[index].conteo = this.rankingDiario[index].conteo + 1;
+          } else {
+            this.rankingDiario.push({
+              conteo: 1,
+              categoria: entrada.categoria,
+              fecha: entrada.fecha
+            });
+          }
         }
       });
       this.rankingDiario = this.rankingDiario.sort(function (a, b) {
         return a.conteo - b.conteo;
       }).reverse();
       this.dataSourceDiario = new MatTableDataSource(this.rankingDiario);
-      console.log(this.rankingDiario);
     });
   }
   getPreguntas() {
     this.comunidad.getPreguntas().subscribe((preguntas: any) => {
       preguntas.detail.forEach(pregunta => {
-        var repetido = false;
-        var index = 0;
-        this.rankingPreguntas.forEach((cat, i) => {
-          if (cat.categoria == pregunta.categoria) {
-            repetido = true;
-            index = i;
-          }
-        });
-        if (repetido) {
-          this.rankingPreguntas[index].conteo = this.rankingPreguntas[index].conteo + 1;
-        } else {
-          this.rankingPreguntas.push({
-            conteo: 1,
-            categoria: pregunta.categoria,
-            fecha: pregunta.fecha
+        if (!pregunta.reportado) {
+          var repetido = false;
+          var index = 0;
+          this.rankingPreguntas.forEach((cat, i) => {
+            if (cat.categoria == pregunta.categoria) {
+              repetido = true;
+              index = i;
+            }
           });
+          if (repetido) {
+            this.rankingPreguntas[index].conteo = this.rankingPreguntas[index].conteo + 1;
+          } else {
+            this.rankingPreguntas.push({
+              conteo: 1,
+              categoria: pregunta.categoria,
+              fecha: pregunta.fecha
+            });
+          }
         }
       });
       this.rankingPreguntas = this.rankingPreguntas.sort(function (a, b) {
         return a.conteo - b.conteo;
       }).reverse();
       this.dataSourcePreguntas = new MatTableDataSource(this.rankingPreguntas);
-      console.log(this.rankingPreguntas);
     });
   }
 

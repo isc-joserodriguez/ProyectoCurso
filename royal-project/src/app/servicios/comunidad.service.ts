@@ -34,4 +34,8 @@ export class ComunidadService {
   agregarRespuesta(ruta, respuestas) {
     return this.http.put(apiUrl + '/agregarResp/' + ruta, respuestas);
   }
+
+  agregarReporte(ruta, datos) {
+    return this.http.put(apiUrl + '/agregarReporte/' + ruta, datos);
+  }
 }

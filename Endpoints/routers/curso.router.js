@@ -64,6 +64,10 @@ module.exports = (wagner) => {
         cursoCtrl.agregarComentario(req, res);
     });
 
+    cursoRouter.put("/agregarReporte/:id", (req, res) => {
+        cursoCtrl.agregarReporte(req, res);
+    });
+
     cursoRouter.put("/updateTemario/:id", (req, res) => {
         cursoCtrl.updateTemario(req, res);
     });

@@ -36,7 +36,9 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     evaluacion: false
   };
 
-  temario = [];
+  nwInfoCurso: any = {}
+
+  temario: any = [];
   listaRecursos = [];
   objTarea: any = {};
 
@@ -132,6 +134,7 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   infoCurso(id) {
     this.cursos.getCursoInfo(id).subscribe((res: any) => {
+      this.nwInfoCurso = res.detail[0];
       this.temario = res.detail[0].contenidoCurso;
       this.portada = res.detail[0].imagen;
       this.infoClase = this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1];
@@ -157,10 +160,10 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.getTarea()
       }
       this.infoRespuestas = [];
-      this.infoClase.comentarios.forEach(respuesta => {
+      this.infoClase.comentarios.forEach((respuesta, i) => {
         this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
           var respuestas = [];
-          respuesta.respuestas.forEach(respuestaCom => {
+          respuesta.respuestas.forEach((respuestaCom, j) => {
             this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
 
               let resCom: any = {
@@ -170,9 +173,11 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
                 foto: usuarioCom.detail[0].foto,
                 id: respuestaCom.idPersona,
                 ruta: usuarioCom.detail[0].ruta,
-                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true
+                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true,
+                i: i,
+                j: j
               }
-              respuestas.push(resCom);
+              if (!respuestaCom.reportado) respuestas.push(resCom);
             });
           });
 
@@ -184,9 +189,10 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             id: respuesta.idPersona,
             ruta: usuario.detail[0].ruta,
             respuestas: respuestas,
-            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true
+            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true,
+            i: i
           }
-          this.infoRespuestas.push(nuevaRes);
+          if (!respuesta.reportado) this.infoRespuestas.push(nuevaRes);
         });
       });
     });
@@ -433,13 +439,56 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.responderIndex = index;
     this.respuestaCom = '';
   }
-  enviarRespuestaCom() {
-    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1].comentarios[this.responderIndex].respuestas.push({
+  enviarRespuestaCom(i) {
+    this.temario[this.unidad - 1].subtemas[this.subtema - 1].clases[this.clase - 1].comentarios[i].respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaCom
     });
 
     this.cursos.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
+      this.infoCurso(this.route.snapshot.params.id);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
+  }
+
+
+  reportarComentarioN1(i) {
+
+    this.nwInfoCurso.reportes.push({
+      unidad: this.route.snapshot.params.unidad - 1,
+      subtema: this.route.snapshot.params.subtema - 1,
+      clase: this.route.snapshot.params.clase - 1,
+      tipo: 1, //1-Respuesta n1 | 2- Respuesta n2
+      respn1: i,
+      idAlumno: localStorage.getItem('userid')
+    });
+
+    this.nwInfoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].reportado = true;
+
+    this.cursos.agregarReporte(this.route.snapshot.params.id, { contenidoCurso: this.nwInfoCurso.contenidoCurso, reportes: this.nwInfoCurso.reportes }).subscribe(res => {
+      this.infoCurso(this.route.snapshot.params.id);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
+  }
+
+  reportarComentarioN2(i, j) {
+
+    this.nwInfoCurso.reportes.push({
+      unidad: this.route.snapshot.params.unidad - 1,
+      subtema: this.route.snapshot.params.subtema - 1,
+      clase: this.route.snapshot.params.clase - 1,
+      tipo: 2, //1-Respuesta n1 | 2- Respuesta n2
+      respn1: i,
+      respn2: j,
+      idAlumno: localStorage.getItem('userid')
+    });
+
+
+    this.nwInfoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].respuestas[j].reportado = true;
+
+    this.cursos.agregarReporte(this.route.snapshot.params.id, { contenidoCurso: this.nwInfoCurso.contenidoCurso, reportes: this.nwInfoCurso.reportes }).subscribe(res => {
       this.infoCurso(this.route.snapshot.params.id);
       this.respuestaCom = '';
       this.responderIndex = -1;

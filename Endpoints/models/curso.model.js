@@ -44,10 +44,12 @@ const cursoSchema = new mongoose.Schema({
                         }]
                     },//Recursos de la tarea
                     comentarios: [{
+                        reportado: { type: Boolean, default: false },
                         idPersona: { type: Number },
                         comentario: { type: String },
                         fecha: { type: Date, default: Date.now() },
                         respuestas: [{
+                            reportado: { type: Boolean, default: false },
                             idPersona: { type: Number },
                             comentario: { type: String },
                             fecha: { type: Date, default: Date.now() }
@@ -83,6 +85,16 @@ const cursoSchema = new mongoose.Schema({
         idPersona: { type: String, required: true },
         comentario: { type: String, required: true },
         puntuacion: { type: Number, required: true }
+    }],
+    reportes: [{
+        activo: { type: Boolean, default: true },
+        unidad: { type: Number },
+        subtema: { type: Number },
+        clase: { type: Number },
+        tipo: { type: Number }, //1-Respuesta n1 | 2- Respuesta n2
+        respn1: { type: Number },
+        respn2: { type: Number },
+        idAlumno: { type: Number }
     }]
 
 });
