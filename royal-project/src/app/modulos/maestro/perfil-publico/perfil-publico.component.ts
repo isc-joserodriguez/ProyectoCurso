@@ -27,6 +27,7 @@ export class PerfilPublicoComponent implements OnInit {
   cursosTec = [];
   cursosId = [];
   certificados = [];
+  url = window.location.href.replace('maestro/perfil-publico', 'perfil-maestro');;
 
   constructor(private cursos: CursosService, private route: ActivatedRoute, private router: Router, private usuarios: UsuariosService) { }
 
