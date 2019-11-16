@@ -43,6 +43,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
     ruta: ''
   };
   avance = [];
+  relacionados = [];
 
   player: any;
 
@@ -102,6 +103,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
       this.getAvance(localStorage.getItem('userid'));
       this.getInfoMaestro(curso.detail[0].idMaestro);
       this.getValoraciones();
+      this.getRelacionados(curso.detail[0].subcategoria);
     });
   }
   getAvance(id) {
@@ -218,5 +220,27 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
     this.curso.updateReview(this.route.snapshot.params.id, { valoraciones: this.infoCurso.valoraciones }).subscribe(res => {
       this.getInfoCurso(this.route.snapshot.params.id);
     });
+  }
+  getRelacionados(subcategoria) {
+    this.curso.getCursos().subscribe((cursos: any) => {
+      cursos.detail.forEach(curso => {
+        if (curso.subcategoria == subcategoria && curso.ruta != this.route.snapshot.params.id) this.relacionados.push(curso);
+      });
+
+      if (this.relacionados.length > 5) this.relacionados = this.getRandom(this.relacionados, 5);
+    });
+  }
+  getRandom(arr, n) {
+    var result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+    if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+      var x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
   }
 }
