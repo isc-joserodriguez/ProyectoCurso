@@ -102,7 +102,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
                 fecha: respuestaCom.fecha,
                 foto: usuarioCom.detail[0].foto,
                 id: respuestaCom.idPersona,
-                ruta: usuarioCom.detail[0].ruta
+                ruta: usuarioCom.detail[0].ruta,
+                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true
               }
               respuestas.push(resCom);
             });
@@ -114,7 +115,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             foto: usuario.detail[0].foto,
             id: respuesta.idPersona,
             ruta: usuario.detail[0].ruta,
-            respuestas: respuestas
+            respuestas: respuestas,
+            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true
           }
           this.infoRespuestas.push(nuevaRes);
         });

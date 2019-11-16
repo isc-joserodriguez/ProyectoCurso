@@ -85,7 +85,7 @@
                                 <a
                                   [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
                               </div>
-                              <div class="col-md-4 subtitulo text-center">
+                              <div class="col-md-4 subtitulo text-center" *ngIf="respuesta.maestro">
                                 <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
 
                               </div>
@@ -119,7 +119,7 @@
                                     <div class="col-md-7">
                                       <a [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
                                     </div>
-                                    <div class="col-md-4 subtitulo text-center">
+                                    <div class="col-md-4 subtitulo text-center" *ngIf="resp.maestro">
                                       <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
 
                                     </div>

@@ -211,7 +211,7 @@
                           <div class="col-md-7">
                             <a [routerLink]="['/maestro/alumno',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
                           </div>
-                          <div class="col-md-4 subtitulo text-center">
+                          <div class="col-md-4 subtitulo text-center" *ngIf="respuesta.maestro">
                             <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
 
                           </div>
@@ -244,7 +244,7 @@
                                 <div class="col-md-7">
                                   <a [routerLink]="['/maestro/alumno',resp.ruta]">{{resp.nombreCompleto}}</a>
                                 </div>
-                                <div class="col-md-4 subtitulo text-center">
+                                <div class="col-md-4 subtitulo text-center" *ngIf="resp.maestro">
                                   <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
 
                                 </div>

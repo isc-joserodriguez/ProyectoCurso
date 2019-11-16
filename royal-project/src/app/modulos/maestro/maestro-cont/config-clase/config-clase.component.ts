@@ -162,17 +162,20 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
           var respuestas = [];
           respuesta.respuestas.forEach(respuestaCom => {
             this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
+
               let resCom: any = {
                 nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
                 comentario: respuestaCom.comentario,
                 fecha: respuestaCom.fecha,
                 foto: usuarioCom.detail[0].foto,
                 id: respuestaCom.idPersona,
-                ruta: usuarioCom.detail[0].ruta
+                ruta: usuarioCom.detail[0].ruta,
+                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true
               }
               respuestas.push(resCom);
             });
           });
+
           let nuevaRes: any = {
             nombreCompleto: usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno,
             comentario: respuesta.comentario,
@@ -180,7 +183,8 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             foto: usuario.detail[0].foto,
             id: respuesta.idPersona,
             ruta: usuario.detail[0].ruta,
-            respuestas: respuestas
+            respuestas: respuestas,
+            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true
           }
           this.infoRespuestas.push(nuevaRes);
         });

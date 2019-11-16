@@ -137,14 +137,13 @@
                   <div class="card-body">
                     <h5 class="card-title row">
                       <div class="col-md-1">
-                        <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                        title="Reportar"><img class="icon-report"
-                            src="./../../../assets/icons/reportar.svg"></button>
+                        <button class="unstyled-button" data-toggle="tooltip" data-placement="top" title="Reportar"><img
+                            class="icon-report" src="./../../../assets/icons/reportar.svg"></button>
                       </div>
                       <div class="col-md-7">
                         <a [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
                       </div>
-                      <div class="col-md-4 subtitulo text-center">
+                      <div class="col-md-4 subtitulo text-center" *ngIf="respuesta.maestro">
                         <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
 
                       </div>
@@ -171,15 +170,14 @@
                           <h5 class="card-title row">
                             <div class="col-md-1">
                               <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                              title="Reportar"><img class="icon-report"
+                                title="Reportar"><img class="icon-report"
                                   src="./../../../assets/icons/reportar.svg"></button>
                             </div>
                             <div class="col-md-7">
                               <a [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
                             </div>
-                            <div class="col-md-4 subtitulo text-center">
+                            <div class="col-md-4 subtitulo text-center" *ngIf="resp.maestro">
                               <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
-
                             </div>
                           </h5>
                           {{resp.comentario}}
