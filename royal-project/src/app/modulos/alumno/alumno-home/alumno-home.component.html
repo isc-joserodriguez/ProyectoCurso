@@ -67,7 +67,6 @@
         <div class="col-md-12 text-right pr-5 ">
           <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/categoria/tecnología']">Ver más
             cursos...</button>
-
         </div>
       </div>
       <!--Cierre Botones Categorias-->
@@ -95,8 +94,8 @@
       <!--Botones Categorias-->
       <div class="row col-md-12">
         <div class="col-md-12 text-right pr-5 ">
-          <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/categoria/idiomas']">Ver más
-            cursos...</button>
+          <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/diario/entradas']">Ver
+            más...</button>
         </div>
       </div>
       <!--Cierre Botones Categorias-->
@@ -106,128 +105,101 @@
 </div>
 <!--Cierre Categorías-->
 
-<!--Texto Paquetes-->
-<div class="col-md-12 texto-paquetes">
+<!--comunidad-->
+<div class="categorias container mx-auto">
+  <p class="h3 font-weight-bold text-center bg-warning text-dark">COMUNIDADES MÁS ACTIVAS</p> <br>
   <br>
-  <p class="h3 font-weight-bold text-center text-dark">Conviértete en lo que quieras ser </p> <br>
-  <p class="h4 font-weight-bold text-center text-warning">PAQUETES ROYALE</p> <br>
+  <div class="row">
+    <div class="col-md-5 mb-3">
+      <h4>Diario</h4>
+      <br>
+      <mat-card>
+        <table mat-table [dataSource]="dataSourceDiario">
 
-</div>
-<!--Cierre Texto Paquetes-->
-<!--Imagenes Paquetes-->
-<div class="col-md-12 px-0 paquetes paqueteshome">
+          <!-- Columna Lugar -->
+          <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ° </th>
+            <td mat-cell *matCellDef="let row;let i=index">
+              <img *ngIf="(i==0)" class="icon-opcion" src="./../../../../assets/icons/palomita.svg"> <!-- Oro -->
+              <img *ngIf="(i==1)" class="icon-opcion" src="./../../../../assets/icons/tache.svg"> <!-- Plata -->
+              <img *ngIf="(i==2)" class="icon-opcion" src="./../../../../assets/icons/edit.svg"> <!-- Bronce -->
+              <span *ngIf="(i>2)">{{i+1}}°</span>
+            </td>
+          </ng-container>
 
-  <div class="paquetes-img pb-3 container">
-    <br>
-    <div class="row col-md-12">
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
-            style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid wow bounceInUp" alt="zoom" max-width="100%"
-              height="160" style=" visibility: visible; animation-name: bounceInUp;">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
-            style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
-            style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
-            style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
+          <!-- Columna Nombre Categoria -->
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
+            <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
+          </ng-container>
+
+          <!-- Columna Fecha -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima pregunta </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
+          </ng-container>
+
+          <!-- Columna Num -->
+          <ng-container matColumnDef="conteo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+            <td mat-cell *matCellDef="let row">{{row.conteo}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="colDiario"></tr>
+          <tr mat-row *matRowDef="let row; columns: colDiario;">
+          </tr>
+        </table>
+      </mat-card>
+      <div class="col-md-12 text-right pr-2">
+        <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/categoria/tecnología']">Ver más
+          cursos...</button>
       </div>
     </div>
-    <br>
-    <div class="row col-md-12">
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
-            style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid imgLiquidFill view overlay zoom z-depth-1 rounded"
-            style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid view overlay zoom z-depth-1 rounded" style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
-      <div class="col-md-3 text-center ">
-        <label>
-          <div class="imgLiquid view overlay zoom z-depth-1 rounded sombra" style="max-width:100%; height:150px;">
-            <img src="http://www.lorempixel.com/500/500" class="img-fluid" alt="zoom" max-width="100%" height="160">
-            <p class="centered font-weight-bold">Conviértete en un Desarrollador Web Front End</p>
-            <div class="mask flex-center waves-effect waves-light">
-              <p class="white-text abajo font-weight-bold">3 Cursos</p>
-            </div>
-          </div>
-        </label>
-      </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="col-md-5 mb-3">
+      <h4>Preguntas</h4>
+      <br>
+      <mat-card>
+        <table mat-table [dataSource]="dataSourcePreguntas">
 
+          <!-- Columna Lugar -->
+          <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ° </th>
+            <td mat-cell *matCellDef="let row;let i=index">
+              <img *ngIf="(i==0)" class="icon-opcion" src="./../../../../assets/icons/palomita.svg"> <!-- Oro -->
+              <img *ngIf="(i==1)" class="icon-opcion" src="./../../../../assets/icons/tache.svg"> <!-- Plata -->
+            </td>
+          </ng-container>
+
+          <!-- Columna Nombre Categoria -->
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
+            <td mat-cell *matCellDef="let row"> {{(row.categoria=='tecnologia')?'Tecnología':'Idiomas'}} </td>
+          </ng-container>
+
+          <!-- Columna Fecha -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima pregunta </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
+          </ng-container>
+
+          <!-- Columna Num -->
+          <ng-container matColumnDef="conteo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+            <td mat-cell *matCellDef="let row">{{row.conteo}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="colPreguntas"></tr>
+          <tr mat-row *matRowDef="let row; columns: colPreguntas;">
+          </tr>
+        </table>
+      </mat-card>
+      <div class="col-md-12 text-right pr-5">
+        <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/categoria/tecnología']">Ver más
+          cursos...</button>
+      </div>
     </div>
   </div>
-
 </div>
-<!--Cierre Paquetes-->
-<br>
-
-<!--Botones Paquetes-->
-<div class="col-md-12 text-center">
-  <button type="button" class="btn btn-warning btn-lg text-dark">¡Conoce nuestros paquetes!</button></div>
-<!--Cierre Botones Paquetes-->
+<!--Cierre Comunidad-->
 <br><br>

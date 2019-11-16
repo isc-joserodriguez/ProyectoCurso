@@ -154,8 +154,8 @@
                     <label class="custom-file-label" for="inputGroupFile01">{{archivopath}}</label>
                   </div>
                 </div>
-                <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"
-                  max="100">{{porcentaje}}%</progress>
+                <mat-progress-bar *ngIf="!finalizado" mode="determinate" [value]="porcentaje">
+                </mat-progress-bar>
               </div>
             </div>
           </div>

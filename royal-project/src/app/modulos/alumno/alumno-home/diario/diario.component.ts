@@ -27,7 +27,8 @@ export class DiarioComponent implements OnInit {
     this.diario.getEntradas().subscribe((res: any) => {
       res.detail.forEach(entrada => {
         this.usuarios.getUser(entrada.idPersona).subscribe((info: any) => {
-          this.subcategorias.push(entrada.categoria);
+          if (!this.subcategorias.includes(entrada.categoria)) this.subcategorias.push(entrada.categoria);
+          this.subcategorias = this.subcategorias.sort();
           this.listaEntradas.push({
             //Pendiente
             insignias: info.detail[0].insignias.length,
@@ -43,14 +44,13 @@ export class DiarioComponent implements OnInit {
             nombre: info.detail[0].nombre + ' ' + info.detail[0].apPaterno + ' ' + info.detail[0].apMaterno
           });
         });
-        this.entradasFiltradas = this.listaEntradas;
-        var a = [];
-        new Set(this.subcategorias).forEach(e => {
-          a.push(e);
-        });
-        this.subcategorias = a;
-        this.subcategorias = this.subcategorias.sort();
       });
+      this.entradasFiltradas = this.listaEntradas;
+      var a = [];
+      new Set(this.subcategorias).forEach(e => {
+        a.push(e);
+      });
+      this.subcategorias = a;
     });
   }
   filtrar(event, element) {

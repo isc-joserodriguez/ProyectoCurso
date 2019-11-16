@@ -44,8 +44,8 @@
                     </div>
                   </div>
 
-                  <progress *ngIf="!finalizado" class="progress is-large is-success" value="{{porcentaje}}"
-                    max="100">{{porcentaje}}%</progress>
+                  <mat-progress-bar *ngIf="!finalizado" mode="determinate" [value]="porcentaje">
+                  </mat-progress-bar>
 
                 </div>
               </div>
@@ -68,7 +68,8 @@
             <br>
             <div class="row">
               <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-success btn-md " [disabled]="!(insigniaForm.valid && archivo)" (click)="subir()">
+                <button type="button" class="btn btn-success btn-md " [disabled]="!(insigniaForm.valid && archivo)"
+                  (click)="subir()">
                   <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Guardar
                 </button>
               </div>

@@ -53,6 +53,7 @@ export class AdminPagosComponent implements OnInit {
             var detallesCompra = {
               administrador: (compra.idAdmin == -1) ? 'Adquirido por Sistema' : infoAdmin.detail[0].nombre + ' ' + infoAdmin.detail[0].apPaterno + ' ' + infoAdmin.detail[0].apMaterno,
               persona: infoAlumno.detail[0].nombre + ' ' + infoAlumno.detail[0].apPaterno + ' ' + infoAlumno.detail[0].apMaterno,
+              idPersona: infoAlumno.detail[0]._id,
               importe: compra.importe,
               fecha: compra.fecha,
               fechaLimite: compra.fechaLimite,

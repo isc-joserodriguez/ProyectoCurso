@@ -1,0 +1,86 @@
+<div class="col-md-12 px-0 paqueteshome">
+  <div class="container">
+    <div class="row ">
+      <h2 class="p-2 letracursotitulo"><b>Diario</b></h2>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="col-md-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <!--Dudas-->
+          <div class="card col-md-12">
+            <!--Foro-->
+            <div class="container">
+              <br>
+              <h4 class="pl-2 mb-0"><b>Entradas</b></h4>
+            </div>
+            <div class="col-md-12 mt-1 px-4">
+              <mat-divider></mat-divider>
+              <br>
+              <ul class="list-unstyled field-login" *ngFor="let entrada of listaEntradas">
+                <li class="media">
+
+                  <a [href]="'/alumno/perfil-publico/'+entrada.rutaPersona" target="_blank" rel="noopener noreferrer">
+                    <div class="imgLiquidFill imgLiquid ml-2 " style="width:90px; height:90px;">
+                      <img [src]="entrada.foto" class="rounded-circle sombrabaja" alt="Cinque Terre" width="90"
+                        height="90">
+                    </div>
+                    <p class="text-muted pr-1 text-center">{{entrada.nombre}}</p>
+                  </a>
+
+                  <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
+                    <div class="p-2 bd-highlight">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
+                        <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
+                      </span>
+                    </div>
+                    <div>
+                      <label>{{entrada.insignias}}</label>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                      <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
+                        <img class="imgicon" src="./../../../assets/icons/libro.svg" />
+                      </span>
+                    </div>
+                    <div>
+                      <label>{{entrada.cursos}}</label>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="mt-0 mb-1">{{entrada.titulo}}</h5>
+                    <span class="d-inline-block text-truncate" style="max-width: 500px;">
+                      <div [innerHTML]="entrada.escrito"></div>
+                    </span>
+                    <div class="row justify-content-between">
+                      <div class="py-2 pl-5 vertical-center">
+                        <a [routerLink]="['./entrada',entrada.ruta]">Ver más...</a>
+                      </div>
+                      <div class="pr-5">
+                        <button type="button" class="btn btn-success btn-sm"
+                          [routerLink]="['./entrada',entrada.ruta]" fragment="respuesta">Responder</button>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="p-2 bd-highlight txtTodos">{{entrada.categoria}} | {{entrada.fecha | date}}</div>
+                  </div>
+                </li>
+                <mat-divider></mat-divider>
+              </ul>
+
+            </div>
+
+            <!--fin foro-->
+          </div>
+          <!--fin dudas-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

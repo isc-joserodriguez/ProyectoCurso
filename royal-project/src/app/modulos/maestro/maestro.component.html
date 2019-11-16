@@ -29,9 +29,10 @@
               style="font-size:20px;" [routerLink]="['/maestro/curso',curso.ruta,'insignias']" style="font-size:20px;">
               <img class="icon-nav mr-2" src="./../../../assets/icons/insignia.svg">Insignias
             </a>
-            <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
-              style="font-size:20px;" [routerLink]="['/maestro/curso',curso.ruta]" style="font-size:20px;">
-              <img class="icon-nav mr-2" src="./../../../assets/icons/vista.svg">Vista previa
+            <a *ngIf="curso.categoria=='Idiomas'"
+              class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
+              style="font-size:20px;" [routerLink]="['/maestro/curso/diario',curso.ruta]" style="font-size:20px;">
+              <img class="icon-nav mr-2" src="./../../../assets/icons/vista.svg">Diario
             </a>
             <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
               style="font-size:20px;" [routerLink]="['/maestro/curso/config',curso.ruta]" style="font-size:20px;">
@@ -49,7 +50,8 @@
         curso</button>
       <br>
       <mat-divider></mat-divider>
-      <button type="button" class="btn btn-primary letracursotitulo mx-3" [routerLink]="['/maestro/perfil/estado-cursos']" >
+      <button type="button" class="btn btn-primary letracursotitulo mx-3"
+        [routerLink]="['/maestro/perfil/estado-cursos']">
         <b>Estado Cursos</b> <img class="icon-nav ml-2" src="./../../../assets/icons/status.svg"></button>
     </div>
 

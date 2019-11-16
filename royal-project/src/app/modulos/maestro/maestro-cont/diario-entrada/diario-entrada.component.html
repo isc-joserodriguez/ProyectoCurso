@@ -1,0 +1,145 @@
+<div class="col-md-12 px-0" style="background-color: rgba(126, 124, 121, 0.068);">
+  <div class="col-md-12 px-0 paqueteshome">
+    <div class="container">
+      <div class="row ">
+        <h2 class="p-2 letracursotitulo"><b>Entrada</b></h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <!--div pregunta-->
+            <div class="container">
+              <div class="card">
+                <br>
+                <!--Pregunta y Respuesta-->
+                <div class="container col-md-12 px-5">
+                  <div class="row">
+                    <div class="col-md-2 p-0 text-center">
+                      <a [href]="'/alumno/perfil-publico/'+infoPersona.ruta" target="_blank" rel="noopener noreferrer">
+                        <div class="imgLiquidFill imgLiquid ml-2 " style="width:90px; height:90px;">
+                          <img [src]="infoPersona.foto" class="rounded-circle sombrabaja" alt="Cinque Terre" width="90"
+                            height="90">
+                        </div>
+                        <p class="text-muted pr-1">{{infoPersona.nombreCompleto}}</p>
+                      </a>
+                    </div>
+                    <div class="col-md-10">
+                      <b class="h3">{{infoEntrada.titulo}}</b>
+                      <br>
+                      <div [innerHTML]="infoEntrada.escrito"></div>
+
+                      <button type="button" class="btn colorbtn" [routerLink]="['./']" fragment="caja"
+                        (click)="setDetalles(infoEntrada.escrito)">Corregir</button>
+                      <br>
+                      <b>{{infoEntrada.fecha | date}}</b>
+                      <br>
+                      <p>{{infoEntrada.categoria}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Respuestas -->
+              <div class="card" id="respuesta">
+                <div class="card-header paqueteshome text-center text-white">
+                  <b>
+                    Respuestas ({{numPreguntas}})
+                  </b>
+                </div>
+                <div class="card-body">
+                  <div class="container">
+
+                    <!-- Respuestas -->
+                    <div class="card mb-12 descri mb-4 pl-2"
+                      *ngFor="let respuesta of infoRespuestas | paginate: { itemsPerPage: 5, currentPage: p }; let i=index">
+                      <div class="row no-gutters">
+                        <div class="col-md-2 px-2">
+                          <div class="imgLiquidFill imgLiquid mt-4 " style="width:100px; height:100px;">
+                            <img [src]="respuesta.foto" class="card-img rounded-circle sombrabaja" alt="Cinque Terre"
+                              width="100" height="100">
+                          </div>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="card-body">
+                            <h5 class="card-title"><a
+                                [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                            </h5>
+                            <div [innerHTML]="respuesta.comentario"></div>
+                            <div class="p-2 d-flex justify-content-between txtTodos">
+                              <p class="text-muted"> {{respuesta.fecha | date}}</p>
+                              <button [disabled]="!iduser" type="button" class="btn colorbtn"
+                                (click)="responder(i)">Responder</button>
+                            </div>
+                          </div>
+                          <mat-divider> </mat-divider>
+                          <!-- Respuesta al comentario -->
+                          <div *ngFor="let resp of respuesta.respuestas">
+                            <div class="row no-gutters">
+                              <div class="col-md-2">
+                                <div class="imgLiquidFill imgLiquid mt-3 " style="width:90px; height:90px;">
+                                  <img [src]="resp.foto" class="card-img rounded-circle sombrabaja" alt="Cinque Terre"
+                                    width="90" height="90">
+
+                                </div>
+                              </div>
+                              <div class="col-md-10">
+                                <div class="card-body">
+                                  <h5 class="card-title"><a
+                                      [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                  </h5>
+                                  <div [innerHTML]="resp.comentario"></div>
+                                  <div class="p-2 bd-highlight txtTodos">
+                                    {{resp.fecha | date}}
+                                  </div>
+                                </div>
+                                <mat-divider> </mat-divider>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Respuesta al comentario -->
+                          <div *ngIf="responderIndex==i">
+                            <ckeditor required [config]="ckeConfig" debounce="500" [(ngModel)]="respuestaCom">
+                            </ckeditor>
+                            <div class="text-right pr-4 pb-3">
+                              <button [disabled]="respuestaCom==''" type="button" class="btn colorbtn"
+                                (click)="enviarRespuestaCom()">Enviar</button>
+                              <button type="button" class="btn btn-danger" (click)="responderIndex=-1">Cancelar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+                    </pagination-controls>
+                    <!-- Respuestas -->
+                    <mat-divider></mat-divider>
+                    <br>
+                    <form [formGroup]="respuestaForm">
+                      <h5 id="caja"> Respuesta:</h5>
+                      <ckeditor required [config]="ckeConfig" debounce="500" formControlName="respuesta">
+                      </ckeditor>
+                      <div class="text-right pr-4 pb-3">
+                        <button [disabled]="!respuestaForm.valid || !iduser || respuestaForm.value.respuesta==' '"
+                          type="button" class="btn colorbtn" (click)="enviarRespuesta()">Enviar</button>
+                      </div>
+                    </form>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <!-- Respuestas -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>

@@ -20,7 +20,7 @@ export class MaestroComponent implements OnInit {
     this.cursos.getCursosMaestro(id).subscribe((res: any) => {
       res.detail.forEach(e => {
         if (e.estado == 2) {
-          this.listaCursos.push({ nombre: e.nombreCorto, id: e._id, ruta: e.ruta });
+          this.listaCursos.push({ nombre: e.nombreCorto, id: e._id, ruta: e.ruta, categoria: e.categoria });
           this.nuevoCurso = false;
         }
       });

@@ -42,6 +42,7 @@ export class NavAlumnoComponent implements OnInit {
 
   ngOnInit() {
     this.verificarToken();
+    this.getCategorias();
 
     this.logForm = this.formBuilder.group({
       logCorreo: [null, Validators.required],
@@ -156,7 +157,6 @@ export class NavAlumnoComponent implements OnInit {
           if (!res.detail.tipo[3].alumno) {
             this.router.navigate(['/usuario-inhabilitado']);
           }
-          this.getCategorias();
           this.getCursos();
         }
       }, err => {

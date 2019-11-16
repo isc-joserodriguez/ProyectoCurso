@@ -115,6 +115,11 @@
             <i class="far fa-edit"></i> Estado Cursos
           </button>
           <mat-divider></mat-divider>
+          <a [href]="perfilPublico | safe: 'resourceUrl'" target="_blank" rel="noopener noreferrer">
+            <button mat-menu-item>
+              <i class="fas fa-external-link-alt"></i> ¡Comparte tu perfil!
+            </button>
+          </a>
           <button mat-menu-item (click)="logout()">
             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
           </button>

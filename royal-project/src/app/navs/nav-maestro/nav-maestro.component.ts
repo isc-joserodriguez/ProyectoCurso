@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-nav-maestro',
@@ -20,10 +21,11 @@ export class NavMaestroComponent implements OnInit {
     sexo: 3
   };
 
+  perfilPublico = '';
   usuario = '';
   sexo = 3; // 1= H 2= M 3= Indef
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
     this.verificarToken();
@@ -46,6 +48,9 @@ export class NavMaestroComponent implements OnInit {
         this.usuario = res.detail.nombre;
         this.sexo = res.detail.sexo;
         localStorage.setItem('userid', res.detail.id);
+        this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
+          this.perfilPublico = '/maestro/perfil-publico/' + usuario.detail[0].ruta;
+        });
         if (!res.detail.tipo[2].maestro) {
           this.router.navigate(['/usuario-inhabilitado']);
         }

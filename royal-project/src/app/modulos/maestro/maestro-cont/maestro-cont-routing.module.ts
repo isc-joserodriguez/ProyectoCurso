@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MaestroHomeComponent } from './maestro-home/maestro-home.component';
-import { MaestroCursoComponent } from './maestro-curso/maestro-curso.component';
 import { CursoConfigComponent } from './curso-config/curso-config.component';
 import { ConfigUnidadComponent } from './config-unidad/config-unidad.component';
 import { ConfigSubtemaComponent } from './config-subtema/config-subtema.component';
@@ -13,14 +12,12 @@ import { MaestroRevisionComponent } from './maestro-revision/maestro-revision.co
 import { MaestroInsigniasComponent } from './maestro-insignias/maestro-insignias.component';
 import { MaestroNuevaInsigniaComponent } from './maestro-nueva-insignia/maestro-nueva-insignia.component';
 import { MaestroInsigniaEditarComponent } from './maestro-insignia-editar/maestro-insignia-editar.component';
+import { DiarioComponent } from './diario/diario.component';
+import { DiarioEntradaComponent } from './diario-entrada/diario-entrada.component';
 const routes: Routes = [
   {
     path: '',
     component: MaestroHomeComponent
-  },
-  {
-    path: 'curso/:id',
-    component: MaestroCursoComponent
   },
   {
     path: 'curso/config/:id',
@@ -65,7 +62,16 @@ const routes: Routes = [
   {
     path: 'curso/config/:id/redirec/:ruta',
     component: RedirecComponent
+  },
+  {
+    path: 'curso/diario/:id',
+    component: DiarioComponent
+  },
+  {
+    path: 'curso/diario/:id/entrada/:ruta',
+    component: DiarioEntradaComponent
   }
+
 
 ];
 

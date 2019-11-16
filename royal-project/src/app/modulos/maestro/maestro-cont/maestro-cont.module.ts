@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { MaestroContRoutingModule } from './maestro-cont-routing.module';
 import { MaestroHomeComponent } from './maestro-home/maestro-home.component';
-import { MaestroCursoComponent } from './maestro-curso/maestro-curso.component';
 
 // Forms
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -46,9 +45,11 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { CKEditorModule } from 'ng2-ckeditor';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DiarioComponent } from './diario/diario.component';
+import { DiarioEntradaComponent } from './diario-entrada/diario-entrada.component';
 
 @NgModule({
-  declarations: [MaestroHomeComponent, MaestroCursoComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent, MaestroNuevaInsigniaComponent, MaestroInsigniaEditarComponent],
+  declarations: [MaestroHomeComponent, CursoConfigComponent, ConfigUnidadComponent, ConfigSubtemaComponent, ConfigClaseComponent, ConfigTemarioComponent, RedirecComponent, MaestroAlumnosComponent, MaestroRevisionComponent, MaestroInsigniasComponent, MaestroNuevaInsigniaComponent, MaestroInsigniaEditarComponent, DiarioComponent, DiarioEntradaComponent],
   imports: [
     CommonModule,
     MaestroContRoutingModule,

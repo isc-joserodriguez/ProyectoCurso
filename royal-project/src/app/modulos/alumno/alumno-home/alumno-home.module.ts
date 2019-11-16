@@ -31,6 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 
 // mdbootstrap
@@ -82,7 +84,9 @@ import { DiarioPropiasComponent } from './diario-propias/diario-propias.componen
     CKEditorModule,
     SafePipeModule,
     NgDompurifyModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatCardModule
   ]
 })
 export class AlumnoHomeModule { }

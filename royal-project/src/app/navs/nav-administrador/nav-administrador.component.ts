@@ -43,6 +43,7 @@ export class NavAdministradorComponent implements OnInit {
       this.usuario = res.detail.nombre;
       this.sexo = res.detail.sexo;
       localStorage.setItem('userid', res.detail.id);
+      
     }, err => {
       console.log(err);
     });
