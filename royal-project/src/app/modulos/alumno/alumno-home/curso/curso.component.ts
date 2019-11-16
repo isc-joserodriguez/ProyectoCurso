@@ -27,6 +27,7 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
   review = '';
   indexRev = -1;
   valoraciones = [];
+  relacionados = [];
   infoCurso: any = {
     idMaestro: 0,
     nombreCompleto: '',
@@ -172,7 +173,28 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.promedios.dos = Math.round((this.promedios.dos * 100) / this.infoCurso.valoraciones.length);
     this.promedios.uno = Math.round((this.promedios.uno * 100) / this.infoCurso.valoraciones.length);
     this.ratingGeneral = Math.round(puntaje / this.infoCurso.valoraciones.length);
+  }
+  getRelacionados(subcategoria) {
+    this.curso.getCursos().subscribe((cursos: any) => {
+      cursos.detail.forEach(curso => {
+        if (curso.subcategoria == subcategoria && curso.ruta != this.route.snapshot.params.id) this.relacionados.push(curso);
+      });
 
+      if (this.relacionados.length > 5) this.relacionados = this.getRandom(this.relacionados, 5);
+    });
+  }
+  getRandom(arr, n) {
+    var result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+    if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+      var x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
   }
 
 }
