@@ -38,10 +38,26 @@
                 una descripción del curso.</span>
             </mat-error>
           </mat-form-field>
+          <!--Opción Royal-->
+          <div class="col-md-12 container mb-3">
+            <p><b>Royal Language</b></p>
+            <div class="input-group input-group-sm vertical-center">
+              <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
+                <span class="text-check">Royal</span></mat-checkbox>
+            </div>
+
+          </div>
+
+
           <div class="row">
-            <button [disabled]="!revisionForm.valid" mat-button color="primary"
-              (click)="aceptarCurso()">Aceptar</button>
-            <button [disabled]="!revisionForm.valid" mat-button color="warn" (click)="rechazarCurso()">Rechazar</button>
+            <div class="col-md-6 text-center">
+              <button [disabled]="!revisionForm.valid" mat-button color="primary"
+                (click)="aceptarCurso()">Aceptar</button>
+            </div>
+            <div class="col-md-6 text-right">
+              <button [disabled]="!revisionForm.valid" mat-button color="warn"
+                (click)="rechazarCurso()">Rechazar</button>
+            </div>
           </div>
         </mat-card>
       </form>
@@ -94,7 +110,8 @@
           <mat-accordion class="example-headers-align">
             <div class="col-md-12">
               <!--primer acordeon-->
-              <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index" class="acordeon-cuerpo3">
+              <mat-expansion-panel hideToggle="true" *ngFor="let unidad of infoCurso.contenidoCurso let i=index"
+                class="acordeon-cuerpo3">
                 <mat-expansion-panel-header class="acordeon-enc">
                   <mat-panel-title>
                     <b>Unidad {{i+1}}: {{unidad.unidad}}</b>
@@ -109,7 +126,8 @@
                 <mat-accordion class="example-headers-align">
                   <div class="col-md-12">
                     <!--primer acordeon-->
-                    <mat-expansion-panel hideToggle="true" *ngFor="let subtema of unidad.subtemas; let j=index" class="acordeon-cuerpo3">
+                    <mat-expansion-panel hideToggle="true" *ngFor="let subtema of unidad.subtemas; let j=index"
+                      class="acordeon-cuerpo3">
                       <mat-expansion-panel-header class="acordeon-enc">
                         <mat-panel-title>
                           <b>Subtema {{j+1}}: {{subtema.subtema}}</b>

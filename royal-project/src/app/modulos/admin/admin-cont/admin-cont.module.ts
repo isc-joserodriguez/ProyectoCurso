@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -72,7 +73,8 @@ import { AdminInscripcionComponent } from './admin-inscripcion/admin-inscripcion
     MatExpansionModule,
     MatIconModule,
     MatDividerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
   ]
 })
 export class AdminContModule { }
