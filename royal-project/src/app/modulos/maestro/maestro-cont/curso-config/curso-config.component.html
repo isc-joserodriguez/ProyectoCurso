@@ -23,7 +23,8 @@
                 <span class="input-group-text">Subir Foto</span>
               </div>
               <div class="custom-file">
-                <input type="file" class="custom-file-input text-truncate" formControlName="foto" (change)="seleccionarFoto($event)">
+                <input type="file" class="custom-file-input text-truncate" formControlName="foto"
+                  (change)="seleccionarFoto($event)">
                 <label class="custom-file-label" for="inputGroupFile01">{{mensajeFoto}}</label>
               </div>
             </div>
@@ -82,11 +83,11 @@
             <ul *ngFor="let objetivo of infoCurso.objetivos; let i=index">
               <li>
                 {{objetivo.objetivo}}
-                <button mat-mini-fab (click)="editarObjetivo(i)" color="trans">
-                  <img class="icon-edit" src="./../../../assets/icons/edit.svg">
+                <button (click)="editarObjetivo(i)" class="unstyled-button">
+                  <img class="icon-opcion" src="./../../../assets/icons/edit.svg">
                 </button>
-                <button mat-mini-fab color="trans" (click)="eliminarObjetivo(i)" class="ml-2">
-                  <img class="icon-edit" src="./../../../assets/icons/remover.svg">
+                <button (click)="eliminarObjetivo(i)" class="ml-2 unstyled-button">
+                  <img class="icon-report" src="./../../../assets/icons/remover.svg">
                 </button>
               </li>
             </ul>
@@ -273,45 +274,42 @@
         </div>
 
         <div class="col-md-12 mt-1">
-          <div class="row divisortop2">
+          <div class="row divisortop2" *ngFor="let review of valoraciones">
             <br>
-            <ul class="list-unstyled mb-0">
-              <li class="media" *ngFor="let review of valoraciones">
-                <div class="imgLiquidFill imgLiquid pt-4" style="width:100px; height:100px;">
-                  <img [src]="review.foto" class="mr-3" alt="..." width="100" height="100">
+            <div class="imgLiquidFill imgLiquid pt-4" style="width:100px; height:100px;">
+              <img [src]="review.foto" class="mx-2 rounded-circle sombrabaja" alt="..." width="100" height="100">
+            </div>
+            <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
+              <div class="p-2 bd-highlight">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
+                  <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
+                </span>
+              </div>
+              <div>
+                <label>{{review.insignias}}</label>
+              </div>
+              <div class="p-2 bd-highlight">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
+                  <img class="imgicon" src="./../../../assets/icons/libro.svg" />
+                </span>
+              </div>
+              <div>
+                <label>{{review.cursos}}</label>
+              </div>
+            </div>
+            <div class="media-body">
+              <div class="row col-md-12">
+                <div class="col-md-8 pt-3">
+                  <h5 class="mt-0 mb-1">{{review.nombre}}</h5>
                 </div>
-                <div class="d-flex flex-column bd-highlight text-center mr-2" style="height: 200px;">
-                  <div class="p-2 bd-highlight">
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Insignias">
-                      <img class="imgicon" src="./../../../assets/icons/insignia.svg" />
-                    </span>
-                  </div>
-                  <div>
-                    <label>{{review.insignias}}</label>
-                  </div>
-                  <div class="p-2 bd-highlight">
-                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cursos">
-                      <img class="imgicon" src="./../../../assets/icons/libro.svg" />
-                    </span>
-                  </div>
-                  <div>
-                    <label>{{review.cursos}}</label>
-                  </div>
+                <div class="col-md-4 pb-2">
+                  <bar-rating [rate]="review.puntuacion" [max]="5" [readOnly]="true"></bar-rating>
                 </div>
-                <div class="media-body">
-                  <div class="row justify-content-between">
-                    <div class="col-4 pt-3">
-                      <h5 class="mt-0 mb-1">{{review.nombre}}</h5>
-                    </div>
-                    <div class="col-4 pb-2">
-                      <bar-rating [rate]="review.puntuacion" [max]="5" [readOnly]="true"></bar-rating>
-                    </div>
-                  </div>
-                  {{review.comentario}}
-                </div>
-              </li>
-
-            </ul>
+              </div>
+              <div class="container px-4">
+                {{review.comentario}}
+              </div>
+            </div>
           </div>
         </div>
         <!--fin reseñas-->
