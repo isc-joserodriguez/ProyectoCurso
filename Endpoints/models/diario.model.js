@@ -20,7 +20,12 @@ const diarioSchema = new mongoose.Schema({
         }]
     }],
     ruta: { type: String },
-    reportes: [{ idAlumno: { type: Number }, ruta: { type: String }, comentario: { type: String }, numReportes: { type: Number } }]
+    reportes: [{
+        idAlumno: { type: Number },
+        ruta: { type: String },
+        comentario: { type: String },
+        numReportes: { type: Number }
+    }]
 });
 
 //modelo Curso
