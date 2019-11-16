@@ -91,6 +91,33 @@ const update = (req, res) => {
     });
 }
 
+const agregarReporte = (req, res) => {
+    const ruta = req.params.ruta;
+    const respuestas = req.body.respuestas;
+    const reportado = req.body.reportado;
+    const reportes = req.body.reportes;
+    _diario.update({ ruta: ruta }, {
+        $set: {
+            respuestas: respuestas,
+            reportado: reportado,
+            reportes: reportes
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
 const agregarResp = (req, res) => {
     const ruta = req.params.ruta;
     const respuestas = req.body.respuestas;
@@ -118,6 +145,6 @@ const agregarResp = (req, res) => {
 module.exports = (Comunidad) => {
     _diario = Comunidad;
     return ({
-        getAll, create, getById, update, agregarResp
+        getAll, create, getById, update, agregarResp, agregarReporte
     });
 }

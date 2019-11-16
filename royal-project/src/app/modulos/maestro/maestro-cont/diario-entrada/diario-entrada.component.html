@@ -32,8 +32,9 @@
                       <div class="row">
                         <div class="col-md-1 p-0 text-center pt-1">
                           <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                            title="Reportar"><img class="icon-report"
-                              src="./../../../assets/icons/reportar.svg"></button>
+                            title="Reportar entrada" (click)="reportarEntrada()">
+                            <img class="icon-report" src="./../../../assets/icons/reportar.svg">
+                          </button>
                         </div>
                         <div class="col-md-11">
                           <b class="h3">{{infoEntrada.titulo}}</b>
@@ -57,7 +58,7 @@
               <div class="card" id="respuesta">
                 <div class="card-header paqueteshome text-center text-white">
                   <b>
-                    Respuestas ({{numPreguntas}})
+                    Respuestas ({{infoRespuestas.length}})
                   </b>
                 </div>
                 <div class="card-body">
@@ -78,8 +79,9 @@
                             <h5 class="card-title row">
                               <div class="col-md-1">
                                 <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                                  title="Reportar"><img class="icon-report"
-                                    src="./../../../assets/icons/reportar.svg"></button>
+                                  title="Reportar comentario" (click)="reportarComentarioN1(respuesta.i)">
+                                  <img class="icon-report" src="./../../../assets/icons/reportar.svg">
+                                </button>
                               </div>
                               <div class="col-md-7">
                                 <a
@@ -99,7 +101,7 @@
                           </div>
                           <mat-divider> </mat-divider>
                           <!-- Respuesta al comentario -->
-                          <div *ngFor="let resp of respuesta.respuestas">
+                          <div *ngFor="let resp of respuesta.respuestas;let j=index">
                             <div class="row no-gutters">
                               <div class="col-md-2">
                                 <div class="imgLiquidFill imgLiquid mt-3 " style="width:90px; height:90px;">
@@ -113,8 +115,9 @@
                                   <h5 class="card-title row">
                                     <div class="col-md-1">
                                       <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                                        title="Reportar"><img class="icon-report"
-                                          src="./../../../assets/icons/reportar.svg"></button>
+                                        title="Reportar comentario" (click)="reportarComentarioN2(resp.i,resp.j)">
+                                        <img class="icon-report" src="./../../../assets/icons/reportar.svg">
+                                      </button>
                                     </div>
                                     <div class="col-md-7">
                                       <a [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
@@ -139,7 +142,7 @@
                             </ckeditor>
                             <div class="text-right pr-4 pb-3">
                               <button [disabled]="respuestaCom==''" type="button" class="btn colorbtn"
-                                (click)="enviarRespuestaCom()">Enviar</button>
+                                (click)="enviarRespuestaCom(respuesta.i)">Enviar</button>
                               <button type="button" class="btn btn-danger" (click)="responderIndex=-1">Cancelar</button>
                             </div>
                           </div>

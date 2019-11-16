@@ -72,6 +72,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   getInfoClase(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.reportes = curso.detail[0].reportes;
+      console.log(this.infoCurso.reportes)
       this.infoCurso.imagen = curso.detail[0].imagen;
       this.infoCurso.alumnosInscritos = curso.detail[0].alumnosInscritos;
       this.infoCurso.alumnosInscritos = [];
@@ -79,6 +81,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.infoCurso.alumnosInscritos.push(elemento.idAlumno);
       });
       this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
+      console.log(this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[0]);
       if (!this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')))) {
         this.router.navigate(['/curso', this.route.snapshot.params.id, 'vista']);
       }
@@ -91,10 +94,10 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       this.setAvance(localStorage.getItem('userid'));
       this.getTareas();
       this.infoRespuestas = [];
-      this.infoClase.comentarios.forEach(respuesta => {
+      this.infoClase.comentarios.forEach((respuesta, i) => {
         this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
           var respuestas = [];
-          respuesta.respuestas.forEach(respuestaCom => {
+          respuesta.respuestas.forEach((respuestaCom, j) => {
             this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
               let resCom: any = {
                 nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
@@ -103,9 +106,11 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
                 foto: usuarioCom.detail[0].foto,
                 id: respuestaCom.idPersona,
                 ruta: usuarioCom.detail[0].ruta,
-                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true
+                maestro: (usuarioCom.detail[0].tipo[2].maestro == null) ? false : true,
+                i: i,
+                j: j
               }
-              respuestas.push(resCom);
+              if (!respuestaCom.reportado) respuestas.push(resCom);
             });
           });
           let nuevaRes: any = {
@@ -116,9 +121,10 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             id: respuesta.idPersona,
             ruta: usuario.detail[0].ruta,
             respuestas: respuestas,
-            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true
+            maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true,
+            i: i
           }
-          this.infoRespuestas.push(nuevaRes);
+          if (!respuesta.reportado) this.infoRespuestas.push(nuevaRes);
         });
       });
     });
@@ -247,8 +253,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.responderIndex = index;
     this.respuestaCom = '';
   }
-  enviarRespuestaCom() {
-    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[this.responderIndex].respuestas.push({
+  enviarRespuestaCom(i) {
+    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaCom
     });
@@ -257,6 +263,49 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       this.getInfoClase(this.route.snapshot.params.id);
       this.respuestaCom = '';
       this.responderIndex = -1;
+    });
+  }
+
+
+  reportarComentarioN1(i) {
+
+    this.infoCurso.reportes.push({
+      unidad: this.route.snapshot.params.unidad - 1,
+      subtema: this.route.snapshot.params.subtema - 1,
+      clase: this.route.snapshot.params.clase - 1,
+      tipo: 1, //1-Respuesta n1 | 2- Respuesta n2
+      respn1: i,
+      idAlumno: localStorage.getItem('userid')
+    });
+
+    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].reportado = true;
+
+    console.log(this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i]);
+
+    this.curso.agregarReporte(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso, reportes: this.infoCurso.reportes }).subscribe(res => {
+      this.ngOnInit();
+    });
+  }
+
+  reportarComentarioN2(i, j) {
+
+    this.infoCurso.reportes.push({
+      unidad: this.route.snapshot.params.unidad - 1,
+      subtema: this.route.snapshot.params.subtema - 1,
+      clase: this.route.snapshot.params.clase - 1,
+      tipo: 2, //1-Respuesta n1 | 2- Respuesta n2
+      respn1: i,
+      respn2: j,
+      idAlumno: localStorage.getItem('userid')
+    });
+
+
+    this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].respuestas[j].reportado = true;
+
+    console.log(this.infoCurso.contenidoCurso);
+
+    this.curso.agregarReporte(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso, reportes: this.infoCurso.reportes }).subscribe(res => {
+      this.ngOnInit();
     });
   }
 }

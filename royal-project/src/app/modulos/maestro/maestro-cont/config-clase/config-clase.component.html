@@ -205,8 +205,9 @@
                         <h5 class="card-title row">
                           <div class="col-md-1">
                             <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                              title="Reportar"><img class="icon-report"
-                                src="./../../../assets/icons/reportar.svg"></button>
+                              title="Reportar comentario" (click)="reportarComentarioN1(respuesta.i)">
+                              <img class="icon-report" src="./../../../assets/icons/reportar.svg">
+                            </button>
                           </div>
                           <div class="col-md-7">
                             <a [routerLink]="['/maestro/alumno',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
@@ -238,8 +239,9 @@
                               <h5 class="card-title row">
                                 <div class="col-md-1">
                                   <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
-                                    title="Reportar"><img class="icon-report"
-                                      src="./../../../assets/icons/reportar.svg"></button>
+                                    title="Reportar comentario" (click)="reportarComentarioN2(resp.i,resp.j)">
+                                    <img class="icon-report" src="./../../../assets/icons/reportar.svg">
+                                  </button>
                                 </div>
                                 <div class="col-md-7">
                                   <a [routerLink]="['/maestro/alumno',resp.ruta]">{{resp.nombreCompleto}}</a>
@@ -267,7 +269,7 @@
 
                         <div class="text-right pr-4 pb-3">
                           <button [disabled]="respuestaCom==''" type="button" class="btn colorbtn"
-                            (click)="enviarRespuestaCom()">Enviar</button>
+                            (click)="enviarRespuestaCom(respuesta.i)">Enviar</button>
                           <button type="button" class="btn btn-danger" (click)="responderIndex=-1">Cancelar</button>
                         </div>
                       </div>

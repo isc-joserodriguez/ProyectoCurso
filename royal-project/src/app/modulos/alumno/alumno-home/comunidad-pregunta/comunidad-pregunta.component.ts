@@ -24,7 +24,6 @@ export class ComunidadPreguntaComponent implements OnInit {
 
   iduser = localStorage.getItem('userid');
   propia = false
-  numPreguntas = 0;
   respuestaCom = '';
   responderIndex = -1;
 
@@ -46,7 +45,8 @@ export class ComunidadPreguntaComponent implements OnInit {
     idPersona: 0,
     pregunta: '',
     respuestas: [],
-    ruta: ''
+    ruta: '',
+    reportes: []
   }
 
   editarCategoria = false;
@@ -109,16 +109,15 @@ export class ComunidadPreguntaComponent implements OnInit {
       } else {
         this.infoPregunta.categoria = 'Idiomas'
       }
-      this.numPreguntas = this.infoPregunta.respuestas.length;
       if (this.infoPregunta.idPersona == this.iduser) {
         this.propia = true;
       }
       this.getinfoPersona(this.infoPregunta.idPersona);
       this.infoRespuestas = [];
-      this.infoPregunta.respuestas.forEach(respuesta => {
+      this.infoPregunta.respuestas.forEach((respuesta, i) => {
         this.usuarios.getUser(respuesta.idPersona).subscribe((usuario: any) => {
           var respuestas = [];
-          respuesta.respuestas.forEach(respuestaCom => {
+          respuesta.respuestas.forEach((respuestaCom, j) => {
             this.usuarios.getUser(respuestaCom.idPersona).subscribe((usuarioCom: any) => {
               let resCom: any = {
                 nombreCompleto: usuarioCom.detail[0].nombre + ' ' + usuarioCom.detail[0].apPaterno + ' ' + usuarioCom.detail[0].apMaterno,
@@ -126,9 +125,11 @@ export class ComunidadPreguntaComponent implements OnInit {
                 fecha: respuestaCom.fecha,
                 foto: usuarioCom.detail[0].foto,
                 id: respuestaCom.idPersona,
-                ruta: usuarioCom.detail[0].ruta
+                ruta: usuarioCom.detail[0].ruta,
+                i: i,
+                j: j
               }
-              respuestas.push(resCom);
+              if (!respuestaCom.reportado) respuestas.push(resCom);
             });
           });
           let nuevaRes: any = {
@@ -138,9 +139,10 @@ export class ComunidadPreguntaComponent implements OnInit {
             foto: usuario.detail[0].foto,
             id: respuesta.idPersona,
             ruta: usuario.detail[0].ruta,
-            respuestas: respuestas
+            respuestas: respuestas,
+            i: i
           }
-          this.infoRespuestas.push(nuevaRes);
+          if (!respuesta.reportado) this.infoRespuestas.push(nuevaRes);
         });
       });
     });
@@ -216,8 +218,8 @@ export class ComunidadPreguntaComponent implements OnInit {
     this.responderIndex = index;
     this.respuestaCom = '';
   }
-  enviarRespuestaCom() {
-    this.infoPregunta.respuestas[this.responderIndex].respuestas.push({
+  enviarRespuestaCom(i) {
+    this.infoPregunta.respuestas[i].respuestas.push({
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaCom
     });
@@ -226,6 +228,50 @@ export class ComunidadPreguntaComponent implements OnInit {
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
       this.responderIndex = -1;
+    });
+  }
+
+  reportarComentarioN1(i) {
+    this.infoPregunta.respuestas[i].reportado = true;
+    this.infoPregunta.reportes.push({
+      tipo: 1,
+      respn1: i,
+      idReporta: localStorage.getItem('userid')
+    });
+    this.comunidad.agregarReporte(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas, reportado: false, reportes: this.infoPregunta.reportes }).subscribe(res => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
+  }
+
+  reportarComentarioN2(i, j) {
+    this.infoPregunta.respuestas[i].respuestas[j].reportado = true;
+    this.infoPregunta.reportes.push({
+      tipo: 2,
+      respn1: i,
+      respn2: j,
+      idReporta: localStorage.getItem('userid')
+    });
+    this.comunidad.agregarReporte(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas, reportado: false, reportes: this.infoPregunta.reportes }).subscribe(res => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+      this.respuestaCom = '';
+      this.responderIndex = -1;
+    });
+  }
+
+  reportarEntrada() {
+    console.log(this.infoPregunta);
+    this.infoPregunta.reportes.push({
+      tipo: 0,
+      idReporta: localStorage.getItem('userid')
+    });
+    this.comunidad.agregarReporte(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas, reportado: true, reportes: this.infoPregunta.reportes }).subscribe(res => {
+      if (this.infoPregunta.categoria == 'Tecnología') {
+        this.router.navigate(['/comunidad/tecnologia']);
+      } else {
+        this.router.navigate(['/comunidad/idiomas']);
+      }
     });
   }
 

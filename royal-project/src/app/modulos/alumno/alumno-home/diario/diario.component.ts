@@ -29,20 +29,21 @@ export class DiarioComponent implements OnInit {
         this.usuarios.getUser(entrada.idPersona).subscribe((info: any) => {
           if (!this.subcategorias.includes(entrada.categoria)) this.subcategorias.push(entrada.categoria);
           this.subcategorias = this.subcategorias.sort();
-          this.listaEntradas.push({
-            //Pendiente
-            insignias: info.detail[0].insignias.length,
-            cursos: info.detail[0].cursoAlumno.length,
-            fecha: entrada.fecha,
-            categoria: entrada.categoria,
-            foto: info.detail[0].foto,
-            rutaPersona: info.detail[0].ruta,
-            id: entrada.idPersona,
-            escrito: entrada.escrito,
-            titulo: entrada.titulo,
-            ruta: entrada.ruta,
-            nombre: info.detail[0].nombre + ' ' + info.detail[0].apPaterno + ' ' + info.detail[0].apMaterno
-          });
+          if (!entrada.reportado)
+            this.listaEntradas.push({
+              //Pendiente
+              insignias: info.detail[0].insignias.length,
+              cursos: info.detail[0].cursoAlumno.length,
+              fecha: entrada.fecha,
+              categoria: entrada.categoria,
+              foto: info.detail[0].foto,
+              rutaPersona: info.detail[0].ruta,
+              id: entrada.idPersona,
+              escrito: entrada.escrito,
+              titulo: entrada.titulo,
+              ruta: entrada.ruta,
+              nombre: info.detail[0].nombre + ' ' + info.detail[0].apPaterno + ' ' + info.detail[0].apMaterno
+            });
         });
       });
       this.entradasFiltradas = this.listaEntradas;

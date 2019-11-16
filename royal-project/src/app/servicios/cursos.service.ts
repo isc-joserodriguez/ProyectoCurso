@@ -75,4 +75,8 @@ export class CursosService {
     return this.http.put(apiUrl + '/agregarComentario/' + ruta, comentarios);
   }
 
+  agregarReporte(id, datos) {
+    return this.http.put(apiUrl + '/agregarReporte/' + id, datos);
+  }
+
 }
