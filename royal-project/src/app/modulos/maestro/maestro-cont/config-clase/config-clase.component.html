@@ -10,8 +10,8 @@
           <mat-card>
             <div class="row container pl-5 mb-3">
               <div class="custom-control custom-switch">
-                <input id="evaluacion" type="checkbox" [checked]="evaluacion" class="custom-control-input" [(ngModel)]="evaluacion"
-                  (click)="cambiarEvaluacion()">
+                <input id="evaluacion" type="checkbox" [checked]="evaluacion" class="custom-control-input"
+                  [(ngModel)]="evaluacion" (click)="cambiarEvaluacion()">
                 <label class="custom-control-label h4 letrastar" for="evaluacion">Evaluación</label>
               </div>
             </div>
@@ -202,8 +202,19 @@
                     </div>
                     <div class="col-md-10">
                       <div class="card-body">
-                        <h5 class="card-title"><a
-                            [routerLink]="['/maestro/alumno',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                        <h5 class="card-title row">
+                          <div class="col-md-1">
+                            <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
+                              title="Reportar"><img class="icon-report"
+                                src="./../../../assets/icons/reportar.svg"></button>
+                          </div>
+                          <div class="col-md-7">
+                            <a [routerLink]="['/maestro/alumno',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                          </div>
+                          <div class="col-md-4 subtitulo text-center">
+                            <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
+
+                          </div>
                         </h5>
                         {{respuesta.comentario}}
                         <div class="p-2 d-flex justify-content-between txtTodos">
@@ -224,8 +235,19 @@
                           </div>
                           <div class="col-md-10">
                             <div class="card-body">
-                              <h5 class="card-title"><a
-                                  [routerLink]="['/maestro/alumno',resp.ruta]">{{resp.nombreCompleto}}</a>
+                              <h5 class="card-title row">
+                                <div class="col-md-1">
+                                  <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
+                                    title="Reportar"><img class="icon-report"
+                                      src="./../../../assets/icons/reportar.svg"></button>
+                                </div>
+                                <div class="col-md-7">
+                                  <a [routerLink]="['/maestro/alumno',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                </div>
+                                <div class="col-md-4 subtitulo text-center">
+                                  <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
+
+                                </div>
                               </h5>
                               {{resp.comentario}}
                               <div class="p-2 bd-highlight txtTodos">

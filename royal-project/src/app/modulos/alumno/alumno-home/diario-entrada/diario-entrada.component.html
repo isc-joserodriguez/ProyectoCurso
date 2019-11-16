@@ -6,7 +6,7 @@
   <div class="col-md-12 px-0 paqueteshome">
     <div class="container">
       <div class="row ">
-        <h2 class="p-2 letracursotitulo"><b>Entrada</b></h2>
+        <h2 class="p-2 subtitulo"><b>Entrada</b></h2>
       </div>
     </div>
   </div>
@@ -33,7 +33,16 @@
                       </a>
                     </div>
                     <div class="col-md-10">
-                      <b class="h3">{{infoEntrada.titulo}}</b>
+                      <div class="row">
+                        <div class="col-md-1 p-0 text-center pt-1">
+                          <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
+                            title="Reportar"><img class="icon-report"
+                              src="./../../../assets/icons/reportar.svg"></button>
+                        </div>
+                        <div class="col-md-11">
+                          <b class="h3">{{infoEntrada.titulo}}</b>
+                        </div>
+                      </div>
                       <br>
                       <div [innerHTML]="infoEntrada.escrito"></div>
 
@@ -70,8 +79,20 @@
                         </div>
                         <div class="col-md-10">
                           <div class="card-body">
-                            <h5 class="card-title"><a
-                                [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                            <h5 class="card-title row">
+                              <div class="col-md-1">
+                                <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
+                                  title="Reportar"><img class="icon-report"
+                                    src="./../../../assets/icons/reportar.svg"></button>
+                              </div>
+                              <div class="col-md-7">
+                                <a
+                                  [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                              </div>
+                              <div class="col-md-4 subtitulo text-center">
+                                <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
+
+                              </div>
                             </h5>
                             <div [innerHTML]="respuesta.comentario"></div>
                             <div class="p-2 d-flex justify-content-between txtTodos">
@@ -93,8 +114,19 @@
                               </div>
                               <div class="col-md-10">
                                 <div class="card-body">
-                                  <h5 class="card-title"><a
-                                      [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                  <h5 class="card-title row">
+                                    <div class="col-md-1">
+                                      <button class="unstyled-button" data-toggle="tooltip" data-placement="top"
+                                        title="Reportar"><img class="icon-report"
+                                          src="./../../../assets/icons/reportar.svg"></button>
+                                    </div>
+                                    <div class="col-md-7">
+                                      <a [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                    </div>
+                                    <div class="col-md-4 subtitulo text-center">
+                                      <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
+
+                                    </div>
                                   </h5>
                                   <div [innerHTML]="resp.comentario"></div>
                                   <div class="p-2 bd-highlight txtTodos">

@@ -233,6 +233,7 @@ table {
 
 .mat-trans {
   background-color: rgba(138, 221, 45, 0);
+  border: none;
 }
 
 .icon-remove {
@@ -309,4 +310,23 @@ table {
   border: 5px hidden #1c6ea4;
 }
 
+.fondomaestro {
+  background: #32b014;
+  background: -moz-radial-gradient(center, #32b014 0%, #4b6948 100%);
+  background: -webkit-radial-gradient(center, #32b014 0%, #4b6948 100%);
+  background: radial-gradient(ellipse at center, #32b014 0%, #4b6948 100%);
+  border-radius: 2px;
+}
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
 
+.icon-report {
+  width: 25px;
+}
+.txtTodos{
+  color: #3a383893;
+  font-weight: bold;
+}
