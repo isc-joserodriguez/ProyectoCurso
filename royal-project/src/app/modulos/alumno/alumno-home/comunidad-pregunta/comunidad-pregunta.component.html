@@ -126,8 +126,7 @@
                   <form [formGroup]="actualizacionForm">
 
                     <h5>Actualizar pregunta:</h5>
-                    <ckeditor required [config]="ckeConfig" debounce="500" (paste)="onPaste($event)"
-                      (change)="onChange($event)" formControlName="actualizacion">
+                    <ckeditor required [config]="ckeConfig" debounce="500" formControlName="actualizacion">
                     </ckeditor>
 
                     <div class="text-right pr-4 pb-3">

@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
 import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
-import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisticas.component';
 import { AdminCursosComponent } from './admin-cursos/admin-cursos.component';
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-info.component';
 import { CursoRevisionComponent } from './curso-revision/curso-revision.component';
 import { AdminInscripcionComponent } from './admin-inscripcion/admin-inscripcion.component';
+import { AdminReportesComponent } from './admin-reportes/admin-reportes.component';
 
 const routes: Routes = [
   {
@@ -28,8 +28,8 @@ const routes: Routes = [
     component: AdminPagosComponent
   },
   {
-    path: 'estadisticas',
-    component: AdminEstadisticasComponent
+    path: 'reportes',
+    component: AdminReportesComponent
   },
   {
     path: 'nuevo-usuario',

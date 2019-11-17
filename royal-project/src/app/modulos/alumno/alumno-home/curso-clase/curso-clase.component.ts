@@ -280,8 +280,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].reportado = true;
 
-    console.log(this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i]);
-
     this.curso.agregarReporte(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso, reportes: this.infoCurso.reportes }).subscribe(res => {
       this.ngOnInit();
     });
