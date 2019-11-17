@@ -16,7 +16,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <div class="card border-light" style="height: 25rem">
+          <div class="card border-light " style="height: 25rem">
             <div class="imgLiquidFill imgLiquid card-img-top sombra" style="width:250px; height:250px;">
               <img [src]="infoMaestro.foto" width="253" height="250">
             </div>
@@ -63,7 +63,7 @@
                   <br>
                   <div class="col-md-12 ">
                     <div class="row text-center">
-                      <div class="card col-md-4 descri mx-5 mb-2" *ngFor="let curso of cursosTec">
+                      <div class="card col-md-4 descri fondoama mx-5 mb-2" *ngFor="let curso of cursosTec">
                         <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3"
                           style="max-width:200px; height:150px;">
                           <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
@@ -73,7 +73,7 @@
                           <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
                             {{curso.descripcionCurso}}
                           </p>
-                          <a class="btn btn-primary btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
+                          <a class="btn btn-warning btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
                         </div>
                       </div>
                     </div>
@@ -86,7 +86,7 @@
                   <div class="col-md-12 ">
 
                     <div class="row text-center">
-                      <div class="card col-md-4 descri mx-5 mb-2" *ngFor="let curso of cursosId">
+                      <div class="card col-md-4 descri fondoama mx-5 mb-2" *ngFor="let curso of cursosId">
                         <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3"
                           style="max-width:200px; height:150px;">
                           <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
@@ -96,7 +96,7 @@
                           <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
                             {{curso.descripcionCurso}}
                           </p>
-                          <a class="btn btn-primary btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
+                          <a class="btn btn-warning btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
                         </div>
                       </div>
                     </div>

@@ -3,7 +3,10 @@
   <br>
   <br>
   <br>
-  Comparte tu perfil: {{url}}
+  <div class="txtTodos text-right mr-2">
+    <i class="fas fa-external-link-alt"></i> Comparte tu perfil: {{url}}
+  </div>
+
   <!--titulo-->
   <div class="col-md-12 px-0 paqueteshome">
     <div class="container">
@@ -64,17 +67,17 @@
                   <br>
                   <div class="col-md-12 ">
                     <div class="row text-center">
-                      <div class="card col-md-4 descri mx-5 mb-2" *ngFor="let curso of cursosTec">
+                      <div class="card col-md-4 descri mx-5 mb-2 fondoama" *ngFor="let curso of cursosTec">
                         <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3"
                           style="max-width:200px; height:150px;">
                           <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
                         </div>
                         <div class="card-body">
-                          <h5 class="card-title text-break text-truncate">{{curso.nombreCompleto}}</h5>
+                          <h5 class="card-title text-wrap text-truncate">{{curso.nombreCompleto}}</h5>
                           <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
                             {{curso.descripcionCurso}}
                           </p>
-                          <a class="btn btn-primary btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
+                          <a class="btn btn-warning btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
                         </div>
                       </div>
                     </div>
@@ -87,17 +90,17 @@
                   <div class="col-md-12 ">
 
                     <div class="row text-center">
-                      <div class="card col-md-4 descri mx-5 mb-2" *ngFor="let curso of cursosId">
+                      <div class="card col-md-4 descri mx-5 mb-2 fondoama" *ngFor="let curso of cursosId">
                         <div class="imgLiquid view overlay zoom z-depth-1 rounded mt-3"
                           style="max-width:200px; height:150px;">
                           <img class="card-img-top" [src]="curso.imagen" max-width="200" height="150">
                         </div>
                         <div class="card-body">
-                          <h5 class="card-title text-break text-truncate">{{curso.nombreCompleto}}</h5>
+                          <h5 class="card-title text-wrap text-truncate">{{curso.nombreCompleto}}</h5>
                           <p class="card-text d-inline-block text-truncate" style="max-width: 150px;">
                             {{curso.descripcionCurso}}
                           </p>
-                          <a class="btn btn-primary btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
+                          <a class="btn btn-warning btn-sm" [routerLink]="['/curso',curso.ruta]">Ver curso</a>
                         </div>
                       </div>
                     </div>
