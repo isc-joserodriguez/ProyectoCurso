@@ -129,18 +129,18 @@
             <div class="card-header paqueteshome text-center text-white">
               Certificados
             </div>
-            <div class="card-body descri">
-              <div class="row" *ngFor="let certificado of certificados">
-                <div class="card mb-3 mx-3" style="max-width: 350px;">
+            <div class="card-body">
+              <div class="row justify-content-center container">
+                <div class="card col-md-4 mx-3 mb-2 descri" style="max-width: 350px;" *ngFor="let certificado of certificados">
                   <div class="row no-gutters">
                     <div class="col-md-4 vertical-center">
-                      <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:100px; height:100px;">
-                        <img src="http://www.lorempixel.com/200/200" width="100" height="100">
+                      <div class="imgLiquidFill imgLiquid  pl-2" style="width:80px; height:80px;">
+                        <img src="./../../../assets/icons/certificado.png" width="80" height="80" class="card-img sombrabaja">
                       </div>
                     </div>
                     <div class="col-md-8 ">
                       <div class="card-body">
-                        <h5 class="card-title">{{certificado.nombreCurso}}</h5>
+                        <h6 class="card-title">{{certificado.nombreCurso}}</h6>
                         <div class="text-right">
                           <a [href]="certificado.url" target="_blank" rel="noopener noreferrer">
                             <button mat-mini-fab color="success">
