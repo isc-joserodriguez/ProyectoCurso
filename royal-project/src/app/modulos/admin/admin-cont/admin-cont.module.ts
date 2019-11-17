@@ -32,11 +32,11 @@ import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { AdminCursosComponent } from './admin-cursos/admin-cursos.component';
 import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component';
 import { AdminPagosComponent } from './admin-pagos/admin-pagos.component';
-import { AdminEstadisticasComponent } from './admin-estadisticas/admin-estadisticas.component';
 import { AdminUsuarioNuevoComponent } from './admin-usuario-nuevo/admin-usuario-nuevo.component';
 import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-info.component';
 import { CursoRevisionComponent } from './curso-revision/curso-revision.component';
 import { AdminInscripcionComponent } from './admin-inscripcion/admin-inscripcion.component';
+import { AdminReportesComponent } from './admin-reportes/admin-reportes.component';
 
 
 @NgModule({
@@ -45,11 +45,11 @@ import { AdminInscripcionComponent } from './admin-inscripcion/admin-inscripcion
     AdminCursosComponent,
     AdminUsuariosComponent,
     AdminPagosComponent,
-    AdminEstadisticasComponent,
     AdminUsuarioNuevoComponent,
     AdminUsuarioInfoComponent,
     CursoRevisionComponent,
-    AdminInscripcionComponent
+    AdminInscripcionComponent,
+    AdminReportesComponent
   ],
   imports: [
     CommonModule,

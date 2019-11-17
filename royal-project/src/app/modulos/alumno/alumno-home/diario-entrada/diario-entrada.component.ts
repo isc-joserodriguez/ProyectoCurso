@@ -126,7 +126,6 @@ export class DiarioEntradaComponent implements OnInit {
             maestro: (usuario.detail[0].tipo[2].maestro == null) ? false : true,
             i: i
           }
-          console.log(respuesta);
           if (!respuesta.reportado) this.infoRespuestas.push(nuevaRes);
         });
       });
@@ -180,7 +179,6 @@ export class DiarioEntradaComponent implements OnInit {
     });
   }
   reportarComentarioN1(i) {
-    console.log(this.infoEntrada.respuestas[i])
     this.infoEntrada.respuestas[i].reportado = true;
     this.infoEntrada.reportes.push({
       tipo: 1,
