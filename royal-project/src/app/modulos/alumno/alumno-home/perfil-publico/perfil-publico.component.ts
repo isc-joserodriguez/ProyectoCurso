@@ -68,12 +68,39 @@ export class PerfilPublicoComponent implements OnInit {
             url: certificado.url
           });
         });
+
+
       });
 
       this.progreso = this.infoAlumno.puntaje % 1000;
       this.nivel = ((this.infoAlumno.puntaje - this.progreso) / 1000) + 1;
       this.porcentajeNivel = Math.round((this.progreso * 100) / 1000);
 
+
     });
+    this.certificados = [{
+      nombreCurso: "matematicas",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    },
+    {
+      nombreCurso: "matematicasatematicas",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    },
+    {
+      nombreCurso: "matematicas",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    },
+    {
+      nombreCurso: "matematicasatematicas3",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    }]
   }
 }

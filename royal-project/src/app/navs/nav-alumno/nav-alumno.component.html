@@ -49,11 +49,11 @@
         </button>
         <mat-menu #comunidad="matMenu" class="fondo-navbar">
           <button mat-menu-item [matMenuTriggerFor]="Preguntas">
-            <i class="fas fa-laptop-code"></i>Preguntas
+            <i class="far fa-comments"></i> Preguntas
           </button>
           <mat-divider></mat-divider>
           <button mat-menu-item [matMenuTriggerFor]="Diario">
-            <i class="fas fa-language"></i> Diario
+            <i class="fas fa-book-open"></i> Diario
           </button>
         </mat-menu>
         <mat-menu #Preguntas="matMenu" class="fondo-navbar">
@@ -66,16 +66,16 @@
           </button>
           <mat-divider></mat-divider>
           <button mat-menu-item [routerLink]="['/comunidad/preguntas/mis-preguntas']">
-            <i class="far fa-comments"></i> Mis preguntas
+            <i class="far fa-comment"></i> Mis preguntas
           </button>
         </mat-menu>
         <mat-menu #Diario="matMenu" class="fondo-navbar">
           <button mat-menu-item [routerLink]="['/diario/entradas']">
-            <i class="fas fa-laptop-code"></i>Entradas
+            <i class="fas fa-edit"></i> Entradas
           </button>
           <mat-divider></mat-divider>
           <button mat-menu-item [routerLink]="['/diario/mis-entradas']">
-            <i class="far fa-comments"></i> Mis entradas
+            <i class="fas fa-book-reader"></i> Mis entradas
           </button>
         </mat-menu>
       </div>

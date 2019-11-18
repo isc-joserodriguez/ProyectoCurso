@@ -326,14 +326,18 @@ table {
 .icon-report {
   width: 25px;
 }
-.txtTodos{
+.txtTodos {
   color: #3a383893;
   font-weight: bold;
 }
 
 .fondoroyal {
   background: rgba(165, 176, 46, 0.527);
-  background: -moz-radial-gradient(center, #A6B02E 0%, #695226 100%);
-  background: -webkit-radial-gradient(center, #A6B02E 0%, #695226 100%);
-  background: radial-gradient(ellipse at center, #A6B02E 0%, #695226 100%);
-  }
+  background: -moz-radial-gradient(center, #a6b02e 0%, #695226 100%);
+  background: -webkit-radial-gradient(center, #a6b02e 0%, #695226 100%);
+  background: radial-gradient(ellipse at center, #a6b02e 0%, #695226 100%);
+}
+
+.fondocarrusel {
+  background-color: rgba(126, 124, 121, 0.068);
+}
