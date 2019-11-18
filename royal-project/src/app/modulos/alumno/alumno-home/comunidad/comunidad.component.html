@@ -39,7 +39,8 @@
             <div class="col-md-12 mt-1 px-4">
               <mat-divider></mat-divider>
               <br>
-              <ul class="list-unstyled field-login" *ngFor="let pregunta of listaPreguntas">
+              <ul class="list-unstyled field-login"
+                *ngFor="let pregunta of listaPreguntas | paginate: { itemsPerPage: 5, currentPage: p }">
                 <li class="media">
 
                   <a [href]="'/alumno/perfil-publico/'+pregunta.rutaPersona" target="_blank" rel="noopener noreferrer">
@@ -88,7 +89,8 @@
                 </li>
                 <mat-divider></mat-divider>
               </ul>
-
+              <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente">
+              </pagination-controls>
             </div>
 
             <!--fin foro-->

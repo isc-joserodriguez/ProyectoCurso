@@ -10,6 +10,7 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
   styleUrls: ['./comunidad.component.scss']
 })
 export class ComunidadComponent implements OnInit {
+  p: number = 1;
   categoria = this.route.snapshot.params.categoria;
   iduser = localStorage.getItem('userid') == null;
   listaPreguntas = [];
