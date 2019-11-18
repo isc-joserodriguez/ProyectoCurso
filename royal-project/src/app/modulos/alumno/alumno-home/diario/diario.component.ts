@@ -8,6 +8,7 @@ import { DiarioService } from 'src/app/servicios/diario.service';
   styleUrls: ['./diario.component.scss']
 })
 export class DiarioComponent implements OnInit {
+  p: number = 1;
   iduser = localStorage.getItem('userid') == null;
   listaEntradas = [];
   entradasFiltradas = [];

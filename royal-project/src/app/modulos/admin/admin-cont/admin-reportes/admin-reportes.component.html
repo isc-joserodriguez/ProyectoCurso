@@ -1,13 +1,14 @@
 <!--Reportes Preguntas-->
-<mat-expansion-panel [expanded]="preguntasExpand" hideToggle="true" class="acordeon-cuerpo2">
-  <mat-expansion-panel-header class="acordeon-enc2">
+<mat-expansion-panel [expanded]="preguntasExpand" hideToggle="true">
+  <mat-expansion-panel-header class="encabezado">
     <mat-panel-title>
-      <b class="subtitulo">Reportes Preguntas</b>
+      <b class="letracursotitulo">Reportes Preguntas</b>
     </mat-panel-title>
     <mat-panel-description>
       <span> </span>
-      <img class="iconacordeon" src="./../../../assets/icons/peticion2.svg">
     </mat-panel-description>
+    <img class="iconacordeon" src="./../../../assets/icons/peticion.svg">
+
   </mat-expansion-panel-header>
   <br>
   <div class="card mb-12 descri mb-4 pl-2" *ngFor="let reporte of preguntasReportes">
@@ -31,9 +32,9 @@
           <div class="p-2 d-flex justify-content-between txtTodos">
             <p class="text-muted"> {{reporte.fecha|date}}</p>
             <br>
-            <button type="button" class="btn colorbtn"
+            <button type="button" class="btn btn-warning"
               (click)="omitirPregunta(reporte.reportes,reporte.respuestas, reporte.index, reporte.rutaPregunta, reporte.estatusEntrada)">Omitir</button>
-            <button type="button" class="btn colorbtn"
+            <button type="button" class="btn btn-success"
               (click)="aceptarPregunta(reporte.reportes,reporte.respuestas, reporte.index, reporte.rutaPregunta, reporte.estatusEntrada)">Aceptar</button>
           </div>
         </div>
@@ -45,15 +46,16 @@
 <!--Reportes Preguntas-->
 
 <!--Reportes Diario-->
-<mat-expansion-panel [expanded]="diarioExpand" hideToggle="true" class="acordeon-cuerpo2">
-  <mat-expansion-panel-header class="acordeon-enc2">
+<mat-expansion-panel [expanded]="diarioExpand" hideToggle="true">
+  <mat-expansion-panel-header class="encabezado">
     <mat-panel-title>
-      <b class="subtitulo">Reportes Diario</b>
+      <b class="letracursotitulo">Reportes Diario</b>
     </mat-panel-title>
     <mat-panel-description>
       <span> </span>
-      <img class="iconacordeon" src="./../../../assets/icons/peticion2.svg">
     </mat-panel-description>
+    <img class="iconacordeon" src="./../../../assets/icons/peticion.svg">
+
   </mat-expansion-panel-header>
   <br>
   <div class="card mb-12 descri mb-4 pl-2" *ngFor="let reporte of diarioReportes">
@@ -75,9 +77,9 @@
           <div class="p-2 d-flex justify-content-between txtTodos">
             <p class="text-muted"> {{reporte.fecha|date}}</p>
             <br>
-            <button type="button" class="btn colorbtn"
+            <button type="button" class="btn btn-warning"
               (click)="omitirDiario(reporte.reportes,reporte.respuestas, reporte.index, reporte.rutaDiario, reporte.estatusEntrada)">Omitir</button>
-            <button type="button" class="btn colorbtn"
+            <button type="button" class="btn btn-success"
               (click)="aceptarDiario(reporte.reportes,reporte.respuestas, reporte.index, reporte.rutaDiario, reporte.estatusEntrada)">Aceptar</button>
           </div>
         </div>
@@ -88,15 +90,17 @@
 <!--Reportes Diario-->
 
 <!--Reportes Comentarios-->
-<mat-expansion-panel [expanded]="comentariosExpand" hideToggle="true" class="acordeon-cuerpo2">
-  <mat-expansion-panel-header class="acordeon-enc2">
+<mat-expansion-panel [expanded]="comentariosExpand" hideToggle="true">
+  <mat-expansion-panel-header class="encabezado">
     <mat-panel-title>
-      <b class="subtitulo">Reportes comentarios</b>
+      <b class="letracursotitulo">Reportes comentarios</b>
     </mat-panel-title>
+
     <mat-panel-description>
-      <span> </span>
-      <img class="iconacordeon" src="./../../../assets/icons/peticion2.svg">
+      <span></span>
     </mat-panel-description>
+    <mat-icon><img class="iconacordeon" src="./../../../assets/icons/peticion.svg"></mat-icon>
+
   </mat-expansion-panel-header>
   <br>
   <div class="card mb-12 descri mb-4 pl-2" *ngFor="let reporte of comentariosReportes">
@@ -118,9 +122,9 @@
           <div class="p-2 d-flex justify-content-between txtTodos">
             <p class="text-muted"> {{reporte.fecha|date}}</p>
             <br>
-            <button type="button" class="btn colorbtn"
+            <button type="button" class="btn btn-warning"
               (click)="omitirComentario(reporte.reportes,reporte.contenidoCurso, reporte.index, reporte.rutaCurso)">Omitir</button>
-            <button type="button" class="btn colorbtn"
+            <button type="button" class="btn btn-success"
               (click)="aceptarComentario(reporte.reportes,reporte.contenidoCurso, reporte.index, reporte.rutaCurso)">Aceptar</button>
           </div>
         </div>
