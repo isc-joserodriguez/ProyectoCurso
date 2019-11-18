@@ -21,6 +21,7 @@ export class NavMaestroComponent implements OnInit {
     sexo: 3
   };
 
+  notificaciones = [];
   perfilPublico = '';
   usuario = '';
   sexo = 3; // 1= H 2= M 3= Indef
@@ -50,6 +51,7 @@ export class NavMaestroComponent implements OnInit {
         localStorage.setItem('userid', res.detail.id);
         this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
           this.perfilPublico = '/maestro/perfil-publico/' + usuario.detail[0].ruta;
+          this.notificaciones = usuario.detail[0].notificaciones.reverse();
         });
         if (!res.detail.tipo[2].maestro) {
           this.router.navigate(['/usuario-inhabilitado']);
@@ -57,6 +59,13 @@ export class NavMaestroComponent implements OnInit {
       }
     }, err => {
       console.log(err);
+    });
+  }
+
+  descartar(i) {
+    this.notificaciones[i].estado = false;
+    this.usuarios.updateNotificaciones(localStorage.getItem('userid'), { notificaciones: this.notificaciones.reverse() }).subscribe(res => {
+      this.verificarToken();
     });
   }
 

@@ -72,8 +72,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   getInfoClase(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.idMaestro = curso.detail[0].idMaestro;
       this.infoCurso.reportes = curso.detail[0].reportes;
-      console.log(this.infoCurso.reportes)
       this.infoCurso.imagen = curso.detail[0].imagen;
       this.infoCurso.alumnosInscritos = curso.detail[0].alumnosInscritos;
       this.infoCurso.alumnosInscritos = [];
@@ -81,7 +81,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.infoCurso.alumnosInscritos.push(elemento.idAlumno);
       });
       this.infoCurso.contenidoCurso = curso.detail[0].contenidoCurso;
-      console.log(this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[0]);
       if (!this.infoCurso.alumnosInscritos.includes(parseInt(localStorage.getItem('userid')))) {
         this.router.navigate(['/curso', this.route.snapshot.params.id, 'vista']);
       }
@@ -187,9 +186,21 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             }
           );
           this.curso.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
-            this.finalizadoTarea = true;
-            this.tareaEntregada = true;
-            this.ngOnInit();
+            //Notificar
+            var curso = this.route.snapshot.params.id;
+            this.usuarios.getUser(localStorage.getItem('userid')).subscribe((alumno: any) => {
+              this.usuarios.getUser(this.infoCurso.idMaestro).subscribe((maestro: any) => {
+                maestro.detail[0].notificaciones.push({
+                  ruta: '/maestro/curso/' + curso + '/revision/' + alumno.detail[0].ruta,
+                  descripcion: 'Un alumno entregó actividad.'
+                });
+                this.usuarios.updateNotificaciones(this.infoCurso.idMaestro, { notificaciones: maestro.detail[0].notificaciones }).subscribe(res => {
+                  this.finalizadoTarea = true;
+                  this.tareaEntregada = true;
+                  this.ngOnInit();
+                });
+              });
+            });
           });
         });
       }
@@ -241,8 +252,8 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
       idPersona: localStorage.getItem('userid'),
       comentario: this.respuestaForm.value.respuesta
     });
-    //console.log(this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios)
     this.curso.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
+      this.notificar();
       this.getInfoClase(this.route.snapshot.params.id);
       this.respuestaForm.setValue({
         respuesta: ' '
@@ -260,9 +271,36 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     this.curso.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso }).subscribe(res => {
+      this.notificar();
       this.getInfoClase(this.route.snapshot.params.id);
       this.respuestaCom = '';
       this.responderIndex = -1;
+    });
+  }
+
+  notificar() {
+    var unidad = this.route.snapshot.params.unidad;
+    var subtema = this.route.snapshot.params.subtema;
+    var clase = this.route.snapshot.params.clase;
+    var curso = this.route.snapshot.params.id;
+
+    this.infoCurso.alumnosInscritos.forEach(id => {
+      if (parseInt(localStorage.getItem('userid')) != id) {
+        this.usuarios.getUser(id).subscribe((user: any) => {
+          user.detail[0].notificaciones.push({
+            ruta: '/curso/' + curso + '/clase/' + unidad + '/' + subtema + '/' + clase,
+            descripcion: 'Un compañero comentó en una clase.'
+          });
+          this.usuarios.updateNotificaciones(id, { notificaciones: user.detail[0].notificaciones }).subscribe(res => { });
+        });
+      }
+    });
+    this.usuarios.getUser(this.infoCurso.idMaestro).subscribe((user: any) => {
+      user.detail[0].notificaciones.push({
+        ruta: '/maestro/curso/config/' + curso + '/temario/' + unidad + '/' + subtema + '/' + clase,
+        descripcion: 'Un alumno comentó en una clase.'
+      });
+      this.usuarios.updateNotificaciones(this.infoCurso.idMaestro, { notificaciones: user.detail[0].notificaciones }).subscribe(res => { });
     });
   }
 
@@ -299,8 +337,6 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     this.infoCurso.contenidoCurso[this.route.snapshot.params.unidad - 1].subtemas[this.route.snapshot.params.subtema - 1].clases[this.route.snapshot.params.clase - 1].comentarios[i].respuestas[j].reportado = true;
-
-    console.log(this.infoCurso.contenidoCurso);
 
     this.curso.agregarReporte(this.route.snapshot.params.id, { contenidoCurso: this.infoCurso.contenidoCurso, reportes: this.infoCurso.reportes }).subscribe(res => {
       this.ngOnInit();

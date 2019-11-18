@@ -201,6 +201,56 @@ const getUserByRute = (req, res) => {
         });
 }
 
+const updateNotificaciones = (req, res) => {
+    const id = req.params.id;
+    notificaciones = req.body.notificaciones
+    _persona.update({ _id: id }, {
+        $set: {
+            notificaciones: notificaciones
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
+const updatePuntaje = (req, res) => {
+    const id = req.params.id;
+    puntaje = req.body.puntaje
+    _persona.update({ _id: id }, {
+        $set: {
+            puntaje: puntaje
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
 const updateCert = (req, res) => {
     const id = req.params.id;
     certificados = req.body.certificados
@@ -480,6 +530,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute, updateCert, updateDocs, updateCursosMaestro
+        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute, updateCert, updateDocs, updateCursosMaestro, updateNotificaciones, updatePuntaje
     });
 }

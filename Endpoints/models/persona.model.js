@@ -40,11 +40,10 @@ const personaSchema = new mongoose.Schema({
     }],
     curriculum: { type: String },
     notificaciones: [{
-        _id: { type: String, required: true },
-        personaId: { type: String, required: true },
-        fecha: { type: Date, required: true },
-        descripción: { type: String, required: true },
-        estado: { type: Boolean, required: true }
+        ruta: { type: String },
+        fecha: { type: Date, default: Date.now() },
+        descripcion: { type: String },
+        estado: { type: Boolean, default: true }
     }],
     documentos: {
         curriculum: { type: String },

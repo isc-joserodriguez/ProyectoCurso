@@ -42,8 +42,9 @@
           <div class="col-md-12 container mb-3">
             <p><b>Royal Language</b></p>
             <div class="input-group input-group-sm vertical-center">
-              <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
-                <span class="text-check">Royal</span></mat-checkbox>
+              <mat-checkbox formControlName="royal" [(ngModel)]="infoCurso.royal">
+                <img class="icon-check" src="./../../../assets/icons/royal.png"> <span class="text-check">Royal</span>
+              </mat-checkbox>
             </div>
 
           </div>

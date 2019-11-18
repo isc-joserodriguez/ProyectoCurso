@@ -26,7 +26,7 @@ export class AdminUsuarioInfoComponent implements OnInit {
     this.getUsuario(this.route.snapshot.params.id);
   }
   getUsuario(id) {
-    this.usuarios.getId(id).subscribe((resp: any) => {
+    this.usuarios.getUser(id).subscribe((resp: any) => {
       this.usuario.tipo = resp.detail[0].tipo;
 
       this.permisoUsuario = this.usuario.tipo[0].admin == true ? 0 : 1;

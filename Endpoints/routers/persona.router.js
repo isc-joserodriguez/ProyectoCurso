@@ -54,6 +54,14 @@ module.exports = (wagner) => {
         personaCtrl.updateCert(req, res);
     });
 
+    personaRouter.put("/updatePuntaje/:id", (req, res) => {
+        personaCtrl.updatePuntaje(req, res);
+    });
+
+    personaRouter.put("/updateNotificaciones/:id", (req, res) => {
+        personaCtrl.updateNotificaciones(req, res);
+    });
+
     personaRouter.put("/inscribirAlumno/:id", (req, res) => {
         personaCtrl.inscribirAlumno(req, res);
     });

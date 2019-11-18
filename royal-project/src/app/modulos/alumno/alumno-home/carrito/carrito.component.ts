@@ -38,7 +38,6 @@ export class CarritoComponent implements OnInit, AfterViewInit {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           this.pagar();
-          console.log(order);
         },
         onError: err => {
           console.log(err);
@@ -77,13 +76,11 @@ export class CarritoComponent implements OnInit, AfterViewInit {
     var temp = '';
     this.rutas.forEach(ruta => {
       temp = temp + ruta + '|';
-      console.log(temp);
     });
     if (temp == '') {
       localStorage.removeItem('carrito')
       this.router.navigate(['/']);
     } else {
-      console.log(temp);
       localStorage.setItem('carrito', temp);
       this.getCursos();
     }

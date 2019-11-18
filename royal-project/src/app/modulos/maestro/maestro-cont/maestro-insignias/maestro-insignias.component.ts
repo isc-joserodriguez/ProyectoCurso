@@ -70,8 +70,8 @@ export class MaestroInsigniasComponent implements OnInit {
   }
 
   subirInsignia() {
-    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe((res: any) => {
-      res.detail[0].alumnosInscritos.forEach(alumnoInscrito => {
+    this.cursos.getCursoInfo(this.route.snapshot.params.id).subscribe((curso: any) => {
+      curso.detail[0].alumnosInscritos.forEach(alumnoInscrito => {
         this.usuarios.getUser(alumnoInscrito.idAlumno).subscribe((usuario: any) => {
           var nuevo = usuario.detail[0].nombre + ' ' + usuario.detail[0].apPaterno + ' ' + usuario.detail[0].apMaterno + ' - ' + usuario.detail[0].credencial.correo
           if (nuevo.toLowerCase().includes(this.nuevoAlumno.toLowerCase())) {
@@ -85,10 +85,18 @@ export class MaestroInsigniasComponent implements OnInit {
             });
             if (!repetido) {
               usuario.detail[0].insignias.push({ idInsignia: this.indexInsignia, ruta: this.route.snapshot.params.id });
-              this.usuarios.updateInsignia(usuario.detail[0]._id, { insignias: usuario.detail[0].insignias, puntaje: usuario.detail[0].puntaje + 15 }).subscribe(res => {
+              this.usuarios.updateInsignia(usuario.detail[0]._id, { insignias: usuario.detail[0].insignias, puntaje: usuario.detail[0].puntaje + 50 }).subscribe(res => {
                 this.listaInsignias[this.indexInsignia].otorgadas = this.listaInsignias[this.indexInsignia].otorgadas + 1;
                 this.cursos.updateInsignias(this.route.snapshot.params.id, { insignias: this.listaInsignias }).subscribe(res => {
-                  this.ngOnInit();
+                  //Notificar
+                  usuario.detail[0].notificaciones.push({
+                    ruta: '/perfil/insignias',
+                    descripcion: 'Recibiste insignia en el curso de ' + curso.detail[0].nombreCorto + '.'
+                  });
+                  this.usuarios.updateNotificaciones(usuario.detail[0]._id, { notificaciones: usuario.detail[0].notificaciones }).subscribe(res => {
+                    this.ngOnInit();
+                  });
+                  //
                 });
               });
             } else {

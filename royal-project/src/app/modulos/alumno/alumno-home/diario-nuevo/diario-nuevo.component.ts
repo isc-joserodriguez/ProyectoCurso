@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DiarioService } from 'src/app/servicios/diario.service';
 import { CursosService } from 'src/app/servicios/cursos.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-diario-nuevo',
@@ -22,7 +23,7 @@ export class DiarioNuevoComponent implements OnInit {
 
   subcategorias = [];
 
-  constructor(private cursos: CursosService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private diario: DiarioService) { }
+  constructor(private usuarios: UsuariosService, private cursos: CursosService, private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private diario: DiarioService) { }
 
   ngOnInit() {
     this.ckeConfig = {
@@ -73,7 +74,6 @@ export class DiarioNuevoComponent implements OnInit {
         a.push(e);
       });
       this.subcategorias = a;
-      console.log(this.subcategorias)
     });
   }
 
@@ -85,7 +85,12 @@ export class DiarioNuevoComponent implements OnInit {
       categoria: this.entradaForm.value.categoria
     };
     this.diario.addEntradaNueva(entrada).subscribe((res: any) => {
-      this.router.navigate(['/diario/entrada/', res.detail.ruta]);
+      this.usuarios.getUser(localStorage.getItem('userid')).subscribe((info: any) => {
+        info.detail[0].puntaje = info.detail[0].puntaje + 20;
+        this.usuarios.updatePuntaje(localStorage.getItem('userid'), { puntaje: info.detail[0].puntaje }).subscribe(nv => {
+          this.router.navigate(['/diario/entrada/', res.detail.ruta]);
+        });
+      });
     });
   }
 

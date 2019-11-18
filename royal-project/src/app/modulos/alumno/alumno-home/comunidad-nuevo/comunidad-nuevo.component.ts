@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ComunidadService } from 'src/app/servicios/comunidad.service';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-comunidad-nuevo',
@@ -20,7 +21,7 @@ export class ComunidadNuevoComponent implements OnInit {
   iduser = localStorage.getItem('userid');
   preguntaForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private router: Router, private comunidad: ComunidadService, private formBuilder: FormBuilder) { }
+  constructor(private usuarios: UsuariosService, private route: ActivatedRoute, private router: Router, private comunidad: ComunidadService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.ckeConfig = {
@@ -38,7 +39,7 @@ export class ComunidadNuevoComponent implements OnInit {
         { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
         { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
         { name: 'links', groups: ['links'] },
-        { name: 'insert', groups: ['insert','Smiley,'] },
+        { name: 'insert', groups: ['insert', 'Smiley,'] },
         '/',
         { name: 'styles', groups: ['styles'] },
         { name: 'colors', groups: ['colors'] },
@@ -47,8 +48,8 @@ export class ComunidadNuevoComponent implements OnInit {
         { name: 'about', groups: ['about'] }
       ],
       removeButtons: 'Source,Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,RemoveFormat,Outdent,Indent,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Unlink,Anchor,Image,Flash,Table,HorizontalRule,SpecialChar,PageBreak,Iframe,Maximize,ShowBlocks,About'
-    
-     
+
+
     };
     if (this.iduser == null) {
       this.router.navigate(['/']);
@@ -80,8 +81,13 @@ export class ComunidadNuevoComponent implements OnInit {
       repuestas: []
     }
     this.comunidad.addPreguntaNueva(pregunta).subscribe((res: any) => {
-      localStorage.removeItem('pregunta');
-      this.router.navigate(['/comunidad/pregunta/', res.detail.ruta]);
+      this.usuarios.getUser(localStorage.getItem('userid')).subscribe((info: any) => {
+        info.detail[0].puntaje = info.detail[0].puntaje + 15;
+        this.usuarios.updatePuntaje(localStorage.getItem('userid'), { puntaje: info.detail[0].puntaje }).subscribe(nv => {
+          localStorage.removeItem('pregunta');
+          this.router.navigate(['/comunidad/pregunta/', res.detail.ruta]);
+        });
+      });
     });
   }
 }

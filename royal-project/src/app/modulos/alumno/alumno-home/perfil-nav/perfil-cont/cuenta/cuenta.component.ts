@@ -45,7 +45,7 @@ export class CuentaComponent implements OnInit {
   }
 
   inicializar(id) {
-    this.usuario.getId(id).subscribe((res: any) => {
+    this.usuario.getUser(id).subscribe((res: any) => {
       this.persona.credencial = res.detail[0].credencial;
       this.hash = this.persona.credencial.contraseña;
       this.correoForm = this.formBuilder.group({
@@ -65,7 +65,6 @@ export class CuentaComponent implements OnInit {
   guardarCorreo() {
     this.persona.credencial.correo = this.correoForm.value.correo;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.correoForm.value.pass, op: 0 }).subscribe((res: any) => {
-      console.log(res.code);
       if (res.code == 400) {
         this.errorCorreo = true;
         this.inicializar(localStorage.getItem('userid'));
@@ -78,7 +77,6 @@ export class CuentaComponent implements OnInit {
   guardarPass() {
     this.persona.credencial.contraseña = this.passForm.value.pass;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe((res: any) => {
-      console.log(res.code);
       if (res.code == 400) {
         this.errorPass = true;
         this.inicializar(localStorage.getItem('userid'));

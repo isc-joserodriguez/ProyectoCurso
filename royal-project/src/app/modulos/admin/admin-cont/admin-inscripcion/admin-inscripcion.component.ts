@@ -67,7 +67,7 @@ export class AdminInscripcionComponent implements OnInit {
     this.listaCursos = [];
     this.cursos.getCursos().subscribe((res: any) => {
       res.detail.forEach(curso => {
-        this.usuarios.getId(curso.idMaestro).subscribe((maestro: any) => {
+        this.usuarios.getUser(curso.idMaestro).subscribe((maestro: any) => {
           this.listaCursos.push({
             nombre: maestro.detail[0].nombre + ' ' +
               maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,

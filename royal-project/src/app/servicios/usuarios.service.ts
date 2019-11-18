@@ -15,10 +15,6 @@ export class UsuariosService {
     return this.http.get(apiUrl + '/getAll');
   }
 
-  getId(id) {
-    return this.http.get(apiUrl + '/get/' + id);
-  }
-
   updateTipo(id, tipo) {
     return this.http.put(apiUrl + '/editTipo/' + id, tipo);
   }
@@ -53,6 +49,12 @@ export class UsuariosService {
 
   updateInsignia(id, insignia) {
     return this.http.put(apiUrl + '/updateInsignia/' + id, insignia);
+  }
+  updatePuntaje(id, puntaje) {
+    return this.http.put(apiUrl + '/updatePuntaje/' + id, puntaje);
+  }
+  updateNotificaciones(id, Notificaciones) {
+    return this.http.put(apiUrl + '/updateNotificaciones/' + id, Notificaciones);
   }
   updateCert(id, datos) {
     return this.http.put(apiUrl + '/updateCert/' + id, datos);

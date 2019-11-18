@@ -68,7 +68,7 @@ const routes: Routes = [
     component: DiarioComponent
   },
   {
-    path: 'curso/diario/:id/entrada/:ruta',
+    path: 'entrada/:ruta',
     component: DiarioEntradaComponent
   }
 

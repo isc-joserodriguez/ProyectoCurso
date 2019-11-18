@@ -20,13 +20,12 @@
           <p class="salto_pag mb-0">Alertas</p>
         </button>
         <mat-menu #alertas="matMenu" class="fondo-navbar">
-          <button mat-menu-item>
-            <i class="fas fa-laptop-code"></i>Tecnologías
-          </button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item>
-            <i class="fas fa-language"></i> Idiomas
-          </button>
+          <div *ngFor="let notificacion of notificaciones; let i=index">
+            <button mat-menu-item [routerLink]="[notificacion.ruta]" (click)="descartar(i)" *ngIf="notificacion.estado">
+              <i class="fas fa-laptop-code"></i>{{notificacion.descripcion}}
+            </button>
+            <mat-divider></mat-divider>
+          </div>
         </mat-menu>
       </div>
       <!-- Alertas-->

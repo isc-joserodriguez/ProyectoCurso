@@ -11,11 +11,12 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
   styleUrls: ['./maestro-revision.component.scss']
 })
 export class MaestroRevisionComponent implements OnInit {
+  temarioForm: FormGroup;
   contenido = [];
   tareasCurso = [];
   idUsuario = 0;
   faltantes = 0;
-  temarioForm: FormGroup;
+  nombreCorto = '';
 
   finalizadoCert = true;
   cambiaTarea = false;
@@ -36,7 +37,19 @@ export class MaestroRevisionComponent implements OnInit {
     });
     this.contenido = [];
     this.tareasCurso = [];
+    this.idUsuario = 0;
     this.faltantes = 0;
+    this.nombreCorto = '';
+    this.finalizadoCert = true;
+    this.cambiaTarea = false;
+    this.mensajeCert = 'No hay archivos';
+    this.datosFormularioCert = new FormData();
+    this.nombreCert = '';
+    this.porcentajeCert = 0;
+    this.certEntregado = false;
+    this.indexCert = 0;
+    this.infoCert = [];
+    this.puntajeUser = 0;
     this.getTareas(this.route.snapshot.params.id, this.route.snapshot.params.alumno);
   }
 
@@ -54,6 +67,7 @@ export class MaestroRevisionComponent implements OnInit {
 
       this.cursos.getCursoInfo(curso).subscribe((cursoInfo: any) => {
         this.contenido = cursoInfo.detail[0].contenidoCurso;
+        this.nombreCorto = cursoInfo.detail[0].nombreCorto;
         //Unidades
         this.contenido.forEach((unidad, numUnidad) => {
           var subtemasUnidad: any = [];
@@ -137,7 +151,17 @@ export class MaestroRevisionComponent implements OnInit {
     temp.estatus = estatus;
     this.contenido[unidad].subtemas[subtema].clases[clase].tarea.envios.push(temp);
     this.cursos.updateTemario(this.route.snapshot.params.id, { contenidoCurso: this.contenido }).subscribe(res => {
-      this.getTareas(this.route.snapshot.params.id, this.route.snapshot.params.alumno);
+      //Agregar notificación
+      this.usuarios.getUser(this.idUsuario).subscribe((user: any) => {
+        user.detail[0].notificaciones.push({
+          ruta: '/curso/' + this.route.snapshot.params.id + '/clase/' + (unidad + 1) + '/' + (subtema + 1) + '/' + (clase + 1),
+          descripcion: 'Tu tarea de ' + this.nombreCorto + ' ha sido revisada.'
+        });
+        this.usuarios.updateNotificaciones(this.idUsuario, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+          this.getTareas(this.route.snapshot.params.id, this.route.snapshot.params.alumno);
+        });
+      });
+
     });
 
 
@@ -211,12 +235,14 @@ export class MaestroRevisionComponent implements OnInit {
   }
 
   public eliminarCert() {
-    var certTemp = this.infoCert
+    this.certEntregado = false;
+    var nombreBorrar = this.infoCert[this.indexCert].nombre;
+    var certTemp = this.infoCert;
     certTemp.splice(this.indexCert, 1);
     this.usuarios.updateCert(this.idUsuario, { certificados: certTemp, puntaje: this.puntajeUser - 100 }).subscribe(res => {
-      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' + this.idUsuario + '/curso/' + this.route.snapshot.params.id + '/certificado/' + this.infoCert.nombre)
+      const referenciaBorrar = this.firebase.referenciaCloudStorage('usuario/' + this.idUsuario + '/curso/' + this.route.snapshot.params.id + '/certificado/' + nombreBorrar)
       referenciaBorrar.delete().subscribe(() => {
-        this.ngOnInit();
+        this.getTareas(this.route.snapshot.params.id, this.route.snapshot.params.alumno);
       });
     });
   }
@@ -244,9 +270,19 @@ export class MaestroRevisionComponent implements OnInit {
             }
           );
           this.usuarios.updateCert(this.idUsuario, { certificados: this.infoCert, puntaje: this.puntajeUser + 100 }).subscribe(res => {
-            this.finalizadoCert = true;
-            this.certEntregado = true;
-            this.ngOnInit();
+            //Notificar
+            this.usuarios.getUser(this.idUsuario).subscribe((user: any) => {
+              user.detail[0].notificaciones.push({
+                ruta: '/perfil/certificados',
+                descripcion: 'Recibiste el certificado de ' + this.nombreCorto + '.'
+              });
+              this.usuarios.updateNotificaciones(this.idUsuario, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+                this.finalizadoCert = true;
+                this.certEntregado = true;
+                this.ngOnInit();
+              });
+            });
+            //
           });
         });
       }

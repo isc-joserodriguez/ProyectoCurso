@@ -31,6 +31,7 @@ export class NavAlumnoComponent implements OnInit {
   };
 
   cursosAlumno = [];
+  notificaciones = [];
 
   usuario = '';
   logueado = localStorage.getItem('token') != null;
@@ -64,6 +65,7 @@ export class NavAlumnoComponent implements OnInit {
   getCursos() {
     this.cursosAlumno = [];
     this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
+      this.notificaciones = usuario.detail[0].notificaciones.reverse();
       this.perfilPublico = '/alumno/perfil-publico/' + usuario.detail[0].ruta;
       usuario.detail[0].cursoAlumno.forEach(curso => {
         this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo: any) => {
@@ -74,6 +76,12 @@ export class NavAlumnoComponent implements OnInit {
           });
         });
       });
+    });
+  }
+  descartar(i) {
+    this.notificaciones[i].estado = false;
+    this.usuarios.updateNotificaciones(localStorage.getItem('userid'), { notificaciones: this.notificaciones.reverse() }).subscribe(res => {
+      this.getCursos();
     });
   }
   getCategorias() {
