@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
@@ -83,8 +83,9 @@ export class DiarioEntradaComponent implements OnInit {
       respuesta: ['', Validators.required]
     });
 
-    this.getPregunta(this.route.snapshot.params.ruta);
-
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+    });
   }
 
   getPregunta(ruta) {
@@ -149,6 +150,21 @@ export class DiarioEntradaComponent implements OnInit {
     });
 
     this.diario.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas }).subscribe(res => {
+      if (parseInt(localStorage.getItem('userid')) != this.infoEntrada.idPersona) {
+        //Notificar
+        this.usuarios.getUser(this.infoEntrada.idPersona).subscribe((user: any) => {
+          user.detail[0].notificaciones.push({
+            ruta: '/diario/entrada/' + this.infoEntrada.ruta,
+            descripcion: 'Tu entrada en el diario recibió un comentario.'
+          });
+          this.usuarios.updateNotificaciones(this.infoEntrada.idPersona, { notificaciones: user.detail[0].notificaciones }).subscribe(res => { });
+        });
+        //
+      }
+      this.usuarios.getUser(localStorage.getItem('userid')).subscribe((info: any) => {
+        info.detail[0].puntaje = info.detail[0].puntaje + 10;
+        this.usuarios.updatePuntaje(localStorage.getItem('userid'), { puntaje: info.detail[0].puntaje }).subscribe(res => { });
+      });
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaForm.setValue({
         respuesta: ' '
@@ -173,6 +189,37 @@ export class DiarioEntradaComponent implements OnInit {
     });
 
     this.diario.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas }).subscribe(res => {
+      var notificados = [parseInt(localStorage.getItem('userid')), this.infoEntrada.idPersona];
+      if (!notificados.includes(this.infoEntrada.respuestas[i].idPersona)) notificados.push(this.infoEntrada.respuestas[i].idPersona);
+      this.infoEntrada.respuestas[i].respuestas.forEach(respuesta => {
+        if (!notificados.includes(respuesta.idPersona)) notificados.push(respuesta.idPersona);
+      });
+      notificados.splice(0, 1);
+      notificados.forEach(id => {
+        //Notificar
+        this.usuarios.getUser(id).subscribe((user: any) => {
+          var desc = '';
+          if (id == this.infoEntrada.idPersona) {
+            desc = 'Tu entrada en el diario recibió una respuesta de comentario.';
+          } else if (id == this.infoEntrada.respuestas[i].idPersona) {
+            desc = 'Recibiste una respuesta en tu comentario.';
+          } else {
+            desc = 'Alguien más respondió un comentario.';
+          }
+          var route = (user.detail[0].tipo[2].maestro != null) ? '/maestro/entrada/' : '/diario/entrada/';
+          user.detail[0].notificaciones.push({
+            ruta: route + this.infoEntrada.ruta,
+            descripcion: desc
+          });
+          this.usuarios.updateNotificaciones(id, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+            this.usuarios.getUser(localStorage.getItem('userid')).subscribe((info: any) => {
+              info.detail[0].puntaje = info.detail[0].puntaje + 10;
+              this.usuarios.updatePuntaje(localStorage.getItem('userid'), { puntaje: info.detail[0].puntaje }).subscribe(res => { });
+            });
+          });
+        });
+        //
+      });
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
       this.responderIndex = -1;

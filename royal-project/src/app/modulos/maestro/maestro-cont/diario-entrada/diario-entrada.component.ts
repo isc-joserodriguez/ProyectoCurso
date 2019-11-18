@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
@@ -83,7 +83,9 @@ export class DiarioEntradaComponent implements OnInit {
       respuesta: ['', Validators.required]
     });
 
-    this.getPregunta(this.route.snapshot.params.ruta);
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.getPregunta(this.route.snapshot.params.ruta);
+    });
 
   }
 
@@ -149,19 +151,22 @@ export class DiarioEntradaComponent implements OnInit {
     });
 
     this.diario.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas }).subscribe(res => {
+      //Notificar
+      this.usuarios.getUser(this.infoEntrada.idPersona).subscribe((user: any) => {
+        user.detail[0].notificaciones.push({
+          ruta: '/diario/entrada/' + this.infoEntrada.ruta,
+          descripcion: 'Tu entrada en el diario recibió un comentario.'
+        });
+        this.usuarios.updateNotificaciones(this.infoEntrada.idPersona, { notificaciones: user.detail[0].notificaciones }).subscribe(res => { });
+      });
+      //
+
+
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaForm.setValue({
         respuesta: ' '
       });
     });
-  }
-
-  navegarCat() {
-    if (this.infoEntrada.categoria == 'Tecnología') {
-      this.router.navigate(['/comunidad/tecnologia']);
-    } else {
-      this.router.navigate(['/comunidad/idiomas']);
-    }
   }
 
   setDetalles(detalles) {
@@ -181,6 +186,31 @@ export class DiarioEntradaComponent implements OnInit {
     });
 
     this.diario.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoEntrada.respuestas }).subscribe(res => {
+      var notificados = [parseInt(localStorage.getItem('userid')), this.infoEntrada.idPersona];
+      if (!notificados.includes(this.infoEntrada.respuestas[i].idPersona)) notificados.push(this.infoEntrada.respuestas[i].idPersona);
+      this.infoEntrada.respuestas[i].respuestas.forEach(respuesta => {
+        if (!notificados.includes(respuesta.idPersona)) notificados.push(respuesta.idPersona);
+      });
+      notificados.splice(0, 1);
+      notificados.forEach(id => {
+        //Notificar
+        this.usuarios.getUser(id).subscribe((user: any) => {
+          var desc = '';
+          if (id == this.infoEntrada.idPersona) {
+            desc = 'Tu entrada en el diario recibió una respuesta de comentario.';
+          } else if (id == this.infoEntrada.respuestas[i].idPersona) {
+            desc = 'Recibiste una respuesta en tu comentario.';
+          } else {
+            desc = 'Alguien más respondió un comentario.';
+          }
+          user.detail[0].notificaciones.push({
+            ruta: '/diario/entrada/' + this.infoEntrada.ruta,
+            descripcion: desc
+          });
+          this.usuarios.updateNotificaciones(id, { notificaciones: user.detail[0].notificaciones }).subscribe(res => { });
+        });
+        //
+      });
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
       this.responderIndex = -1;

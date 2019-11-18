@@ -42,7 +42,7 @@ export class CuentaComponent implements OnInit {
   }
 
   inicializar(id) {
-    this.usuario.getId(id).subscribe((res: any) => {
+    this.usuario.getUser(id).subscribe((res: any) => {
       this.persona.credencial = res.detail[0].credencial;
       this.hash = this.persona.credencial.contraseña;
       this.correoForm.setValue({

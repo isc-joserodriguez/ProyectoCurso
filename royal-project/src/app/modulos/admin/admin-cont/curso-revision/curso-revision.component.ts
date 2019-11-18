@@ -11,6 +11,7 @@ declare let videojs: any;
   styleUrls: ['./curso-revision.component.scss']
 })
 export class CursoRevisionComponent implements OnInit, OnDestroy {
+  royal = true;
   infoCurso = {
     nombreCompleto: '',
     precio: 0,
@@ -21,7 +22,8 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
     inscritos: 0,
     objetivos: [],
     contenidoCurso: [{}],
-    notas: ''
+    notas: '',
+    royal: false
   };
   infoMaestro = {
     foto: '',
@@ -35,7 +37,8 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.revisionForm = this.formBuilder.group({
       precio: ['', Validators.required],
-      notas: ['', Validators.required]
+      notas: ['', Validators.required],
+      royal: [false]
     });
     this.getInfoCurso(this.route.snapshot.params.id);
   }
@@ -45,6 +48,7 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
   }
   getInfoCurso(id) {
     this.curso.getCursoInfo(id).subscribe((curso: any) => {
+      this.infoCurso.royal = curso.detail[0].royal;
       this.infoCurso.nombreCompleto = curso.detail[0].nombreCompleto;
       this.infoCurso.precio = curso.detail[0].precio;
       this.infoCurso.introduccionVideo = curso.detail[0].introduccionVideo;
@@ -72,7 +76,6 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
   }
   getInfoMaestro(id) {
     this.usuarios.getUser(id).subscribe((usuario: any) => {
-      console.log(usuario.detail[0]);
       this.infoMaestro.cursoMaestro = usuario.detail[0].cursoMaestro;
       this.infoMaestro.id = usuario.detail[0]._id;
       this.infoMaestro.foto = usuario.detail[0].foto;
@@ -81,20 +84,36 @@ export class CursoRevisionComponent implements OnInit, OnDestroy {
     });
   }
   aceptarCurso() {
-    const estatus = { estado: 2, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio };
+    const estatus = { estado: 2, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio, royal: this.revisionForm.value.royal };
     this.curso.updateEstado(this.route.snapshot.params.id, estatus).subscribe(res => {
       this.infoMaestro.cursoMaestro.push({
         ruta: this.route.snapshot.params.id
       });
       this.usuarios.updateCursosMaestro(this.infoMaestro.id, { cursoMaestro: this.infoMaestro.cursoMaestro }).subscribe(res => {
-        this.router.navigate(['/admin/cursos']);
+        this.usuarios.getUser(this.infoMaestro.id).subscribe((user: any) => {
+          user.detail[0].notificaciones.push({
+            ruta: '/maestro/perfil/estado-cursos',
+            descripcion: 'Curso aceptado: ' + this.infoCurso.nombreCompleto + '.'
+          });
+          this.usuarios.updateNotificaciones(this.infoMaestro.id, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+            this.router.navigate(['/admin/cursos']);
+          });
+        });
       });
     });
   }
   rechazarCurso() {
-    const estatus = { estado: 3, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio };
+    const estatus = { estado: 3, notas: this.revisionForm.value.notas, precio: this.revisionForm.value.precio, royal: this.revisionForm.value.royal };
     this.curso.updateEstado(this.route.snapshot.params.id, estatus).subscribe(res => {
-      this.router.navigate(['/admin/cursos']);
+      this.usuarios.getUser(this.infoMaestro.id).subscribe((user: any) => {
+        user.detail[0].notificaciones.push({
+          ruta: '/maestro/perfil/estado-cursos',
+          descripcion: 'Curso rechazado: ' + this.infoCurso.nombreCompleto + '.'
+        });
+        this.usuarios.updateNotificaciones(this.infoMaestro.id, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+          this.router.navigate(['/admin/cursos']);
+        });
+      });
     });
   }
 

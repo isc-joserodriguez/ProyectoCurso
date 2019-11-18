@@ -446,9 +446,24 @@ export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     this.cursos.agregarComentario(this.route.snapshot.params.id, { contenidoCurso: this.temario }).subscribe(res => {
-      this.infoCurso(this.route.snapshot.params.id);
-      this.respuestaCom = '';
-      this.responderIndex = -1;
+      var unidad = this.route.snapshot.params.unidad;
+      var subtema = this.route.snapshot.params.subtema;
+      var clase = this.route.snapshot.params.clase;
+      var curso = this.route.snapshot.params.id;
+
+      this.nwInfoCurso.alumnosInscritos.forEach(id => {
+        this.usuarios.getUser(id.idAlumno).subscribe((user: any) => {
+          user.detail[0].notificaciones.push({
+            ruta: '/curso/' + curso + '/clase/' + unidad + '/' + subtema + '/' + clase,
+            descripcion: 'Maestro respondió un comentario.'
+          });
+          this.usuarios.updateNotificaciones(id.idAlumno, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+            this.infoCurso(this.route.snapshot.params.id);
+            this.respuestaCom = '';
+            this.responderIndex = -1;
+          });
+        });
+      });
     });
   }
 

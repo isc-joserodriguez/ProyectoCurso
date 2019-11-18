@@ -36,7 +36,6 @@ export class PerfilMaestroComponent implements OnInit {
   getUsuario(id) {
     this.usuarios.getUserByRute(id).subscribe((maestro: any) => {
       this.infoMaestro = maestro.detail[0];
-      console.log(this.infoMaestro);
       this.infoMaestro.cursoMaestro.forEach(curso => {
         this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo: any) => {
           if (cursoInfo.detail[0].categoria == 'Tecnología') {

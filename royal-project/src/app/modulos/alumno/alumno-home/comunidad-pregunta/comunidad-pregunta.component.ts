@@ -193,6 +193,24 @@ export class ComunidadPreguntaComponent implements OnInit {
     });
 
     this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
+      if (parseInt(localStorage.getItem('userid')) != this.infoPregunta.idPersona) {
+        //Notificar
+        this.usuarios.getUser(this.infoPregunta.idPersona).subscribe((user: any) => {
+          user.detail[0].notificaciones.push({
+            ruta: '/comunidad/pregunta/' + this.infoPregunta.ruta,
+            descripcion: 'Tu pregunta recibió un comentario.'
+          });
+          this.usuarios.updateNotificaciones(this.infoPregunta.idPersona, { notificaciones: user.detail[0].notificaciones }).subscribe(res => { });
+        });
+        //
+      }
+
+
+
+      this.usuarios.getUser(localStorage.getItem('userid')).subscribe((info: any) => {
+        info.detail[0].puntaje = info.detail[0].puntaje + 5;
+        this.usuarios.updatePuntaje(localStorage.getItem('userid'), { puntaje: info.detail[0].puntaje }).subscribe(res => { });
+      });
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaForm.setValue({
         respuesta: ' '
@@ -225,6 +243,39 @@ export class ComunidadPreguntaComponent implements OnInit {
     });
 
     this.comunidad.agregarRespuesta(this.route.snapshot.params.ruta, { respuestas: this.infoPregunta.respuestas }).subscribe(res => {
+      var notificados = [parseInt(localStorage.getItem('userid')), this.infoPregunta.idPersona];
+      if (!notificados.includes(this.infoPregunta.respuestas[i].idPersona)) notificados.push(this.infoPregunta.respuestas[i].idPersona);
+      this.infoPregunta.respuestas[i].respuestas.forEach(respuesta => {
+        if (!notificados.includes(respuesta.idPersona)) notificados.push(respuesta.idPersona);
+      });
+      notificados.splice(0, 1);
+      notificados.forEach(id => {
+        //Notificar
+        this.usuarios.getUser(id).subscribe((user: any) => {
+          var desc = '';
+          if (id == this.infoPregunta.idPersona) {
+            desc = 'Tu pregunta recibió una respuesta de comentario.';
+          } else if (id == this.infoPregunta.respuestas[i].idPersona) {
+            desc = 'Recibiste una respuesta en tu comentario.';
+          } else {
+            desc = 'Alguien más respondió un comentario.';
+          }
+          user.detail[0].notificaciones.push({
+            ruta: '/comunidad/pregunta/' + this.infoPregunta.ruta,
+            descripcion: desc
+          });
+          this.usuarios.updateNotificaciones(id, { notificaciones: user.detail[0].notificaciones }).subscribe(res => {
+            this.usuarios.getUser(localStorage.getItem('userid')).subscribe((info: any) => {
+              info.detail[0].puntaje = info.detail[0].puntaje + 5;
+              this.usuarios.updatePuntaje(localStorage.getItem('userid'), { puntaje: info.detail[0].puntaje }).subscribe(res => { });
+            });
+          });
+        });
+        //
+      });
+
+
+
       this.getPregunta(this.route.snapshot.params.ruta);
       this.respuestaCom = '';
       this.responderIndex = -1;
@@ -261,7 +312,6 @@ export class ComunidadPreguntaComponent implements OnInit {
   }
 
   reportarEntrada() {
-    console.log(this.infoPregunta);
     this.infoPregunta.reportes.push({
       tipo: 0,
       idReporta: localStorage.getItem('userid')

@@ -204,11 +204,13 @@ const updateEstado = (req, res) => {
     const notas = req.body.notas;
     const estado = req.body.estado;
     const precio = req.body.precio;
+    const royal = req.body.royal;
     _curso.update({ ruta: ruta }, {
         $set: {
             notas: notas,
             estado: estado,
-            precio: precio
+            precio: precio,
+            royal: royal
         }
     }).then(data => {
         res.status(200);
