@@ -20,9 +20,16 @@
             <div class="col-md-3">
               <img [src]="curso.imagen" class="card-img">
             </div>
-            <div class="col-md-9 descri">
+            <div class="col-md-9 fondocarrusel">
               <div class="card-body">
-                <h5 class="card-title mb-4 negrita">{{curso.nombreCompleto}}</h5>
+                <div class="row">
+                  <div class="col-md-8 vertical-center">
+                    <h5 class="card-title mb-0 negrita">{{curso.nombreCompleto}}</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true" class="pb-3"></bar-rating>
+                  </div>
+                </div>
                 <div class=" p-3">{{curso.descripcionCurso}}</div>
                 <br>
                 <div class="row justify-content-between">
@@ -30,7 +37,8 @@
                     <p class="preciocar">${{curso.precio}}</p>
                   </div>
                   <div class="col-md-4">
-                    <button type="button" class="btn colorbtn btn-lg" [routerLink]="['/curso',curso.ruta,'vista']">Ir al
+                    <button type="button" class="btn colorbtn btn-lg" [routerLink]="['/curso',curso.ruta,'vista']">Ir
+                      al
                       curso</button>
                   </div>
                 </div>
@@ -81,15 +89,22 @@
           <div class="card mb-12">
             <div class="row no-gutters">
               <div class="col-md-2">
-                <img [src]="curso.imagen" class="card-img">
+                <img [src]="curso.imagen" class="card-img m-2 sombrabaja redondear">
               </div>
               <div class="col-md-10">
-                <div class="card-body">
-                  <h5 class="card-title">{{curso.descripcionCurso}}</h5>
-                  <p class="card-text">{{curso.subcategoria}}</p>
+                <div class="card-body ml-3">
+                  <h5 class="card-title mb-0">{{curso.descripcionCurso}}</h5>
+                  <div class="row">
+                    <div class="col-md-4 vertical-center">
+                      <p class="card-text">{{curso.subcategoria}}</p>
+                    </div>
+                    <div class="col-md-8">
+                      <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true"></bar-rating>
+                    </div>
+                  </div>
                   <div class="row justify-content-between">
                     <div class="col-4">
-                      <p class="card-title">${{curso.precio}}</p>
+                      <p class="card-title preciochico">${{curso.precio}}</p>
                     </div>
                     <div class="col-4">
                       <a class="btn colorbtn" [routerLink]="['/curso',curso.ruta,'vista']">Ir al curso</a>

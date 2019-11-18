@@ -25,7 +25,7 @@
                 <img [src]="curso.imagen" class="card-img m-2 sombrabaja redondear">
               </div>
               <div class="col-md-10">
-                <div class="card-body">
+                <div class="card-body ml-3">
                   <h5 class="card-title row">
                     <div class="col-md-10">
                       {{curso.descripcionCurso}}
@@ -37,13 +37,20 @@
                       </div>
                     </div>
                   </h5>
-                  <p class="card-text">{{curso.subcategoria}}</p>
+                  <div class="row">
+                    <div class="col-md-4 pt-2">
+                      <p class="card-text">{{curso.subcategoria}}</p>
+                    </div>
+                    <div class="col-md-8">
+                      <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true"></bar-rating>
+                    </div>
+                  </div>
                   <div class="row justify-content-between">
                     <div class="col-4">
                       <p class="card-title">${{curso.precio}}</p>
                     </div>
                     <div class="col-4">
-                      <a class="btn btn-primary" [routerLink]="['/curso',curso.ruta,'vista']">Ir al curso</a>
+                      <a class="btn btn-success" [routerLink]="['/curso',curso.ruta,'vista']">Ir al curso</a>
                     </div>
                   </div>
                 </div>

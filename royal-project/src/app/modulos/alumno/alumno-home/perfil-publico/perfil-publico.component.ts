@@ -68,24 +68,7 @@ export class PerfilPublicoComponent implements OnInit {
             url: certificado.url
           });
         });
-        this.certificados = [{
-          nombreCurso: "matematicas",
-          imagen: 'http://www.lorempixel.com/200/200',
-          fecha: '12/12/1994',
-          url: 'aaaaaa'
-        },
-        {
-          nombreCurso: "matematicasatematicas",
-          imagen: 'http://www.lorempixel.com/200/200',
-          fecha: '12/12/1994',
-          url: 'aaaaaa'
-        },
-        {
-          nombreCurso: "matematicas",
-          imagen: 'http://www.lorempixel.com/200/200',
-          fecha: '12/12/1994',
-          url: 'aaaaaa'
-        }]
+
 
       });
 
@@ -95,5 +78,29 @@ export class PerfilPublicoComponent implements OnInit {
 
 
     });
+    this.certificados = [{
+      nombreCurso: "matematicas",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    },
+    {
+      nombreCurso: "matematicasatematicas",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    },
+    {
+      nombreCurso: "matematicas",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    },
+    {
+      nombreCurso: "matematicasatematicas3",
+      imagen: 'http://www.lorempixel.com/200/200',
+      fecha: '12/12/1994',
+      url: 'aaaaaa'
+    }]
   }
 }

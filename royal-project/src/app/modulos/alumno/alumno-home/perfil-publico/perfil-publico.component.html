@@ -135,12 +135,13 @@
               Certificados
             </div>
             <div class="card-body descri">
-              <div class="row" *ngFor="let certificado of certificados">
-                <div class="card mb-3 mx-3" style="max-width: 350px;">
+              <div class="row justify-content-center container">
+                <div class="card col-md-4 mx-3 mb-3 descri" style="max-width: 350px;"
+                  *ngFor="let certificado of certificados">
                   <div class="row no-gutters">
                     <div class="col-md-4 vertical-center">
-                      <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:100px; height:100px;">
-                        <img [src]="certificado.imagen" width="100" height="100">
+                      <div class="imgLiquidFill imgLiquid card-img pl-2" style="width:80px; height:80px;">
+                        <img [src]="certificado.imagen" width="80" height="80" class="card-img sombrabaja">
                       </div>
                     </div>
                     <div class="col-md-8 ">
