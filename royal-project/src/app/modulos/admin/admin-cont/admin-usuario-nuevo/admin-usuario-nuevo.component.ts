@@ -59,7 +59,6 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     this.persona.credencial.contraseña = this.altaForm.value.altaNombre.substring(0, 2) +
       this.altaForm.value.altaApPaterno.substring(0, 2) + this.persona.fechaNac.replace(/-/g, '');
 
-    console.log(this.persona.credencial.contraseña);
     this.persona.nombre = this.altaForm.value.altaNombre;
     this.persona.apPaterno = this.altaForm.value.altaApPaterno;
     this.persona.apMaterno = this.altaForm.value.altaApMaterno;
