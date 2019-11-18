@@ -30,23 +30,23 @@ export class NavAdministradorComponent implements OnInit {
   }
 
   verificarToken() {
-    this.auth.infoUser(localStorage.getItem('token')).subscribe((res: any) => {
-      if (res.detail.token != undefined) {
-        this.logout();
-      } else if (res.detail.tipo[1].coord != undefined) {
-        this.router.navigate(['/coord/']);
-      } else if (res.detail.tipo[2].maestro != undefined) {
-        this.router.navigate(['/maestro/']);
-      } else if (res.detail.tipo[3].alumno != undefined) {
-        this.router.navigate(['/']);
-      }
-      this.usuario = res.detail.nombre;
-      this.sexo = res.detail.sexo;
-      localStorage.setItem('userid', res.detail.id);
-      
-    }, err => {
-      console.log(err);
-    });
+    if (localStorage.getItem('token') == null) {
+      this.router.navigate(['/']);
+    } else {
+      this.auth.infoUser(localStorage.getItem('token')).subscribe((res: any) => {
+        if (res.detail.token != undefined) {
+          this.logout();
+        } else if (res.detail.tipo[2].maestro != undefined) {
+          this.router.navigate(['/maestro/']);
+        } else if (res.detail.tipo[3].alumno != undefined) {
+          this.router.navigate(['/']);
+        }
+        this.usuario = res.detail.nombre;
+        this.sexo = res.detail.sexo;
+        localStorage.setItem('userid', res.detail.id);
+
+      });
+    }
   }
 
   logout() {

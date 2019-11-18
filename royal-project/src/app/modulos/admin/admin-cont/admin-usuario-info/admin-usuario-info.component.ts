@@ -11,6 +11,8 @@ export class AdminUsuarioInfoComponent implements OnInit {
   tempCoord = true;
   permisoUsuario = 0;
 
+  permitir = false;
+
   usuario = {
     id: 1,
     credencial: { correo: '', contraseña: '' },
@@ -27,6 +29,7 @@ export class AdminUsuarioInfoComponent implements OnInit {
   }
   getUsuario(id) {
     this.usuarios.getUser(id).subscribe((resp: any) => {
+      if (resp.detail[0].tipo[0].admin != null || resp.detail[0].tipo[1].coord != null) this.permitir = true;
       this.usuario.tipo = resp.detail[0].tipo;
 
       this.permisoUsuario = this.usuario.tipo[0].admin == true ? 0 : 1;

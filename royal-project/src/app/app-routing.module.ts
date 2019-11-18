@@ -4,7 +4,6 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
-import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.component';
 import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuario-desactivado.component';
 
 
@@ -36,16 +35,6 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './modulos/admin/admin.module#AdminModule'
-      }
-    ]
-  },
-  {
-    path: 'coord',
-    component: NavCoordinadorComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './modulos/coord/coord.module#CoordModule'
       }
     ]
   },

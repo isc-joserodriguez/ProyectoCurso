@@ -148,10 +148,8 @@ export class NavAlumnoComponent implements OnInit {
         localStorage.setItem('userid', res.detail.id);
         if (res.detail.token != undefined) {
           this.logout();
-        } else if (res.detail.tipo[0].admin != undefined) {
+        } else if (res.detail.tipo[0].admin != undefined || res.detail.tipo[1].coord != undefined) {
           this.router.navigate(['/admin/']);
-        } else if (res.detail.tipo[1].coord != undefined) {
-          this.router.navigate(['/coord/']);
         } else if (res.detail.tipo[2].maestro != undefined) {
           if (!res.detail.tipo[2].maestro) {
             this.router.navigate(['/usuario-inhabilitado']);

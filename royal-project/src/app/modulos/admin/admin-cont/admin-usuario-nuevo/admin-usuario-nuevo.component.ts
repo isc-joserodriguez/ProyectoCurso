@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 
 // Convertidor fecha
 import { DateConvert } from 'src/app/helper/date.convert';
+import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 @Component({
   selector: 'app-admin-usuario-nuevo',
@@ -29,9 +30,14 @@ export class AdminUsuarioNuevoComponent implements OnInit {
 
   archivopath = 'Elige un Archivo';
 
-  constructor(private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
+  admin = false;
+
+  constructor(private usuarios: UsuariosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usr: any) => {
+      this.admin = (usr.detail[0].tipo[0].admin == null) ? false : true;
+    });
     this.altaForm = this.formBuilder.group({
       altaNombre: ['', Validators.required],
       altaApPaterno: ['', Validators.required],
@@ -52,6 +58,8 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     this.persona.credencial.correo = this.altaForm.value.altaCorreo;
     this.persona.credencial.contraseña = this.altaForm.value.altaNombre.substring(0, 2) +
       this.altaForm.value.altaApPaterno.substring(0, 2) + this.persona.fechaNac.replace(/-/g, '');
+
+    console.log(this.persona.credencial.contraseña);
     this.persona.nombre = this.altaForm.value.altaNombre;
     this.persona.apPaterno = this.altaForm.value.altaApPaterno;
     this.persona.apMaterno = this.altaForm.value.altaApMaterno;

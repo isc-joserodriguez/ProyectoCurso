@@ -79,8 +79,8 @@
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Rol de Usuario:</mat-label>
               <select matNativeControl required formControlName="altaRol">
-                <option value="0">Administrador</option>
-                <option value="1">Coordinador</option>
+                <option value="0" *ngIf="admin">Administrador</option>
+                <option value="1" *ngIf="admin">Coordinador</option>
                 <option value="2">Maestro</option>
                 <option value="3">Alumno</option>
               </select>
