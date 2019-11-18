@@ -110,50 +110,52 @@
   <p class="h3 font-weight-bold text-center bg-warning text-dark mt-2">COMUNIDADES MÁS ACTIVAS</p> <br>
 </div>
 <br>
-<div class="row mx-0 fondocarrusel">
+<div class="row mx-0 fondocarrusel py-3">
   <div class="col-md-6 mb-3 divisorright">
     <div class="container text-center">
       <h4>Diario</h4>
     </div>
     <br>
-    <mat-card>
-      <table mat-table [dataSource]="dataSourceDiario" class="bordercolor">
+    <div class="container">
+      <mat-card>
+        <table mat-table [dataSource]="dataSourceDiario" class="bordercolor">
 
-        <!-- Columna Lugar -->
-        <ng-container matColumnDef="icon">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ° </th>
-          <td mat-cell *matCellDef="let row;let i=index">
-            <img *ngIf="(i==0)" class="icon-opcion" src="./../../../../assets/icons/oro.svg"> <!-- Oro -->
-            <img *ngIf="(i==1)" class="icon-opcion" src="./../../../../assets/icons/plata.svg"> <!-- Plata -->
-            <img *ngIf="(i==2)" class="icon-opcion" src="./../../../../assets/icons/bronce.svg"> <!-- Bronce -->
-            <span *ngIf="(i>2)">{{i+1}}°</span>
-          </td>
-        </ng-container>
+          <!-- Columna Lugar -->
+          <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ° </th>
+            <td mat-cell *matCellDef="let row;let i=index">
+              <img *ngIf="(i==0)" class="icon-opcion" src="./../../../../assets/icons/oro.svg"> <!-- Oro -->
+              <img *ngIf="(i==1)" class="icon-opcion" src="./../../../../assets/icons/plata.svg"> <!-- Plata -->
+              <img *ngIf="(i==2)" class="icon-opcion" src="./../../../../assets/icons/bronce.svg"> <!-- Bronce -->
+              <span *ngIf="(i>2)">{{i+1}}°</span>
+            </td>
+          </ng-container>
 
-        <!-- Columna Nombre Categoria -->
-        <ng-container matColumnDef="categoria">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
-          <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
-        </ng-container>
+          <!-- Columna Nombre Categoria -->
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
+            <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
+          </ng-container>
 
-        <!-- Columna Fecha -->
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima pregunta </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
-        </ng-container>
+          <!-- Columna Fecha -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima pregunta </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
+          </ng-container>
 
-        <!-- Columna Num -->
-        <ng-container matColumnDef="conteo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-          <td mat-cell *matCellDef="let row">{{row.conteo}}</td>
-        </ng-container>
+          <!-- Columna Num -->
+          <ng-container matColumnDef="conteo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+            <td mat-cell *matCellDef="let row">{{row.conteo}}</td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="colDiario"></tr>
-        <tr mat-row *matRowDef="let row; columns: colDiario;">
-        </tr>
-      </table>
-    </mat-card>
-    <div class="col-md-12 text-right pr-2">
+          <tr mat-header-row *matHeaderRowDef="colDiario"></tr>
+          <tr mat-row *matRowDef="let row; columns: colDiario;">
+          </tr>
+        </table>
+      </mat-card>
+    </div>
+    <div class="col-md-12 text-right pr-2 mt-2">
       <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/diario/entradas']">Ver más
         entradas...</button>
     </div>
@@ -164,45 +166,47 @@
       <h4>Preguntas</h4>
     </div>
     <br>
-    <mat-card>
-      <table mat-table [dataSource]="dataSourcePreguntas">
+    <div class="container">
+      <mat-card>
+        <table mat-table [dataSource]="dataSourcePreguntas">
 
-        <!-- Columna Lugar -->
-        <ng-container matColumnDef="icon">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ° </th>
-          <td mat-cell *matCellDef="let row;let i=index">
-            <img *ngIf="(i==0)" class="icon-opcion" src="./../../../../assets/icons/oro.svg"> <!-- Oro -->
-            <img *ngIf="(i==1)" class="icon-opcion" src="./../../../../assets/icons/plata.svg"> <!-- Plata -->
-          </td>
-        </ng-container>
+          <!-- Columna Lugar -->
+          <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ° </th>
+            <td mat-cell *matCellDef="let row;let i=index">
+              <img *ngIf="(i==0)" class="icon-opcion" src="./../../../../assets/icons/oro.svg"> <!-- Oro -->
+              <img *ngIf="(i==1)" class="icon-opcion" src="./../../../../assets/icons/plata.svg"> <!-- Plata -->
+            </td>
+          </ng-container>
 
-        <!-- Columna Nombre Categoria -->
-        <ng-container matColumnDef="categoria">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
-          <td mat-cell *matCellDef="let row">
-            <a *ngIf="row.categoria=='tecnologia'" [routerLink]="['/comunidad/tecnologia']">Tecnología</a>
-            <a *ngIf="row.categoria!='tecnologia'" [routerLink]="['/comunidad/idiomas']">Idiomas</a>
-            {{row.categoria}}
-          </td>
-        </ng-container>
+          <!-- Columna Nombre Categoria -->
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
+            <td mat-cell *matCellDef="let row">
+              <a *ngIf="row.categoria=='tecnologia'" [routerLink]="['/comunidad/tecnologia']">Tecnología</a>
+              <a *ngIf="row.categoria!='tecnologia'" [routerLink]="['/comunidad/idiomas']">Idiomas</a>
+              {{row.categoria}}
+            </td>
+          </ng-container>
 
-        <!-- Columna Fecha -->
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima pregunta </th>
-          <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
-        </ng-container>
+          <!-- Columna Fecha -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultima pregunta </th>
+            <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
+          </ng-container>
 
-        <!-- Columna Num -->
-        <ng-container matColumnDef="conteo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-          <td mat-cell *matCellDef="let row">{{row.conteo}}</td>
-        </ng-container>
+          <!-- Columna Num -->
+          <ng-container matColumnDef="conteo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+            <td mat-cell *matCellDef="let row">{{row.conteo}}</td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="colPreguntas"></tr>
-        <tr mat-row *matRowDef="let row; columns: colPreguntas;">
-        </tr>
-      </table>
-    </mat-card>
+          <tr mat-header-row *matHeaderRowDef="colPreguntas"></tr>
+          <tr mat-row *matRowDef="let row; columns: colPreguntas;">
+          </tr>
+        </table>
+      </mat-card>
+    </div>
   </div>
 </div>
 
