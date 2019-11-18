@@ -163,6 +163,9 @@
           <button mat-menu-item [routerLink]="['/perfil/certificados']">
             <i class="fas fa-award"></i> Certificados
           </button>
+          <button mat-menu-item [routerLink]="['/perfil/insignias']">
+            <i class="fas fa-award"></i> Insignias
+          </button>
           <!-- <button mat-menu-item [routerLink]="['/maestro']">
             <i class="fas fa-chalkboard-teacher"></i> Modo Maestro
           </button> -->
@@ -191,8 +194,8 @@
 </header>
 
 <!--Modal Login-->
-<div class="modal fade ventana-modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal"
-  aria-hidden="true">
+<div class="modal fade ventana-modal" #loginModal id="loginModal" tabindex="-1" role="dialog"
+  aria-labelledby="loginModal" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -202,7 +205,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="text-center" [formGroup]="logForm">
+        <form class="text-center" [formGroup]="logForm" *ngIf="!correcto">
           <mat-form-field class="field-login">
             <input matInput placeholder="Correo" formControlName="logCorreo">
             <mat-error>
@@ -217,12 +220,17 @@
                 contraseña</span>
             </mat-error>
           </mat-form-field>
-          <a href="#">¡Olvidé mi contraseña!</a>
-          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" [disabled]="!logForm.valid"
-            (click)="login()">Inicia sesión</button>
+          <button type="button" class="btn btn-success btn-sm" [disabled]="!logForm.valid" (click)="login()">Inicia
+            sesión</button>
+          <mat-error *ngIf="passErr">Contraseña incorrecta.</mat-error>
         </form>
+        <div *ngIf="correcto">
+          <h2>Iniciaste sesión correctamente</h2>
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal"
+            (click)="ngOnInit()">Continuar</button>
+        </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" *ngIf="!correcto">
         ¿Aún no tienes cuenta? <span><button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
             data-toggle="modal" data-target="#regModal">Regístrate</button></span>
       </div>
