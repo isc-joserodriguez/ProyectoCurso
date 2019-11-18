@@ -1,7 +1,7 @@
 let _curso;
 
 const getAll = (req, res) => {
-    _curso.find({}.sort({ royal: -1 }))
+    _curso.find({}).sort({ royal: -1 })
         .then(cursos => {
             res.status(200);
             res.json({
