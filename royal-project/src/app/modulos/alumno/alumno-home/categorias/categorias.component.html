@@ -27,7 +27,7 @@
                     <h5 class="card-title mb-0 negrita">{{curso.nombreCompleto}}</h5>
                   </div>
                   <div class="col-md-4">
-                    <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true" class="pb-3"></bar-rating>
+                    <bar-rating [(rate)]="curso.valoraciones" [max]="5" [readOnly]="true" class="pb-3"></bar-rating>
                   </div>
                 </div>
                 <div class=" p-3">{{curso.descripcionCurso}}</div>
@@ -109,7 +109,7 @@
                       <p class="card-text">{{curso.subcategoria}}</p>
                     </div>
                     <div class="col-md-8">
-                      <bar-rating [(rate)]="ratingGeneral" [max]="5" [readOnly]="true"></bar-rating>
+                      <bar-rating [(rate)]="curso.valoraciones" [max]="5" [readOnly]="true"></bar-rating>
                     </div>
                   </div>
                   <div class="row justify-content-between">

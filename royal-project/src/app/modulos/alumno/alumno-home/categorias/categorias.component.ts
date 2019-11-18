@@ -34,6 +34,7 @@ export class CategoriasComponent implements OnInit {
     this.cursos.getSubcategorias().subscribe((res: any) => {
       res.detail.forEach(e => {
         if (e.categoria == this.primeraMay(cat)) {
+          e.valoraciones = this.getPromedio(e.valoraciones);
           this.listaCursos.push(e);
           this.cursosFiltrados.push(e);
           this.subcategorias.push(e.subcategoria)
@@ -45,6 +46,14 @@ export class CategoriasComponent implements OnInit {
       });
       this.subcategorias = a;
     });
+  }
+
+  getPromedio(valoraciones) {
+    var suma = 0;
+    valoraciones.forEach(val => {
+      suma = suma + val.puntuacion;
+    });
+    return Math.round(suma / valoraciones.length)
   }
 
   primeraMay(cad) {

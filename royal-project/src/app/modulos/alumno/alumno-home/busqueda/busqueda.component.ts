@@ -25,10 +25,18 @@ export class BusquedaComponent implements OnInit {
     const buscar = busqueda.replace(/-/g, ' ');
     this.cursos.getBusqueda(buscar).subscribe((res: any) => {
       res.detail.forEach(e => {
+        e.valoraciones = this.getPromedio(e.valoraciones);
         this.listaCursos.push(e);
       });
-
     });
+  }
+
+  getPromedio(valoraciones) {
+    var suma = 0;
+    valoraciones.forEach(val => {
+      suma = suma + val.puntuacion;
+    });
+    return Math.round(suma / valoraciones.length)
   }
 
   primeraMay(cad) {
