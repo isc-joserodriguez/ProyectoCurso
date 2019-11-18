@@ -24,7 +24,7 @@ export class ConfigUnidadComponent implements OnInit {
   }
 
   infoCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe((res:any) => {
+    this.cursos.getCursoInfo(id).subscribe((res: any) => {
       this.temario = res.detail[0].contenidoCurso;
       const i = this.route.snapshot.params.unidad - 1;
       this.nombreUnidad = this.temario[i].unidad;
@@ -43,7 +43,8 @@ export class ConfigUnidadComponent implements OnInit {
             tarea: [clases.tarea],
             texto: [clases.texto],
             tipoPlantilla: [clases.tipoPlantilla],
-            video: [clases.video]
+            video: [clases.video],
+            evaluacion: [clases.evaluacion]
           });
           ((this.subtemasForm.get('subtemas') as FormArray).controls[j].get('clases') as FormArray).push(claseFormGroup);
         });
@@ -78,7 +79,8 @@ export class ConfigUnidadComponent implements OnInit {
       tarea: [{}],
       texto: [''],
       tipoPlantilla: [0],
-      video: ['http://vjs.zencdn.net/v/oceans.mp4']
+      video: ['http://vjs.zencdn.net/v/oceans.mp4'],
+      evaluacion: [false]
     });
     ((this.subtemasForm.get('subtemas') as FormArray).controls[i].get('clases') as FormArray).push(claseFormGroup);
   }

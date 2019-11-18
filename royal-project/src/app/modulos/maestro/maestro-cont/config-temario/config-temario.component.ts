@@ -50,7 +50,8 @@ export class ConfigTemarioComponent implements OnInit {
               tarea: [clases.tarea],
               texto: [clases.texto],
               tipoPlantilla: [clases.tipoPlantilla],
-              video: [clases.video]
+              video: [clases.video],
+              evaluacion:[clases.evaluacion]
             });
             (((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray).push(claseFormGroup);
           });
@@ -84,7 +85,8 @@ export class ConfigTemarioComponent implements OnInit {
       tarea: [{}],
       texto: [''],
       tipoPlantilla: [0],
-      video: ['http://vjs.zencdn.net/v/oceans.mp4']
+      video: ['http://vjs.zencdn.net/v/oceans.mp4'],
+      evaluacion:[false]
     });
     (((this.temarioForm.get('unidades') as FormArray).controls[i].get('subtemas') as FormArray).controls[j].get('clases') as FormArray).push(claseFormGroup);
   }

@@ -25,7 +25,7 @@ export class ConfigSubtemaComponent implements OnInit {
   }
 
   infoCurso(id) {
-    this.cursos.getCursoInfo(id).subscribe((res:any) => {
+    this.cursos.getCursoInfo(id).subscribe((res: any) => {
       this.temario = res.detail[0].contenidoCurso;
       this.nombreSubtema = this.temario[this.unidad - 1].subtemas[this.subtema - 1].subtema;
 
@@ -37,7 +37,8 @@ export class ConfigSubtemaComponent implements OnInit {
           tarea: [clases.tarea],
           texto: [clases.texto],
           tipoPlantilla: [clases.tipoPlantilla],
-          video: [clases.video]
+          video: [clases.video],
+          evaluacion: [clases.evaluacion]
         });
         (this.clasesForm.get('clases') as FormArray).push(claseFormGroup);
       });
@@ -69,7 +70,8 @@ export class ConfigSubtemaComponent implements OnInit {
       tarea: [{}],
       texto: [''],
       tipoPlantilla: [0],
-      video: ['http://vjs.zencdn.net/v/oceans.mp4']
+      video: ['http://vjs.zencdn.net/v/oceans.mp4'],
+      evaluacion: [false]
     });
     (this.clasesForm.get('clases') as FormArray).push(claseFormGroup);
   }
