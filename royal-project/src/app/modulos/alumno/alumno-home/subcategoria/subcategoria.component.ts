@@ -24,10 +24,18 @@ export class SubcategoriaComponent implements OnInit {
     this.cursos.getSubcategorias().subscribe((res: any) => {
       res.detail.forEach(e => {
         if (e.subcategoria == this.primeraMay(cat)) {
+          e.valoraciones = this.getPromedio(e.valoraciones);
           this.listaCursos.push(e);
         }
       });
     });
+  }
+  getPromedio(valoraciones) {
+    var suma = 0;
+    valoraciones.forEach(val => {
+      suma = suma + val.puntuacion;
+    });
+    return Math.round(suma / valoraciones.length)
   }
 
   primeraMay(cad) {
