@@ -14,7 +14,7 @@
 <div class="col-md-10 container divisor p-0">
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item" *ngFor="let curso of listaCursos; let i=index" [ngClass]="{active: i==0}">
+      <div class="carousel-item" *ngFor="let curso of cursosFiltrados; let i=index" [ngClass]="{active: i==0}">
         <div class="card col-md-12 p-0">
           <div class="row no-gutters">
             <div class="col-md-3">
@@ -73,7 +73,8 @@
       <div class="col-md-2 divisor container ml-5">
         <h5 class="pt-2"><b>Royal Language</b></h5>
         <div class="input-group input-group-sm vertical-center p-0">
-          <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
+          <mat-checkbox (change)="filtrar($event,'filtroPremium')">
+            <img class="icon-check" src="./../../../assets/icons/royal.png">
             <span class="text-check"><b> Royal</b></span></mat-checkbox>
         </div>
         <mat-divider></mat-divider>
@@ -97,7 +98,7 @@
                     <div class="col-md-10">
                       {{curso.descripcionCurso}}
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" *ngIf="curso.royal">
                       <div class="input-group input-group-sm vertical-center fondoroyal sombrabaja text-center">
                         <img class="input-group-prepend icon-check ml-2" src="./../../../assets/icons/royal.png">
                         <p class="input-group-prepend subtitulo mb-0 ml-1">Royal</p>

@@ -10,6 +10,8 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 export class BusquedaComponent implements OnInit {
   p: number = 1;
   listaCursos = [];
+  cursosFiltrados = [];
+  fP = false;
 
   constructor(private route: ActivatedRoute, private cursos: CursosService) { }
 
@@ -17,6 +19,7 @@ export class BusquedaComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.p = 1;
       this.listaCursos = [];
+      this.cursosFiltrados = [];
       this.getCursos(params.get('busqueda'));
     });
   }
@@ -27,6 +30,7 @@ export class BusquedaComponent implements OnInit {
       res.detail.forEach(e => {
         e.valoraciones = this.getPromedio(e.valoraciones);
         this.listaCursos.push(e);
+        this.cursosFiltrados.push(e);
       });
     });
   }
@@ -41,6 +45,20 @@ export class BusquedaComponent implements OnInit {
 
   primeraMay(cad) {
     return cad.charAt(0).toUpperCase() + cad.slice(1);
+  }
+
+  filtrar(event) {
+    this.fP = event.checked;
+    if (this.fP) {
+      this.listaCursos = [];
+      this.cursosFiltrados.forEach(curso => {
+        if (curso.royal) {
+          this.listaCursos.push(curso);
+        }
+      });
+    } else {
+      this.listaCursos = this.cursosFiltrados;
+    }
   }
 
 }

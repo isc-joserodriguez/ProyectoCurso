@@ -1,7 +1,7 @@
 let _curso;
 
 const getAll = (req, res) => {
-    _curso.find({})
+    _curso.find({}.sort({ royal: -1 }))
         .then(cursos => {
             res.status(200);
             res.json({
@@ -59,7 +59,7 @@ const getCursosSolicitudes = (req, res) => {
 };
 
 const getCursosAprobados = (req, res) => {
-    _curso.find({ estado: 2 })
+    _curso.find({ estado: 2 }).sort({ royal: -1 })
         .then(cursos => {
             res.status(200);
             res.json({
@@ -97,8 +97,7 @@ const getCursosRechazados = (req, res) => {
 };
 
 const getSubcategorias = (req, res) => {
-    /* _curso.find({}, { subcategoria: 1, categoria: 1 }).sort({ subcategoria: 1 }) */
-    _curso.find({}).sort({ subcategoria: 1 })
+    _curso.find({}).sort({ royal: -1, subcategoria: 1 })
         .then(cursos => {
             res.status(200);
             res.json({
@@ -117,7 +116,7 @@ const getSubcategorias = (req, res) => {
 };
 
 const getBusqueda = (req, res) => {
-    _curso.find({ nombreCompleto: new RegExp(req.params.busqueda, 'i') })
+    _curso.find({ nombreCompleto: new RegExp(req.params.busqueda, 'i') }).sort({ royal: -1 })
         .then(cursos => {
             res.status(200);
             res.json({
