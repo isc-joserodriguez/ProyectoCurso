@@ -210,7 +210,9 @@
                             </button>
                           </div>
                           <div class="col-md-7">
-                            <a [routerLink]="['/maestro/alumno',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                            <h5 *ngIf="respuesta.maestro">{{respuesta.nombreCompleto}}</h5>
+                            <a *ngIf="!respuesta.maestro"
+                              [routerLink]="['/maestro/alumno/',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
                           </div>
                           <div class="col-md-4 subtitulo text-center" *ngIf="respuesta.maestro">
                             <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
@@ -244,7 +246,9 @@
                                   </button>
                                 </div>
                                 <div class="col-md-7">
-                                  <a [routerLink]="['/maestro/alumno',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                  <h5 *ngIf="resp.maestro">{{resp.nombreCompleto}}</h5>
+                                  <a *ngIf="!resp.maestro"
+                                    [routerLink]="['/maestro/alumno/',resp.ruta]">{{resp.nombreCompleto}}</a>
                                 </div>
                                 <div class="col-md-4 subtitulo text-center" *ngIf="resp.maestro">
                                   <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
