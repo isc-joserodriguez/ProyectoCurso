@@ -17,11 +17,11 @@
         style="font-size:20px;" [routerLink]="['./usuarios']" style="font-size:20px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/usuarios.svg">Usuarios</a>
       <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
-        style="font-size:20px;" [routerLink]="['./pagos']" style="font-size:20px;"> <img class="icon-nav mr-2"
-          src="./../../../assets/icons/pagos.svg">Pagos</a>
+        style="font-size:20px;" [routerLink]="['./pagos']" style="font-size:20px;" *ngIf="admin"> <img
+          class="icon-nav mr-2" src="./../../../assets/icons/pagos.svg">Pagos</a>
       <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
-        style="font-size:20px;" [routerLink]="['./inscripciones']" style="font-size:20px;"> <img class="icon-nav mr-2"
-          src="./../../../assets/icons/registro.svg">Inscripciones</a>
+        style="font-size:20px;" [routerLink]="['./inscripciones']" style="font-size:20px;" *ngIf="admin"> <img
+          class="icon-nav mr-2" src="./../../../assets/icons/registro.svg">Inscripciones</a>
       <a class="list-group-item list-group-item-action btn-outline-dark btn-block text-left mat-elevation-z8"
         style="font-size:20px;" [routerLink]="['./reportes']" style="font-size:20px;"> <img class="icon-nav mr-2"
           src="./../../../assets/icons/reportar.svg">Reportes</a>

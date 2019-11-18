@@ -9,7 +9,7 @@
       <div class="col-md-2 divisor container">
         <h5><b>Royal Language</b></h5>
         <div class="input-group input-group-sm vertical-center">
-          <mat-checkbox><img class="icon-check" src="./../../../assets/icons/royal.png">
+          <mat-checkbox (change)="filtrar($event)"><img class="icon-check" src="./../../../assets/icons/royal.png">
             <span class="text-check">Royal</span></mat-checkbox>
         </div>
 
@@ -30,7 +30,7 @@
                     <div class="col-md-10">
                       {{curso.descripcionCurso}}
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2" *ngIf="curso.royal">
                       <div class="input-group input-group-sm vertical-center fondoroyal sombrabaja text-center">
                         <img class="input-group-prepend icon-check ml-2" src="./../../../assets/icons/royal.png">
                         <p class="input-group-prepend subtitulo mb-0 ml-1">Royal</p>

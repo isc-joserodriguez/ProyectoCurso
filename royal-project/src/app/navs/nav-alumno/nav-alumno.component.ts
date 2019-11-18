@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
@@ -7,12 +7,16 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 
+
 @Component({
   selector: 'app-nav-alumno',
   templateUrl: './nav-alumno.component.html',
   styleUrls: ['./nav-alumno.component.scss']
 })
 export class NavAlumnoComponent implements OnInit {
+  passErr = false;
+  correcto = false;
+
   logForm: FormGroup;
   regForm: FormGroup;
 
@@ -114,9 +118,9 @@ export class NavAlumnoComponent implements OnInit {
     this.persona.credencial.contraseña = this.logForm.value.logContrasenia;
     this.auth.login(this.persona).subscribe((res: any) => {
       localStorage.setItem('token', res.detail);
-      this.ngOnInit();
+      this.correcto = true;
     }, err => {
-      console.log(err);
+      this.passErr = true;
     });
   }
 
@@ -148,10 +152,8 @@ export class NavAlumnoComponent implements OnInit {
         localStorage.setItem('userid', res.detail.id);
         if (res.detail.token != undefined) {
           this.logout();
-        } else if (res.detail.tipo[0].admin != undefined) {
+        } else if (res.detail.tipo[0].admin != undefined || res.detail.tipo[1].coord != undefined) {
           this.router.navigate(['/admin/']);
-        } else if (res.detail.tipo[1].coord != undefined) {
-          this.router.navigate(['/coord/']);
         } else if (res.detail.tipo[2].maestro != undefined) {
           if (!res.detail.tipo[2].maestro) {
             this.router.navigate(['/usuario-inhabilitado']);
@@ -177,6 +179,7 @@ export class NavAlumnoComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('userid');
     this.router.navigate(['/']);
+    this.correcto = false;
     this.ngOnInit();
   }
 

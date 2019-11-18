@@ -24,6 +24,7 @@
     "@angular/router": "~7.2.0",
     "@fortawesome/fontawesome-free": "^5.9.0",
     "@tinkoff/ng-dompurify": "^1.1.4",
+    "@types/jquery": "^3.3.31",
     "@types/mocha": "^5.2.7",
     "@types/video.js": "^7.2.15",
     "angular-bootstrap-md": "^7.5.4",

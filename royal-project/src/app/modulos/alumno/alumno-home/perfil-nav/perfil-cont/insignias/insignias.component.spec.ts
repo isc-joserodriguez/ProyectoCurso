@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoordComponent } from './coord.component';
+import { InsigniasComponent } from './insignias.component';
 
-describe('CoordComponent', () => {
-  let component: CoordComponent;
-  let fixture: ComponentFixture<CoordComponent>;
+describe('InsigniasComponent', () => {
+  let component: InsigniasComponent;
+  let fixture: ComponentFixture<InsigniasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoordComponent ]
+      declarations: [ InsigniasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoordComponent);
+    fixture = TestBed.createComponent(InsigniasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

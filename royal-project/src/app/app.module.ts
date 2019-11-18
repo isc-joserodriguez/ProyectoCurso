@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
-import { NavCoordinadorComponent } from './navs/nav-coordinador/nav-coordinador.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -58,7 +57,6 @@ import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinko
     AppComponent,
     NavAlumnoComponent,
     NavMaestroComponent,
-    NavCoordinadorComponent,
     NavAdministradorComponent,
     UsuarioDesactivadoComponent
   ],

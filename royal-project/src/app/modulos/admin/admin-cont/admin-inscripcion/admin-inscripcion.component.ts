@@ -68,6 +68,7 @@ export class AdminInscripcionComponent implements OnInit {
     this.cursos.getCursos().subscribe((res: any) => {
       res.detail.forEach(curso => {
         this.usuarios.getUser(curso.idMaestro).subscribe((maestro: any) => {
+          if(curso.estado==2)
           this.listaCursos.push({
             nombre: maestro.detail[0].nombre + ' ' +
               maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,
@@ -113,7 +114,7 @@ export class AdminInscripcionComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
   filtrarAlumno(cadena) {
     this.listaAlumno = [];
     this.usuarios.getAll().subscribe((res: any) => {

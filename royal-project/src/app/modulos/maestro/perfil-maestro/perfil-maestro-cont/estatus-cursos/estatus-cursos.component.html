@@ -48,8 +48,8 @@
         <ng-container matColumnDef="editar">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
           <td mat-cell *matCellDef="let row">
-            <button mat-mini-fab color="primary" (click)="configCurso(row.ruta)"><img class="icon-opcion"
-                src="./../../../assets/icons/edit.svg"></button>
+            <button *ngIf="row.estado=='Aceptado'" mat-mini-fab color="primary" (click)="configCurso(row.ruta)"><img
+                class="icon-opcion" src="./../../../assets/icons/edit.svg"></button>
           </td>
         </ng-container>
 

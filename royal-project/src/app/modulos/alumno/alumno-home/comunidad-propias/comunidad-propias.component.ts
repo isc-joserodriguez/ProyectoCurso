@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./comunidad-propias.component.scss']
 })
 export class ComunidadPropiasComponent implements OnInit {
-  
+
   constructor(private comunidad: ComunidadService, private formBuilder: FormBuilder, private router: Router) { }
   preguntas = [];
   preguntaForm: FormGroup;
@@ -29,7 +29,7 @@ export class ComunidadPropiasComponent implements OnInit {
     this.comunidad.getPreguntas().subscribe((preguntas: any) => {
       preguntas.detail.forEach(pregunta => {
         if (pregunta.idPersona == localStorage.getItem('userid')) {
-          this.preguntas.push(pregunta);
+          if (!pregunta.reportado) this.preguntas.push(pregunta);
         }
       });;
     });

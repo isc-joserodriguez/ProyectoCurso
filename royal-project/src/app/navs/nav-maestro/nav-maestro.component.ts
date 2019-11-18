@@ -39,10 +39,8 @@ export class NavMaestroComponent implements OnInit {
     this.auth.infoUser(localStorage.getItem('token')).subscribe((res: any) => {
       if (res.detail.token != undefined) {
         this.logout();
-      } else if (res.detail.tipo[0].admin != undefined) {
+      } else if (res.detail.tipo[0].admin != undefined || res.detail.tipo[1].coord != undefined) {
         this.router.navigate(['/admin/']);
-      } else if (res.detail.tipo[1].coord != undefined) {
-        this.router.navigate(['/coord/']);
       } else if (res.detail.tipo[3].alumno != undefined) {
         this.router.navigate(['/']);
       } else {

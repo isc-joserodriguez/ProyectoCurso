@@ -32,9 +32,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule } from 'angular-bootstrap-md';
 import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
+import { InsigniasComponent } from './insignias/insignias.component';
 
 @NgModule({
-  declarations: [PerfilComponent, CuentaComponent, HistorialComprasComponent, CertificadosComponent],
+  declarations: [PerfilComponent, CuentaComponent, HistorialComprasComponent, CertificadosComponent, InsigniasComponent],
   imports: [
     CommonModule,
     PerfilContRoutingModule,

@@ -146,7 +146,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
             infoAvance[1] = 0;
             infoAvance[2] = 0;
             if (infoAvance[0] > this.infoCurso.contenidoCurso.length - 1) {
-              console.log('reiniciamos');
+              infoAvance = [0, 0, 0]
             }
           }
           this.goClase(infoAvance[0], infoAvance[1], infoAvance[2]);

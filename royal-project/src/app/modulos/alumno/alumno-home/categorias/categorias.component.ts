@@ -15,6 +15,7 @@ export class CategoriasComponent implements OnInit {
   cursosFiltrados = [];
   subcategorias = [];
   filtro = [];
+  fP = false;
 
   constructor(private route: ActivatedRoute, private cursos: CursosService) { }
 
@@ -61,7 +62,9 @@ export class CategoriasComponent implements OnInit {
   }
 
   filtrar(event, element) {
-    if (event.checked == true) {
+    if (element == 'filtroPremium') {
+      this.fP = event.checked;
+    } else if (event.checked == true) {
       this.filtro.push(element);
     } else {
       var index = 0;
@@ -70,13 +73,27 @@ export class CategoriasComponent implements OnInit {
       });
       this.filtro.splice(index, 1);
     }
-    this.listaCursos = [];
-    this.cursosFiltrados.forEach(curso => {
-      if (this.filtro.includes(curso.subcategoria)) {
-        this.listaCursos.push(curso);
-      }
-    });
-
+    if (this.filtro.length != 0) {
+      this.listaCursos = [];
+      this.cursosFiltrados.forEach(curso => {
+        if (this.filtro.includes(curso.subcategoria)) {
+          if (this.fP && curso.royal) {
+            this.listaCursos.push(curso);
+          } else if (!this.fP) {
+            this.listaCursos.push(curso);
+          }
+        }
+      });
+    } else if (this.fP) {
+      this.listaCursos = [];
+      this.cursosFiltrados.forEach(curso => {
+        if (curso.royal) {
+          this.listaCursos.push(curso);
+        }
+      });
+    } else {
+      this.listaCursos = this.cursosFiltrados;
+    }
   }
 
 }

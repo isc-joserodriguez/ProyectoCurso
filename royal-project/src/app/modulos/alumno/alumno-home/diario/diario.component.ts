@@ -65,12 +65,15 @@ export class DiarioComponent implements OnInit {
       });
       this.filtro.splice(index, 1);
     }
-    this.listaEntradas = [];
-    this.entradasFiltradas.forEach(curso => {
-      if (this.filtro.includes(curso.categoria)) {
-        this.listaEntradas.push(curso);
-      }
-    });
-
+    if (this.filtro.length != 0) {
+      this.listaEntradas = [];
+      this.entradasFiltradas.forEach(curso => {
+        if (this.filtro.includes(curso.categoria)) {
+          this.listaEntradas.push(curso);
+        }
+      });
+    } else {
+      this.listaEntradas = this.entradasFiltradas;
+    }
   }
 }

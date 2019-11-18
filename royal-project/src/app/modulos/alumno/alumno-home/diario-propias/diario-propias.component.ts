@@ -17,7 +17,7 @@ export class DiarioPropiasComponent implements OnInit {
     this.diario.getEntradas().subscribe((entradas: any) => {
       entradas.detail.forEach(entrada => {
         if (entrada.idPersona == localStorage.getItem('userid')) {
-          this.entradas.push(entrada);
+          if (!entrada.reportado) this.entradas.push(entrada);
         }
       });;
     });

@@ -20,7 +20,7 @@
                 <div class="container col-md-12 px-5">
                   <div class="row">
                     <div class="col-md-2 p-0 text-center">
-                      <a [href]="'/alumno/perfil-publico/'+infoPersona.ruta" target="_blank" rel="noopener noreferrer">
+                      <a [href]="'/maestro/alumno/'+infoPersona.ruta" target="_blank" rel="noopener noreferrer">
                         <div class="imgLiquidFill imgLiquid ml-2 " style="width:90px; height:90px;">
                           <img [src]="infoPersona.foto" class="rounded-circle sombrabaja" alt="Cinque Terre" width="90"
                             height="90">
@@ -84,8 +84,9 @@
                                 </button>
                               </div>
                               <div class="col-md-7">
-                                <a
-                                  [routerLink]="['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
+                                <h5 *ngIf="respuesta.maestro">{{respuesta.nombreCompleto}}</h5>
+                                <a *ngIf="!respuesta.maestro"
+                                  [routerLink]="['/maestro/alumno/',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
                               </div>
                               <div class="col-md-4 subtitulo text-center" *ngIf="respuesta.maestro">
                                 <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
@@ -120,7 +121,9 @@
                                       </button>
                                     </div>
                                     <div class="col-md-7">
-                                      <a [routerLink]="['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
+                                      <h5 *ngIf="resp.maestro">{{resp.nombreCompleto}}</h5>
+                                      <a *ngIf="!resp.maestro"
+                                        [routerLink]="['/maestro/alumno/',resp.ruta]">{{resp.nombreCompleto}}</a>
                                     </div>
                                     <div class="col-md-4 subtitulo text-center" *ngIf="resp.maestro">
                                       <p class="fondomaestro mx-3 sombrabaja ">Maestro</p>
