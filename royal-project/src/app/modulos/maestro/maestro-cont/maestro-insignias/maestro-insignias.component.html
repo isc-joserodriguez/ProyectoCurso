@@ -47,8 +47,8 @@
           <ng-container matColumnDef="otorgar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Otorgar</th>
             <td mat-cell *matCellDef="let row;let i=index">
-              <button mat-mini-fab color="primary" (click)="otorgar(i)"><img class="icon-opcion"
-                  src="./../../../assets/icons/edit.svg"></button>
+              <button mat-mini-fab color="mat-trans" (click)="otorgar(i)"><img class="icon-remove"
+                  src="./../../../assets/icons/logro.svg"></button>
             </td>
           </ng-container>
 
@@ -56,7 +56,7 @@
           <ng-container matColumnDef="editar">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
             <td mat-cell *matCellDef="let row;let i=index">
-              <button mat-mini-fab color="primary" (click)="editar(i)"><img class="icon-opcion"
+              <button mat-mini-fab color="mat-trans" (click)="editar(i)"><img class="icon-edit"
                   src="./../../../assets/icons/edit.svg"></button>
             </td>
           </ng-container>
