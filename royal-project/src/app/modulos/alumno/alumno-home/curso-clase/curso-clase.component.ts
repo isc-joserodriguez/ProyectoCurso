@@ -239,8 +239,9 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             if (infoAvance[0] > this.infoCurso.contenidoCurso.length - 1) {
               this.router.navigate(['/curso/', this.route.snapshot.params.id]);
             }
+          } else {
+            this.goClase(infoAvance[0], infoAvance[1], infoAvance[2]);
           }
-          this.goClase(infoAvance[0], infoAvance[1], infoAvance[2]);
         }
       }
     }

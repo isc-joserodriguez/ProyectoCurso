@@ -15,7 +15,7 @@ module.exports = (wagner) => {
     const Persona = require('./persona.model');
     const Curso = require('./curso.model');
     const Comunidad = require('./comunidad.model');
-    const Codigo = require('./codigo.model');
+    const Promo = require('./promo.model');
     const Compra = require('./compra.model');
     const Diario = require('./diario.model');
 
@@ -24,7 +24,7 @@ module.exports = (wagner) => {
         Persona,
         Curso,
         Comunidad,
-        Codigo,
+        Promo,
         Compra,
         Diario
     }
