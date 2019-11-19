@@ -143,7 +143,7 @@
                         </button>
                       </div>
                       <div class="col-md-7">
-                          <a
+                        <a
                           [routerLink]="(respuesta.maestro)?['/perfil-maestro',respuesta.ruta]:['/alumno/perfil-publico',respuesta.ruta]">{{respuesta.nombreCompleto}}</a>
                       </div>
                       <div class="col-md-4 subtitulo text-center" *ngIf="respuesta.maestro">
@@ -177,7 +177,7 @@
                                   class="icon-report" src="./../../../assets/icons/reportar.svg"></button>
                             </div>
                             <div class="col-md-7">
-                                <a
+                              <a
                                 [routerLink]="(resp.maestro)?['/perfil-maestro',resp.ruta]:['/alumno/perfil-publico',resp.ruta]">{{resp.nombreCompleto}}</a>
                             </div>
                             <div class="col-md-4 subtitulo text-center" *ngIf="resp.maestro">
@@ -231,7 +231,7 @@
       </div>
       <!-- Respuestas -->
 
-      <div class="row justify-content-between">
+      <div class="row justify-content-between mt-3">
         <div class="col-4 text-right">
           <button class="btn-md p-1 mb-2" mat-raised-button color="primary" [routerLink]="['../../../../']">
             Volver

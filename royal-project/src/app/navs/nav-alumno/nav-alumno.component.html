@@ -225,9 +225,12 @@
           <mat-error *ngIf="passErr">Contraseña incorrecta.</mat-error>
         </form>
         <div *ngIf="correcto">
-          <h2>Iniciaste sesión correctamente</h2>
-          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal"
-            (click)="ngOnInit()">Continuar</button>
+          <div class="text-center">
+            <h2>Iniciaste sesión correctamente.</h2>
+            <h2 class="letrastar">¡Bienvenido!</h2>
+            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal"
+              (click)="ngOnInit()">Continuar</button>
+          </div>
         </div>
       </div>
       <div class="modal-footer" *ngIf="!correcto">
