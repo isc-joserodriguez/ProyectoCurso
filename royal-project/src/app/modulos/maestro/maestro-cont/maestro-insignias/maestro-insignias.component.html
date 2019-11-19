@@ -72,9 +72,9 @@
       <br>
     </div>
     <br>
-    <div class="col-md-12" *ngIf="divOtorgar">
+    <div class="col-md-12 inscripcion" *ngIf="divOtorgar">
       <div class="text-center vertical-center">
-        <label class="h3">Otorgar Insignia</label>
+        <label class="h3 subinscri">Otorgar Insignia</label>
       </div>
 
       <ul class="list-unstyled field-login">
@@ -98,7 +98,7 @@
             </mat-form-field>
             <div class="row container">
               <div class="pr-5">
-                <button type="button" class="btn btn-success btn-sm" (click)="subirInsignia()">Inscribir</button>
+                <button type="button" class="btn btn-success btn-sm" (click)="subirInsignia()">Otorgar</button>
                 <mat-error>
                   <label>{{error}}</label>
                 </mat-error>
@@ -106,7 +106,6 @@
             </div>
           </div>
         </li>
-        <mat-divider></mat-divider>
       </ul>
       <br>
     </div>

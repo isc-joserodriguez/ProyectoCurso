@@ -26,6 +26,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -86,7 +87,8 @@ import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinko
     NgxPaginationModule,
     CKEditorModule,
     NgDompurifyModule,
-    SafePipeModule
+    SafePipeModule,
+    MatBadgeModule
   ],
   providers: [  {
     provide: DomSanitizer,
