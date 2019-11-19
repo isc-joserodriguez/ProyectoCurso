@@ -1,75 +1,14 @@
 <div class=”main-container”>
   <header>
     <nav class="navbar navbar-light blue-grey lighten-5 navbar-expand-sm fixed-top scrolling-navbar img-posicion">
-      <a class="nav-item active" [routerLink]="['/admin']">
-        <img class="icon-nav-home" src="./../../../assets/icons/home.svg">
+      <a class="nav-item active pl-2" [routerLink]="['/admin']">
+        <img class="icon-nav-home" src="./../../../assets/icons/royal.png">
       </a>
       <div class="collapse navbar-collapse row col-md-12" id="navbarSupportedContent">
-        <!--Categorias-->
-        <div class="col-md-1 vertical-center nav-item active pl-4">
-          <button mat-button [matMenuTriggerFor]="categorias" class="p-0">
-            <img class="icon-nav" src="./../../../assets/icons/menu.svg">
-            <p class="salto_pag mb-0">Categorías</p>
-          </button>
-          <mat-menu #categorias="matMenu" class="fondo-navbar">
-            <button mat-menu-item [matMenuTriggerFor]="Tecnologias">
-              <i class="fas fa-laptop-code"></i>Tecnología
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item [matMenuTriggerFor]="Idiomas">
-              <i class="fas fa-language"></i> Idiomas
-            </button>
-          </mat-menu>
-          <mat-menu #Tecnologias="matMenu">
-            <button mat-menu-item>Fishes</button>
-            <button mat-menu-item>Amphibians</button>
-            <button mat-menu-item>Reptiles</button>
-            <button mat-menu-item>Birds</button>
-            <button mat-menu-item>Mammals</button>
-          </mat-menu>
-          <mat-menu #Idiomas="matMenu">
-            <button mat-menu-item>Fishes</button>
-            <button mat-menu-item>Amphibians</button>
-            <button mat-menu-item>Reptiles</button>
-            <button mat-menu-item>Birds</button>
-            <button mat-menu-item>Mammals</button>
-          </mat-menu>
 
-        </div>
-
-        <!--Categorias-->
-
-        <!--Buscador-->
-        <div class="col-md-6 vertical-center">
-          <div class="input-group input-group-sm vertical-center">
-            <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso">
-            <div class="input-group-prepend ml-3">
-              <button mat-mini-fab color="primary"><i class="fas fa-search"></i></button>
-            </div>
-          </div>
-        </div>
-        <!--Buscador-->
-
-        <!--Comunidad-->
-        <div class="col-md-1 vertical-center nav-item active ">
-          <button mat-button [matMenuTriggerFor]="comunidad" class="p-0">
-            <img class="icon-nav" src="./../../../assets/icons/comunidad.svg">
-            <p class="salto_pag mb-0">Comunidad</p>
-          </button>
-          <mat-menu #comunidad="matMenu" class="fondo-navbar">
-            <button mat-menu-item>
-              <i class="fas fa-laptop-code"></i>Tecnologías
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item>
-              <i class="fas fa-language"></i> Idiomas
-            </button>
-          </mat-menu>
-        </div>
-        <!--Comunidad-->
 
         <!--Pagos-->
-        <div class="col-md-1 vertical-center nav-item active ">
+        <div class="col-md-1 offset-md-9 vertical-center nav-item active ">
           <button mat-button [matMenuTriggerFor]="comunidad" class="p-0">
             <img class="icon-nav" src="./../../../assets/icons/pagos2.svg">
             <p class="salto_pag mb-0">Pagos</p>
@@ -92,26 +31,9 @@
         </div>
         <!--Pagos-->
 
-        <!-- Alertas-->
-        <div class="col-md-1 vertical-center">
-          <button mat-button [matMenuTriggerFor]="alertas" class="p-0">
-            <img class="icon-nav" src="./../../../assets/icons/alertas.svg">
-            <p class="salto_pag mb-0">Alertas</p>
-          </button>
-          <mat-menu #alertas="matMenu" class="fondo-navbar">
-            <button mat-menu-item>
-              <i class="fas fa-laptop-code"></i>Tecnologías
-            </button>
-            <mat-divider></mat-divider>
-            <button mat-menu-item>
-              <i class="fas fa-language"></i> Idiomas
-            </button>
-          </mat-menu>
-        </div>
-        <!-- Alertas-->
 
         <!--Mi perfil-->
-        <div class="col-md-1 vertical-center">
+        <div class="col-md-1 offset-md-1 vertical-center">
           <button mat-button [matMenuTriggerFor]="miperfil" class="p-0">
             <img class="icon-nav" src="./../../../assets/icons/perfil-m.svg" *ngIf="sexo==2"><img class="icon-nav"
               src="./../../../assets/icons/perfil-h.svg" *ngIf="sexo==1"><img class="icon-nav"

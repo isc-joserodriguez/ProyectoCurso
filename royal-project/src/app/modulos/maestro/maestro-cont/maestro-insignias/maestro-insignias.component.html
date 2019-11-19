@@ -72,20 +72,20 @@
       <br>
     </div>
     <br>
-    <div class="col-md-12" *ngIf="divOtorgar">
+    <div class="col-md-12 inscripcion" *ngIf="divOtorgar">
       <div class="text-center vertical-center">
-        <label class="h1">Otorgar Insignia</label>
+        <label class="h3 subinscri">Otorgar Insignia</label>
       </div>
 
       <ul class="list-unstyled field-login">
         <li class="media">
           <div class="imgLiquidFill imgLiquid" style="width:100px; height:100px;">
-            <img [src]="insigniaOtorgar.imagen" class="mr-3" alt="..." width="100" height="100">
+            <img [src]="insigniaOtorgar.imagen" class="mr-3 sombraimg" alt="..." width="100" height="100">
           </div>
 
-          <div class="media-body">
+          <div class="media-body ml-3">
             <h5 class="mt-0 mb-1">{{insigniaOtorgar.nombreInsignia}}</h5>
-            {{insigniaOtorgar.descripcionInsignia}}
+            <label class="text-muted">{{insigniaOtorgar.descripcionInsignia}}</label>
             <mat-form-field appearance="outline" class="field-login">
               <mat-label>Filtrar alumno:</mat-label>
               <input type="text" placeholder="Busca un alumno" aria-label="Number" matInput [matAutocomplete]="auto"
@@ -96,9 +96,9 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-            <div class="row justify-content-between">
+            <div class="row container">
               <div class="pr-5">
-                <button type="button" class="btn btn-success btn-sm" (click)="subirInsignia()">Inscribir</button>
+                <button type="button" class="btn btn-success btn-sm" (click)="subirInsignia()">Otorgar</button>
                 <mat-error>
                   <label>{{error}}</label>
                 </mat-error>
@@ -106,7 +106,6 @@
             </div>
           </div>
         </li>
-        <mat-divider></mat-divider>
       </ul>
       <br>
     </div>
