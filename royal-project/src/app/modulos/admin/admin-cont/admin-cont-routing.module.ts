@@ -9,6 +9,9 @@ import { AdminUsuarioInfoComponent } from './admin-usuario-info/admin-usuario-in
 import { CursoRevisionComponent } from './curso-revision/curso-revision.component';
 import { AdminInscripcionComponent } from './admin-inscripcion/admin-inscripcion.component';
 import { AdminReportesComponent } from './admin-reportes/admin-reportes.component';
+import { AdminPromosComponent } from './admin-promos/admin-promos.component';
+import { AdminPromosNuevaComponent } from './admin-promos-nueva/admin-promos-nueva.component';
+import { AdminPromosEditComponent } from './admin-promos-edit/admin-promos-edit.component';
 
 const routes: Routes = [
   {
@@ -46,7 +49,20 @@ const routes: Routes = [
   {
     path: 'inscripciones',
     component: AdminInscripcionComponent
+  },
+  {
+    path: 'promos',
+    component: AdminPromosComponent
+  },
+  {
+    path: 'promos/nueva',
+    component: AdminPromosNuevaComponent
+  },
+  {
+    path: 'promos/editar/:id',
+    component: AdminPromosEditComponent
   }
+
 ];
 
 @NgModule({

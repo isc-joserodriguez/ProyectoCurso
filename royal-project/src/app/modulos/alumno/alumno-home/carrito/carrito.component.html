@@ -62,6 +62,42 @@
             </li>
           </ul>
           <br>
+          <div class="descrinuevo">
+            <div *ngIf="divBotones">
+              <h3>Aplicar Descuentos</h3>
+              <button type="button" class="btn btn-success btn-md " (click)="activarCodigos()">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Código
+              </button>
+              <button type="button" class="btn btn-success btn-md " (click)="aplicarFecha()">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Fecha
+              </button>
+            </div>
+            <div *ngIf="divCodigo">
+              <mat-form-field appearance="outline" class="field-login">
+                <mat-label>Código:</mat-label>
+                <input matInput placeholder="Ingresa el código" [(ngModel)]="codigo">
+              </mat-form-field>
+              <br>
+              <button *ngIf="!descuento" type="button" class="btn btn-success btn-md " [disabled]="codigo==''"
+                (click)="aplicarCodigo()">
+                <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Aplicar
+              </button>
+              <mat-error>{{error}}.</mat-error>
+            </div>
+          </div>
+          <br>
+          <ul class="list-group" *ngIf="descuento">
+            <li class="list-group-item descrinuevo">
+              <div class="d-flex bd-highlight">
+                <div class="mr-auto p-2 bd-highlight">Descuento</div>
+                <div class="p-2 bd-highlight">$ {{importeDescuento}}</div>
+                <button type="button" class="btn btn-success btn-md " (click)="pagar()">
+                  <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">PagarTemp
+                </button>
+              </div>
+            </li>
+          </ul>
+          <br>
           <ul class="list-group">
             <li class="list-group-item descrinuevo">
               <div class="d-flex bd-highlight">

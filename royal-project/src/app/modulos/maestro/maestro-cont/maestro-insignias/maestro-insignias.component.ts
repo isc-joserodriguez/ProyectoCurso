@@ -126,4 +126,11 @@ export class MaestroInsigniasComponent implements OnInit {
     this.router.navigate(['/maestro/curso/', this.route.snapshot.params.id, 'insignias', 'editar', id]);
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
 }

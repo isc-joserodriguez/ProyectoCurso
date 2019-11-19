@@ -31,6 +31,10 @@ export class UsuariosService {
     return this.http.put(apiUrl + '/editDatos/' + id, datos);
   }
 
+  updateCodigos(id, codigos) {
+    return this.http.put(apiUrl + '/updateCodigos/' + id, codigos);
+  }
+
   updateCursosMaestro(id, datos) {
     return this.http.put(apiUrl + '/updateCursosMaestro/' + id, datos);
   }

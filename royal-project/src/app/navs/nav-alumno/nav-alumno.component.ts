@@ -6,6 +6,9 @@ import { Match } from 'src/app/helper/match.validator';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { interval, Subscription } from 'rxjs';
+import { PromosService } from 'src/app/servicios/promos.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DateConvert } from 'src/app/helper/date.convert';
 
 
 
@@ -36,7 +39,7 @@ export class NavAlumnoComponent implements OnInit {
   };
 
   cursosAlumno = [];
-  
+
   notificaciones = [];
   sinLeer = 0;
   subscription: Subscription;
@@ -47,12 +50,12 @@ export class NavAlumnoComponent implements OnInit {
   busqueda = '';
   perfilPublico = '';
 
-  constructor(private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private promos: PromosService, private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.verificarToken();
     this.getCategorias();
-
+    this.getPromosFecha();
 
     const source = interval(5000);
     this.subscription = source.subscribe(val => {
@@ -76,6 +79,19 @@ export class NavAlumnoComponent implements OnInit {
       regRepContrasenia: ['', Validators.required]
     }, {
       validator: Match('regContrasenia', 'regRepContrasenia')
+    });
+  }
+  getPromosFecha() {
+    this.promos.getPromos().subscribe((promos: any) => {
+      promos.detail.forEach(promo => {
+        if (promo.estatus && promo.tipo == 1 && new Date(promo.fechaInicio).getTime() < Date.now() && new Date(promo.fechaFin).getTime() > Date.now()) {
+          console.log(promo);
+          var mensaje = '¡Aprovecha el ' + promo.porcentaje + '% de descuento hasta el ' + DateConvert(promo.fechaFin) + '!'
+          this._snackBar.open(mensaje, 'Cerrar', {
+            duration: 10000,
+          });
+        }
+      });
     });
   }
   getCursos() {

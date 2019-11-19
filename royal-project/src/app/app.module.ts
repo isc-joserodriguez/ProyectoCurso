@@ -26,7 +26,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -43,14 +44,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BarRatingModule } from "ngx-bar-rating";
 
 //pagination
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 //editor ckeditor
 
 import { CKEditorModule } from 'ng2-ckeditor';
 
-import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinkoff/ng-dompurify';
+import { NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE } from '@tinkoff/ng-dompurify';
 
 
 @NgModule({
@@ -88,16 +89,17 @@ import {NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE} from '@tinko
     CKEditorModule,
     NgDompurifyModule,
     SafePipeModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSnackBarModule
   ],
-  providers: [  {
+  providers: [{
     provide: DomSanitizer,
     useClass: NgDompurifyDomSanitizer,
-},
-{
+  },
+  {
     provide: SANITIZE_STYLE,
     useValue: ɵ_sanitizeStyle,
-},],
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

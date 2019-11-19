@@ -226,6 +226,31 @@ const updateNotificaciones = (req, res) => {
     });
 }
 
+const updateCodigos = (req, res) => {
+    const id = req.params.id;
+    codigos = req.body.codigos
+    _persona.update({ _id: id }, {
+        $set: {
+            codigos: codigos
+        }
+    }).then(data => {
+        res.status(200);
+        res.json({
+            code: 200,
+            mgs: "Se editó con éxito",
+            detail: data
+        });
+
+    }).catch(error => {
+        res.status(400);
+        res.json({
+            code: 400,
+            msg: "Error.",
+            detail: error
+        });
+    });
+}
+
 const updatePuntaje = (req, res) => {
     const id = req.params.id;
     puntaje = req.body.puntaje
@@ -530,6 +555,6 @@ const update = (req, res) => {
 module.exports = (Persona) => {
     _persona = Persona;
     return ({
-        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute, updateCert, updateDocs, updateCursosMaestro, updateNotificaciones, updatePuntaje
+        getAll, create, deletePersona, getById, update, info, login, updateTipo, updateCredencial, inscribirAlumno, updateAvance, updateInsignia, getUserByRute, updateCert, updateDocs, updateCursosMaestro, updateNotificaciones, updatePuntaje, updateCodigos
     });
 }

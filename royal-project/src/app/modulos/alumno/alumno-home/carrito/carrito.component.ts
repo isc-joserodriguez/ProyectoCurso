@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { ComprasService } from 'src/app/servicios/compras.service';
+import { PromosService } from 'src/app/servicios/promos.service';
+import { DateConvert } from 'src/app/helper/date.convert';
 declare var paypal;
 
 @Component({
@@ -14,10 +16,21 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   listaCursos = [];
   rutas = [];
   total = 0;
+  codigo = '';
+  error = '';
+  descuento = false;
+  importeDescuento = 0;
+  usosCod = 0;
+  codigosUsados = [];
+  promoFecha: any = {};
+  divBotones = false;
+  divCodigo = false;
+  cod = false;
+  fechaNac: any;
 
   @ViewChild('paypal') paypalElement: ElementRef;
 
-  constructor(private compras: ComprasService, private router: Router, private usuarios: UsuariosService, private cursos: CursosService) { }
+  constructor(private promos: PromosService, private compras: ComprasService, private router: Router, private usuarios: UsuariosService, private cursos: CursosService) { }
 
   ngAfterViewInit() {
     paypal
@@ -47,8 +60,31 @@ export class CarritoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.getCodigosUsados();
+    this.getPromosFecha();
     this.getCursos();
+  }
+  getPromosFecha() {
+    this.promos.getPromos().subscribe((promos: any) => {
+      promos.detail.forEach(promo => {
+        if (promo.estatus && promo.tipo == 1 && new Date(promo.fechaInicio).getTime() < Date.now() && new Date(promo.fechaFin).getTime() > Date.now()) {
+          this.promoFecha = promo;
+          this.divBotones = true;
+        }
+      });
+      if (!this.divBotones) this.divCodigo = true;
+    });
+  }
+  activarCodigos() {
+    this.divBotones = false;
+    this.divCodigo = true;
+  }
 
+  getCodigosUsados() {
+    this.usuarios.getUser(localStorage.getItem('userid')).subscribe(((usuarioInfo: any) => {
+      this.fechaNac = usuarioInfo.detail[0].fechaNac;
+      this.codigosUsados = usuarioInfo.detail[0].codigos;
+    }));
   }
   getCursos() {
     this.listaCursos = [];
@@ -109,13 +145,71 @@ export class CarritoComponent implements OnInit, AfterViewInit {
               var infoCurso = curso.detail[0];
               infoCurso.alumnosInscritos.push({ idAlumno: usuario._id });
               this.cursos.inscribirAlumno(infoCurso._id, infoCurso.alumnosInscritos).subscribe(res => {
-                localStorage.removeItem('carrito')
-                this.router.navigate(['/mis-cursos']);
+                if (this.cod) {
+                  this.promos.updateUsos(this.codigo, { usos: this.usosCod + 1 }).subscribe(res => {
+                    this.usuarios.getUser(localStorage.getItem('userid')).subscribe(((usuarioInfo: any) => {
+                      usuarioInfo.detail[0].codigos.push(this.codigo);
+                      this.usuarios.updateCodigos(localStorage.getItem('userid'), { codigos: usuarioInfo.detail[0].codigos }).subscribe(res => {
+                        localStorage.removeItem('carrito');
+                        this.router.navigate(['/mis-cursos']);
+                      });
+                    }));
+                  });
+                } else {
+                  localStorage.removeItem('carrito');
+                  this.router.navigate(['/mis-cursos']);
+                }
               });
             });
           });
         });
       });
+    });
+  }
+
+  aplicarFecha() {
+    this.descuento = true;
+    this.importeDescuento = this.total * (this.promoFecha.porcentaje / 100)
+    this.total = this.total * ((100 - this.promoFecha.porcentaje) / 100);
+    this.error = '';
+    this.divBotones = false;
+  }
+
+  aplicarCodigo() {
+    this.promos.getPromo(this.codigo).subscribe((promo: any) => {
+      if (promo.detail[0] != undefined) {
+        if (!this.codigosUsados.includes(this.codigo)) {
+
+          if (promo.detail[0].estatus && new Date(promo.detail[0].fechaInicio).getTime() < Date.now() && new Date(promo.detail[0].fechaFin).getTime() > Date.now()) {
+            if (!promo.detail[0].cumple) {
+              this.descuento = true;
+              this.usosCod = promo.detail[0].usos;
+              this.importeDescuento = this.total * (promo.detail[0].porcentaje / 100)
+              this.total = this.total * ((100 - promo.detail[0].porcentaje) / 100);
+              this.error = '';
+              this.cod = true;
+            } else {
+              if (DateConvert(this.fechaNac).substring(0, 5) == DateConvert(new Date() + '').substring(0, 5)) {
+                this.descuento = true;
+                this.usosCod = promo.detail[0].usos;
+                this.importeDescuento = this.total * (promo.detail[0].porcentaje / 100)
+                this.total = this.total * ((100 - promo.detail[0].porcentaje) / 100);
+                this.error = '';
+                this.cod = true;
+              } else {
+                this.error = 'Guardalo para tu cumpleaños';
+              }
+            }
+
+          } else {
+            this.error = 'Código no disponible';
+          }
+        } else {
+          this.error = 'Ya usaste este código';
+        }
+      } else {
+        this.error = 'No se encontró el código';
+      }
     });
   }
 }

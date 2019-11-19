@@ -56,7 +56,8 @@ const personaSchema = new mongoose.Schema({
     resumen: { type: String, default: ' ' },
     puntaje: { type: Number, default: 0 },
     ruta: { type: String },
-    royal: { type: Number, default: 0 }//0-Normal | 1-Royal
+    royal: { type: Number, default: 0 },//0-Normal | 1-Royal
+    codigos: []
 });
 
 //modelo Persona

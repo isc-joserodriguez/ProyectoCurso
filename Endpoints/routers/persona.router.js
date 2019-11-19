@@ -58,6 +58,10 @@ module.exports = (wagner) => {
         personaCtrl.updatePuntaje(req, res);
     });
 
+    personaRouter.put("/updateCodigos/:id", (req, res) => {
+        personaCtrl.updateCodigos(req, res);
+    });
+
     personaRouter.put("/updateNotificaciones/:id", (req, res) => {
         personaCtrl.updateNotificaciones(req, res);
     });

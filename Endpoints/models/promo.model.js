@@ -3,13 +3,15 @@ const mongoose = require('mongoose');
 //esquema
 //definir el esquema que vamos a manejar
 const promoSchema = new mongoose.Schema({
-    _id: { type: String, required: true },
-    tipo: { type: Number },//0-Promo | 1-fecha
-    promo: { type: String, required: true },
-    cursos: [{ _id: { type: String, required: true } }],
-    fechaInicio: { type: Date, required: true },
-    fechaExpiracion: { type: Date, required: true },
-    usos: { type: Number, default: 0 }
+    _id: { type: Number },
+    tipo: { type: Number },//0-Codigo | 1-fecha
+    codigo: { type: String, default: 'N/A' },
+    porcentaje: { type: Number },
+    fechaInicio: { type: Date },
+    fechaFin: { type: Date },
+    usos: { type: Number, default: 0 },
+    cumple: { type: Boolean, default: false },
+    estatus: { type: Boolean, default: true }
 });
 
 //modelo Curso
