@@ -127,9 +127,10 @@
 
       <!-- Alertas-->
       <div class="col-md-1 vertical-center" *ngIf="logueado">
-        <button mat-button [matMenuTriggerFor]="alertas" class="p-0" matBadge="8" matBadgeColor="accent">
+        <button mat-button [matMenuTriggerFor]="alertas" class="p-0">
           <img class="icon-nav" src="./../../../assets/icons/alertas.svg">
-          <p class="salto_pag mb-0">Alertas</p>
+          <p *ngIf="sinLeer>0" class="salto_pag mb-0" [matBadge]="sinLeer" matBadgeColor="accent">Alertas</p>
+          <p *ngIf="sinLeer==0" class="salto_pag mb-0">Alertas</p>
         </button>
         <mat-menu #alertas="matMenu" class="fondo-navbar">
           <div *ngFor="let notificacion of notificaciones; let i=index">
