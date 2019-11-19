@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav-maestro',
@@ -22,6 +23,9 @@ export class NavMaestroComponent implements OnInit {
   };
 
   notificaciones = [];
+  sinLeer = 0;
+  subscription: Subscription;
+
   perfilPublico = '';
   usuario = '';
   sexo = 3; // 1= H 2= M 3= Indef
@@ -30,6 +34,12 @@ export class NavMaestroComponent implements OnInit {
 
   ngOnInit() {
     this.verificarToken();
+    const source = interval(5000);
+    this.subscription = source.subscribe(val => {
+      if (localStorage.getItem('userid') != null) {
+        this.getNotificaciones();
+      }
+    });
   }
 
   verificarToken() {
@@ -49,7 +59,6 @@ export class NavMaestroComponent implements OnInit {
         localStorage.setItem('userid', res.detail.id);
         this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
           this.perfilPublico = '/maestro/perfil-publico/' + usuario.detail[0].ruta;
-          this.notificaciones = usuario.detail[0].notificaciones.reverse();
         });
         if (!res.detail.tipo[2].maestro) {
           this.router.navigate(['/usuario-inhabilitado']);
@@ -60,8 +69,24 @@ export class NavMaestroComponent implements OnInit {
     });
   }
 
+  getNotificaciones() {
+    this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
+      var conteo = 0;
+      usuario.detail[0].notificaciones.forEach(not => {
+        if (not.estado) conteo++;
+      });
+      if (conteo > this.sinLeer) {
+        this.sinLeer = conteo;
+        this.notificaciones = usuario.detail[0].notificaciones.reverse();
+      }
+
+    });
+
+  }
+
   descartar(i) {
     this.notificaciones[i].estado = false;
+    this.sinLeer = this.sinLeer - 1;
     this.usuarios.updateNotificaciones(localStorage.getItem('userid'), { notificaciones: this.notificaciones.reverse() }).subscribe(res => {
       this.verificarToken();
     });

@@ -9,7 +9,7 @@ require('./models/models')(wagner);
 //Importar Routers
 const personaRouter = require('./routers/persona.router')(wagner);
 const cursoRouter = require('./routers/curso.router')(wagner);
-const codigoRouter = require('./routers/codigo.router')(wagner);
+const promoRouter = require('./routers/promo.router')(wagner);
 const compraRouter = require('./routers/compra.router')(wagner);
 const comunidadRouter = require('./routers/comunidad.router')(wagner);
 const diarioRouter = require('./routers/diario.router')(wagner);
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 //Agregar rutas
 app.use("/personas",personaRouter);
 app.use("/cursos",cursoRouter);
-app.use("/codigos",codigoRouter);
+app.use("/promos",promoRouter);
 app.use("/compras",compraRouter);
 app.use("/comunidad",comunidadRouter);
 app.use("/diario",diarioRouter);

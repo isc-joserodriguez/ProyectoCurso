@@ -36,14 +36,16 @@ export class NavAlumnoComponent implements OnInit {
   };
 
   cursosAlumno = [];
+  
   notificaciones = [];
+  sinLeer = 0;
+  subscription: Subscription;
 
   usuario = '';
   logueado = localStorage.getItem('token') != null;
   sexo = 3; // 1= H 2= M 3= Indef
   busqueda = '';
   perfilPublico = '';
-  subscription: Subscription;
 
   constructor(private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
@@ -51,10 +53,13 @@ export class NavAlumnoComponent implements OnInit {
     this.verificarToken();
     this.getCategorias();
 
-    if (localStorage.getItem('userid') != null) {
-      const source = interval(5000);
-      this.subscription = source.subscribe(val => this.getCursos());
-    }
+
+    const source = interval(5000);
+    this.subscription = source.subscribe(val => {
+      if (localStorage.getItem('userid') != null) {
+        this.getNotificaciones();
+      }
+    });
 
     this.logForm = this.formBuilder.group({
       logCorreo: [null, Validators.required],
@@ -76,7 +81,6 @@ export class NavAlumnoComponent implements OnInit {
   getCursos() {
     this.cursosAlumno = [];
     this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
-      this.notificaciones = usuario.detail[0].notificaciones.reverse();
       this.perfilPublico = '/alumno/perfil-publico/' + usuario.detail[0].ruta;
       usuario.detail[0].cursoAlumno.forEach(curso => {
         this.cursos.getCursoInfo(curso.ruta).subscribe((cursoInfo: any) => {
@@ -89,10 +93,25 @@ export class NavAlumnoComponent implements OnInit {
       });
     });
   }
+  getNotificaciones() {
+    this.usuarios.getUser(localStorage.getItem('userid')).subscribe((usuario: any) => {
+      var conteo = 0;
+      usuario.detail[0].notificaciones.forEach(not => {
+        if (not.estado) conteo++;// = conteo + 1;
+      });
+      if (conteo > this.sinLeer) {
+        this.sinLeer = conteo;
+        this.notificaciones = usuario.detail[0].notificaciones.reverse();
+      }
+
+    });
+
+  }
   descartar(i) {
     this.notificaciones[i].estado = false;
+    this.sinLeer = this.sinLeer - 1;
     this.usuarios.updateNotificaciones(localStorage.getItem('userid'), { notificaciones: this.notificaciones.reverse() }).subscribe(res => {
-      this.getCursos();
+      this.getNotificaciones();
     });
   }
   getCategorias() {

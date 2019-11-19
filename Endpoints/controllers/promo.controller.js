@@ -1,13 +1,13 @@
-let _codigo;
+let _promo;
 
 const getAll = (req,res)=>{
-    _codigo.find({})
-    .then(codigos=>{
+    _promo.find({})
+    .then(promos=>{
         res.status(200);
         res.json({
             code:200,
             msg:"Consulta exitosa.",
-            detail:codigos
+            detail:promos
         });        
     }).catch(error=>{
             res.status(400);
@@ -20,8 +20,8 @@ const getAll = (req,res)=>{
 };
 
 const create = (req,res)=>{
-    const codigo = req.body;
-    _codigo.create(codigo)
+    const promo = req.body;
+    _promo.create(promo)
     .then(data=>{
         res.status(200);
         res.json({
@@ -38,9 +38,9 @@ const create = (req,res)=>{
     });
 }
 
-const deletecodigo = (req,res) =>{
+const deletepromo = (req,res) =>{
     const {id}= req.params;
-    _codigo.remove({_id:id})
+    _promo.remove({_id:id})
     .then(data=>{
         res.status(200);
         res.json({
@@ -60,13 +60,13 @@ const deletecodigo = (req,res) =>{
 
 const getById = (req,res)=>{
     const id= req.params.id;
-    _codigo.find({_id:id})
-    .then(codigo=>{
+    _promo.find({_id:id})
+    .then(promo=>{
         res.status(200);
         res.json({
             code:200,
             msg:"Consulta exitosa.",
-            detail:codigo
+            detail:promo
         });
     }).catch(error=>{
         res.status(400);
@@ -80,14 +80,14 @@ const getById = (req,res)=>{
 
 const update = (req,res)=>{
     const {id}= req.params;
-    const codigo=req.body;
-    _codigo.update({_id:id},{$set:{
-        idPersona:codigo.idPersona,
-        nombreTema:codigo.nombreTema,
-        cuerpoTema:codigo.cuerpoTema,
-        fechaTema:codigo.fechaTema,
-        categoriaTema:codigo.categoriaTema,
-        repuestas:codigo.repuestas,
+    const promo=req.body;
+    _promo.update({_id:id},{$set:{
+        idPersona:promo.idPersona,
+        nombreTema:promo.nombreTema,
+        cuerpoTema:promo.cuerpoTema,
+        fechaTema:promo.fechaTema,
+        categoriaTema:promo.categoriaTema,
+        repuestas:promo.repuestas,
     }}).then(data=>{
         res.status(200);
         res.json({
@@ -105,9 +105,9 @@ const update = (req,res)=>{
     });
 }
 
-module.exports = (Codigo)=>{
-    _codigo = Codigo;
+module.exports = (Promo)=>{
+    _promo = Promo;
     return ({
-        getAll, create, deletecodigo, getById,update
+        getAll, create, deletepromo, getById,update
     });
 }
