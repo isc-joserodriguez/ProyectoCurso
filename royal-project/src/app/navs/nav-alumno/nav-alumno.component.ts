@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { Match } from 'src/app/helper/match.validator';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { interval, Subscription } from 'rxjs';
 
 
 
@@ -42,12 +43,18 @@ export class NavAlumnoComponent implements OnInit {
   sexo = 3; // 1= H 2= M 3= Indef
   busqueda = '';
   perfilPublico = '';
+  subscription: Subscription;
 
   constructor(private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.verificarToken();
     this.getCategorias();
+
+    if (localStorage.getItem('userid') != null) {
+      const source = interval(5000);
+      this.subscription = source.subscribe(val => this.getCursos());
+    }
 
     this.logForm = this.formBuilder.group({
       logCorreo: [null, Validators.required],
