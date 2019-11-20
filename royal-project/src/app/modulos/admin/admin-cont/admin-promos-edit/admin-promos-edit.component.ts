@@ -14,6 +14,8 @@ export class AdminPromosEditComponent implements OnInit {
   tipo = 0;
   estatus = false;
   codigo = '';
+  cambia = false;
+  cambios = 0;
 
   constructor(private route: ActivatedRoute, private router: Router, private promos: PromosService, private formBuilder: FormBuilder) { }
 
@@ -32,12 +34,26 @@ export class AdminPromosEditComponent implements OnInit {
       fechaFin: ['', Validators.required],
       estatus: [false]
     });
+
+    this.fechaForm.controls['fechaFin'].valueChanges.subscribe(value => {
+      if (this.cambios == 0) {
+        this.cambios++;
+      } else {
+        this.cambia = true;
+      }
+    });
+    this.promoForm.controls['fechaFin'].valueChanges.subscribe(value => {
+      if (this.cambios == 0) {
+        this.cambios++;
+      } else {
+        this.cambia = true;
+      }
+    });
     this.getInfoPromo(this.route.snapshot.params.id);
   }
 
   getInfoPromo(id) {
     this.promos.getPromoById(id).subscribe((promo: any) => {
-      console.log(promo.detail[0]);
       this.codigo = promo.detail[0].codigo;
       this.tipo = promo.detail[0].tipo;
       this.estatus = promo.detail[0].estatus;
@@ -69,7 +85,7 @@ export class AdminPromosEditComponent implements OnInit {
     } else {
       promo = this.fechaForm.value;
     }
-    promo.fechaFin = new Date(promo.fechaFin).getTime() + (23.9 * 60 * 60 * 1000);
+    if (this.cambia) promo.fechaFin = new Date(promo.fechaFin).getTime() + (23.9 * 60 * 60 * 1000);
     promo.tipo = this.tipo;
     this.promos.updatePromo(this.route.snapshot.params.id, promo).subscribe(res => {
       this.router.navigate(['/admin/promos/']);

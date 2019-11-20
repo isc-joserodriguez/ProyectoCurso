@@ -85,7 +85,6 @@ export class NavAlumnoComponent implements OnInit {
     this.promos.getPromos().subscribe((promos: any) => {
       promos.detail.forEach(promo => {
         if (promo.estatus && promo.tipo == 1 && new Date(promo.fechaInicio).getTime() < Date.now() && new Date(promo.fechaFin).getTime() > Date.now()) {
-          console.log(promo);
           var mensaje = '¡Aprovecha el ' + promo.porcentaje + '% de descuento hasta el ' + DateConvert(promo.fechaFin) + '!'
           this._snackBar.open(mensaje, 'Cerrar', {
             duration: 10000,

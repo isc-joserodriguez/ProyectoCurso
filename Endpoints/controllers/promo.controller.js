@@ -125,8 +125,6 @@ const update = (req, res) => {
 const updateUsos = (req, res) => {
     const id = req.params.id;
     const usos = req.body.usos;
-    console.log(id);
-    console.log(usos);
     _promo.update({ codigo: id }, {
         $set: {
             usos: usos
