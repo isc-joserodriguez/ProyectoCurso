@@ -9,7 +9,7 @@ import { PromosService } from 'src/app/servicios/promos.service';
   styleUrls: ['./admin-promos.component.scss']
 })
 export class AdminPromosComponent implements OnInit {
-  displayedColumns: string[] = ['tipo', 'codigo', 'porcentaje', 'fechaInicio', 'fechaFin', 'usos', 'estado' ,'editar'];
+  displayedColumns: string[] = ['tipo', 'codigo', 'porcentaje', 'fechaInicio', 'fechaFin', 'usos', 'estatus' ,'editar'];
 
 
   listaPromos = [];
