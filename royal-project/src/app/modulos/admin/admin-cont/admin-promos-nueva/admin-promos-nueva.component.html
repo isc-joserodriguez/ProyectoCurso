@@ -4,178 +4,185 @@
   </div>
   <div class="container">
     <mat-card>
-      <!-- Tipo -->
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Tipo:</mat-label>
-          <mat-select [(ngModel)]="tipo">
-            <mat-option value="0"> Código </mat-option>
-            <mat-option value="1"> Fecha </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <!-- Tipo -->
-      <div *ngIf="tipo==0">
-        <form [formGroup]="promoForm">
-          <div class="col-md-12">
+      <div class="col-md-10 offset-md-1">
+        <!-- Tipo -->
+        <div class="mr-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo:</mat-label>
+            <mat-select [(ngModel)]="tipo">
+              <mat-option value="0"> Código </mat-option>
+              <mat-option value="1"> Fecha </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- FormCod -->
+        <div *ngIf="tipo==0">
+          <form [formGroup]="promoForm">
+            <div class="col-md-12">
 
-            <!-- Código -->
-            <div class="row">
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Código:</mat-label>
-                <input matInput placeholder="Ingresa el código" formControlName="codigo" required>
-                <mat-error>
-                  <span *ngIf="!promoForm.get('codigo').valid && promoForm.get('codigo').touched">Agrega el
-                    código.</span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <!-- Código -->
-
-            <!-- Porcentaje -->
-            <div class="row">
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Porcentaje:</mat-label>
-                <input matInput type="number" placeholder="Ingresa el porcentaje de descuento"
-                  formControlName="porcentaje" required>
-                <mat-error>
-                  <span *ngIf="!promoForm.get('porcentaje').valid && promoForm.get('porcentaje').touched">Agrega el
-                    porcentaje (1-100).</span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <!-- Porcentaje -->
-
-            <!-- Fechas -->
-            <div class="row">
-              <!-- Fecha inic -->
-              <div class="col-md-6">
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha en que inicia la promoción:</mat-label>
-                  <input matInput [matDatepicker]="fechaInicio" placeholder="Elige una fecha"
-                    formControlName="fechaInicio" required>
-                  <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
-                  <mat-datepicker #fechaInicio></mat-datepicker>
+              <!-- Código -->
+              <div class="row">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Código:</mat-label>
+                  <input matInput placeholder="Ingresa el código" formControlName="codigo" required>
                   <mat-error>
-                    <span *ngIf="!promoForm.get('fechaInicio').valid && promoForm.get('fechaInicio').touched">Agrega
-                      fecha
-                      de inicio.</span>
+                    <span *ngIf="!promoForm.get('codigo').valid && promoForm.get('codigo').touched">Agrega el
+                      código.</span>
                   </mat-error>
                 </mat-form-field>
               </div>
-              <!-- Fecha inic -->
+              <!-- Código -->
 
-              <!-- Fecha fin -->
-              <div class="col-md-6">
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha en que finaliza la promoción:</mat-label>
-                  <input matInput [matDatepicker]="fechaFin" placeholder="Elige una fecha" formControlName="fechaFin"
-                    required>
-                  <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
-                  <mat-datepicker #fechaFin></mat-datepicker>
+              <!-- Porcentaje -->
+              <div class="row">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Porcentaje:</mat-label>
+                  <input matInput type="number" placeholder="Ingresa el porcentaje de descuento"
+                    formControlName="porcentaje" required>
                   <mat-error>
-                    <span *ngIf="!promoForm.get('fechaFin').valid && promoForm.get('fechaFin').touched">Agrega fecha
-                      de finalización.</span>
+                    <span *ngIf="!promoForm.get('porcentaje').valid && promoForm.get('porcentaje').touched">Agrega el
+                      porcentaje (1-100).</span>
                   </mat-error>
                 </mat-form-field>
               </div>
-              <!-- Fecha fin -->
-            </div>
-            <!-- Fechas -->
+              <!-- Porcentaje -->
 
-            <!-- Cumple -->
-            <div class="row">
-              <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="cumple" formControlName="cumple">
-                <label class="custom-control-label" for="cumple">Cumpleaños</label>
+              <!-- Fechas -->
+              <div class="row">
+                <!-- Fecha inic -->
+                <div class="col-md-6 pl-0">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha en que inicia la promoción:</mat-label>
+                    <input matInput [matDatepicker]="fechaInicio" placeholder="Elige una fecha"
+                      formControlName="fechaInicio" required>
+                    <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaInicio></mat-datepicker>
+                    <mat-error>
+                      <span *ngIf="!promoForm.get('fechaInicio').valid && promoForm.get('fechaInicio').touched">Agrega
+                        fecha
+                        de inicio.</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- Fecha inic -->
+
+                <!-- Fecha fin -->
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha en que finaliza la promoción:</mat-label>
+                    <input matInput [matDatepicker]="fechaFin" placeholder="Elige una fecha" formControlName="fechaFin"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaFin></mat-datepicker>
+                    <mat-error>
+                      <span *ngIf="!promoForm.get('fechaFin').valid && promoForm.get('fechaFin').touched">Agrega fecha
+                        de finalización.</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- Fecha fin -->
+              </div>
+              <!-- Fechas -->
+
+              <!-- Cumple -->
+              <div class="row">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="cumple" formControlName="cumple">
+                  <label class="custom-control-label" for="cumple">Cumpleaños</label>
+                </div>
+              </div>
+              <!-- Cumple -->
+
+              <div class="row pt-3">
+                <div class="col-md-6 text-center">
+                  <button type="button" class="btn btn-success btn-md " [disabled]="!promoForm.valid"
+                    (click)="guardar()">
+                    <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Guardar
+                  </button>
+                </div>
+                <div class="col-md-6 text-center">
+                  <button type="button" class="btn btn-danger btn-md" [routerLink]="['../']">
+                    <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">Cancelar
+                  </button>
+                </div>
               </div>
             </div>
-            <!-- Cumple -->
+          </form>
+        </div>
+        <!-- FormCod -->
+        <!-- FormFecha -->
+        <div *ngIf="tipo==1">
+          <form [formGroup]="fechaForm">
+            <div class="col-md-12">
 
-            <div class="row">
-              <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-success btn-md " [disabled]="!promoForm.valid" (click)="guardar()">
-                  <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Guardar
-                </button>
-              </div>
-              <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-danger btn-md" [routerLink]="['../']">
-                  <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">Cancelar
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div *ngIf="tipo==1">
-        <form [formGroup]="fechaForm">
-          <div class="col-md-12">
-
-            <!-- Porcentaje -->
-            <div class="row">
-              <mat-form-field appearance="outline" class="field-login">
-                <mat-label>Porcentaje:</mat-label>
-                <input matInput type="number" placeholder="Ingresa el porcentaje de descuento"
-                  formControlName="porcentaje" required>
-                <mat-error>
-                  <span *ngIf="!promoForm.get('porcentaje').valid && promoForm.get('porcentaje').touched">Agrega el
-                    porcentaje (1-100).</span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <!-- Porcentaje -->
-
-            <!-- Fechas -->
-            <div class="row">
-              <!-- Fecha inic -->
-              <div class="col-md-6">
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha en que inicia la promoción:</mat-label>
-                  <input matInput [matDatepicker]="fechaInicio" placeholder="Elige una fecha"
-                    formControlName="fechaInicio" required>
-                  <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
-                  <mat-datepicker #fechaInicio></mat-datepicker>
+              <!-- Porcentaje -->
+              <div class="row">
+                <mat-form-field appearance="outline" class="field-login">
+                  <mat-label>Porcentaje:</mat-label>
+                  <input matInput type="number" placeholder="Ingresa el porcentaje de descuento"
+                    formControlName="porcentaje" required>
                   <mat-error>
-                    <span *ngIf="!promoForm.get('fechaInicio').valid && promoForm.get('fechaInicio').touched">Agrega
-                      fecha
-                      de inicio.</span>
+                    <span *ngIf="!promoForm.get('porcentaje').valid && promoForm.get('porcentaje').touched">Agrega el
+                      porcentaje (1-100).</span>
                   </mat-error>
                 </mat-form-field>
               </div>
-              <!-- Fecha inic -->
+              <!-- Porcentaje -->
 
-              <!-- Fecha fin -->
-              <div class="col-md-6">
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha en que finaliza la promoción:</mat-label>
-                  <input matInput [matDatepicker]="fechaFin" placeholder="Elige una fecha" formControlName="fechaFin"
-                    required>
-                  <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
-                  <mat-datepicker #fechaFin></mat-datepicker>
-                  <mat-error>
-                    <span *ngIf="!promoForm.get('fechaFin').valid && promoForm.get('fechaFin').touched">Agrega fecha
-                      de finalización.</span>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <!-- Fecha fin -->
-            </div>
-            <!-- Fechas -->
+              <!-- Fechas -->
+              <div class="row">
+                <!-- Fecha inic -->
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha en que inicia la promoción:</mat-label>
+                    <input matInput [matDatepicker]="fechaInicio" placeholder="Elige una fecha"
+                      formControlName="fechaInicio" required>
+                    <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaInicio></mat-datepicker>
+                    <mat-error>
+                      <span *ngIf="!promoForm.get('fechaInicio').valid && promoForm.get('fechaInicio').touched">Agrega
+                        fecha
+                        de inicio.</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- Fecha inic -->
 
-            <div class="row">
-              <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-success btn-md " [disabled]="!fechaForm.valid" (click)="guardar()">
-                  <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Guardar
-                </button>
+                <!-- Fecha fin -->
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha en que finaliza la promoción:</mat-label>
+                    <input matInput [matDatepicker]="fechaFin" placeholder="Elige una fecha" formControlName="fechaFin"
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaFin></mat-datepicker>
+                    <mat-error>
+                      <span *ngIf="!promoForm.get('fechaFin').valid && promoForm.get('fechaFin').touched">Agrega fecha
+                        de finalización.</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- Fecha fin -->
               </div>
-              <div class="col-md-6 text-center">
-                <button type="button" class="btn btn-danger btn-md" [routerLink]="['../']">
-                  <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">Cancelar
-                </button>
+              <!-- Fechas -->
+
+              <div class="row pt-3">
+                <div class="col-md-6 text-center">
+                  <button type="button" class="btn btn-success btn-md " [disabled]="!fechaForm.valid"
+                    (click)="guardar()">
+                    <img class="icon-nav mr-1" src="./../../../assets/icons/guardar.svg">Guardar
+                  </button>
+                </div>
+                <div class="col-md-6 text-center">
+                  <button type="button" class="btn btn-danger btn-md" [routerLink]="['../']">
+                    <img class="icon-nav mr-1" src="./../../../assets/icons/error.svg">Cancelar
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
+        <!-- FormFecha -->
       </div>
     </mat-card>
   </div>
