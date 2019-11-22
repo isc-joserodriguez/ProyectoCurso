@@ -29,7 +29,7 @@ export class CuentaComponent implements OnInit {
 
   ngOnInit() {
     this.correoForm = this.formBuilder.group({
-      correo: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
       pass: ['', Validators.required]
     });
     this.passForm = this.formBuilder.group({

@@ -32,7 +32,7 @@ export class AdminCuentaComponent implements OnInit {
     this.errorPass = false;
     this.errorCorreo = false;
     this.correoForm = this.formBuilder.group({
-      correo: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
       pass: ['', Validators.required]
     });
     this.passForm = this.formBuilder.group({
@@ -50,7 +50,7 @@ export class AdminCuentaComponent implements OnInit {
       this.persona.credencial = res.detail[0].credencial;
       this.hash = this.persona.credencial.contraseña;
       this.correoForm = this.formBuilder.group({
-        correo: [this.persona.credencial.correo, Validators.required],
+        correo: [this.persona.credencial.correo, [Validators.required, Validators.email]],
         pass: ['', Validators.required]
       });
       this.passForm = this.formBuilder.group({

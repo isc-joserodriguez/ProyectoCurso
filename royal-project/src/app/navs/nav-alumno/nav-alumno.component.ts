@@ -66,7 +66,7 @@ export class NavAlumnoComponent implements OnInit {
     });
 
     this.logForm = this.formBuilder.group({
-      logCorreo: [null, Validators.required],
+      logCorreo: [null, [Validators.required, Validators.email]],
       logContrasenia: [null, Validators.required]
     });
 
@@ -75,7 +75,7 @@ export class NavAlumnoComponent implements OnInit {
       regNombre: ['', Validators.required],
       regApMaterno: ['', Validators.required],
       regApPaterno: ['', Validators.required],
-      regCorreo: ['', Validators.required],
+      regCorreo: ['', [Validators.required, Validators.email]],
       regContrasenia: ['', Validators.required],
       regRepContrasenia: ['', Validators.required]
     }, {

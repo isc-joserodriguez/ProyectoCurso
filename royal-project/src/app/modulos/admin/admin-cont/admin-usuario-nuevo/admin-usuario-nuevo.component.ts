@@ -41,7 +41,7 @@ export class AdminUsuarioNuevoComponent implements OnInit {
       altaNombre: ['', Validators.required],
       altaApPaterno: ['', Validators.required],
       altaApMaterno: ['', Validators.required],
-      altaCorreo: ['', Validators.required],
+      altaCorreo: ['', [Validators.required, Validators.email]],
       altaNac: ['', Validators.required],
       sexo: ['', Validators.required],
       altaRol: ['', Validators.required]
