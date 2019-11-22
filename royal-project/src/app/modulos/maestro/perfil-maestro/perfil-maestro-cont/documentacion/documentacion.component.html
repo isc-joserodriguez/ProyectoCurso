@@ -115,3 +115,21 @@
   </div>
   <br>
 </div>
+
+var=['Primero',
+Hola,
+Holaasdasd,
+sfsd,
+asdsad,
+asdsad]
+
+<ul>
+  <li *ngFor="let var of arr">{{var}}</li>
+</ul>
+
+<input (click)="AgregarValor($event)">
+
+<!-- ts -->
+AgregarValor(event){
+var.push(event.value());
+}
