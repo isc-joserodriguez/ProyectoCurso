@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav-administrador',
@@ -19,6 +20,7 @@ export class NavAdministradorComponent implements OnInit {
     apMaterno: '',
     sexo: 3
   };
+  subscription: Subscription;
 
   usuario = '';
   sexo = 3; // 1= H 2= M 3= Indef
@@ -27,6 +29,10 @@ export class NavAdministradorComponent implements OnInit {
 
   ngOnInit() {
     this.verificarToken();
+    const source = interval(5000);
+    this.subscription = source.subscribe(val => {
+        this.verificarToken();
+    });
   }
 
   verificarToken() {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
-import { Router } from '@angular/router';
 import { Match } from 'src/app/helper/match.validator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cuenta',
@@ -25,7 +25,7 @@ export class CuentaComponent implements OnInit {
     }
   };
 
-  constructor(private usuario: UsuariosService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private _snackBar: MatSnackBar, private usuario: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.errorPass = false;
@@ -70,6 +70,9 @@ export class CuentaComponent implements OnInit {
         this.inicializar(localStorage.getItem('userid'));
       } else {
         this.ngOnInit();
+        this._snackBar.open('Correo actualizado', 'Hecho', {
+          duration: 3000,
+        });
       }
     });
   }
@@ -82,6 +85,9 @@ export class CuentaComponent implements OnInit {
         this.inicializar(localStorage.getItem('userid'));
       } else {
         this.ngOnInit();
+        this._snackBar.open('Contrseña actualizada', 'Hecho', {
+          duration: 3000,
+        });
       }
     });
   }

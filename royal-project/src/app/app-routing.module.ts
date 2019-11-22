@@ -5,6 +5,8 @@ import { NavAlumnoComponent } from './navs/nav-alumno/nav-alumno.component';
 import { NavMaestroComponent } from './navs/nav-maestro/nav-maestro.component';
 import { NavAdministradorComponent } from './navs/nav-administrador/nav-administrador.component';
 import { UsuarioDesactivadoComponent } from './modulos/usuario-desactivado/usuario-desactivado.component';
+import { TerminosYCondicionesComponent } from './modulos/terminos-y-condiciones/terminos-y-condiciones.component';
+import { DatosYPrivacidadComponent } from './modulos/datos-y-privacidad/datos-y-privacidad.component';
 
 
 const routes: Routes = [
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: 'usuario-inhabilitado',
     component: UsuarioDesactivadoComponent
+  },
+  {
+    path: 'terminos-y-condiciones',
+    component: TerminosYCondicionesComponent
+  },
+  {
+    path: 'datos-y-privacidad',
+    component: DatosYPrivacidadComponent
   },
   {
     path: '',

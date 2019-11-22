@@ -61,6 +61,7 @@ export class NavAlumnoComponent implements OnInit {
     this.subscription = source.subscribe(val => {
       if (localStorage.getItem('userid') != null) {
         this.getNotificaciones();
+        this.verificarToken();
       }
     });
 

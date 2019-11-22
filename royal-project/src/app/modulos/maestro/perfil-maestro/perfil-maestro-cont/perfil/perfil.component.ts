@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-perfil',
@@ -21,7 +22,7 @@ export class PerfilComponent implements OnInit {
 
   perfilForm: FormGroup;
 
-  constructor(private firebase: FirebaseService, private usuario: UsuariosService, private formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private firebase: FirebaseService, private usuario: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.perfilForm = this.formBuilder.group({
@@ -79,10 +80,13 @@ export class PerfilComponent implements OnInit {
     } else {
       this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
         this.finalizado = true;
+        this._snackBar.open('Perfil actualizado', 'Hecho', {
+          duration: 3000,
+        });
       });
     }
   }
-  
+
   public seleccionarFoto(event) {
     this.cambiaFoto = true;
     if (event.target.files.length > 0) {
@@ -125,6 +129,9 @@ export class PerfilComponent implements OnInit {
           this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
             this.finalizado = true;
             this.cambiaFoto = false;
+            this._snackBar.open('Perfil actualizado', 'Hecho', {
+              duration: 3000,
+            });
           });
         });
       }

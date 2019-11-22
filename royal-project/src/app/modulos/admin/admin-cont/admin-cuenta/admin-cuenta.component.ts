@@ -6,13 +6,14 @@ import { Match } from 'src/app/helper/match.validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-cuenta',
-  templateUrl: './cuenta.component.html',
-  styleUrls: ['./cuenta.component.scss']
+  selector: 'app-admin-cuenta',
+  templateUrl: './admin-cuenta.component.html',
+  styleUrls: ['./admin-cuenta.component.scss']
 })
-export class CuentaComponent implements OnInit {
+export class AdminCuentaComponent implements OnInit {
   correoForm: FormGroup;
   passForm: FormGroup;
+
   errorPass = false;
   errorCorreo = false;
 
@@ -28,6 +29,8 @@ export class CuentaComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar, private usuario: UsuariosService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    this.errorPass = false;
+    this.errorCorreo = false;
     this.correoForm = this.formBuilder.group({
       correo: ['', Validators.required],
       pass: ['', Validators.required]
@@ -46,18 +49,18 @@ export class CuentaComponent implements OnInit {
     this.usuario.getUser(id).subscribe((res: any) => {
       this.persona.credencial = res.detail[0].credencial;
       this.hash = this.persona.credencial.contraseña;
-      this.correoForm.setValue({
-        correo: this.persona.credencial.correo,
-        pass: ''
+      this.correoForm = this.formBuilder.group({
+        correo: [this.persona.credencial.correo, Validators.required],
+        pass: ['', Validators.required]
       });
-      this.passForm.setValue({
-        actual: '',
-        pass: '',
-        passConfirm: ''
+      this.passForm = this.formBuilder.group({
+        actual: ['', Validators.required],
+        pass: ['', Validators.required],
+        passConfirm: ['', Validators.required]
+      }, {
+        validator: Match('pass', 'passConfirm')
       });
     });
-    this.errorPass = false;
-    this.errorCorreo = false;
   }
 
   guardarCorreo() {
@@ -79,6 +82,7 @@ export class CuentaComponent implements OnInit {
     this.persona.credencial.contraseña = this.passForm.value.pass;
     this.usuario.updateCredencial(localStorage.getItem('userid'), { credencial: this.persona.credencial, contra: this.hash, confirm: this.passForm.value.actual, op: 1 }).subscribe((res: any) => {
       if (res.code == 400) {
+        this.errorPass = true;
         this.inicializar(localStorage.getItem('userid'));
       } else {
         this.ngOnInit();

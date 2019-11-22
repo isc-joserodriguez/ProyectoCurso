@@ -12,6 +12,8 @@ import { AdminReportesComponent } from './admin-reportes/admin-reportes.componen
 import { AdminPromosComponent } from './admin-promos/admin-promos.component';
 import { AdminPromosNuevaComponent } from './admin-promos-nueva/admin-promos-nueva.component';
 import { AdminPromosEditComponent } from './admin-promos-edit/admin-promos-edit.component';
+import { AdminPerfilComponent } from './admin-perfil/admin-perfil.component';
+import { AdminCuentaComponent } from './admin-cuenta/admin-cuenta.component';
 
 const routes: Routes = [
   {
@@ -61,7 +63,16 @@ const routes: Routes = [
   {
     path: 'promos/editar/:id',
     component: AdminPromosEditComponent
-  }
+  },
+  {
+    path: 'config/perfil',
+    component: AdminPerfilComponent
+  },
+  {
+    path: 'config/cuenta',
+    component: AdminCuentaComponent
+  },
+
 
 ];
 

@@ -5,11 +5,11 @@ import { FirebaseService } from 'src/app/servicios/firebase.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  selector: 'app-admin-perfil',
+  templateUrl: './admin-perfil.component.html',
+  styleUrls: ['./admin-perfil.component.scss']
 })
-export class PerfilComponent implements OnInit {
+export class AdminPerfilComponent implements OnInit {
   viejaFoto = '';
   cambiaFoto = false;
 

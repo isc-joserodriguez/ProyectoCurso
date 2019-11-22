@@ -52,6 +52,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CKEditorModule } from 'ng2-ckeditor';
 
 import { NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE } from '@tinkoff/ng-dompurify';
+import { TerminosYCondicionesComponent } from './modulos/terminos-y-condiciones/terminos-y-condiciones.component';
+import { DatosYPrivacidadComponent } from './modulos/datos-y-privacidad/datos-y-privacidad.component';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { NgDompurifyDomSanitizer, NgDompurifyModule, SANITIZE_STYLE } from '@tin
     NavAlumnoComponent,
     NavMaestroComponent,
     NavAdministradorComponent,
-    UsuarioDesactivadoComponent
+    UsuarioDesactivadoComponent,
+    TerminosYCondicionesComponent,
+    DatosYPrivacidadComponent
   ],
   imports: [
     BrowserModule,

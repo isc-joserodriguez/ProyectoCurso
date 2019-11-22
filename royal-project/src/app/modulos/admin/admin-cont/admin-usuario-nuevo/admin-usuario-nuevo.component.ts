@@ -14,6 +14,7 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 })
 export class AdminUsuarioNuevoComponent implements OnInit {
   altaForm: FormGroup;
+  genPass = '';
   persona = {
     credencial: {
       correo: '',
@@ -27,8 +28,6 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     tipo: [],
     foto: 'http://www.lorempixel.com/200/200'
   };
-
-  archivopath = 'Elige un Archivo';
 
   admin = false;
 
@@ -49,15 +48,14 @@ export class AdminUsuarioNuevoComponent implements OnInit {
     });
 
     this.altaForm.valueChanges.subscribe((data) => {
-      this.archivopath = data.altaFoto;
+      this.genPass = data.altaNombre.substring(0, 2) + data.altaApPaterno.substring(0, 2) + DateConvert(data.altaNac).replace(/-/g, '');
     });
   }
 
   alta() {
     this.persona.fechaNac = DateConvert(this.altaForm.value.altaNac);
     this.persona.credencial.correo = this.altaForm.value.altaCorreo;
-    this.persona.credencial.contraseña = this.altaForm.value.altaNombre.substring(0, 2) +
-      this.altaForm.value.altaApPaterno.substring(0, 2) + this.persona.fechaNac.replace(/-/g, '');
+    this.persona.credencial.contraseña = this.genPass;
 
     this.persona.nombre = this.altaForm.value.altaNombre;
     this.persona.apPaterno = this.altaForm.value.altaApPaterno;

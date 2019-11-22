@@ -22,6 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 // MDBootstrap
 import { CarouselModule } from 'angular-bootstrap-md';
@@ -40,6 +43,8 @@ import { AdminReportesComponent } from './admin-reportes/admin-reportes.componen
 import { AdminPromosComponent } from './admin-promos/admin-promos.component';
 import { AdminPromosNuevaComponent } from './admin-promos-nueva/admin-promos-nueva.component';
 import { AdminPromosEditComponent } from './admin-promos-edit/admin-promos-edit.component';
+import { AdminPerfilComponent } from './admin-perfil/admin-perfil.component';
+import { AdminCuentaComponent } from './admin-cuenta/admin-cuenta.component';
 
 
 @NgModule({
@@ -55,7 +60,9 @@ import { AdminPromosEditComponent } from './admin-promos-edit/admin-promos-edit.
     AdminReportesComponent,
     AdminPromosComponent,
     AdminPromosNuevaComponent,
-    AdminPromosEditComponent
+    AdminPromosEditComponent,
+    AdminPerfilComponent,
+    AdminCuentaComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +87,9 @@ import { AdminPromosEditComponent } from './admin-promos-edit/admin-promos-edit.
     MatIconModule,
     MatDividerModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ]
 })
 export class AdminContModule { }
