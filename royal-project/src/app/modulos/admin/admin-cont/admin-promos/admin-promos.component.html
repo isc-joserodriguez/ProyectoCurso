@@ -66,6 +66,14 @@
             </td>
           </ng-container>
 
+          <!-- Columna Estatus -->
+          <ng-container matColumnDef="fechaFin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fin</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.estatus}}
+            </td>
+          </ng-container>
+
           <!-- Columna Usos -->
           <ng-container matColumnDef="usos">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Usos</th>
