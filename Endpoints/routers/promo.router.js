@@ -10,7 +10,7 @@ module.exports = (wagner) => {
     });
 
     promoRouter.get("/getPromo/:id", (req, res) => {
-        promoCtrl.getById(req, res);
+        promoCtrl.getByCode(req, res);
     });
 
     promoRouter.get("/getPromoById/:id", (req, res) => {

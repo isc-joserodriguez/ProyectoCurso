@@ -1,7 +1,7 @@
 let _promo;
 
 const getAll = (req, res) => {
-    _promo.find({})
+    _promo.find({}).sort({ estatus: -1, fechaInicio: 1 })
         .then(promos => {
             res.status(200);
             res.json({
@@ -60,7 +60,7 @@ const deletepromo = (req, res) => {
         });
 }
 
-const getById = (req, res) => {
+const getByCode = (req, res) => {
     const id = req.params.id;
     _promo.find({ codigo: id })
         .then(promo => {
@@ -149,6 +149,6 @@ const updateUsos = (req, res) => {
 module.exports = (Promo) => {
     _promo = Promo;
     return ({
-        getAll, create, deletepromo, getById, update, updateUsos, getPromoById
+        getAll, create, deletepromo, getByCode, update, updateUsos, getPromoById
     });
 }
