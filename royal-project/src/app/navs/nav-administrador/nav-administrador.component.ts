@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { interval, Subscription } from 'rxjs';
@@ -8,7 +8,7 @@ import { interval, Subscription } from 'rxjs';
   templateUrl: './nav-administrador.component.html',
   styleUrls: ['./nav-administrador.component.scss']
 })
-export class NavAdministradorComponent implements OnInit {
+export class NavAdministradorComponent implements OnInit, OnDestroy {
 
   persona = {
     credencial: {
@@ -31,8 +31,12 @@ export class NavAdministradorComponent implements OnInit {
     this.verificarToken();
     const source = interval(5000);
     this.subscription = source.subscribe(val => {
-        this.verificarToken();
+      this.verificarToken();
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   verificarToken() {

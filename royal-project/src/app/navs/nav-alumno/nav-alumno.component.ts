@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
@@ -17,7 +17,7 @@ import { DateConvert } from 'src/app/helper/date.convert';
   templateUrl: './nav-alumno.component.html',
   styleUrls: ['./nav-alumno.component.scss']
 })
-export class NavAlumnoComponent implements OnInit {
+export class NavAlumnoComponent implements OnInit, OnDestroy {
   passErr = false;
   correcto = false;
 
@@ -62,6 +62,7 @@ export class NavAlumnoComponent implements OnInit {
       if (localStorage.getItem('userid') != null) {
         this.getNotificaciones();
         this.verificarToken();
+        console.log('alumno')
       }
     });
 
@@ -82,6 +83,11 @@ export class NavAlumnoComponent implements OnInit {
       validator: Match('regContrasenia', 'regRepContrasenia')
     });
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   getPromosFecha() {
     this.promos.getPromos().subscribe((promos: any) => {
       promos.detail.forEach(promo => {

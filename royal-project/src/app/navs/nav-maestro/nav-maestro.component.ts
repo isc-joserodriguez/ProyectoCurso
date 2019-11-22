@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
@@ -9,7 +9,7 @@ import { interval, Subscription } from 'rxjs';
   templateUrl: './nav-maestro.component.html',
   styleUrls: ['./nav-maestro.component.scss']
 })
-export class NavMaestroComponent implements OnInit {
+export class NavMaestroComponent implements OnInit, OnDestroy {
 
   persona = {
     credencial: {
@@ -41,6 +41,10 @@ export class NavMaestroComponent implements OnInit {
         this.verificarToken();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   verificarToken() {
