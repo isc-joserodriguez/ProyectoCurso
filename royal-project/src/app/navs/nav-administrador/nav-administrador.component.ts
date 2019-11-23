@@ -24,6 +24,7 @@ export class NavAdministradorComponent implements OnInit, OnDestroy {
 
   usuario = '';
   sexo = 3; // 1= H 2= M 3= Indef
+  stop = false;
 
   constructor(private router: Router, private auth: AuthService) { }
 
@@ -31,12 +32,14 @@ export class NavAdministradorComponent implements OnInit, OnDestroy {
     this.verificarToken();
     const source = interval(5000);
     this.subscription = source.subscribe(val => {
-      this.verificarToken();
+      if (!this.stop) {
+        this.verificarToken();
+      }
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.stop = true;
   }
 
   verificarToken() {

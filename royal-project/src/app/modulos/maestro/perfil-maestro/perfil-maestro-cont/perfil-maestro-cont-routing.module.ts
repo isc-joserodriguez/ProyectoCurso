@@ -4,6 +4,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { DocumentacionComponent } from './documentacion/documentacion.component';
 import { EstatusCursosComponent } from './estatus-cursos/estatus-cursos.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,11 @@ const routes: Routes = [
   {
     path: 'estado-cursos',
     component: EstatusCursosComponent
-  }
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionesComponent
+  },
 ];
 
 @NgModule({

@@ -34,9 +34,10 @@ import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule } from 'angular-bootstrap-md';
 import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { InsigniasComponent } from './insignias/insignias.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 @NgModule({
-  declarations: [PerfilComponent, CuentaComponent, HistorialComprasComponent, CertificadosComponent, InsigniasComponent],
+  declarations: [PerfilComponent, CuentaComponent, HistorialComprasComponent, CertificadosComponent, InsigniasComponent, NotificacionesComponent],
   imports: [
     CommonModule,
     PerfilContRoutingModule,

@@ -80,7 +80,7 @@ export class PerfilComponent implements OnInit {
     } else {
       this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
         this.finalizado = true;
-        this._snackBar.open('Perfil actualizado', 'Hecho', {
+        this._snackBar.open('Perfil actualizado.', 'Hecho', {
           duration: 3000,
         });
       });
@@ -129,7 +129,7 @@ export class PerfilComponent implements OnInit {
           this.usuario.updateDatos(localStorage.getItem('userid'), datos).subscribe(res => {
             this.finalizado = true;
             this.cambiaFoto = false;
-            this._snackBar.open('Perfil actualizado', 'Hecho', {
+            this._snackBar.open('Perfil actualizado.', 'Hecho', {
               duration: 3000,
             });
           });

@@ -29,6 +29,7 @@ export class NavMaestroComponent implements OnInit, OnDestroy {
   perfilPublico = '';
   usuario = '';
   sexo = 3; // 1= H 2= M 3= Indef
+  stop = false;
 
   constructor(private router: Router, private auth: AuthService, private usuarios: UsuariosService) { }
 
@@ -37,14 +38,16 @@ export class NavMaestroComponent implements OnInit, OnDestroy {
     const source = interval(5000);
     this.subscription = source.subscribe(val => {
       if (localStorage.getItem('userid') != null) {
-        this.getNotificaciones();
-        this.verificarToken();
+        if (!this.stop) {
+          this.getNotificaciones();
+          this.verificarToken();
+        }
       }
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.stop = true;
   }
 
   verificarToken() {

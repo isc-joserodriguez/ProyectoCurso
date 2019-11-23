@@ -31,9 +31,10 @@ import { CarouselModule } from 'angular-bootstrap-md';
 import { CardsFreeModule } from 'angular-bootstrap-md';
 import { WavesModule, IconsModule, ButtonsModule } from 'angular-bootstrap-md';
 import { EstatusCursosComponent } from './estatus-cursos/estatus-cursos.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 @NgModule({
-  declarations: [CuentaComponent, PerfilComponent, DocumentacionComponent, EstatusCursosComponent],
+  declarations: [CuentaComponent, PerfilComponent, DocumentacionComponent, EstatusCursosComponent, NotificacionesComponent],
   imports: [
     CommonModule,
     PerfilMaestroContRoutingModule,

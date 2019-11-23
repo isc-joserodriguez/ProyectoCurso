@@ -49,6 +49,7 @@ export class NavAlumnoComponent implements OnInit, OnDestroy {
   sexo = 3; // 1= H 2= M 3= Indef
   busqueda = '';
   perfilPublico = '';
+  stop = false;
 
   constructor(private _snackBar: MatSnackBar, private promos: PromosService, private usuarios: UsuariosService, private cursos: CursosService, private router: Router, private auth: AuthService, private formBuilder: FormBuilder) { }
 
@@ -59,10 +60,9 @@ export class NavAlumnoComponent implements OnInit, OnDestroy {
 
     const source = interval(5000);
     this.subscription = source.subscribe(val => {
-      if (localStorage.getItem('userid') != null) {
+      if (localStorage.getItem('userid') != null && !this.stop) {
         this.getNotificaciones();
         this.verificarToken();
-        console.log('alumno')
       }
     });
 
@@ -85,7 +85,7 @@ export class NavAlumnoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.stop = true;
   }
 
   getPromosFecha() {

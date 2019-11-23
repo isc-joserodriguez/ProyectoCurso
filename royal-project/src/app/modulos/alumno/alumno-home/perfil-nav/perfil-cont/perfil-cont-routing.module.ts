@@ -5,6 +5,7 @@ import { CuentaComponent } from './cuenta/cuenta.component';
 import { HistorialComprasComponent } from './historial-compras/historial-compras.component';
 import { CertificadosComponent } from './certificados/certificados.component';
 import { InsigniasComponent } from './insignias/insignias.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'insignias',
     component: InsigniasComponent
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionesComponent
   }
 ];
 

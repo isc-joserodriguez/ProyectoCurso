@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 declare let videojs: any;
 
 @Component({
@@ -47,7 +48,7 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
 
   player: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -146,7 +147,11 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
             infoAvance[1] = 0;
             infoAvance[2] = 0;
             if (infoAvance[0] > this.infoCurso.contenidoCurso.length - 1) {
-              infoAvance = [0, 0, 0]
+              this.getAvance(localStorage.getItem('userid'));
+              this._snackBar.open('Has llegado al final de las clases.', 'Hecho', {
+                duration: 3000,
+              });
+              return;
             }
           }
           this.goClase(infoAvance[0], infoAvance[1], infoAvance[2]);
@@ -219,6 +224,9 @@ export class CursoResumenComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     this.curso.updateReview(this.route.snapshot.params.id, { valoraciones: this.infoCurso.valoraciones }).subscribe(res => {
       this.getInfoCurso(this.route.snapshot.params.id);
+      this._snackBar.open('Reseña Guardada.', 'Hecho', {
+        duration: 3000,
+      });
     });
   }
   getRelacionados(subcategoria) {

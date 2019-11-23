@@ -70,7 +70,7 @@ export class CuentaComponent implements OnInit {
         this.inicializar(localStorage.getItem('userid'));
       } else {
         this.ngOnInit();
-        this._snackBar.open('Correo actualizado', 'Hecho', {
+        this._snackBar.open('Correo actualizado.', 'Hecho', {
           duration: 3000,
         });
       }
@@ -85,7 +85,7 @@ export class CuentaComponent implements OnInit {
         this.inicializar(localStorage.getItem('userid'));
       } else {
         this.ngOnInit();
-        this._snackBar.open('Contrseña actualizada', 'Hecho', {
+        this._snackBar.open('Contraseña actualizada.', 'Hecho', {
           duration: 3000,
         });
       }

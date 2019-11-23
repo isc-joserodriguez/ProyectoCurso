@@ -4,6 +4,7 @@ import { CursosService } from 'src/app/servicios/cursos.service'
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 declare let videojs: any;
 
 @Component({
@@ -50,7 +51,7 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
   infoTarea: any = {};
   tareaForm: FormGroup;
   respuestaForm: FormGroup;
-  constructor(private firebase: FirebaseService, private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
+  constructor(private _snackBar: MatSnackBar, private firebase: FirebaseService, private router: Router, private route: ActivatedRoute, private curso: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -238,6 +239,9 @@ export class CursoClaseComponent implements OnInit, OnDestroy, AfterViewInit {
             infoAvance[2] = 0;
             if (infoAvance[0] > this.infoCurso.contenidoCurso.length - 1) {
               this.router.navigate(['/curso/', this.route.snapshot.params.id]);
+              this._snackBar.open('Has llegado al final de las clases.', 'Hecho', {
+                duration: 3000,
+              });
             }
           } else {
             this.goClase(infoAvance[0], infoAvance[1], infoAvance[2]);

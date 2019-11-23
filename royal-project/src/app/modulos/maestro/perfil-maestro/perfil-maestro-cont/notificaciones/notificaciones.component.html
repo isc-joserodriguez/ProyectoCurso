@@ -1,0 +1,48 @@
+<div class="col-md-12 fondoadmin">
+  <div class="text-center vertical-center">
+    <label class="h3 subtitulo my-2">Notificaciones</label>
+  </div>
+  <!-- Primer form -->
+  <mat-card>
+    <!--tabla-->
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="datosCursos" matSort>
+
+        <!-- Columna Descripción -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción</th>
+          <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
+        </ng-container>
+
+        <!-- Columna Fecha -->
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+          <td mat-cell *matCellDef="let row"> {{row.fecha|date}} </td>
+        </ng-container>
+
+        <!-- Columna Estado -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+        </ng-container>
+
+        <!-- Columna Ver -->
+
+        <ng-container matColumnDef="ver">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ver</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="[row.ruta]">Ver</a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colCursos"></tr>
+        <tr mat-row *matRowDef="let row; columns: colCursos;">
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+    <!--fin tabla-->
+  </mat-card>
+  <br>
+</div>

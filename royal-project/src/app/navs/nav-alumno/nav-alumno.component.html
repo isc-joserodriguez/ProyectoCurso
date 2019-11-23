@@ -139,6 +139,9 @@
             </button>
             <mat-divider></mat-divider>
           </div>
+          <button mat-menu-item [routerLink]="['/perfil/notificaciones']">
+            <i class="fas fa-laptop-code"></i>Ver todas
+          </button>
         </mat-menu>
       </div>
       <!-- Alertas-->
@@ -230,7 +233,7 @@
             <h2>Iniciaste sesión correctamente.</h2>
             <h2 class="letrastar">¡Bienvenido!</h2>
             <button type="button" class="btn btn-success btn-sm" data-dismiss="modal"
-              (click)="ngOnInit()">Continuar</button>
+              (click)="verificarToken()">Continuar</button>
           </div>
         </div>
       </div>
