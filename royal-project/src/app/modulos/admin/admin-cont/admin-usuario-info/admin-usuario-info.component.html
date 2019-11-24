@@ -16,7 +16,7 @@
                     <mat-label>Correo:</mat-label>
                     <input matInput placeholder="Ingresa tu correo" required [(ngModel)]="usuario.credencial.correo">
                     <mat-error>
-                        <span *ngIf="usuario.correo==''">Agrega un correo</span>
+                        <span *ngIf="usuario.credencial.correo==''">Agrega un correo</span>
                     </mat-error>
                 </mat-form-field>
                 <br>

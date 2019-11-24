@@ -19,7 +19,6 @@ export class DiarioEntradaComponent implements OnInit {
   ckeConfig: any;
   mycontent: string;
   log: string = '';
-  @ViewChild("myckeditor") ckeditor: any;
   //fin ckeditor
 
   iduser = localStorage.getItem('userid');

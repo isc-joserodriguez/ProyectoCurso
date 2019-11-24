@@ -151,7 +151,7 @@
                   <div class="custom-file">
                     <input type="file" class="custom-file-input text-truncate" formControlName="foto"
                       (change)="seleccionarFoto($event)">
-                    <label class="custom-file-label text-truncate" for="inputGroupFile01">{{archivopath}}</label>
+                    <label class="custom-file-label text-truncate" for="inputGroupFile01">{{nombreArchivo}}</label>
                   </div>
                 </div>
                 <mat-progress-bar *ngIf="!finalizado" mode="determinate" [value]="porcentaje">

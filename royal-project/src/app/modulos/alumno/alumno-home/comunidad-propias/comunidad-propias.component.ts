@@ -14,6 +14,7 @@ export class ComunidadPropiasComponent implements OnInit {
   preguntas = [];
   preguntaForm: FormGroup;
   categoriaSelect = 'idiomas';
+  iduser = localStorage.getItem('userid') == null;
   ngOnInit() {
     this.preguntaForm = this.formBuilder.group({
       pregunta: ['', Validators.required]

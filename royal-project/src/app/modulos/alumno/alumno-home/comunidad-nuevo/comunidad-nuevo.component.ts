@@ -15,7 +15,6 @@ export class ComunidadNuevoComponent implements OnInit {
   ckeConfig: any;
   mycontent: string;
   log: string = '';
-  @ViewChild("myckeditor") ckeditor: any;
   //fin ckeditor
   categoria = this.route.snapshot.params.categoria;
   iduser = localStorage.getItem('userid');

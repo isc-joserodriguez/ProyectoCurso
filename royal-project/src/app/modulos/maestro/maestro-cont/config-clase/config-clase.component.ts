@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { FirebaseService } from 'src/app/servicios/firebase.service';
-import { CKEditorComponent } from 'ng2-ckeditor/esm5/ckeditor.component.js';
+//import { CKEditorComponent } from 'ng2-ckeditor/esm5/ckeditor.component.js';
 declare let videojs: any;
 
 @Component({
@@ -13,12 +13,12 @@ declare let videojs: any;
   styleUrls: ['./config-clase.component.scss']
 })
 export class ConfigClaseComponent implements OnInit, OnDestroy, AfterViewInit {
+  p = 0;
   name = 'ng2-ckeditor';
   player: any;
   ckeConfig: any;
   mycontent: string;
   log: string = '';
-  @ViewChild(CKEditorComponent) ckeditor: CKEditorComponent;
   numPlantilla = 0;
 
   respuestaCom = '';
