@@ -33,7 +33,8 @@
       <!--Buscador-->
       <div class="col-md-6 vertical-center">
         <div class="input-group input-group-sm vertical-center">
-          <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso" [(ngModel)]="busqueda">
+          <input type="text" class="form-control my-auto ml-2" placeholder="Buscar Curso" [(ngModel)]="busqueda"
+            (keydown.enter)="busquedaKeyDown()">
           <div class="input-group-prepend ml-3">
             <button mat-mini-fab color="primary" (click)="buscar()"><i class="fas fa-search"></i></button>
           </div>
@@ -134,7 +135,8 @@
         </button>
         <mat-menu #alertas="matMenu" class="fondo-navbar">
           <div *ngFor="let notificacion of notificaciones; let i=index">
-            <button mat-menu-item [matTooltip]="notificacion.descripcion" [routerLink]="[notificacion.ruta]" (click)="descartar(i)" *ngIf="notificacion.estado">
+            <button mat-menu-item [matTooltip]="notificacion.descripcion" [routerLink]="[notificacion.ruta]"
+              (click)="descartar(i)" *ngIf="notificacion.estado">
               <i class="fas fa-bell"></i>{{notificacion.descripcion}}
             </button>
             <mat-divider></mat-divider>
@@ -211,14 +213,15 @@
       <div class="modal-body">
         <form class="text-center" [formGroup]="logForm" *ngIf="!correcto">
           <mat-form-field class="field-login">
-            <input matInput placeholder="Correo" formControlName="logCorreo">
+            <input matInput placeholder="Correo" formControlName="logCorreo" (keydown.enter)="loginKeyDown()">
             <mat-error>
               <span *ngIf="!logForm.get('logCorreo').valid && logForm.get('logCorreo').touched">Agrega un
                 correo</span>
             </mat-error>
           </mat-form-field>
           <mat-form-field class="field-login">
-            <input matInput placeholder="Contraseña" type="password" formControlName="logContrasenia">
+            <input matInput placeholder="Contraseña" type="password" formControlName="logContrasenia"
+              (keydown.enter)="loginKeyDown()">
             <mat-error>
               <span *ngIf="!logForm.get('logContrasenia').valid && logForm.get('logContrasenia').touched">Agrega una
                 contraseña</span>

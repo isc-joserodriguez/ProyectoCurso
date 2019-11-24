@@ -319,7 +319,7 @@
           <br><br><br>
           <!--Carrusel-->
           <div class="row pl-4">
-            <h4 class="txtTodos">Cursos Relacionados</h4>
+            <h4 class="txtTodos" *ngIf="relacionados.length!=0">Cursos Relacionados</h4>
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner text-center">
                 <div class="carousel-item" *ngFor="let curso of relacionados; let i=index" [ngClass]="{active: i==0}">

@@ -125,9 +125,7 @@ export class NavAlumnoComponent implements OnInit, OnDestroy {
         this.sinLeer = conteo;
         this.notificaciones = usuario.detail[0].notificaciones.reverse();
       }
-
     });
-
   }
   descartar(i) {
     this.notificaciones[i].estado = false;
@@ -235,5 +233,10 @@ export class NavAlumnoComponent implements OnInit, OnDestroy {
     this.router.navigate(['/buscar', this.busqueda.replace(/ /g, '-')]);
   }
 
-
+  busquedaKeyDown() {
+    if (this.busqueda != '') this.buscar();
+  }
+  loginKeyDown() {
+    if (this.logForm.valid) this.login();
+  }
 }

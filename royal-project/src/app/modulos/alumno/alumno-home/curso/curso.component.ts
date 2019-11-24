@@ -181,6 +181,7 @@ export class CursoComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
       if (this.relacionados.length > 5) this.relacionados = this.getRandom(this.relacionados, 5);
+      console.log(this.relacionados)
     });
   }
   getRandom(arr, n) {

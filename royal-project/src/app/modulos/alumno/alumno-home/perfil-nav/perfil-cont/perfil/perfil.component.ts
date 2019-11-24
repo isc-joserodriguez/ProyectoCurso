@@ -88,7 +88,7 @@ export class PerfilComponent implements OnInit {
     this.cambiaFoto = true;
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.mensajeArchivo = `Archivo preparado: ${event.target.files[i].name}`;
+        this.mensajeArchivo = `${event.target.files[i].name}`;
         this.nombreArchivo = event.target.files[i].name;
         this.datosFormulario.delete('archivo');
         this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name);
