@@ -24,8 +24,8 @@
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
           <td mat-cell *matCellDef="let row">
-            <img class="icon-opcion"
-              [src]="(!row.estado)?'./../../../assets/icons/ojoazul.svg':'./../../../assets/icons/ojogris.svg'">
+            <img [matTooltip]="(row.estado)?'Sin ver':'Visto'" class="icon-opcion"
+              [src]="(row.estado)?'./../../../assets/icons/ojoazul.svg':'./../../../assets/icons/ojogris.svg'">
           </td>
         </ng-container>
 

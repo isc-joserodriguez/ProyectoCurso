@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 // MDBootstrap
@@ -58,7 +59,8 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
     MatIconModule,
     MatDividerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ]
 })
 export class PerfilMaestroContModule { }
