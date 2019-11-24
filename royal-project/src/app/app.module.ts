@@ -28,6 +28,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -94,7 +96,8 @@ import { DatosYPrivacidadComponent } from './modulos/datos-y-privacidad/datos-y-
     NgDompurifyModule,
     SafePipeModule,
     MatBadgeModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [{
     provide: DomSanitizer,

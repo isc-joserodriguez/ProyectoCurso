@@ -134,13 +134,13 @@
         </button>
         <mat-menu #alertas="matMenu" class="fondo-navbar">
           <div *ngFor="let notificacion of notificaciones; let i=index">
-            <button mat-menu-item [routerLink]="[notificacion.ruta]" (click)="descartar(i)" *ngIf="notificacion.estado">
-              <i class="fas fa-laptop-code"></i>{{notificacion.descripcion}}
+            <button mat-menu-item [matTooltip]="notificacion.descripcion" [routerLink]="[notificacion.ruta]" (click)="descartar(i)" *ngIf="notificacion.estado">
+              <i class="fas fa-bell"></i>{{notificacion.descripcion}}
             </button>
             <mat-divider></mat-divider>
           </div>
           <button mat-menu-item [routerLink]="['/perfil/notificaciones']">
-            <i class="fas fa-laptop-code"></i>Ver todas
+            <i class="far fa-bell"></i>Ver todas
           </button>
         </mat-menu>
       </div>

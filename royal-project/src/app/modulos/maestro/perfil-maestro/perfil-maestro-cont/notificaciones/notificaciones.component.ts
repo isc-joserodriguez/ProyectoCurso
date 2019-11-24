@@ -11,32 +11,32 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 })
 export class NotificacionesComponent implements OnInit {
 
-  // Variables Cursos
-  listaCursos = [];
-  colCursos: string[] = ['descripcion', 'fecha', 'estado', 'ver'];
-  datosCursos: MatTableDataSource<any>;
+  // Variables Notificaciones
+  listaNotificaciones = [];
+  colNotificaciones: string[] = ['descripcion', 'fecha', 'estado', 'ver'];
+  datosNotificaciones: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private usuarios: UsuariosService) {
-    // datasource cursos
-    this.datosCursos = new MatTableDataSource(this.listaCursos);
+    // datasource notificaciones
+    this.datosNotificaciones = new MatTableDataSource(this.listaNotificaciones);
   }
 
   ngOnInit() {
-    // inic. cursos
-    this.datosCursos.paginator = this.paginator;
-    this.datosCursos.sort = this.sort;
-    this.getCursos();
+    // inic. notificaciones
+    this.datosNotificaciones.paginator = this.paginator;
+    this.datosNotificaciones.sort = this.sort;
+    this.getNotificaciones();
   }
 
-  getCursos() {
-    this.listaCursos = [];
+  getNotificaciones() {
+    this.listaNotificaciones = [];
     this.usuarios.getUser(localStorage.getItem('userid')).subscribe((res: any) => {
-      this.listaCursos = res.detail[0].notificaciones;
-      this.datosCursos = new MatTableDataSource(this.listaCursos);
-      this.datosCursos.paginator = this.paginator;
-      this.datosCursos.sort = this.sort;
+      this.listaNotificaciones = res.detail[0].notificaciones.reverse();
+      this.datosNotificaciones = new MatTableDataSource(this.listaNotificaciones);
+      this.datosNotificaciones.paginator = this.paginator;
+      this.datosNotificaciones.sort = this.sort;
     });
   }
 }
