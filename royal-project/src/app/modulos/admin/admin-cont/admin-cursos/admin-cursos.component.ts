@@ -22,7 +22,7 @@ export class AdminCursosComponent implements OnInit {
 
   // Variables Cursos
   listaCursos = [];
-  colCursos: string[] = ['maestro', 'curso', 'fecha', 'estado', 'publicado', 'editar'];
+  colCursos: string[] = ['maestro', 'curso', 'fecha', 'publicado', 'editar'];
   datosCursos: MatTableDataSource<any>;
   @ViewChild('paginasCursos', { read: MatPaginator }) paginasCursos: MatPaginator;
   @ViewChild(MatSort) ordenCursos: MatSort;

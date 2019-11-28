@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  urlMongo: 'http://localhost:3002/',
+  urlMongo: 'https://api-plataformacursos.herokuapp.com/',
   firebaseConfig: {
     apiKey: 'AIzaSyDGqMTJv408g2V1zUWUuAAFuXGtHyb49CY',
     authDomain: 'royal-proyect.firebaseapp.com',

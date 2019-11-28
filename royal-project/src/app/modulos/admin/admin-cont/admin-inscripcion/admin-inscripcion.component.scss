@@ -5,6 +5,11 @@
 }
 
 .subinscri {
-    text-shadow: 2px 2px 3px rgba(138, 138, 138, 0.84);
-    color: #007791;
-  }
+  text-shadow: 2px 2px 3px rgba(138, 138, 138, 0.84);
+  color: #007791;
+}
+
+.tachado {
+  text-decoration: line-through;
+  color: red;
+}

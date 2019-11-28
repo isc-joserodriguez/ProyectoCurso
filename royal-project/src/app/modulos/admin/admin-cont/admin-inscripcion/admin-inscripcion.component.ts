@@ -6,6 +6,9 @@ import { CursosService } from 'src/app/servicios/cursos.service';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ComprasService } from 'src/app/servicios/compras.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PromosService } from 'src/app/servicios/promos.service';
+import { DateConvert } from 'src/app/helper/date.convert';
 
 @Component({
   selector: 'app-admin-inscripcion',
@@ -14,6 +17,8 @@ import { ComprasService } from 'src/app/servicios/compras.service';
 })
 export class AdminInscripcionComponent implements OnInit {
   abonar = false;
+  descuento = false;
+  porcentaje = 0;
   nuevoAlumno = '';
   error = '';
   infoCurso: any = {
@@ -34,17 +39,18 @@ export class AdminInscripcionComponent implements OnInit {
 
   // Variables Cursos
   listaCursos = [];
-  displayedColumns: string[] = ['maestro', 'curso', 'fecha', 'estado', 'publicado', 'inscripcion'];
+  displayedColumns: string[] = ['maestro', 'curso', 'fecha', 'publicado', 'precio', 'inscripcion'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private compras: ComprasService, private cursos: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) {
+  constructor(private promos: PromosService, private _snackBar: MatSnackBar, private compras: ComprasService, private cursos: CursosService, private usuarios: UsuariosService, private formBuilder: FormBuilder) {
     // datasource cursos
     this.dataSource = new MatTableDataSource(this.listaCursos);
   }
 
   ngOnInit() {
+    this.getPromosFecha();
     this.cobroForm = this.formBuilder.group({
       abono: ['', [Validators.required, Validators.min(395)]],
       fecha: ['', Validators.required]
@@ -68,17 +74,18 @@ export class AdminInscripcionComponent implements OnInit {
     this.cursos.getCursos().subscribe((res: any) => {
       res.detail.forEach(curso => {
         this.usuarios.getUser(curso.idMaestro).subscribe((maestro: any) => {
-          if(curso.estado==2)
-          this.listaCursos.push({
-            nombre: maestro.detail[0].nombre + ' ' +
-              maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,
-            id: curso._id,
-            curso: curso.nombreCorto,
-            fecha: curso.fechaSolicitud,
-            ruta: curso.ruta,
-            estado: this.getEstatus(curso.estado),
-            publicado: curso.publicacion
-          });
+          if (curso.estado == 2)
+            this.listaCursos.push({
+              nombre: maestro.detail[0].nombre + ' ' +
+                maestro.detail[0].apPaterno + ' ' + maestro.detail[0].apMaterno,
+              id: curso._id,
+              curso: curso.nombreCorto,
+              fecha: curso.fechaSolicitud,
+              ruta: curso.ruta,
+              precio: curso.precio,
+              estado: this.getEstatus(curso.estado),
+              publicado: curso.publicacion
+            });
           this.dataSource = new MatTableDataSource(this.listaCursos);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -151,7 +158,7 @@ export class AdminInscripcionComponent implements OnInit {
                   var detalles: any = {
                     idAdmin: localStorage.getItem('userid'),
                     idPersona: usuario._id,
-                    importe: this.infoCurso.precio,
+                    importe: (this.descuento) ? this.infoCurso.precio * this.porcentaje : this.infoCurso.precio,
                     abonos: [],
                     cursos: [{ ruta: this.infoCurso.ruta }],
                     resto: 0,
@@ -186,6 +193,22 @@ export class AdminInscripcionComponent implements OnInit {
 
   abono() {
     this.abonar = (!this.abonar)
+  }
+
+  getPromosFecha() {
+    this.promos.getPromos().subscribe((promos: any) => {
+      promos.detail.forEach(promo => {
+        if (promo.estatus && promo.tipo == 1 && new Date(promo.fechaInicio).getTime() < Date.now() && new Date(promo.fechaFin).getTime() > Date.now()) {
+          this.descuento = true;
+          this.porcentaje = (100 - promo.porcentaje) / 100;
+          var mensaje = '¡Hay promoción del ' + promo.porcentaje + '% de descuento hasta el ' + DateConvert(promo.fechaFin) + '!'
+          this._snackBar.open(mensaje, 'Cerrar', {
+            duration: 10000,
+          });
+          return;
+        }
+      });
+    });
   }
 
 }
