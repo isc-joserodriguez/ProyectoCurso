@@ -2,12 +2,13 @@ export const environment = {
   production: true,
   urlMongo: 'https://api-plataformacursos.herokuapp.com/',
   firebaseConfig: {
-    apiKey: 'AIzaSyDGqMTJv408g2V1zUWUuAAFuXGtHyb49CY',
-    authDomain: 'royal-proyect.firebaseapp.com',
-    databaseURL: 'https://royal-proyect.firebaseio.com',
-    projectId: 'royal-proyect',
-    storageBucket: 'royal-proyect.appspot.com',
-    messagingSenderId: '406213129302',
-    appId: '1:406213129302:web:86dfb919ef0b8eba8bb7f7'
+    apiKey: "AIzaSyAeZu9LCuhjeqjzsZHLk4kXcnk8cvFFlR0",
+    authDomain: "cursoswebroyal.firebaseapp.com",
+    databaseURL: "https://cursoswebroyal.firebaseio.com",
+    projectId: "cursoswebroyal",
+    storageBucket: "cursoswebroyal.appspot.com",
+    messagingSenderId: "980942249625",
+    appId: "1:980942249625:web:46da7d3f3629643a9ea208",
+    measurementId: "G-S26RBDNS2F"
   }
 };
