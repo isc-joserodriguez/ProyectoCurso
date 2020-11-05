@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   urlMongo: 'https://api-plataformacursos.herokuapp.com/',
   firebaseConfig: {
     apiKey: "AIzaSyAeZu9LCuhjeqjzsZHLk4kXcnk8cvFFlR0",
