@@ -1,6 +1,9 @@
 {
   "name": "endpoints",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.13.0"
+  },
   "description": "Endpoints para plataformas de cursos",
   "main": "index.js",
   "scripts": {
@@ -12,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.3",

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const wagner = require('wagner-core');
 const bodyParser = require('body-parser');
 
@@ -26,9 +27,9 @@ app.use((req, res, next) => {
     next();
 });
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(cors());
 
 //Agregar rutas
 app.use("/personas",personaRouter);
